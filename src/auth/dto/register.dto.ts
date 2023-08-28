@@ -1,4 +1,5 @@
-import { IsString, IsEmail, MinLength } from 'class-validator';
+import { IsPasswordsMatchingConstraint } from '@common/decorators';
+import { IsString, IsEmail, MinLength, Validate } from 'class-validator';
 
 export class RegisterDto {
   @IsEmail()
@@ -10,5 +11,6 @@ export class RegisterDto {
 
   @IsString()
   @MinLength(6)
+  @Validate(IsPasswordsMatchingConstraint)
   passportRepeat: string;
 }

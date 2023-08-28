@@ -20,10 +20,12 @@
     "paths": {
       "@prisma": ["src/prisma"],
       "@prisma/*": ["src/prisma/*"],
+      "@common": ["libs/common/src"],
+      "@common/*": ["libs/common/src/*"],
       "@user": ["src/user"],
       "@user/*": ["src/user/*"],
-      "@common": ["libs/common/src"],
-      "@common/*": ["libs/common/src/*"]
+      "@auth": ["src/auth"],
+      "@auth/*": ["src/auth/*"]
     }
   }
 }

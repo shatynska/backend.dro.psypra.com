@@ -1,8 +1,6 @@
 import {
   Controller,
   Get,
-  Post,
-  Body,
   Param,
   Delete,
   ParseUUIDPipe,
@@ -15,13 +13,6 @@ import { UserResponse } from './responses';
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-
-  @UseInterceptors(ClassSerializerInterceptor)
-  @Post()
-  async create(@Body() dto) {
-    const user = await this.usersService.save(dto);
-    return new UserResponse(user);
-  }
 
   @UseInterceptors(ClassSerializerInterceptor)
   @Get(':idOrEmail')

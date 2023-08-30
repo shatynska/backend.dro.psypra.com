@@ -31,4 +31,9 @@ export class UsersController {
   ) {
     return this.usersService.remove(id, user);
   }
+
+  @Get()
+  me(@CurrentUser() user: UserResponse) {
+    return user;
+  }
 }

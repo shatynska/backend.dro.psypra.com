@@ -6,17 +6,21 @@ import {
   Get,
   HttpStatus,
   Post,
+  Query,
+  Req,
   Res,
   UnauthorizedException,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { LoginDto, RegisterDto } from './dto';
 import { AuthService } from './auth.service';
 import { Tokens } from './interfaces';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { Cookie, Public, UserAgent } from '@common/decorators';
 import { UserResponse } from 'src/users/responses';
+import { GoogleGuard } from './guards/google.guard';
 
 const REFRESH_TOKEN = 'refreshtoken';
 
@@ -102,5 +106,21 @@ export class AuthController {
       path: '/',
     });
     res.status(HttpStatus.CREATED).json({ accessToken: tokens.accessToken });
+  }
+
+  @UseGuards(GoogleGuard)
+  @Get('google')
+  googleAuth() {}
+
+  @UseGuards(GoogleGuard)
+  @Get('google/callback')
+  googleAuthCallback(@Req() req: Request, @Res() res: Response) {
+    const token = req.user['accessToken'];
+    res.redirect(`http://localhost:3000/api/auth/success?token=${token}`);
+  }
+
+  @Get('success')
+  success(@Query('token') token: string) {
+    return { token };
   }
 }

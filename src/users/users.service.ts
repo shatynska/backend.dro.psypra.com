@@ -25,6 +25,7 @@ export class UsersService {
         email: user.email,
         password: hashedPassword,
         roles: ['USER'],
+        provider: user?.provider,
       },
     });
   }

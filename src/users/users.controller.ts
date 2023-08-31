@@ -6,11 +6,14 @@ import {
   ParseUUIDPipe,
   UseInterceptors,
   ClassSerializerInterceptor,
+  Put,
+  Body,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UserResponse } from './responses';
 import { CurrentUser } from '@common/decorators';
 import { JwtPayload } from '@auth/interfaces';
+import { User } from '@prisma/client';
 
 @Controller('users')
 export class UsersController {
@@ -35,5 +38,12 @@ export class UsersController {
   @Get()
   me(@CurrentUser() user: UserResponse) {
     return user;
+  }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Put()
+  async updateUser(@Body() body: Partial<User>) {
+    const user = await this.usersService.save(body);
+    return new UserResponse(user);
   }
 }

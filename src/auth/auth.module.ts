@@ -7,9 +7,15 @@ import { UsersModule } from 'src/users/users.module';
 import { options } from './config';
 import { STRATEGIES } from './strategies';
 import { GUARDS } from './guards';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
-  imports: [UsersModule, PassportModule, JwtModule.registerAsync(options())],
+  imports: [
+    UsersModule,
+    PassportModule,
+    JwtModule.registerAsync(options()),
+    HttpModule,
+  ],
   controllers: [AuthController],
   providers: [AuthService, ...STRATEGIES, ...GUARDS],
 })

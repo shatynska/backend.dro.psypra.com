@@ -21,6 +21,10 @@ import { ConfigService } from '@nestjs/config';
 import { Cookie, Public, UserAgent } from '@common/decorators';
 import { UserResponse } from 'src/users/responses';
 import { GoogleGuard } from './guards/google.guard';
+import { mergeMap, map } from 'rxjs';
+import { handleTimeoutAndErrors } from '@common/helpers';
+import { HttpService } from '@nestjs/axios';
+import { Provider } from '@prisma/client';
 
 const REFRESH_TOKEN = 'refreshtoken';
 
@@ -30,6 +34,7 @@ export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly configService: ConfigService,
+    private readonly httpService: HttpService,
   ) {}
 
   @UseInterceptors(ClassSerializerInterceptor)
@@ -116,11 +121,27 @@ export class AuthController {
   @Get('google/callback')
   googleAuthCallback(@Req() req: Request, @Res() res: Response) {
     const token = req.user['accessToken'];
-    res.redirect(`http://localhost:3000/api/auth/success?token=${token}`);
+    res.redirect(
+      `http://localhost:3000/api/auth/success-google?token=${token}`,
+    );
   }
 
-  @Get('success')
-  success(@Query('token') token: string) {
-    return { token };
+  @Get('success-google')
+  successGoogle(
+    @Query('token') token: string,
+    @UserAgent() agent: string,
+    @Res() res: Response,
+  ) {
+    return this.httpService
+      .get(
+        `https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=${token}`,
+      )
+      .pipe(
+        mergeMap(({ data: { email } }) =>
+          this.authService.providerAuth(email, agent, Provider.GOOGLE),
+        ),
+        map((data) => this.setRefreshTokenToCookies(data, res)),
+        handleTimeoutAndErrors(),
+      );
   }
 }

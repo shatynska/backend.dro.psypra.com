@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  api_blue:
+    image: shatynska/api-dro-psypra-com:latest
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.docker.network=traefik-public'
+      - 'traefik.http.routers.api_dro_psypra_com_blue.entrypoints=https'
+      - 'traefik.http.routers.api_dro_psypra_com_blue.rule=(Host(`dro.psypra.com`) && Path(`/api`))'
+      - 'traefik.http.routers.api_dro_psypra_com_blue.tls=true'
+      - 'traefik.http.services.api_dro_psypra_com_blue.loadbalancer.server.port=3001'
+    ports:
+      - 3001:3001
+    networks:
+      - traefik-public
+      - dro-psypra-com
+
+networks:
+  traefik-public:
+    external: true
+  dro-psypra-com:
+    external: true

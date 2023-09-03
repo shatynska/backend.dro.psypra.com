@@ -17,8 +17,6 @@ COPY --chown=node:node package*.json ./
 # Install app dependencies using the `npm ci` command instead of `npm install`
 RUN npm ci
 
-RUN npx prisma generate
-
 # Bundle app source
 COPY --chown=node:node . .
 
@@ -39,6 +37,8 @@ COPY --chown=node:node package*.json ./
 COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
 
 COPY --chown=node:node . .
+
+RUN npx prisma generate
 
 # Run the build command which creates the production bundle
 RUN npm run build

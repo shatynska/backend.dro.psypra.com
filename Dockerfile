@@ -17,6 +17,8 @@ COPY --chown=node:node package*.json ./
 # Install app dependencies using the `npm ci` command instead of `npm install`
 RUN npm ci
 
+RUN npx prisma generate
+
 # Bundle app source
 COPY --chown=node:node . .
 

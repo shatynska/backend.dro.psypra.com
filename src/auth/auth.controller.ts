@@ -122,7 +122,10 @@ export class AuthController {
   googleAuthCallback(@Req() req: Request, @Res() res: Response) {
     const token = req.user['accessToken'];
     res.redirect(
-      `http://localhost:3000/api/auth/success-google?token=${token}`,
+      `${this.configService.get('API_URL')}:
+      ${this.configService.get(
+        'API_PORT',
+      )}/api/auth/success-google?token=${token}`,
     );
   }
 

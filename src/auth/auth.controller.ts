@@ -122,9 +122,8 @@ export class AuthController {
   googleAuthCallback(@Req() req: Request, @Res() res: Response) {
     const token = req.user['accessToken'];
     res.redirect(
-      `${this.configService.get('API_URL')}:
-      ${this.configService.get(
-        'API_PORT',
+      `${this.configService.get(
+        'API_URL',
       )}/api/auth/success-google?token=${token}`,
     );
   }

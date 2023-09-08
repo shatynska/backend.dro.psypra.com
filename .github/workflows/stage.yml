@@ -16,6 +16,7 @@ jobs:
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v2.0
         with:
+          envkey_NAME: api
           envkey_NODE_ENV: production
           envkey_API_URL: 'https://api.dro.psypra.com'
           envkey_API_PORT: 3001

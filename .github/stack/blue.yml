@@ -9,6 +9,7 @@ services:
       - 'traefik.http.routers.api_dro_psypra_com_blue.entrypoints=https'
       - 'traefik.http.routers.api_dro_psypra_com_blue.rule=Host(`api.dro.psypra.com`)'
       - 'traefik.http.routers.api_dro_psypra_com_blue.tls=true'
+      - 'traefik.http.routers.api_dro_psypra_com_blue.tls.certresolver=letsEncrypt'
       - 'traefik.http.services.api_dro_psypra_com_blue.loadbalancer.server.port=3001'
     ports:
       - 3001:3001

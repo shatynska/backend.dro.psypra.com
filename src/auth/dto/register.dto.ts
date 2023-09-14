@@ -1,4 +1,5 @@
 import { IsPasswordsMatchingConstraint } from '@common/decorators';
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsString,
   IsEmail,
@@ -8,15 +9,18 @@ import {
 } from 'class-validator';
 
 export class RegisterDto {
+  @ApiProperty()
   @IsEmail()
   @IsNotEmpty()
   email: string;
 
+  @ApiProperty()
   @IsString()
   @MinLength(6)
   @IsNotEmpty()
   password: string;
 
+  @ApiProperty()
   @IsString()
   @MinLength(6)
   @Validate(IsPasswordsMatchingConstraint)

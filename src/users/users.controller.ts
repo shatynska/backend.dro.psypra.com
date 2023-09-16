@@ -14,7 +14,9 @@ import { UserResponse } from './responses';
 import { CurrentUser } from '@common/decorators';
 import { JwtPayload } from '@auth/interfaces';
 import { User } from '@prisma/client';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}

@@ -25,10 +25,12 @@ import { mergeMap, map } from 'rxjs';
 import { handleTimeoutAndErrors } from '@common/helpers';
 import { HttpService } from '@nestjs/axios';
 import { Provider } from '@prisma/client';
+import { ApiTags } from '@nestjs/swagger';
 
 const REFRESH_TOKEN = 'refreshtoken';
 
 @Public()
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(

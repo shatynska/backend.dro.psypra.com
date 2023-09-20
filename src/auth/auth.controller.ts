@@ -1,3 +1,6 @@
+import { Cookie, Public, UserAgent } from '@common/decorators';
+import { handleTimeoutAndErrors } from '@common/helpers';
+import { HttpService } from '@nestjs/axios';
 import {
   BadRequestException,
   Body,
@@ -13,19 +16,16 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { LoginDto, RegisterDto } from './dto';
-import { AuthService } from './auth.service';
-import { Tokens } from './interfaces';
-import { Request, Response } from 'express';
 import { ConfigService } from '@nestjs/config';
-import { Cookie, Public, UserAgent } from '@common/decorators';
-import { UserResponse } from 'src/users/responses';
-import { GoogleGuard } from './guards/google.guard';
-import { mergeMap, map } from 'rxjs';
-import { handleTimeoutAndErrors } from '@common/helpers';
-import { HttpService } from '@nestjs/axios';
-import { Provider } from '@prisma/client';
 import { ApiTags } from '@nestjs/swagger';
+import { Provider } from '@prisma/client';
+import { Request, Response } from 'express';
+import { map, mergeMap } from 'rxjs';
+import { UserEntity } from 'src/users/entities';
+import { AuthService } from './auth.service';
+import { LoginDto, RegisterDto } from './dto';
+import { GoogleGuard } from './guards/google.guard';
+import { Tokens } from './interfaces';
 
 const REFRESH_TOKEN = 'refreshtoken';
 
@@ -48,7 +48,7 @@ export class AuthController {
         `Unable to register user with data ${JSON.stringify(dto)}`,
       );
     }
-    return new UserResponse(user);
+    return new UserEntity(user);
   }
 
   @Post('login')

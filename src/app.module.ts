@@ -5,6 +5,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from '@auth/guards/jwt-auth.guard';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
   imports: [
@@ -12,11 +13,21 @@ import { JwtAuthGuard } from '@auth/guards/jwt-auth.guard';
     UsersModule,
     PrismaModule,
     AuthModule,
+    ThrottlerModule.forRoot([
+      {
+        ttl: 6000,
+        limit: 10,
+      },
+    ]),
   ],
   providers: [
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
     },
   ],
 })

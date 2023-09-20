@@ -1,35 +1,37 @@
+import { JwtPayload } from '@auth/interfaces';
+import { CurrentUser } from '@common/decorators';
 import {
+  Body,
+  ClassSerializerInterceptor,
   Controller,
+  Delete,
   Get,
   Param,
-  Delete,
   ParseUUIDPipe,
-  UseInterceptors,
-  ClassSerializerInterceptor,
   Put,
-  Body,
+  UseInterceptors,
 } from '@nestjs/common';
-import { UsersService } from './users.service';
-import { UserResponse } from './responses';
-import { CurrentUser } from '@common/decorators';
-import { JwtPayload } from '@auth/interfaces';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { User } from '@prisma/client';
-import { ApiTags } from '@nestjs/swagger';
+import { UserEntity } from './entities';
+import { UsersService } from './users.service';
 
-@ApiTags('users')
 @Controller('users')
+@ApiTags('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @UseInterceptors(ClassSerializerInterceptor)
   @Get(':idOrEmail')
+  @UseInterceptors(ClassSerializerInterceptor)
+  @ApiBearerAuth()
   async findOne(@Param('idOrEmail') idOrEmail: string) {
     const user = await this.usersService.findOne(idOrEmail);
-    return new UserResponse(user);
+    return new UserEntity(user);
   }
 
-  @UseInterceptors(ClassSerializerInterceptor)
   @Delete(':id')
+  @UseInterceptors(ClassSerializerInterceptor)
+  @ApiBearerAuth()
   async remove(
     @Param('id', ParseUUIDPipe) id: string,
     @CurrentUser() user: JwtPayload,
@@ -38,14 +40,16 @@ export class UsersController {
   }
 
   @Get()
-  me(@CurrentUser() user: UserResponse) {
+  @ApiBearerAuth()
+  me(@CurrentUser() user: UserEntity) {
     return user;
   }
 
-  @UseInterceptors(ClassSerializerInterceptor)
   @Put()
+  @UseInterceptors(ClassSerializerInterceptor)
+  @ApiBearerAuth()
   async updateUser(@Body() body: Partial<User>) {
     const user = await this.usersService.save(body);
-    return new UserResponse(user);
+    return new UserEntity(user);
   }
 }

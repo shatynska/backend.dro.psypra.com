@@ -14,6 +14,7 @@ async function bootstrap() {
     .setDescription('The DroPsyPra API description')
     .setVersion('0.0.1')
     .addTag('users')
+    .addBearerAuth()
     .build();
   const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api/swagger', app, swaggerDocument);

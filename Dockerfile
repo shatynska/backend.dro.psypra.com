@@ -8,6 +8,7 @@ USER node
 WORKDIR /var/www/app
 
 COPY --chown=node:node package*.json ./
+COPY --chown=node:node .prettierrc ./
 
 RUN npm ci
 

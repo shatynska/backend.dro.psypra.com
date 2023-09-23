@@ -33,6 +33,7 @@ datasource db {
 
 model User {
   id        String    @id @default(uuid())
+  /// @IsEmail
   email     String    @unique
   password  String?
   provider  Provider?

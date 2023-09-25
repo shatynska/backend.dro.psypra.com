@@ -13,7 +13,7 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { User } from '@prisma/client';
-import { UserEntity } from './entities';
+import { UserResponseDto } from './dtos';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -26,7 +26,7 @@ export class UsersController {
   @ApiBearerAuth()
   async findOne(@Param('idOrEmail') idOrEmail: string) {
     const user = await this.usersService.findOne(idOrEmail);
-    return new UserEntity(user);
+    return new UserResponseDto(user);
   }
 
   @Delete(':id')
@@ -41,7 +41,7 @@ export class UsersController {
 
   @Get()
   @ApiBearerAuth()
-  me(@CurrentUser() user: UserEntity) {
+  me(@CurrentUser() user: JwtPayload) {
     return user;
   }
 
@@ -50,6 +50,6 @@ export class UsersController {
   @ApiBearerAuth()
   async updateUser(@Body() body: Partial<User>) {
     const user = await this.usersService.save(body);
-    return new UserEntity(user);
+    return new UserResponseDto(user);
   }
 }

@@ -8,7 +8,7 @@ import {
   IsUUID,
 } from 'class-validator';
 
-export class UserEntity implements User {
+export class UserResponseDto implements User {
   @IsUUID(4)
   @IsNotEmpty()
   id: string;

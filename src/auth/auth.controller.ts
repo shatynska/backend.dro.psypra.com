@@ -21,7 +21,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { Provider } from '@prisma/client';
 import { Request, Response } from 'express';
 import { map, mergeMap } from 'rxjs';
-import { UserEntity } from 'src/users/entities';
+import { UserResponseDto } from 'src/users/dtos';
 import { AuthService } from './auth.service';
 import { LoginDto, RegisterDto } from './dto';
 import { GoogleGuard } from './guards/google.guard';
@@ -48,7 +48,7 @@ export class AuthController {
         `Unable to register user with data ${JSON.stringify(dto)}`,
       );
     }
-    return new UserEntity(user);
+    return new UserResponseDto(user);
   }
 
   @Post('login')

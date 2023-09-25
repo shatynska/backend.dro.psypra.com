@@ -21,7 +21,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { Provider } from '@prisma/client';
 import { Request, Response } from 'express';
 import { map, mergeMap } from 'rxjs';
-import { UserResponseDto } from 'src/users/dtos';
+import { UserResponseDto } from 'src/users/dto';
 import { AuthService } from './auth.service';
 import { LoginDto, RegisterDto } from './dto';
 import { GoogleGuard } from './guards/google.guard';

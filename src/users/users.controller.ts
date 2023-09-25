@@ -13,7 +13,7 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { User } from '@prisma/client';
-import { UserResponseDto } from './dtos';
+import { UserResponseDto } from './dto';
 import { UsersService } from './users.service';
 
 @Controller('users')

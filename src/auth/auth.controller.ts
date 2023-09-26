@@ -1,4 +1,9 @@
-import { Cookie, Public, UserAgent } from '@common/decorators';
+import {
+  ApiErrorDecorator,
+  Cookie,
+  Public,
+  UserAgent,
+} from '@common/decorators';
 import { handleTimeoutAndErrors } from '@common/helpers';
 import { HttpService } from '@nestjs/axios';
 import {
@@ -17,21 +22,21 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Provider } from '@prisma/client';
 import { Request, Response } from 'express';
 import { map, mergeMap } from 'rxjs';
 import { UserResponseDto } from 'src/users/dto';
 import { AuthService } from './auth.service';
-import { LoginDto, RegisterDto } from './dto';
+import { AccessTokenDto, LoginDto, RegisterDto } from './dto';
 import { GoogleGuard } from './guards/google.guard';
 import { Tokens } from './interfaces';
 
 const REFRESH_TOKEN = 'refreshtoken';
 
+@Controller('auth')
 @Public()
 @ApiTags('auth')
-@Controller('auth')
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
@@ -39,8 +44,20 @@ export class AuthController {
     private readonly httpService: HttpService,
   ) {}
 
-  @UseInterceptors(ClassSerializerInterceptor)
   @Post('register')
+  @UseInterceptors(ClassSerializerInterceptor)
+  @ApiOperation({
+    summary: 'Register user',
+  })
+  @ApiResponse({
+    status: 201,
+    type: UserResponseDto,
+  })
+  @ApiErrorDecorator(HttpStatus.BAD_REQUEST, 'Bad Request')
+  @ApiErrorDecorator(
+    HttpStatus.CONFLICT,
+    'User with this email is already registered',
+  )
   async register(@Body() dto: RegisterDto) {
     const user = await this.authService.register(dto);
     if (!user) {
@@ -52,6 +69,15 @@ export class AuthController {
   }
 
   @Post('login')
+  @ApiOperation({
+    summary: 'Login user',
+  })
+  @ApiResponse({
+    status: 201,
+    type: AccessTokenDto,
+  })
+  @ApiErrorDecorator(HttpStatus.BAD_REQUEST, 'Unable to login')
+  @ApiErrorDecorator(HttpStatus.UNAUTHORIZED, 'Wrong login or password')
   async login(
     @Body() dto: LoginDto,
     @Res() res: Response,

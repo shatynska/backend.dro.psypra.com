@@ -32,9 +32,13 @@ datasource db {
 }
 
 model User {
+  /// @IsUUID(4)
+  /// @example '0c287617-9f36-489e-ba72-d462777987e9'
   id        String    @id @default(uuid())
+  /// @example test@gmail.com
   /// @IsEmail
   email     String    @unique
+  /// @example secret_password
   ///@MinLength(6)
   password  String?
   provider  Provider?

@@ -28,7 +28,7 @@ import { Request, Response } from 'express';
 import { map, mergeMap } from 'rxjs';
 import { UserResponseDto } from 'src/users/dto';
 import { AuthService } from './auth.service';
-import { AccessTokenDto, LoginDto, RegisterDto } from './dto';
+import { LoginDto, LoginResponseDto, RegisterDto } from './dto';
 import { GoogleGuard } from './guards/google.guard';
 import { Tokens } from './interfaces';
 
@@ -74,7 +74,7 @@ export class AuthController {
   })
   @ApiResponse({
     status: 201,
-    type: AccessTokenDto,
+    type: LoginResponseDto,
   })
   @ApiErrorDecorator(HttpStatus.BAD_REQUEST, 'Unable to login')
   @ApiErrorDecorator(HttpStatus.UNAUTHORIZED, 'Wrong login or password')
@@ -92,6 +92,12 @@ export class AuthController {
     this.setRefreshTokenToCookies(tokens, res);
   }
 
+  @ApiOperation({
+    summary: 'Logout user',
+  })
+  @ApiResponse({
+    status: 200,
+  })
   @Get('logout')
   async logout(
     @Cookie(REFRESH_TOKEN) refreshToken: string,

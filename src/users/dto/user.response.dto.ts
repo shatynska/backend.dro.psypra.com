@@ -1,40 +1,25 @@
-import { Provider, Role, User } from '@prisma/client';
+import { Provider } from '@nestjs/common';
+import { ApiHideProperty, PickType } from '@nestjs/swagger';
+import { User } from '@prisma/entities/user.entity';
 import { Exclude } from 'class-transformer';
-import {
-  ArrayNotEmpty,
-  IsDate,
-  IsEmail,
-  IsNotEmpty,
-  IsUUID,
-} from 'class-validator';
 
-export class UserResponseDto implements User {
-  @IsUUID(4)
-  @IsNotEmpty()
-  id: string;
-
-  @IsEmail()
-  @IsNotEmpty()
-  email: string;
-
+export class UserResponseDto extends PickType(User, ['id', 'email', 'roles']) {
+  @ApiHideProperty()
   @Exclude()
   password: string;
 
+  @ApiHideProperty()
   @Exclude()
   provider: Provider;
 
-  @IsDate()
-  @IsNotEmpty()
+  @ApiHideProperty()
   createdAt: Date;
 
-  @IsDate()
-  @IsNotEmpty()
+  @ApiHideProperty()
   updatedAt: Date;
 
-  @ArrayNotEmpty()
-  roles: Role[];
-
   constructor(user: User) {
+    super();
     Object.assign(this, user);
   }
 }

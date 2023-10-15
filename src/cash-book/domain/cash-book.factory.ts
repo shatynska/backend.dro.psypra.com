@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
-import { CashBookYear } from './cash-book-year.value-object';
 import { CashBook } from './cash-book.aggregate-root';
+import { CashBookYear } from './value-objects/cash-book-year.value-object';
 
 export class CashBookFactory {
   public static async create(year: CashBookYear) {

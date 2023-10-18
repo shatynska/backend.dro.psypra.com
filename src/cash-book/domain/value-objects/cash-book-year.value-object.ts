@@ -1,15 +1,20 @@
-import { InvalidCashBookYearError } from '../errors';
+import { InvalidCashBookYearForCreationError } from '../errors';
 
 export class CashBookYear {
-  constructor(private value: number) {
-    this.ensureIsValidCashBookYear(value);
+  constructor(readonly value: number) {
+    this.ensureIsValidCashBookYearForCreation(value);
     this.value = value;
   }
 
-  private ensureIsValidCashBookYear(value: number) {
+  private ensureIsValidCashBookYearForCreation(value: number) {
     const currentYear = new Date().getFullYear();
-    if (!Number.isInteger(value) || value < currentYear) {
-      throw new InvalidCashBookYearError();
+    const validCashBookYearArray = [
+      currentYear - 1,
+      currentYear,
+      currentYear + 1,
+    ];
+    if (!validCashBookYearArray.includes(value)) {
+      throw new InvalidCashBookYearForCreationError();
     }
   }
 }

@@ -1,1 +1,1 @@
-export * from './invalid-cash-book-year.error';
+export * from './invalid-cash-book-year-for-creation.error';

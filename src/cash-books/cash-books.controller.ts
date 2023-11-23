@@ -1,6 +1,13 @@
 import { Public } from '@common/decorators';
-import { Controller, Get } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  ClassSerializerInterceptor,
+  Controller,
+  Get,
+  UseInterceptors,
+} from '@nestjs/common';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CashBalanceResponseDto } from './dto';
+import { cashBalanceStub } from './stubs';
 
 @Controller('cash-books')
 @Public()
@@ -9,10 +16,13 @@ export class CashBooksController {
   constructor() {}
 
   @Get('cash-balance')
+  @UseInterceptors(ClassSerializerInterceptor)
+  @ApiResponse({
+    status: 200,
+    type: CashBalanceResponseDto,
+  })
   getCashBalance() {
-    return {
-      value: 4800,
-    };
+    return new CashBalanceResponseDto(cashBalanceStub);
   }
 
   @Get('current')

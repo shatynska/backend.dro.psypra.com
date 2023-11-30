@@ -3,7 +3,7 @@ import { IsArray, IsInt, IsNotEmpty } from 'class-validator';
 
 export class CreateCashBookDto {
   @ApiProperty({
-    example: 2016,
+    example: 2022,
     type: 'integer',
     format: 'int32',
   })

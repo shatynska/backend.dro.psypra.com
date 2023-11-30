@@ -12,7 +12,7 @@ export class ConnectCashBookDto {
   @IsUUID(4)
   id?: string;
   @ApiProperty({
-    example: 2016,
+    example: 2022,
     type: 'integer',
     format: 'int32',
     required: false,

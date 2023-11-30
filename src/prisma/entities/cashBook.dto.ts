@@ -6,7 +6,7 @@ export class CashBookDto {
   })
   id: string;
   @ApiProperty({
-    example: 2016,
+    example: 2022,
     type: 'integer',
     format: 'int32',
   })

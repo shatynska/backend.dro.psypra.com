@@ -31,9 +31,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model CashBalance {
+  /// @example 8420
+  value Int @id
+
+  @@map("cash_balance")
+}
+
+model CashBook {
+  /// @IsUUID(4)
+  /// @example c0287617-9f36-489e-ba72-d462777987e9
+  id              String @id @default(uuid())
+  /// @example 2022
+  year            Int    @unique
+  /// @example [2, 3, 4, 5, 7, 8, 9, 10, 11]
+  reportingMonths Int[]  @map("reporting_months")
+
+  @@map("cash_books")
+}
+
 model User {
   /// @IsUUID(4)
-  /// @example '0c287617-9f36-489e-ba72-d462777987e9'
+  /// @example c0298617-9f36-489e-ba72-d462777987e9
   id        String    @id @default(uuid())
   /// @example test@gmail.com
   /// @IsEmail

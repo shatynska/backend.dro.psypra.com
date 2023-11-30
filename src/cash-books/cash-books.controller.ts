@@ -6,14 +6,14 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CashBooksService } from './cash-books.service';
 import { CashBalanceResponseDto } from './dto';
-import { cashBalanceStub } from './stubs';
 
 @Controller('cash-books')
 @Public()
 @ApiTags('cash-books')
 export class CashBooksController {
-  constructor() {}
+  constructor(private readonly cashBooksService: CashBooksService) {}
 
   @Get('cash-balance')
   @UseInterceptors(ClassSerializerInterceptor)
@@ -21,8 +21,9 @@ export class CashBooksController {
     status: 200,
     type: CashBalanceResponseDto,
   })
-  getCashBalance() {
-    return new CashBalanceResponseDto(cashBalanceStub);
+  async getCashBalance() {
+    const cashBalance = await this.cashBooksService.findCashBalance();
+    return new CashBalanceResponseDto(cashBalance);
   }
 
   @Get('current')

@@ -20,7 +20,6 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@brakebein/prisma-generator-nestjs-dto": "^1.18.3",
     "@nestjs/axios": "^3.0.0",
     "@nestjs/cache-manager": "^2.1.0",
     "@nestjs/common": "^10.0.0",
@@ -49,6 +48,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@brakebein/prisma-generator-nestjs-dto": "^1.18.4",
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.0",
     "@nestjs/testing": "^10.0.0",

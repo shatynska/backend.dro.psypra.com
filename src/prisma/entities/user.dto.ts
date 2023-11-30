@@ -2,11 +2,16 @@ import { Provider, Role } from '@prisma/client';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UserDto {
-  @ApiProperty()
+  @ApiProperty({
+    example: 'c0298617-9f36-489e-ba72-d462777987e9',
+  })
   id: string;
-  @ApiProperty()
+  @ApiProperty({
+    example: 'test@gmail.com',
+  })
   email: string;
   @ApiProperty({
+    example: 'secret_password',
     nullable: true,
   })
   password: string | null;
@@ -26,7 +31,7 @@ export class UserDto {
   })
   updatedAt: Date;
   @ApiProperty({
-    isArray: true,
+    example: [Role.USER],
     enum: Role,
   })
   roles: Role[];

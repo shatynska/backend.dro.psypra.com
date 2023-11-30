@@ -10,6 +10,7 @@ export class Token {
   })
   exp: Date;
   @ApiProperty({
+    type: () => User,
     required: false,
   })
   user?: User;

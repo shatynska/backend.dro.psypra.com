@@ -1,18 +1,30 @@
 import { Provider, Role } from '@prisma/client';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MinLength,
+} from 'class-validator';
 
 export class CreateUserDto {
-  @ApiProperty()
+  @ApiProperty({
+    example: 'test@gmail.com',
+  })
   @IsNotEmpty()
   @IsString()
+  @IsEmail()
   email: string;
   @ApiProperty({
+    example: 'secret_password',
     required: false,
     nullable: true,
   })
   @IsOptional()
   @IsString()
+  @MinLength(6)
   password?: string;
   @ApiProperty({
     enum: Provider,
@@ -22,7 +34,7 @@ export class CreateUserDto {
   @IsOptional()
   provider?: Provider;
   @ApiProperty({
-    isArray: true,
+    example: [Role.USER],
     enum: Role,
   })
   @IsNotEmpty()

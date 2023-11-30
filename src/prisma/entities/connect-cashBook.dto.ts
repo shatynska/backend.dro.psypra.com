@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsOptional, IsString, IsUUID } from 'class-validator';
+import { IsInt, IsOptional, IsString, IsUUID } from 'class-validator';
 
-export class ConnectUserDto {
+export class ConnectCashBookDto {
   @ApiProperty({
-    example: 'c0298617-9f36-489e-ba72-d462777987e9',
+    example: 'c0287617-9f36-489e-ba72-d462777987e9',
     required: false,
     nullable: true,
   })
@@ -12,12 +12,13 @@ export class ConnectUserDto {
   @IsUUID(4)
   id?: string;
   @ApiProperty({
-    example: 'test@gmail.com',
+    example: 2016,
+    type: 'integer',
+    format: 'int32',
     required: false,
     nullable: true,
   })
   @IsOptional()
-  @IsString()
-  @IsEmail()
-  email?: string;
+  @IsInt()
+  year?: number;
 }

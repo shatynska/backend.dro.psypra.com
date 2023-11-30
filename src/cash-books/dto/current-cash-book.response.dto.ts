@@ -26,6 +26,7 @@ export interface MembershipFee {
 }
 
 export interface MemberWithMembershipFees {
-  name: string;
+  firstName: string;
+  lastName: string;
   membershipFees: Array<[number, number]>;
 }

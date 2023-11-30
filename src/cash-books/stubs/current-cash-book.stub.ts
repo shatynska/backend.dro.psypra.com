@@ -4,7 +4,8 @@ export const CurrentCashBookStub: CurrentCashBookResponseDto = {
   reportingMonths: [11, 10, 9, 7, 6, 5],
   membersWithMembershipFees: [
     {
-      name: 'Берчук Володимир',
+      firstName: 'Берчук Володимир',
+      lastName: 'Берчук Володимир',
       membershipFees: [
         [10, 200],
         [9, 200],
@@ -13,7 +14,8 @@ export const CurrentCashBookStub: CurrentCashBookResponseDto = {
       ],
     },
     {
-      name: 'Білас Юлія',
+      firstName: 'Білас Юлія',
+      lastName: 'Білас Юлія',
       membershipFees: [
         [10, 200],
         [9, 200],
@@ -21,7 +23,8 @@ export const CurrentCashBookStub: CurrentCashBookResponseDto = {
       ],
     },
     {
-      name: 'Гамбарова Еляна',
+      firstName: 'Гамбарова Еляна',
+      lastName: 'Гамбарова Еляна',
       membershipFees: [
         [11, 200],
         [10, 200],
@@ -30,7 +33,8 @@ export const CurrentCashBookStub: CurrentCashBookResponseDto = {
       ],
     },
     {
-      name: 'Дробчак Ольга',
+      firstName: 'Дробчак Ольга',
+      lastName: 'Дробчак Ольга',
       membershipFees: [
         [11, 200],
         [10, 200],
@@ -41,7 +45,8 @@ export const CurrentCashBookStub: CurrentCashBookResponseDto = {
       ],
     },
     {
-      name: 'Коцюба Галина',
+      firstName: 'Коцюба Галина',
+      lastName: 'Коцюба Галина',
       membershipFees: [
         [11, 400],
         [6, 200],
@@ -49,7 +54,8 @@ export const CurrentCashBookStub: CurrentCashBookResponseDto = {
       ],
     },
     {
-      name: 'Лех Наталія',
+      firstName: 'Лех Наталія',
+      lastName: 'Лех Наталія',
       membershipFees: [
         [10, 200],
         [9, 200],
@@ -59,18 +65,8 @@ export const CurrentCashBookStub: CurrentCashBookResponseDto = {
       ],
     },
     {
-      name: 'Некрасова Валентина',
-      membershipFees: [
-        [11, 200],
-        [10, 200],
-        [9, 200],
-        [7, 200],
-        [6, 200],
-        [5, 200],
-      ],
-    },
-    {
-      name: 'Петришин Ольга',
+      firstName: 'Некрасова Валентина',
+      lastName: 'Некрасова Валентина',
       membershipFees: [
         [11, 200],
         [10, 200],
@@ -81,7 +77,8 @@ export const CurrentCashBookStub: CurrentCashBookResponseDto = {
       ],
     },
     {
-      name: 'Созанська Ірина',
+      firstName: 'Петришин Ольга',
+      lastName: 'Петришин Ольга',
       membershipFees: [
         [11, 200],
         [10, 200],
@@ -92,18 +89,33 @@ export const CurrentCashBookStub: CurrentCashBookResponseDto = {
       ],
     },
     {
-      name: 'Татаревич Галина',
+      firstName: 'Созанська Ірина',
+      lastName: 'Созанська Ірина',
+      membershipFees: [
+        [11, 200],
+        [10, 200],
+        [9, 200],
+        [7, 200],
+        [6, 200],
+        [5, 200],
+      ],
+    },
+    {
+      firstName: 'Татаревич Галина',
+      lastName: 'Татаревич Галина',
       membershipFees: [[10, 200]],
     },
     {
-      name: 'Франчук Тетяна',
+      firstName: 'Франчук Тетяна',
+      lastName: 'Франчук Тетяна',
       membershipFees: [
         [11, 200],
         [7, 200],
       ],
     },
     {
-      name: 'Чапля Уляна',
+      firstName: 'Чапля Уляна',
+      lastName: 'Чапля Уляна',
       membershipFees: [
         [10, 200],
         [9, 200],
@@ -113,7 +125,8 @@ export const CurrentCashBookStub: CurrentCashBookResponseDto = {
       ],
     },
     {
-      name: 'Шатинська Альона',
+      firstName: 'Шатинська Альона',
+      lastName: 'Шатинська Альона',
       membershipFees: [
         [11, 200],
         [10, 200],

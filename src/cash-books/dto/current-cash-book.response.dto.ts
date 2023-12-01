@@ -2,31 +2,24 @@ export class CurrentCashBookResponseDto {
   reportingMonths: number[];
   membersWithMembershipFees: MemberWithMembershipFees[];
   expenses: Expense[];
+  constructor(CurrentCashBook: CurrentCashBookResponseDto) {
+    Object.assign(this, CurrentCashBook);
+  }
 }
 
-export interface Expense {
-  id: string;
+export class Expense {
   date: string;
   amount: number;
   details: string;
 }
 
-export interface Member {
-  id: string;
-  name: string;
-  status: string;
-}
-
-export interface MembershipFee {
-  id: string;
-  date: string;
-  reportingMonth: number;
-  memberName: string;
-  amount: number;
-}
-
-export interface MemberWithMembershipFees {
-  firstName: string;
+export class MemberWithMembershipFees {
   lastName: string;
-  membershipFees: Array<[number, number]>;
+  firstName: string;
+  membershipFees: MembershipFee[];
+}
+
+export class MembershipFee {
+  reportingMonth: number;
+  amount: number;
 }

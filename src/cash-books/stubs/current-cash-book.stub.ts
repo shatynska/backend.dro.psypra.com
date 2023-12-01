@@ -4,8 +4,8 @@ export const CurrentCashBookStub: CurrentCashBookResponseDto = {
   reportingMonths: [11, 10, 9, 7, 6, 5],
   membersWithMembershipFees: [
     {
-      lastName: 'Володимир',
-      firstName: 'Берчук',
+      lastName: 'Берчук',
+      firstName: 'Володимир',
       membershipFees: [
         { reportingMonth: 11, amount: 200 },
         { reportingMonth: 10, amount: 200 },
@@ -49,7 +49,7 @@ export const CurrentCashBookStub: CurrentCashBookResponseDto = {
       lastName: 'Коцюба',
       firstName: 'Галина',
       membershipFees: [
-        { reportingMonth: 11, amount: 200 },
+        { reportingMonth: 11, amount: 400 },
         { reportingMonth: 6, amount: 200 },
         { reportingMonth: 5, amount: 200 },
       ],

@@ -50,6 +50,55 @@ model CashBook {
   @@map("cash_books")
 }
 
+model Expense {
+  /// @IsUUID(4)
+  /// @example c0287617-9f36-489e-ba72-d462777987e9
+  id        String   @id @default(uuid())
+  /// @example 380
+  amount    Int
+  /// @example піца
+  details   String?
+  /// @example 2022-11-27
+  date      DateTime
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("expenses")
+}
+
+model Member {
+  /// @IsUUID(4)
+  /// @example c0287617-9f36-489e-ba72-d462777987e9
+  id             String          @id @default(uuid())
+  /// @example Олег
+  firstName      String          @map("first_name")
+  /// @example Зварицький
+  lastName       String          @map("last_name")
+  /// @example [MemberStatus.ACTIVE]
+  status         MemberStatus
+  membershipFees MembershipFee[]
+
+  @@map("members")
+}
+
+model MembershipFee {
+  /// @IsUUID(4)
+  /// @example c0287617-9f36-489e-ba72-d462777987e9
+  id             String   @id @default(uuid())
+  /// @example 300
+  amount         Int
+  /// @example 2022
+  year Int
+    /// @example 2
+  reportingMonth Int
+  member         Member   @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  /// @IsUUID(4)
+  /// @example c0287617-9f36-489e-ba72-d462777987e9
+  memberId       String   @map("member_id")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  @@map("membership_fees")
+}
+
 model User {
   /// @IsUUID(4)
   /// @example c0298617-9f36-489e-ba72-d462777987e9
@@ -78,6 +127,11 @@ model Token {
   userAgent String   @map("user_agent")
 
   @@map("tokens")
+}
+
+enum MemberStatus {
+  ACTIVE
+  INACTIVE
 }
 
 enum Role {

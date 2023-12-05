@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class UserDto {
   @ApiProperty({
-    example: 'c0298617-9f36-489e-ba72-d462777987e9',
+    example: 'c0377617-9f36-489e-ba72-d462777987e9',
   })
   id: string;
   @ApiProperty({
@@ -21,6 +21,11 @@ export class UserDto {
   })
   provider: Provider | null;
   @ApiProperty({
+    example: [Role.USER],
+    enum: Role,
+  })
+  roles: Role[];
+  @ApiProperty({
     type: 'string',
     format: 'date-time',
   })
@@ -30,9 +35,4 @@ export class UserDto {
     format: 'date-time',
   })
   updatedAt: Date;
-  @ApiProperty({
-    example: [Role.USER],
-    enum: Role,
-  })
-  roles: Role[];
 }

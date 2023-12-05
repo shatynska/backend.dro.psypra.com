@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { ReportingMonth } from './reportingMonth.entity';
 
 export class CashBook {
   @ApiProperty({
@@ -7,15 +8,12 @@ export class CashBook {
   id: string;
   @ApiProperty({
     example: 2022,
-    type: 'integer',
-    format: 'int32',
   })
-  year: number;
+  title: string;
   @ApiProperty({
-    example: [2, 3, 4, 5, 7, 8, 9, 10, 11],
-    type: 'integer',
-    format: 'int32',
+    type: () => ReportingMonth,
     isArray: true,
+    required: false,
   })
-  reportingMonths: number[];
+  reportingMonths?: ReportingMonth[];
 }

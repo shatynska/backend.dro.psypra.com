@@ -27,5 +27,5 @@ export class UpdateExpenseDto {
   })
   @IsOptional()
   @IsDateString()
-  date?: Date;
+  reportingDate?: Date;
 }

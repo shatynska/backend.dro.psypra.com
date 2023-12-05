@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class MemberDto {
   @ApiProperty({
-    example: 'c0287617-9f36-489e-ba72-d462777987e9',
+    example: 'c0357617-9f36-489e-ba72-d462777987e9',
   })
   id: string;
   @ApiProperty({
@@ -19,4 +19,14 @@ export class MemberDto {
     enum: MemberStatus,
   })
   status: MemberStatus;
+  @ApiProperty({
+    type: 'string',
+    format: 'date-time',
+  })
+  createdAt: Date;
+  @ApiProperty({
+    type: 'string',
+    format: 'date-time',
+  })
+  updatedAt: Date;
 }

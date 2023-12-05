@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsOptional, IsString, IsUUID } from 'class-validator';
+import { IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class ConnectCashBookDto {
   @ApiProperty({
@@ -13,12 +13,10 @@ export class ConnectCashBookDto {
   id?: string;
   @ApiProperty({
     example: 2022,
-    type: 'integer',
-    format: 'int32',
     required: false,
     nullable: true,
   })
   @IsOptional()
-  @IsInt()
-  year?: number;
+  @IsString()
+  title?: string;
 }

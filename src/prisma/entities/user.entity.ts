@@ -4,7 +4,7 @@ import { Token } from './token.entity';
 
 export class User {
   @ApiProperty({
-    example: 'c0298617-9f36-489e-ba72-d462777987e9',
+    example: 'c0377617-9f36-489e-ba72-d462777987e9',
   })
   id: string;
   @ApiProperty({
@@ -22,16 +22,6 @@ export class User {
   })
   provider: Provider | null;
   @ApiProperty({
-    type: 'string',
-    format: 'date-time',
-  })
-  createdAt: Date;
-  @ApiProperty({
-    type: 'string',
-    format: 'date-time',
-  })
-  updatedAt: Date;
-  @ApiProperty({
     example: [Role.USER],
     enum: Role,
   })
@@ -41,5 +31,15 @@ export class User {
     isArray: true,
     required: false,
   })
-  Token?: Token[];
+  tokens?: Token[];
+  @ApiProperty({
+    type: 'string',
+    format: 'date-time',
+  })
+  createdAt: Date;
+  @ApiProperty({
+    type: 'string',
+    format: 'date-time',
+  })
+  updatedAt: Date;
 }

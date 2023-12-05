@@ -1,9 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { ReportingMonth } from './reportingMonth.entity';
 import { Member } from './member.entity';
 
 export class MembershipFee {
   @ApiProperty({
-    example: 'c0287617-9f36-489e-ba72-d462777987e9',
+    example: 'c0367617-9f36-489e-ba72-d462777987e9',
   })
   id: string;
   @ApiProperty({
@@ -13,24 +14,21 @@ export class MembershipFee {
   })
   amount: number;
   @ApiProperty({
-    example: 2022,
-    type: 'integer',
-    format: 'int32',
+    type: () => ReportingMonth,
+    required: false,
   })
-  year: number;
+  reportingMonth?: ReportingMonth;
   @ApiProperty({
-    example: 2,
-    type: 'integer',
-    format: 'int32',
+    example: 'c0297617-9f36-489e-ba72-d462777987e9',
   })
-  reportingMonth: number;
+  reportingMonthId: string;
   @ApiProperty({
     type: () => Member,
     required: false,
   })
   member?: Member;
   @ApiProperty({
-    example: 'c0287617-9f36-489e-ba72-d462777987e9',
+    example: 'c0357617-9f36-489e-ba72-d462777987e9',
   })
   memberId: string;
   @ApiProperty({
@@ -38,4 +36,9 @@ export class MembershipFee {
     format: 'date-time',
   })
   createdAt: Date;
+  @ApiProperty({
+    type: 'string',
+    format: 'date-time',
+  })
+  updatedAt: Date;
 }

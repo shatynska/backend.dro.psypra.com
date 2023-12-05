@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class ExpenseDto {
   @ApiProperty({
-    example: 'c0287617-9f36-489e-ba72-d462777987e9',
+    example: 'c0317617-9f36-489e-ba72-d462777987e9',
   })
   id: string;
   @ApiProperty({
@@ -21,10 +21,15 @@ export class ExpenseDto {
     type: 'string',
     format: 'date-time',
   })
-  date: Date;
+  reportingDate: Date;
   @ApiProperty({
     type: 'string',
     format: 'date-time',
   })
   createdAt: Date;
+  @ApiProperty({
+    type: 'string',
+    format: 'date-time',
+  })
+  updatedAt: Date;
 }

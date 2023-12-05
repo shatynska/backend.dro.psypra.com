@@ -3,7 +3,7 @@ import { IsEmail, IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class ConnectUserDto {
   @ApiProperty({
-    example: 'c0298617-9f36-489e-ba72-d462777987e9',
+    example: 'c0377617-9f36-489e-ba72-d462777987e9',
     required: false,
     nullable: true,
   })

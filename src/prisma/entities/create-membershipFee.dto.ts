@@ -10,20 +10,4 @@ export class CreateMembershipFeeDto {
   @IsNotEmpty()
   @IsInt()
   amount: number;
-  @ApiProperty({
-    example: 2022,
-    type: 'integer',
-    format: 'int32',
-  })
-  @IsNotEmpty()
-  @IsInt()
-  year: number;
-  @ApiProperty({
-    example: 2,
-    type: 'integer',
-    format: 'int32',
-  })
-  @IsNotEmpty()
-  @IsInt()
-  reportingMonth: number;
 }

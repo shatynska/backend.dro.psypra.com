@@ -11,22 +11,4 @@ export class UpdateMembershipFeeDto {
   @IsOptional()
   @IsInt()
   amount?: number;
-  @ApiProperty({
-    example: 2022,
-    type: 'integer',
-    format: 'int32',
-    required: false,
-  })
-  @IsOptional()
-  @IsInt()
-  year?: number;
-  @ApiProperty({
-    example: 2,
-    type: 'integer',
-    format: 'int32',
-    required: false,
-  })
-  @IsOptional()
-  @IsInt()
-  reportingMonth?: number;
 }

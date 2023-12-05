@@ -31,5 +31,5 @@ export class CreateExpenseDto {
   })
   @IsNotEmpty()
   @IsDateString()
-  date: Date;
+  reportingDate: Date;
 }

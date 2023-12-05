@@ -41,33 +41,40 @@ model CashBalance {
 model CashBook {
   /// @IsUUID(4)
   /// @example c0287617-9f36-489e-ba72-d462777987e9
-  id              String @id @default(uuid())
+  id              String           @id @default(uuid())
   /// @example 2022
-  year            Int    @unique
-  /// @example [2, 3, 4, 5, 7, 8, 9, 10, 11]
-  reportingMonths Int[]  @map("reporting_months")
+  title           String           @unique
+  reportingMonths ReportingMonth[]
 
   @@map("cash_books")
 }
 
 model Expense {
   /// @IsUUID(4)
-  /// @example c0287617-9f36-489e-ba72-d462777987e9
-  id        String   @id @default(uuid())
+  /// @example c0317617-9f36-489e-ba72-d462777987e9
+  id      String  @id @default(uuid())
   /// @example 380
-  amount    Int
+  amount  Int
   /// @example піца
-  details   String?
+  details String?
+
+  reportingMonth   ReportingMonth @relation(fields: [reportingMonthId], references: [id])
+  /// @IsUUID(4)
+  /// @example c0297617-9f36-489e-ba72-d462777987e9
+  reportingMonthId String         @map("reporting_month_id")
+
   /// @example 2022-11-27
-  date      DateTime
+  reportingDate DateTime @map("reporting_date") @db.Date
+
   createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("expenses")
 }
 
 model Member {
   /// @IsUUID(4)
-  /// @example c0287617-9f36-489e-ba72-d462777987e9
+  /// @example c0357617-9f36-489e-ba72-d462777987e9
   id             String          @id @default(uuid())
   /// @example Олег
   firstName      String          @map("first_name")
@@ -77,46 +84,47 @@ model Member {
   status         MemberStatus
   membershipFees MembershipFee[]
 
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
   @@map("members")
 }
 
 model MembershipFee {
   /// @IsUUID(4)
-  /// @example c0287617-9f36-489e-ba72-d462777987e9
-  id             String   @id @default(uuid())
+  /// @example c0367617-9f36-489e-ba72-d462777987e9
+  id               String         @id @default(uuid())
   /// @example 300
-  amount         Int
-  /// @example 2022
-  year Int
-    /// @example 2
-  reportingMonth Int
-  member         Member   @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  amount           Int
+  reportingMonth   ReportingMonth @relation(fields: [reportingMonthId], references: [id])
   /// @IsUUID(4)
-  /// @example c0287617-9f36-489e-ba72-d462777987e9
-  memberId       String   @map("member_id")
-  createdAt      DateTime @default(now()) @map("created_at")
+  /// @example c0297617-9f36-489e-ba72-d462777987e9
+  reportingMonthId String         @map("reporting_month_id")
+
+  member    Member   @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  /// @IsUUID(4)
+  /// @example c0357617-9f36-489e-ba72-d462777987e9
+  memberId  String   @map("member_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("membership_fees")
 }
 
-model User {
+model ReportingMonth {
   /// @IsUUID(4)
-  /// @example c0298617-9f36-489e-ba72-d462777987e9
-  id        String    @id @default(uuid())
-  /// @example test@gmail.com
-  /// @IsEmail
-  email     String    @unique
-  /// @example secret_password
-  ///@MinLength(6)
-  password  String?
-  provider  Provider?
-  createdAt DateTime  @default(now()) @map("created_at")
-  updatedAt DateTime  @updatedAt @map("updated_at")
-  /// @example [Role.USER]
-  roles     Role[]
-  Token     Token[]
+  /// @example c0297617-9f36-489e-ba72-d462777987e9
+  id             String          @id @default(uuid())
+  /// @example 2022-09-01
+  month          DateTime        @db.Date
+  cashBook       CashBook        @relation(fields: [cashBookId], references: [id], onDelete: Cascade)
+  /// @IsUUID(4)
+  /// @example c0287617-9f36-489e-ba72-d462777987e9
+  cashBookId     String          @map("cash_book_id")
+  expenses       Expense[]
+  membershipFees MembershipFee[]
 
-  @@map("users")
+  @@map("reporting_months")
 }
 
 model Token {
@@ -129,16 +137,37 @@ model Token {
   @@map("tokens")
 }
 
+model User {
+  /// @IsUUID(4)
+  /// @example c0377617-9f36-489e-ba72-d462777987e9
+  id       String    @id @default(uuid())
+  /// @example test@gmail.com
+  /// @IsEmail
+  email    String    @unique
+  /// @example secret_password
+  /// @MinLength(6)
+  password String?
+  provider Provider?
+  /// @example [Role.USER]
+  roles    Role[]
+  tokens   Token[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
 enum MemberStatus {
   ACTIVE
   INACTIVE
 }
 
+enum Provider {
+  GOOGLE
+}
+
 enum Role {
   ADMIN
   USER
-}
-
-enum Provider {
-  GOOGLE
 }

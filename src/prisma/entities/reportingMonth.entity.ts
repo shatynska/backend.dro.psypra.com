@@ -9,7 +9,7 @@ export class ReportingMonth {
   })
   id: string;
   @ApiProperty({
-    example: 2022 - 09 - 01,
+    example: "'2022-09-01'",
     type: 'string',
     format: 'date-time',
   })

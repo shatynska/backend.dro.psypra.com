@@ -1,7 +1,7 @@
-import { CashBalance } from '@prisma/entities/cashBalance.entity';
+import { CashBalanceDto } from './cash-balance.dto';
 
-export class CashBalanceResponseDto extends CashBalance {
-  constructor(cashBalance: CashBalance) {
+export class CashBalanceResponseDto extends CashBalanceDto {
+  constructor(cashBalance: CashBalanceResponseDto) {
     super();
     Object.assign(this, cashBalance);
   }

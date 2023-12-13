@@ -27,6 +27,11 @@ export class CashBooksController {
     return new CashBalanceResponseDto(cashBalance);
   }
 
+  @Get('current')
+  getCurrentCashBooks() {
+    return CurrentCashBookStub;
+  }
+
   @Get()
   @UseInterceptors(ClassSerializerInterceptor)
   async findAllCashBooks(): Promise<CashBooksResponseDto> {
@@ -42,10 +47,5 @@ export class CashBooksController {
   ): Promise<CashBookResponseDto> {
     const cashBook = await this.cashBooksService.findCashBookById(id);
     return new CashBookResponseDto(cashBook);
-  }
-
-  @Get('current')
-  getCurrentCashBooks() {
-    return CurrentCashBookStub;
   }
 }

@@ -1,9 +1,11 @@
 import { Public } from '@common/decorators';
 import {
+  Body,
   ClassSerializerInterceptor,
   Controller,
   Get,
   Param,
+  Post,
   UseInterceptors,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
@@ -13,6 +15,7 @@ import {
   CashBookResponseDto,
   CashBooksResponseDto,
 } from './dto/cash-book.response.dto';
+import { CreateCashBookRequestDto } from './dto/create.cash-book.request.dto';
 import { CurrentCashBookStub } from './stubs/current-cash-book.stub';
 
 @Controller('cash-books')
@@ -47,5 +50,15 @@ export class CashBooksController {
   ): Promise<CashBookResponseDto> {
     const cashBook = await this.cashBooksService.findCashBookById(id);
     return new CashBookResponseDto(cashBook);
+  }
+
+  @Post()
+  async createCashBook(
+    @Body() createCashBookRequestDto: CreateCashBookRequestDto,
+  ): Promise<CashBookResponseDto> {
+    const newCashBook = await this.cashBooksService.createCashBook(
+      createCashBookRequestDto,
+    );
+    return new CashBookResponseDto(newCashBook);
   }
 }

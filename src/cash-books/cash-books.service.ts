@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '@prisma/prisma.service';
-import { CashBalanceDto } from './dto/cash-balance.dto';
-import { CashBookDto } from './dto/cash-book.dto';
+import { CashBalanceDto } from './infrastructure/http/dto/cash-balance.dto';
+import { CashBookDto } from './infrastructure/http/dto/cash-book.dto';
 
 @Injectable()
 export class CashBooksService {

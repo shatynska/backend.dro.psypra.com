@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from '@prisma/prisma.service';
 import { CashBalanceDto } from './dto/cash-balance.dto';
 import { CashBookDto } from './dto/cash-book.dto';
@@ -28,5 +29,15 @@ export class CashBooksService {
       return null;
     }
     return cashBook;
+  }
+
+  async createCashBook(
+    createCashBookDto: Prisma.CashBookCreateInput,
+  ): Promise<CashBookDto> {
+    console.log(createCashBookDto);
+    const newCashBook = await this.prismaService.cashBook.create({
+      data: createCashBookDto,
+    });
+    return newCashBook;
   }
 }

@@ -1,5 +1,5 @@
 import { OmitType } from '@nestjs/swagger';
-import { CashBookDto } from './cash-book.dto';
+import { CashBookDto } from '~/cash-books/application/dto';
 
 export class CashBookResponseDto extends OmitType(CashBookDto, [
   'reportingMonths' as const,

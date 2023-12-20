@@ -1,4 +1,4 @@
-import { CashBalanceDto } from './cash-balance.dto';
+import { CashBalanceDto } from '~/cash-books/application/dto';
 
 export class CashBalanceResponseDto extends CashBalanceDto {
   constructor(cashBalance: CashBalanceResponseDto) {

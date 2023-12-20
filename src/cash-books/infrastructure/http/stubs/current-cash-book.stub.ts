@@ -1,4 +1,4 @@
-import { CurrentCashBookResponseDto } from '../infrastructure/http/dto/current-cash-book.response.dto';
+import { CurrentCashBookResponseDto } from '../dto/current-cash-book.response.dto';
 
 export const CurrentCashBookStub: CurrentCashBookResponseDto = {
   reportingMonths: [11, 10, 9, 7, 6, 5],

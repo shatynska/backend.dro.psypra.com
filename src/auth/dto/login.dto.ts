@@ -1,6 +1,6 @@
 import { PickType } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
-import { CreateUserDto } from '../../prisma/entities/create-user.dto';
+import { CreateUserDto } from '~/shared/infrastructure/prisma/entities/create-user.dto';
 
 export class LoginDto extends PickType(CreateUserDto, [
   'email',

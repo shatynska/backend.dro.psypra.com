@@ -18,14 +18,17 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@prisma": ["src/prisma"],
-      "@prisma/*": ["src/prisma/*"],
+
       "@common": ["libs/common/src"],
       "@common/*": ["libs/common/src/*"],
       "@user": ["src/user"],
       "@user/*": ["src/user/*"],
       "@auth": ["src/auth"],
-      "@auth/*": ["src/auth/*"]
+      "@auth/*": ["src/auth/*"],
+      "~/cash-books": ["src/cash-books"],
+      "~/cash-books/*": ["src/cash-books/*"],
+      "~/shared": ["src/shared"],
+      "~/shared/*": ["src/shared/*"]
     }
   }
 }

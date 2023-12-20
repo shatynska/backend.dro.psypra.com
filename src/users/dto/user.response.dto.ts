@@ -1,7 +1,7 @@
 import { Provider } from '@nestjs/common';
 import { ApiHideProperty, PickType } from '@nestjs/swagger';
-import { User } from '@prisma/entities/user.entity';
 import { Exclude } from 'class-transformer';
+import { User } from '~/shared/infrastructure/prisma/entities/user.entity';
 
 export class UserResponseDto extends PickType(User, ['id', 'email', 'roles']) {
   @ApiHideProperty()

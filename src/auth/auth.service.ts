@@ -1,3 +1,4 @@
+import { Provider, Token, User } from '.prisma/client';
 import {
   ConflictException,
   HttpException,
@@ -6,14 +7,13 @@ import {
   Logger,
   UnauthorizedException,
 } from '@nestjs/common';
-import { LoginDto, RegisterDto } from './dto';
-import { UsersService } from 'src/users/users.service';
-import { Token, User, Provider } from '.prisma/client';
-import { compareSync } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { PrismaService } from '@prisma/prisma.service';
-import { v4 } from 'uuid';
+import { compareSync } from 'bcrypt';
 import { add } from 'date-fns';
+import { UsersService } from 'src/users/users.service';
+import { v4 } from 'uuid';
+import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
+import { LoginDto, RegisterDto } from './dto';
 import { Tokens } from './interfaces';
 
 @Injectable()

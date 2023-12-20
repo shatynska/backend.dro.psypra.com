@@ -1,7 +1,7 @@
 import { IsPasswordsMatchingConstraint } from '@common/decorators';
 import { ApiProperty, PickType } from '@nestjs/swagger';
-import { CreateUserDto } from '@prisma/entities/create-user.dto';
 import { IsNotEmpty, IsString, MinLength, Validate } from 'class-validator';
+import { CreateUserDto } from '~/shared/infrastructure/prisma/entities/create-user.dto';
 
 export class RegisterDto extends PickType(CreateUserDto, [
   'email',

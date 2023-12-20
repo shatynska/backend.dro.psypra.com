@@ -1,5 +1,5 @@
-import { CashBalance } from '~/shared/infrastructure/prisma/entities/cashBalance.entity';
+import { CashBalanceResponseDto } from '../dto';
 
-export const cashBalanceStub: CashBalance = {
+export const cashBalanceStub: CashBalanceResponseDto = {
   value: 4800,
 };

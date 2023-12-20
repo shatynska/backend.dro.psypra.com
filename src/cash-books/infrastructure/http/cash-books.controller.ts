@@ -16,7 +16,7 @@ import {
   CashBooksResponseDto,
   CreateCashBookRequestDto,
 } from './dto';
-import { CurrentCashBookStub } from './stubs/current-cash-book.stub';
+import { CurrentCashBookStub } from './stubs';
 
 @Controller('cash-books')
 @Public()

@@ -1,5 +1,4 @@
 import { OmitType } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
 import { CashBookDto } from './cash-book.dto';
 
 export class CashBookResponseDto extends OmitType(CashBookDto, [
@@ -9,11 +8,4 @@ export class CashBookResponseDto extends OmitType(CashBookDto, [
     super();
     Object.assign(this, cashBook);
   }
-}
-
-export class CashBooksResponseDto {
-  @Type(() => CashBookResponseDto)
-  cashBooks: CashBookResponseDto[];
-
-  constructor() {}
 }

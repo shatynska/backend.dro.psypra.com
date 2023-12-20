@@ -10,12 +10,12 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CashBooksService } from '../../application/cash-books.service';
-import { CashBalanceResponseDto } from './dto';
 import {
+  CashBalanceResponseDto,
   CashBookResponseDto,
   CashBooksResponseDto,
-} from './dto/cash-book.response.dto';
-import { CreateCashBookRequestDto } from './dto/create.cash-book.request.dto';
+  CreateCashBookRequestDto,
+} from './dto';
 import { CurrentCashBookStub } from './stubs/current-cash-book.stub';
 
 @Controller('cash-books')

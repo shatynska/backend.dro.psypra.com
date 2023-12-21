@@ -9,14 +9,14 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { CashBooksService } from '../../application/cash-books.service';
+import { CashBooksService } from '../../../application/cash-books.service';
 import {
   CashBalanceResponseDto,
   CashBookResponseDto,
   CashBooksResponseDto,
   CreateCashBookRequestDto,
-} from './dto';
-import { CurrentCashBookStub } from './stubs';
+} from '../dto';
+import { CurrentCashBookStub } from '../stubs';
 
 @Controller('cash-books')
 @Public()

@@ -100,7 +100,11 @@
       "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
-      "^@common/common(|/.*)$": "<rootDir>/libs/common/src/$1"
+      "^@common(|/.*)$": "<rootDir>/libs/common/src/$1",
+      "^@user(|/.*)$": "<rootDir>/src/user/$1",
+      "^@auth(|/.*)$": "<rootDir>/src/auth/$1",
+      "^~/cash-books(|/.*)$": "<rootDir>/src/cash-books/$1",
+      "^~/shared(|/.*)$": "<rootDir>/src/shared/$1"
     }
   }
 }

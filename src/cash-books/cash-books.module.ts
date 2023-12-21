@@ -1,10 +1,7 @@
 import { Module } from '@nestjs/common';
-import { CashBooksService } from './application/cash-books.service';
-import { CashBooksController } from './infrastructure/http/cash-books.controller';
+import { HttpModule } from './infrastructure/http/http.module';
 
 @Module({
-  imports: [],
-  controllers: [CashBooksController],
-  providers: [CashBooksService],
+  imports: [HttpModule],
 })
 export class CashBooksModule {}

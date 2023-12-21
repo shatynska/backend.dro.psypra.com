@@ -16,7 +16,7 @@ import {
   CashBooksResponseDto,
   CreateCashBookRequestDto,
 } from '../dto';
-import { CurrentCashBookStub } from '../stubs';
+import { CurrentCashBookResponseDtoStub } from '../dto/responses/current-cash-book.response.dto.stub';
 
 @Controller('cash-books')
 @Public()
@@ -32,7 +32,7 @@ export class CashBooksController {
 
   @Get('current')
   getCurrentCashBooks() {
-    return CurrentCashBookStub;
+    return CurrentCashBookResponseDtoStub;
   }
 
   @Get()

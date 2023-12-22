@@ -11,7 +11,6 @@ import {
 import { ApiTags } from '@nestjs/swagger';
 import { CashBooksService } from '../../../application/cash-books.service';
 import {
-  CashBalanceResponseDto,
   CashBookResponseDto,
   CashBooksResponseDto,
   CreateCashBookRequestDto,
@@ -23,12 +22,6 @@ import { CurrentCashBookResponseDtoStub } from '../dto/responses/current-cash-bo
 @ApiTags('cash-books')
 export class CashBooksController {
   constructor(private readonly cashBooksService: CashBooksService) {}
-
-  @Get('cash-balance')
-  async getCashBalance(): Promise<CashBalanceResponseDto> {
-    const cashBalance = await this.cashBooksService.findCashBalance();
-    return new CashBalanceResponseDto(cashBalance);
-  }
 
   @Get('current')
   getCurrentCashBooks() {

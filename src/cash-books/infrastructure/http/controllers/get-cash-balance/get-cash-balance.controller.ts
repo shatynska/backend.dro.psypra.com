@@ -1,5 +1,5 @@
 import { Public } from '@common/decorators';
-import { Controller, Get } from '@nestjs/common';
+import { BadRequestException, Controller, Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CashBooksService } from '~/cash-books/application/cash-books.service';
 import { CashBalanceResponseDto } from '../../dto';
@@ -12,7 +12,12 @@ export class GetCashBalanceController {
 
   @Get('cash-balance')
   async getCashBalance(): Promise<CashBalanceResponseDto> {
-    const cashBalance = await this.cashBooksService.findCashBalance();
-    return new CashBalanceResponseDto(cashBalance);
+    const result = await this.cashBooksService.findCashBalance();
+
+    if (result.isLeft()) {
+      const error = result.value;
+      throw new BadRequestException(error.message);
+    }
+    return new CashBalanceResponseDto(result.value);
   }
 }

@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CashBooksService } from '~/cash-books/application/cash-books.service';
+import { right } from '~/shared/domain/libs/either';
 import { cashBalanceResponseDtoStub } from '../../dto/responses/cash-balance.response.dto.stub';
 import { GetCashBalanceController } from './get-cash-balance.controller';
 
@@ -9,7 +10,7 @@ describe('GetCashBalanceController', () => {
   const mockService = {
     findCashBalance: jest
       .fn()
-      .mockResolvedValueOnce(cashBalanceResponseDtoStub),
+      .mockResolvedValueOnce(right(cashBalanceResponseDtoStub)),
   };
 
   beforeEach(async () => {

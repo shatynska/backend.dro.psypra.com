@@ -1,20 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { Either, left, right } from '~/shared/domain/libs/either';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
-import { CashBalanceDto, CashBookDto } from './dto';
+import { CashBookDto } from './dto';
 
 @Injectable()
 export class CashBooksService {
   constructor(private readonly prismaService: PrismaService) {}
-
-  async findCashBalance(): Promise<Either<Error, CashBalanceDto>> {
-    const cashBalance = await this.prismaService.cashBalance.findFirst();
-    if (!cashBalance) {
-      return left(new Error());
-    }
-    return right(cashBalance);
-  }
 
   async findAllCashBooks(): Promise<CashBookDto[]> {
     const cashBooks = await this.prismaService.cashBook.findMany();

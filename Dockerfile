@@ -32,4 +32,4 @@ COPY --chown=node:node --from=build /var/www/app/.env ./
 COPY --chown=node:node --from=build /var/www/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /var/www/app/dist ./dist
 
-CMD [ "node", "dist/main.js" ]
+CMD [ "node", "dist/shared/infrastructure/main.js" ]

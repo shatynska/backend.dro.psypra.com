@@ -3,10 +3,10 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
-import { AuthModule } from './auth/auth.module';
-import { CashBooksModule } from './cash-books/cash-books.module';
 import { PrismaModule } from '~/shared/infrastructure/prisma/prisma.module';
-import { UsersModule } from './users/users.module';
+import { AuthModule } from '../../auth/auth.module';
+import { CashBooksModule } from '../../cash-books/cash-books.module';
+import { UsersModule } from '../../users/users.module';
 
 @Module({
   imports: [

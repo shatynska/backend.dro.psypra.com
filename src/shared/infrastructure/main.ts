@@ -12,6 +12,7 @@ async function bootstrap() {
   app.enableCors();
   app.use(helmet());
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+  app.use(cookieParser());
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('DroPsyPra')
@@ -26,6 +27,5 @@ async function bootstrap() {
   const config = await app.get(ConfigService);
   const port = config.get<number>('API_PORT');
   await app.listen(port || 3000);
-  app.use(cookieParser());
 }
 bootstrap();

@@ -1,8 +1,8 @@
+import { Uuid } from '~/shared/domain/domain/value-objects/uuid.value-object';
 import { Expense } from './entites/expense.entity';
 import { MembershipFee } from './entites/membership-fee.entity';
 import { CashBalance } from './value-objects/cash-balance.value-object';
 import { CashBookYear } from './value-objects/cash-book-year.value-object';
-import { Uuid } from './value-objects/uuid.value-object';
 
 export class CashBook {
   constructor(

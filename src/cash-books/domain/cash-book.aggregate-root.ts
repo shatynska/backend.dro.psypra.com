@@ -1,6 +1,6 @@
 import { Uuid } from '~/shared/domain/domain/value-objects/uuid.value-object';
-import { Expense } from './entites/expense.entity';
-import { MembershipFee } from './entites/membership-fee.entity';
+import { Expense } from './entities/expense.entity';
+import { MembershipFee } from './entities/membership-fee.entity';
 import { CashBalance } from './value-objects/cash-balance.value-object';
 import { CashBookYear } from './value-objects/cash-book-year.value-object';
 

@@ -1,4 +1,4 @@
-import { Entity } from '~/shared/domain/domain/entities/entity';
+import { Entity } from '~/shared/domain/entities';
 
 export class Expense extends Entity {
   // TODO

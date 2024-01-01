@@ -1,6 +1,6 @@
-import { Uuid } from '~/shared/domain/domain/value-objects/uuid.value-object';
+import { Uuid } from '~/shared/domain/value-objects';
 import { CashBook } from './cash-book.aggregate-root';
-import { CashBookTitle } from './value-objects/cash-book-title.value-object';
+import { CashBookTitle } from './value-objects';
 
 export class CashBookFactory {
   public static async create(title: string) {

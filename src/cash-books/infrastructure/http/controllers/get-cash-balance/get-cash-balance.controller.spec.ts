@@ -1,13 +1,15 @@
 import { CqrsModule, QueryBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { right } from '~/shared/domain/libs/either';
+import { success } from '~/shared/core/result';
 import { cashBalanceResponseDtoStub } from '../../dto/responses/cash-balance.response.dto.stub';
 import { GetCashBalanceController } from './get-cash-balance.controller';
 describe('GetCashBalanceController', () => {
   let controller: GetCashBalanceController;
 
   const mockQueryBus = {
-    execute: jest.fn().mockResolvedValueOnce(right(cashBalanceResponseDtoStub)),
+    execute: jest
+      .fn()
+      .mockResolvedValueOnce(success(cashBalanceResponseDtoStub)),
   };
 
   beforeEach(async () => {

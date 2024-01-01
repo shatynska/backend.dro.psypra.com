@@ -1,5 +1,5 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { left, right } from '~/shared/domain/libs/either';
+import { failure, success } from '~/shared/core/result';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
 import { GetCashBalanceQuery } from './get-cash-balance.query';
 
@@ -12,8 +12,8 @@ export class GetCashBalanceHandler
   async execute() {
     const result = await this.prismaService.cashBalance.findFirst();
     if (!result) {
-      return left(new Error());
+      return failure(new Error());
     }
-    return right(result);
+    return success(result);
   }
 }

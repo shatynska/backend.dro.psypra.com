@@ -15,7 +15,7 @@ export class GetCashBalanceController {
   async getCashBalance(): Promise<CashBalanceResponseDto> {
     const result = await this.queryBus.execute(new GetCashBalanceQuery());
 
-    if (result.isLeft()) {
+    if (result.isFailure()) {
       const error = result.value;
       throw new BadRequestException(error.message);
     }

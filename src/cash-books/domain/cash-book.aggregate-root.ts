@@ -1,17 +1,19 @@
-import { Uuid } from '~/shared/domain/domain/value-objects/uuid.value-object';
-import { Expense } from './entities/expense.entity';
-import { MembershipFee } from './entities/membership-fee.entity';
-import { CashBalance } from './value-objects/cash-balance.value-object';
-import { CashBookTitle } from './value-objects/cash-book-title.value-object';
+import { AggregateRoot } from '~/shared/domain/aggregate-root';
+import { Uuid } from '~/shared/domain/value-objects';
+import { Expense, MembershipFee, ReportingMonth } from './entities';
+import { CashBalance, CashBookTitle } from './value-objects';
 
-export class CashBook {
+export class CashBook extends AggregateRoot {
   constructor(
     private readonly id: Uuid,
     private title: CashBookTitle,
     private cashBalance: CashBalance = 0,
+    private reportingMonths: ReportingMonth[] = [],
     private membershipFees: MembershipFee[] = [],
     private expenses: Expense[] = [],
-  ) {}
+  ) {
+    super();
+  }
 
   public recordMembershipFee() {}
 

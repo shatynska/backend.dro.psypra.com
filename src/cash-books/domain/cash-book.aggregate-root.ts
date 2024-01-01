@@ -2,12 +2,12 @@ import { Uuid } from '~/shared/domain/domain/value-objects/uuid.value-object';
 import { Expense } from './entities/expense.entity';
 import { MembershipFee } from './entities/membership-fee.entity';
 import { CashBalance } from './value-objects/cash-balance.value-object';
-import { CashBookYear } from './value-objects/cash-book-year.value-object';
+import { CashBookTitle } from './value-objects/cash-book-title.value-object';
 
 export class CashBook {
   constructor(
     private readonly id: Uuid,
-    private readonly year: CashBookYear,
+    private title: CashBookTitle,
     private cashBalance: CashBalance = 0,
     private membershipFees: MembershipFee[] = [],
     private expenses: Expense[] = [],

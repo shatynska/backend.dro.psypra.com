@@ -31,13 +31,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model CashBalance {
-  /// @example 8420
-  value Int @id
-
-  @@map("cash_balance")
-}
-
 model CashBook {
   /// @IsUUID(4)
   /// @example c0287617-9f36-489e-ba72-d462777987e9
@@ -45,6 +38,8 @@ model CashBook {
   /// @example 2022
   title           String           @unique
   reportingMonths ReportingMonth[]
+  /// @example 842000
+  cashBalance     Int
 
   @@map("cash_books")
 }

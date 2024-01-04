@@ -1,1 +1,3 @@
-export class GetCashBalanceQuery {}
+export class GetCashBalanceQuery {
+  constructor(public readonly id: string) {}
+}

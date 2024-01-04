@@ -9,8 +9,12 @@ export class GetCashBalanceHandler
 {
   constructor(private prismaService: PrismaService) {}
 
-  async execute() {
-    const result = await this.prismaService.cashBalance.findFirst();
+  async execute(query: GetCashBalanceQuery) {
+    const { id } = query;
+    const result = await this.prismaService.cashBook.findUnique({
+      where: { id: id },
+      select: { cashBalance: true },
+    });
     if (!result) {
       return failure(new Error());
     }

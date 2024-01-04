@@ -16,4 +16,10 @@ export class CashBook {
     required: false,
   })
   reportingMonths?: ReportingMonth[];
+  @ApiProperty({
+    example: 842000,
+    type: 'integer',
+    format: 'int32',
+  })
+  cashBalance: number;
 }

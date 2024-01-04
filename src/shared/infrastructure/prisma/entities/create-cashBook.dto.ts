@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsInt, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateCashBookDto {
   @ApiProperty({
@@ -8,4 +8,12 @@ export class CreateCashBookDto {
   @IsNotEmpty()
   @IsString()
   title: string;
+  @ApiProperty({
+    example: 842000,
+    type: 'integer',
+    format: 'int32',
+  })
+  @IsNotEmpty()
+  @IsInt()
+  cashBalance: number;
 }

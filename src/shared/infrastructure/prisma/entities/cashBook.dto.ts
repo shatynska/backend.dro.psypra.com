@@ -9,4 +9,10 @@ export class CashBookDto {
     example: 2022,
   })
   title: string;
+  @ApiProperty({
+    example: 842000,
+    type: 'integer',
+    format: 'int32',
+  })
+  cashBalance: number;
 }

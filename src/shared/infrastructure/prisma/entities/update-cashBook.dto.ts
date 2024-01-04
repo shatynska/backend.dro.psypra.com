@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString } from 'class-validator';
+import { IsInt, IsOptional, IsString } from 'class-validator';
 
 export class UpdateCashBookDto {
   @ApiProperty({
@@ -9,4 +9,13 @@ export class UpdateCashBookDto {
   @IsOptional()
   @IsString()
   title?: string;
+  @ApiProperty({
+    example: 842000,
+    type: 'integer',
+    format: 'int32',
+    required: false,
+  })
+  @IsOptional()
+  @IsInt()
+  cashBalance?: number;
 }

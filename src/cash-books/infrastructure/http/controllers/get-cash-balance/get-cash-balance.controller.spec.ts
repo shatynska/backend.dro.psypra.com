@@ -32,7 +32,7 @@ describe('GetCashBalanceController', () => {
   });
 
   it('should get cash-balance', async () => {
-    const result = await controller.getCashBalance();
+    const result = await controller.getCashBalance('testUuid');
 
     expect(result).toEqual(cashBalanceResponseDtoStub);
   });

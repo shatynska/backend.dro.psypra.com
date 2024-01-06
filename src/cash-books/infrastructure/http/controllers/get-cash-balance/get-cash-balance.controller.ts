@@ -1,9 +1,15 @@
-import { Public } from '@common/decorators';
-import { BadRequestException, Controller, Get, Param } from '@nestjs/common';
+import { ApiErrorDecorator, Public } from '@common/decorators';
+import {
+  BadRequestException,
+  Controller,
+  Get,
+  HttpStatus,
+  Param,
+} from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { GetCashBalanceQuery } from '~/cash-books/application/queries/get-cash-balance/get-cash-balance.query';
-import { CashBalanceResponseDto } from '../../dto';
+import { CashBalanceResponseDto } from '../../dto/responses/cash-balance.response.dto';
 
 @Controller('cash-books')
 @Public()
@@ -11,16 +17,23 @@ import { CashBalanceResponseDto } from '../../dto';
 export class GetCashBalanceController {
   constructor(private readonly queryBus: QueryBus) {}
 
+  @ApiResponse({
+    status: 200,
+    type: CashBalanceResponseDto,
+  })
+  @ApiErrorDecorator(HttpStatus.BAD_REQUEST, 'Bad Request')
   @Get('cash-balance/:id')
   async getCashBalance(
     @Param('id') id: string,
   ): Promise<CashBalanceResponseDto> {
-    const result = await this.queryBus.execute(new GetCashBalanceQuery(id));
+    const cashBalance = await this.queryBus.execute(
+      new GetCashBalanceQuery(id),
+    );
 
-    if (result.isFailure()) {
-      const error = result.value;
-      throw new BadRequestException(error.message);
+    if (cashBalance.isFailure()) {
+      throw new BadRequestException(cashBalance.value.message);
     }
-    return new CashBalanceResponseDto(result.value);
+
+    return new CashBalanceResponseDto(cashBalance.value);
   }
 }

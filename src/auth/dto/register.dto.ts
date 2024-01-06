@@ -1,21 +1,19 @@
 import { IsPasswordsMatchingConstraint } from '@common/decorators';
-import { ApiProperty, PickType } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, MinLength, Validate } from 'class-validator';
-import { CreateUserDto } from '~/shared/infrastructure/prisma/entities/create-user.dto';
+import { ApiProperty } from '@nestjs/swagger';
+import { MinLength, Validate } from 'class-validator';
 
-export class RegisterDto extends PickType(CreateUserDto, [
-  'email',
-  'password',
-] as const) {
+export class RegisterDto {
+  @ApiProperty({
+    example: 'test@gmail.com',
+  })
   email: string;
 
-  @IsNotEmpty()
+  @ApiProperty({ example: 'secret_password' })
+  @MinLength(6)
   password: string;
 
   @ApiProperty({ example: 'secret_password' })
-  @IsString()
   @MinLength(6)
   @Validate(IsPasswordsMatchingConstraint)
-  @IsNotEmpty()
   passportRepeat: string;
 }

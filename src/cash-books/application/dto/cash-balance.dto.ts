@@ -1,3 +1,3 @@
-import { CashBalance } from '~/shared/infrastructure/prisma/entities/cashBalance.entity';
-
-export class CashBalanceDto extends CashBalance {}
+export class CashBalanceDto {
+  value: number;
+}

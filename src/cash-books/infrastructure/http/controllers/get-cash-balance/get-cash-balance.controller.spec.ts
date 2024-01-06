@@ -1,8 +1,9 @@
 import { CqrsModule, QueryBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 import { success } from '~/shared/core/result';
-import { cashBalanceResponseDtoStub } from '../../dto/responses/cash-balance.response.dto.stub';
+import { cashBalanceResponseDtoStub } from '../../dto/responses/cash-balance.response.dto';
 import { GetCashBalanceController } from './get-cash-balance.controller';
+
 describe('GetCashBalanceController', () => {
   let controller: GetCashBalanceController;
 

@@ -1,27 +1,21 @@
 import { AggregateRoot } from '~/shared/domain/aggregate-root';
 import { Uuid } from '~/shared/domain/value-objects';
-import { Expense, MembershipFee, ReportingMonth } from './entities';
-import { CashBalance, CashBookTitle } from './value-objects';
+import { AmountOfMoney, CashBookTitle } from './value-objects';
 
 export class CashBook extends AggregateRoot {
   constructor(
-    private readonly id: Uuid,
+    private id: Uuid = new Uuid(),
     private title: CashBookTitle,
-    private cashBalance: CashBalance = 0,
-    private reportingMonths: ReportingMonth[] = [],
-    private membershipFees: MembershipFee[] = [],
-    private expenses: Expense[] = [],
+    private cashBalance: AmountOfMoney = new AmountOfMoney(),
   ) {
     super();
   }
 
-  public recordMembershipFee() {}
-
-  public correctMembershipFeeEntry() {}
-
-  public recordExpense() {}
-
-  public correctExpenseEntry() {}
-
-  private calculateCashBalance() {}
+  public mapToPrimitives() {
+    return {
+      id: this.id.getValue(),
+      title: this.title.getValue(),
+      cashBalance: this.cashBalance.getValue(),
+    };
+  }
 }

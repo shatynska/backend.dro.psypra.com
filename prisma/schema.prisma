@@ -5,79 +5,39 @@ generator client {
   provider = "prisma-client-js"
 }
 
-generator nestjsDto {
-  provider                        = "prisma-generator-nestjs-dto"
-  output                          = "../src/shared/infrastructure/prisma/entities"
-  outputToNestJsResourceStructure = "false"
-  flatResourceStructure           = "false"
-  exportRelationModifierClasses   = "true"
-  reExport                        = "false"
-  createDtoPrefix                 = "Create"
-  updateDtoPrefix                 = "Update"
-  dtoSuffix                       = "Dto"
-  entityPrefix                    = ""
-  entitySuffix                    = ""
-  classValidation                 = "true"
-  fileNamingStyle                 = "camel"
-  noDependencies                  = "false"
-  outputType                      = "class"
-  definiteAssignmentAssertion     = "false"
-  requiredResponseApiProperty     = "true"
-  prettier                        = "true"
-}
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model CashBook {
-  /// @IsUUID(4)
-  /// @example c0287617-9f36-489e-ba72-d462777987e9
   id              String           @id @default(uuid())
-  /// @example 2022
   title           String           @unique
-  reportingMonths ReportingMonth[]
-  /// @example 842000
   cashBalance     Int
-
+  reportingMonths ReportingMonth[]
   expenses Expense[]
 
   @@map("cash_books")
 }
 
 model Expense {
-  /// @IsUUID(4)
-  /// @example c0317617-9f36-489e-ba72-d462777987e9
   id      String  @id @default(uuid())
-  /// @example 380
-  amount  Int
-  /// @example піца
-  details String?
-
-  /// @example 2022-11-27
-  reportingDate DateTime @map("reporting_date") @db.Date
-
   CashBook   CashBook @relation(fields: [cashBookId], references: [id])
   cashBookId String
-
+  amount  Int
+  reportingDate DateTime @map("reporting_date") @db.Date
+  details String?
   createdAt DateTime @default(now()) @map("created_at")
 
   @@map("expenses")
 }
 
 model Member {
-  /// @IsUUID(4)
-  /// @example c0357617-9f36-489e-ba72-d462777987e9
   id             String          @id @default(uuid())
-  /// @example Олег
   firstName      String          @map("first_name")
-  /// @example Зварицький
   lastName       String          @map("last_name")
-  /// @example [MemberStatus.ACTIVE]
   status         MemberStatus
   membershipFees MembershipFee[]
-
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -85,20 +45,12 @@ model Member {
 }
 
 model MembershipFee {
-  /// @IsUUID(4)
-  /// @example c0367617-9f36-489e-ba72-d462777987e9
   id               String         @id @default(uuid())
-  /// @example 300
-  amount           Int
   reportingMonth   ReportingMonth @relation(fields: [reportingMonthId], references: [id])
-  /// @IsUUID(4)
-  /// @example c0297617-9f36-489e-ba72-d462777987e9
   reportingMonthId String         @map("reporting_month_id")
-
   member    Member   @relation(fields: [memberId], references: [id], onDelete: Cascade)
-  /// @IsUUID(4)
-  /// @example c0357617-9f36-489e-ba72-d462777987e9
   memberId  String   @map("member_id")
+  amount           Int
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -106,15 +58,10 @@ model MembershipFee {
 }
 
 model ReportingMonth {
-  /// @IsUUID(4)
-  /// @example c0297617-9f36-489e-ba72-d462777987e9
   id             String          @id @default(uuid())
-  /// @example '2022-09-01'
-  month          DateTime        @db.Date
   cashBook       CashBook        @relation(fields: [cashBookId], references: [id], onDelete: Cascade)
-  /// @IsUUID(4)
-  /// @example c0287617-9f36-489e-ba72-d462777987e9
   cashBookId     String          @map("cash_book_id")
+  month          DateTime        @db.Date
   membershipFees MembershipFee[]
 
   @@map("reporting_months")
@@ -131,20 +78,12 @@ model Token {
 }
 
 model User {
-  /// @IsUUID(4)
-  /// @example c0377617-9f36-489e-ba72-d462777987e9
   id       String    @id @default(uuid())
-  /// @example test@gmail.com
-  /// @IsEmail
   email    String    @unique
-  /// @example secret_password
-  /// @MinLength(6)
   password String?
   provider Provider?
-  /// @example [Role.USER]
   roles    Role[]
   tokens   Token[]
-
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 

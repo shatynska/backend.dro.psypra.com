@@ -53,17 +53,13 @@ export class CashBook extends AggregateRoot {
     return success(cashBook);
   }
 
-  static reconstitute(params: CashBookParameters): Result<Error, CashBook> {
-    const cashBook = new CashBook(
-      new Uuid(params.id),
-      new Title(params.title),
-      new AmountOfMoney(params.cashBalance),
-    );
+  static reconstitute(params: CashBookParameters): CashBook {
+    const id = Uuid.reconstitute(params.id);
+    const title = Title.reconstitute(params.title);
+    const cashBalance = AmountOfMoney.reconstitute(params.cashBalance);
 
-    if (!cashBook) {
-      return failure(new Error());
-    }
+    const cashBook = new CashBook(id, title, cashBalance);
 
-    return success(cashBook);
+    return cashBook;
   }
 }

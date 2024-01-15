@@ -1,4 +1,4 @@
-import { CashBookDto } from '~/cash-books/domain/dto/cash-book.dto';
+import { CashBookDto } from '~/cash-books/application/dto/cash-book.dto';
 import { Result } from '~/shared/core/result';
 
 export const CASH_BOOKS_READ_REPOSITORY_TOKEN = Symbol(

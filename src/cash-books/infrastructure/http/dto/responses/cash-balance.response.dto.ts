@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { CashBalanceDto } from '~/cash-books/application/dto';
+import { CashBalanceDto } from '~/cash-books/application/dto/cash-balance.dto';
 
 export class CashBalanceResponseDto extends CashBalanceDto {
   @ApiProperty({

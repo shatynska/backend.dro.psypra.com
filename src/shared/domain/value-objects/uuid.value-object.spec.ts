@@ -10,7 +10,7 @@ describe('Uuid', () => {
     expect(received.getValue()).toBe(mockUuid);
   });
   it('should return an UUID', () => {
-    const received = Uuid.recreate(mockUuid).value as Uuid;
+    const received = Uuid.reconstitute(mockUuid).value as Uuid;
 
     expect(received.getValue()).toBe(mockUuid);
   });

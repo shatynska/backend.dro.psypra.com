@@ -20,7 +20,7 @@ export class Uuid extends ValueObject<string> {
     return success(new Uuid(value));
   }
 
-  static reconstitute(value: string): Result<void, Uuid> {
-    return success(new Uuid(value));
+  static reconstitute(value: string): Uuid {
+    return new Uuid(value);
   }
 }

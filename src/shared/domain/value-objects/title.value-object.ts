@@ -26,7 +26,7 @@ export class Title extends ValueObject<string> {
     return success(new Title(value));
   }
 
-  static reconstitute(value: string): Result<void, Title> {
-    return success(new Title(value));
+  static reconstitute(value: string): Title {
+    return new Title(value);
   }
 }

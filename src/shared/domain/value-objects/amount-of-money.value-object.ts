@@ -19,7 +19,7 @@ export class AmountOfMoney extends ValueObject<number> {
     return success(new AmountOfMoney(value));
   }
 
-  static reconstitute(value: number): Result<void, AmountOfMoney> {
-    return success(new AmountOfMoney(value));
+  static reconstitute(value: number): AmountOfMoney {
+    return new AmountOfMoney(value);
   }
 }

@@ -20,6 +20,18 @@ export class CashBook extends AggregateRoot {
     super();
   }
 
+  getId() {
+    return this.id.getValue();
+  }
+
+  getTitle() {
+    return this.title.getValue();
+  }
+
+  getCashBalance() {
+    return this.cashBalance.getValue();
+  }
+
   static create(
     params: CreateCashBookParameters,
   ): Result<DomainErrors, CashBook> {

@@ -1,7 +1,7 @@
 import { Result, failure, success } from '~/shared/core/result';
 import { DomainErrors } from '~/shared/domain/errors/domain.errors';
 import { ShouldNotBeNegativeNumberRule } from '~/shared/domain/rules/should-not-be-negative-number.rule';
-import { ValueObject } from '~/shared/domain/value-objects';
+import { ValueObject } from './value-object';
 
 export class AmountOfMoney extends ValueObject<number> {
   static create(value: number): Result<DomainErrors, AmountOfMoney> {

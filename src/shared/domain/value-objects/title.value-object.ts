@@ -1,7 +1,7 @@
 import { Result, failure, success } from '~/shared/core/result';
-import { ValueObject } from '~/shared/domain/value-objects';
 import { DomainErrors } from '../errors/domain.errors';
 import { ShouldBeWithinLengthRangeRule } from '../rules/should-be-within-length-range.rule';
+import { ValueObject } from './value-object';
 
 export class Title extends ValueObject<string> {
   private static MIN_LENGTH: number = 2;

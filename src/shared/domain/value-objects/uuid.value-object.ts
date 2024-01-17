@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
 import { Result, failure, success } from '~/shared/core/result';
 import { DomainErrors } from '~/shared/domain/errors/domain.errors';
-import { ShouldBeUuidV4Rule } from '../rules/sould-be-uuid.rule';
+import { ShouldBeUuidV4Rule } from '../rules/should-be-uuid.rule';
 import { ValueObject } from './value-object';
 
 export class Uuid extends ValueObject<string> {

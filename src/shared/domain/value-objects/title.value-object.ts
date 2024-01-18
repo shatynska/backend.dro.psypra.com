@@ -5,7 +5,7 @@ import { ValueObject } from './value-object';
 
 export class Title extends ValueObject<string> {
   private static MIN_LENGTH: number = 2;
-  private static MAX_LENGTH: number = 10;
+  private static MAX_LENGTH: number = 50;
 
   static create(value: string): Result<DomainErrors, Title> {
     const validation = this.validate([

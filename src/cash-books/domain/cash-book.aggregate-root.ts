@@ -1,7 +1,7 @@
 import { Result, failure, success } from '~/shared/core/result';
 import { AggregateRoot } from '~/shared/domain/aggregate-root';
-import { DomainError, DomainErrors } from '~/shared/domain/errors';
 import { AmountOfMoney, Title, Uuid } from '~/shared/domain/value-objects';
+import { CashBookCreatingErrors } from './errors';
 
 export type CashBookParameters = {
   id: string;
@@ -34,19 +34,19 @@ export class CashBook extends AggregateRoot {
 
   static create(
     params: CreateCashBookParameters,
-  ): Result<DomainErrors, CashBook> {
-    const domainErrors: DomainErrors = new DomainErrors([]);
+  ): Result<CashBookCreatingErrors, CashBook> {
+    const creatingErrors = new CashBookCreatingErrors();
 
     const title = Title.create(params.title);
     if (title.isFailure()) {
-      domainErrors.errors.push(title.value);
+      creatingErrors.errors.push(title.value);
     }
 
     const id = Uuid.create();
     const cashBalance = AmountOfMoney.create(0);
 
-    if (domainErrors.errors.length > 0) {
-      return failure(domainErrors);
+    if (creatingErrors.errors.length > 0) {
+      return failure(creatingErrors);
     }
 
     const cashBook = new CashBook(
@@ -54,13 +54,6 @@ export class CashBook extends AggregateRoot {
       title.value as Title,
       cashBalance.value as AmountOfMoney,
     );
-    if (!cashBook) {
-      domainErrors.errors.push(
-        // TODO Replace message with constant
-        new DomainError('Помилка при створенні касової книги'),
-      );
-      return failure(domainErrors);
-    }
 
     return success(cashBook);
   }

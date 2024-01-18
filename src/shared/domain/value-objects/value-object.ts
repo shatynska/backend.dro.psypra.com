@@ -8,7 +8,7 @@ export abstract class ValueObject<T> {
   }
 
   protected static validate(rules: Rule[]): Result<DomainErrors, true> {
-    const domainErrors: DomainErrors = new DomainErrors([]);
+    const domainErrors: DomainErrors = new DomainErrors();
 
     for (const rule of rules) {
       if (rule.isBroken()) {

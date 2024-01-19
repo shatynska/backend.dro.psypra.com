@@ -1,5 +1,5 @@
 import { DomainError } from '../errors';
-import { Rule } from '../rules/rule';
+import { Rule } from '../rules';
 
 export abstract class ValueObject<T> {
   protected constructor(protected readonly value: T) {

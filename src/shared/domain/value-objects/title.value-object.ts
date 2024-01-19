@@ -1,6 +1,6 @@
 import { Result, failure, success } from '~/shared/core/result';
 import { TitleCreationError } from '../errors';
-import { ShouldBeWithinLengthRangeRule } from '../rules/should-be-within-length-range.rule';
+import { ShouldBeWithinLengthRangeRule } from '../rules';
 import { ValueObject } from './value-object';
 
 export class Title extends ValueObject<string> {

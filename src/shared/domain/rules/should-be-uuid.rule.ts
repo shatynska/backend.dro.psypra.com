@@ -1,4 +1,4 @@
-import { DomainError } from '../errors/domain.error';
+import { DomainError } from '../errors';
 import { Rule } from './rule';
 
 export class ShouldBeUuidV4Rule implements Rule {

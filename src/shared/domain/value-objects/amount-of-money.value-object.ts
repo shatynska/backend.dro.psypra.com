@@ -1,6 +1,6 @@
 import { Result, failure, success } from '~/shared/core/result';
-import { ShouldNotBeNegativeNumberRule } from '../rules/should-not-be-negative-number.rule';
 import { AmountOfMoneyCreationError } from '../errors';
+import { ShouldNotBeNegativeNumberRule } from '../rules';
 import { ValueObject } from './value-object';
 
 export class AmountOfMoney extends ValueObject<number> {

@@ -1,19 +1,16 @@
 import { Result, failure, success } from '~/shared/core/result';
-import { DomainErrors } from '~/shared/domain/errors/domain.errors';
-import { ShouldNotBeNegativeNumberRule } from '~/shared/domain/rules/should-not-be-negative-number.rule';
+import { ShouldNotBeNegativeNumberRule } from '../rules/should-not-be-negative-number.rule';
+import { AmountOfMoneyCreationError } from '../errors';
 import { ValueObject } from './value-object';
 
 export class AmountOfMoney extends ValueObject<number> {
-  static create(value: number): Result<DomainErrors, AmountOfMoney> {
-    const validation = this.validate([
-      new ShouldNotBeNegativeNumberRule(value),
-    ]);
+  static create(
+    value: number,
+  ): Result<AmountOfMoneyCreationError, AmountOfMoney> {
+    const errors = this.validate([new ShouldNotBeNegativeNumberRule(value)]);
 
-    if (validation.isFailure()) {
-      // TODO Replace message with constant
-      validation.value.message = 'Помилка в сумі';
-
-      return failure(validation.value);
+    if (errors.length > 0) {
+      return failure(new AmountOfMoneyCreationError([...errors]));
     }
 
     return success(new AmountOfMoney(value));

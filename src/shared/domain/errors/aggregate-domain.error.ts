@@ -1,6 +1,6 @@
 import { DomainError } from './domain.error';
 
-export class DomainErrors extends AggregateError {
+export class AggregateDomainError extends AggregateError {
   constructor(errors: DomainError[] = [], message?: string) {
     super(errors, message);
   }
@@ -9,8 +9,8 @@ export class DomainErrors extends AggregateError {
     return this.getMessages(this).join('. ');
   }
 
-  private getMessages(domainErrors: DomainErrors): string[] {
-    const stack: DomainErrors[] = [domainErrors];
+  private getMessages(aggregateDomainError: AggregateDomainError): string[] {
+    const stack: AggregateDomainError[] = [aggregateDomainError];
     const messages: string[] = [];
 
     while (stack.length > 0) {

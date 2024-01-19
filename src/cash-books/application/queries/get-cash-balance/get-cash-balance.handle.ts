@@ -1,23 +1,38 @@
+import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { failure, success } from '~/shared/core/result';
-import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
+import { CashBalanceDto } from '~/cash-books/application/dto/cash-balance.dto';
+import { Result, failure, success } from '~/shared/core/result';
+import {
+  CASH_BOOKS_READ_REPOSITORY_TOKEN,
+  CashBooksReadRepository,
+} from '../../cash-books.read.repository';
+import { CashBookDto } from '../../dto/cash-book.dto';
+import { CashBookNotFoundError } from '../../errors/cash-book-not-found.error';
 import { GetCashBalanceQuery } from './get-cash-balance.query';
 
 @QueryHandler(GetCashBalanceQuery)
 export class GetCashBalanceHandler
   implements IQueryHandler<GetCashBalanceQuery>
 {
-  constructor(private prismaService: PrismaService) {}
+  constructor(
+    @Inject(CASH_BOOKS_READ_REPOSITORY_TOKEN)
+    private cashBooksReadRepository: CashBooksReadRepository,
+  ) {}
 
-  async execute(query: GetCashBalanceQuery) {
+  async execute(
+    query: GetCashBalanceQuery,
+  ): Promise<Result<CashBookNotFoundError, CashBalanceDto>> {
     const { id } = query;
-    const result = await this.prismaService.cashBook.findUnique({
-      where: { id: id },
-      select: { cashBalance: true },
-    });
-    if (!result) {
-      return failure(new Error());
+
+    const cashBook: CashBookDto | null =
+      await this.cashBooksReadRepository.getById(id);
+
+    if (cashBook === null) {
+      return failure(new CashBookNotFoundError());
     }
-    return success(result);
+
+    const cashBalance = cashBook.cashBalance;
+
+    return success({ value: cashBalance });
   }
 }

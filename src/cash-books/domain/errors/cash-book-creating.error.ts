@@ -1,12 +1,12 @@
-import { DomainError, DomainErrors } from '~/shared/domain/errors';
+import { AggregateDomainError, DomainError } from '~/shared/domain/errors';
 
-export class CashBookCreatingErrors extends DomainErrors {
+export class CashBookCreatingError extends AggregateDomainError {
   // TODO Replace message with constant
   static readonly message = 'Помилка при створенні касової книги';
 
   constructor(
     errors: DomainError[] = [],
-    message: string = CashBookCreatingErrors.message,
+    message: string = CashBookCreatingError.message,
   ) {
     super(errors, message);
   }

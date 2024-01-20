@@ -10,6 +10,6 @@ export class ShouldBeUuidV4Rule implements Rule {
   public isBroken(): boolean {
     const regex =
       /^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
-    return regex.test(this.value) === false;
+    return typeof this.value !== 'string' || regex.test(this.value) === false;
   }
 }

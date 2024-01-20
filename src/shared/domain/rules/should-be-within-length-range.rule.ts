@@ -15,6 +15,9 @@ export class ShouldBeWithinLengthRangeRule implements Rule {
 
   public isBroken(): boolean {
     const length = this.value.length;
-    return (length >= this.minLength && length <= this.maxLength) === false;
+    return (
+      typeof this.value !== 'string' ||
+      (length >= this.minLength && length <= this.maxLength) === false
+    );
   }
 }

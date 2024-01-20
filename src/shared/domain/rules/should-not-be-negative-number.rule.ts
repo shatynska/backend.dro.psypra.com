@@ -8,6 +8,6 @@ export class ShouldNotBeNegativeNumberRule implements Rule {
   public error = new DomainError('Значення не повинно бути меншим за нуль');
 
   public isBroken(): boolean {
-    return this.value >= 0 === false;
+    return typeof this.value !== 'number' || this.value >= 0 === false;
   }
 }

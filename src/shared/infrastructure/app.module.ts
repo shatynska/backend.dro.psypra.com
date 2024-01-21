@@ -5,7 +5,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { PrismaModule } from '~/shared/infrastructure/prisma/prisma.module';
 import { AuthModule } from '../../auth/auth.module';
-import { CashBooksModule } from '../../cash-books/cash-books.module';
+import { CashBooksModule } from '../../cash-books/infrastructure/cash-books.module';
 import { UsersModule } from '../../users/users.module';
 
 @Module({

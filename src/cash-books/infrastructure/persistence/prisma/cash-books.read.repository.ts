@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CashBookDto } from '~/cash-books/application/dto/cash-book.dto';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
-import { CashBookMapper } from './cash-book.mapper';
+import { CashBooksMapper } from './cash-books.mapper';
 
 @Injectable()
 export class PrismaCashBooksReadRepository {
@@ -18,6 +18,6 @@ export class PrismaCashBooksReadRepository {
       return null;
     }
 
-    return CashBookMapper.mapToDto(cashBook);
+    return CashBooksMapper.mapToDto(cashBook);
   }
 }

@@ -2,7 +2,7 @@ import { CashBook as PrismaCashBook } from '@prisma/client';
 import { CashBookDto } from '~/cash-books/application/dto/cash-book.dto';
 import { CashBook } from '~/cash-books/domain/cash-book.aggregate-root';
 
-export class CashBookMapper {
+export class CashBooksMapper {
   static mapToPersistence(cashBook: CashBook): PrismaCashBook {
     const mappedCashBook = {
       id: cashBook.getId(),

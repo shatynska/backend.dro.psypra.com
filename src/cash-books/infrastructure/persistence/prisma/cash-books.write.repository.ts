@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CashBook } from '~/cash-books/domain/cash-book.aggregate-root';
 import { CashBooksWriteRepository } from '~/cash-books/domain/cash-books.write.repository';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
-import { CashBookMapper } from './cash-book.mapper';
+import { CashBooksMapper } from './cash-books.mapper';
 
 @Injectable()
 export class PrismaCashBooksWriteRepository
@@ -11,7 +11,7 @@ export class PrismaCashBooksWriteRepository
   constructor(private readonly prismaService: PrismaService) {}
 
   async save(cashBook: CashBook): Promise<void> {
-    const mappedCashBook = CashBookMapper.mapToPersistence(cashBook);
+    const mappedCashBook = CashBooksMapper.mapToPersistence(cashBook);
 
     await this.prismaService.cashBook.create({
       data: mappedCashBook,
@@ -28,6 +28,6 @@ export class PrismaCashBooksWriteRepository
       return null;
     }
 
-    return CashBookMapper.mapToDomain(cashBook);
+    return CashBooksMapper.mapToDomain(cashBook);
   }
 }

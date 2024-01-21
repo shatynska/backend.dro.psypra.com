@@ -1,7 +1,7 @@
 import { Result, failure, success } from '~/shared/core/result';
 import { AggregateRoot } from '~/shared/domain/aggregate-root';
 import { AmountOfMoney, Title, Uuid } from '~/shared/domain/value-objects';
-import { CashBookCreatingError } from './errors';
+import { CashBookCreatingError } from '../errors';
 
 export type CashBookParameters = {
   id: string;

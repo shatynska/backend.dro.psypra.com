@@ -1,10 +1,10 @@
 import { Inject } from '@nestjs/common';
 import { CommandHandler, IQueryHandler } from '@nestjs/cqrs';
-import { CashBook } from '~/cash-books/domain/cash-book.aggregate-root';
 import {
   CASH_BOOKS_WRITE_REPOSITORY_TOKEN,
   CashBooksWriteRepository,
 } from '~/cash-books/domain/cash-books.write.repository';
+import { CashBook } from '~/cash-books/domain/entities/cash-book.entity';
 import { CashBookCreatingError } from '~/cash-books/domain/errors';
 import { Result, failure } from '~/shared/core/result';
 import { CreateCashBookCommand } from './create-cash-book.command';

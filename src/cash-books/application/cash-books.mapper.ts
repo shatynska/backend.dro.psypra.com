@@ -1,4 +1,4 @@
-import { CashBook } from '~/cash-books/domain/cash-book.aggregate-root';
+import { CashBook } from '~/cash-books/domain/entities/cash-book.entity';
 import { CashBookDto } from './dto/cash-book.dto';
 
 export class CashBookMapper {

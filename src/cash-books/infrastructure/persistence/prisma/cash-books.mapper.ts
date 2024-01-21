@@ -1,6 +1,6 @@
 import { CashBook as PrismaCashBook } from '@prisma/client';
 import { CashBookDto } from '~/cash-books/application/dto/cash-book.dto';
-import { CashBook } from '~/cash-books/domain/cash-book.aggregate-root';
+import { CashBook } from '~/cash-books/domain/entities/cash-book.entity';
 
 export class CashBooksMapper {
   static mapToPersistence(cashBook: CashBook): PrismaCashBook {

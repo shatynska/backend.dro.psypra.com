@@ -1,4 +1,4 @@
-import { CashBook } from './cash-book.aggregate-root';
+import { CashBook } from './cash-book.entity';
 
 describe('CashBook', () => {
   jest.mock('~/shared/domain/value-objects');

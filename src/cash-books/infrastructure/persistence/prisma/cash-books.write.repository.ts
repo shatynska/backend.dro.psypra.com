@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CashBook } from '~/cash-books/domain/cash-book.aggregate-root';
 import { CashBooksWriteRepository } from '~/cash-books/domain/cash-books.write.repository';
+import { CashBook } from '~/cash-books/domain/entities/cash-book.entity';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
 import { CashBooksMapper } from './cash-books.mapper';
 

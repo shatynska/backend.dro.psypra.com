@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
-import { CashBookDto } from './dto';
+import { CashBookDto } from './dto/cash-book.dto';
 
 @Injectable()
 export class CashBooksService {
@@ -12,7 +11,7 @@ export class CashBooksService {
     return cashBooks;
   }
 
-  async findCashBookById(id: CashBookDto['id']): Promise<CashBookDto> {
+  async findCashBookById(id: CashBookDto['id']): Promise<CashBookDto | null> {
     const cashBook = await this.prismaService.cashBook.findFirst({
       where: { id: id },
     });
@@ -20,15 +19,5 @@ export class CashBooksService {
       return null;
     }
     return cashBook;
-  }
-
-  async createCashBook(
-    createCashBookDto: Prisma.CashBookCreateInput,
-  ): Promise<CashBookDto> {
-    console.log(createCashBookDto);
-    const newCashBook = await this.prismaService.cashBook.create({
-      data: createCashBookDto,
-    });
-    return newCashBook;
   }
 }

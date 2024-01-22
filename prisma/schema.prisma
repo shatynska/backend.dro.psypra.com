@@ -11,23 +11,23 @@ datasource db {
 }
 
 model CashBook {
-  id              String           @id @default(uuid())
-  title           String           @unique
-  cashBalance     Int
-  reportingMonths ReportingMonth[]
-  expenses Expense[]
+  id               String            @id @default(uuid())
+  title            String            @unique
+  cashBalance      Int
+  reportingPeriods ReportingPeriod[]
+  expenses         Expense[]
 
   @@map("cash_books")
 }
 
 model Expense {
-  id      String  @id @default(uuid())
-  CashBook   CashBook @relation(fields: [cashBookId], references: [id])
-  cashBookId String
-  amount  Int
+  id            String   @id @default(uuid())
+  cashBook      CashBook @relation(fields: [cashBookId], references: [id])
+  cashBookId    String
+  amount        Int
   reportingDate DateTime @map("reporting_date") @db.Date
-  details String?
-  createdAt DateTime @default(now()) @map("created_at")
+  details       String?
+  createdAt     DateTime @default(now()) @map("created_at")
 
   @@map("expenses")
 }
@@ -38,33 +38,35 @@ model Member {
   lastName       String          @map("last_name")
   status         MemberStatus
   membershipFees MembershipFee[]
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  createdAt      DateTime        @default(now()) @map("created_at")
+  updatedAt      DateTime        @updatedAt @map("updated_at")
 
   @@map("members")
 }
 
 model MembershipFee {
-  id               String         @id @default(uuid())
-  reportingMonth   ReportingMonth @relation(fields: [reportingMonthId], references: [id])
-  reportingMonthId String         @map("reporting_month_id")
-  member    Member   @relation(fields: [memberId], references: [id], onDelete: Cascade)
-  memberId  String   @map("member_id")
-  amount           Int
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id                String          @id @default(uuid())
+  reportingPeriod   ReportingPeriod @relation(fields: [reportingPeriodId], references: [id])
+  reportingPeriodId String          @map("reporting_period_id")
+  member            Member          @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  memberId          String          @map("member_id")
+  amount            Int
+  createdAt         DateTime        @default(now()) @map("created_at")
+  updatedAt         DateTime        @updatedAt @map("updated_at")
 
   @@map("membership_fees")
 }
 
-model ReportingMonth {
+model ReportingPeriod {
   id             String          @id @default(uuid())
+  title          String
   cashBook       CashBook        @relation(fields: [cashBookId], references: [id], onDelete: Cascade)
   cashBookId     String          @map("cash_book_id")
-  month          DateTime        @db.Date
+  startDate      DateTime        @db.Date
+  endDate        DateTime        @db.Date
   membershipFees MembershipFee[]
 
-  @@map("reporting_months")
+  @@map("reporting_periods")
 }
 
 model Token {
@@ -78,14 +80,14 @@ model Token {
 }
 
 model User {
-  id       String    @id @default(uuid())
-  email    String    @unique
-  password String?
-  provider Provider?
-  roles    Role[]
-  tokens   Token[]
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id        String    @id @default(uuid())
+  email     String    @unique
+  password  String?
+  provider  Provider?
+  roles     Role[]
+  tokens    Token[]
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
 
   @@map("users")
 }

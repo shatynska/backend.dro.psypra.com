@@ -1,7 +1,7 @@
 import { Result, failure, success } from '~/shared/core/result';
 import { AggregateRoot } from '~/shared/domain/aggregate-root';
 import { AmountOfMoney, Title, Uuid } from '~/shared/domain/value-objects';
-import { CashBookCreatingError } from '../errors';
+import { CashBookCreationError } from '../errors';
 
 export type CashBookParameters = {
   id: string;
@@ -34,8 +34,8 @@ export class CashBook extends AggregateRoot {
 
   static create(
     params: CreateCashBookParameters,
-  ): Result<CashBookCreatingError, CashBook> {
-    const creatingError = new CashBookCreatingError();
+  ): Result<CashBookCreationError, CashBook> {
+    const creatingError = new CashBookCreationError();
 
     const title = Title.create(params.title);
     if (title.isFailure()) {

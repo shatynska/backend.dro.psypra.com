@@ -5,7 +5,7 @@ import {
   CashBooksWriteRepository,
 } from '~/cash-books/domain/cash-books.write.repository';
 import { CashBook } from '~/cash-books/domain/entities/cash-book.entity';
-import { CashBookCreatingError } from '~/cash-books/domain/errors';
+import { CashBookCreationError } from '~/cash-books/domain/errors';
 import { Result, failure } from '~/shared/core/result';
 import { CreateCashBookCommand } from './create-cash-book.command';
 
@@ -20,7 +20,7 @@ export class CreateCashBookHandler
 
   async execute(
     command: CreateCashBookCommand,
-  ): Promise<Result<CashBookCreatingError, void>> {
+  ): Promise<Result<CashBookCreationError, void>> {
     const { params } = command;
 
     // TODO Verify that the title does not already exist

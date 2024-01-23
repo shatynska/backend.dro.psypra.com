@@ -1,1 +1,1 @@
-export * from './cash-book-creating.error';
+export * from './cash-book-creation.error';

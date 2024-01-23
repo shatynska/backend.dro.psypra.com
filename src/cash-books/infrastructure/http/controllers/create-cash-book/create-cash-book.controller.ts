@@ -9,7 +9,7 @@ import {
 import { CommandBus } from '@nestjs/cqrs';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateCashBookCommand } from '~/cash-books/application/commands/create-cash-book/create-cash-book.command';
-import { CashBookCreatingError } from '~/cash-books/domain/errors';
+import { CashBookCreationError } from '~/cash-books/domain/errors';
 import { Result } from '~/shared/core/result';
 import { CreateCashBookRequestDto } from '../../dto/requests/create.cash-book.request.dto';
 
@@ -21,13 +21,13 @@ export class CreateCashBookController {
   @ApiResponse({ status: 201 })
   @ApiErrorDecorator(
     HttpStatus.BAD_REQUEST,
-    CashBookCreatingError.defaultMessage,
+    CashBookCreationError.defaultMessage,
   )
   @Post()
   async createCashBook(
     @Body() createCashBookRequestDto: CreateCashBookRequestDto,
   ): Promise<void> {
-    const cashBook: Result<CashBookCreatingError, void> =
+    const cashBook: Result<CashBookCreationError, void> =
       await this.commandBus.execute(
         new CreateCashBookCommand(createCashBookRequestDto),
       );

@@ -4,7 +4,7 @@ import { Rule } from './rule';
 export class ShouldNotBeNegativeNumberRule implements Rule {
   constructor(
     private value: number,
-    public isBreakable: boolean = false,
+    public isBreakable: boolean = true,
     private customErrorMessage?: string,
   ) {}
 

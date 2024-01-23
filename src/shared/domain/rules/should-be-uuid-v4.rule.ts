@@ -4,7 +4,7 @@ import { Rule } from './rule';
 export class ShouldBeUuidV4Rule implements Rule {
   constructor(
     private value: string,
-    public isBreakable: boolean = false,
+    public isBreakable: boolean = true,
     private customErrorMessage?: string,
   ) {}
 

@@ -4,7 +4,7 @@ import { Rule } from './rule';
 export class ShouldBeUniqueRule implements Rule {
   constructor(
     private value: boolean,
-    public isBreakable: boolean = false,
+    public isBreakable: boolean = true,
     private customErrorMessage?: string,
   ) {}
 

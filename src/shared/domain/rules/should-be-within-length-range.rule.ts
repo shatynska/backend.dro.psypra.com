@@ -6,7 +6,7 @@ export class ShouldBeWithinLengthRangeRule implements Rule {
     private value: string,
     private minLength: number,
     private maxLength: number,
-    public isBreakable: boolean = false,
+    public isBreakable: boolean = true,
     private customErrorMessage?: string,
   ) {}
 

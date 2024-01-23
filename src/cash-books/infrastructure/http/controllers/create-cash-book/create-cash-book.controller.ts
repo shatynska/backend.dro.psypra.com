@@ -19,7 +19,10 @@ import { CreateCashBookRequestDto } from '../../dto/requests/create.cash-book.re
 export class CreateCashBookController {
   constructor(private readonly commandBus: CommandBus) {}
   @ApiResponse({ status: 201 })
-  @ApiErrorDecorator(HttpStatus.BAD_REQUEST, CashBookCreatingError.message)
+  @ApiErrorDecorator(
+    HttpStatus.BAD_REQUEST,
+    CashBookCreatingError.defaultMessage,
+  )
   @Post()
   async createCashBook(
     @Body() createCashBookRequestDto: CreateCashBookRequestDto,

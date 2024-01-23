@@ -24,7 +24,7 @@ export class GetCashBalanceController {
     status: 200,
     type: CashBalanceResponseDto,
   })
-  @ApiErrorDecorator(HttpStatus.NOT_FOUND, CashBookNotFoundError.message)
+  @ApiErrorDecorator(HttpStatus.NOT_FOUND, CashBookNotFoundError.defaultMessage)
   @Get('cash-balance/:id')
   async getCashBalance(
     @Param('id') id: string,

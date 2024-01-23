@@ -1,12 +1,12 @@
-import { AggregateDomainError } from '~/shared/domain/errors';
+import { AggregateDomainError, DomainError } from '~/shared/domain/errors';
 
 export class AmountOfMoneyCreationError extends AggregateDomainError {
   // TODO Replace message with constant
-  static readonly message = 'Не вдається створити грошову суму';
+  static readonly defaultMessage = 'Не вдається створити грошову суму';
 
   constructor(
-    errors: Error[] = [],
-    message: string = AmountOfMoneyCreationError.message,
+    errors: DomainError[] = [],
+    message: string = AmountOfMoneyCreationError.defaultMessage,
   ) {
     super(errors, message);
   }

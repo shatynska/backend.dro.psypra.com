@@ -1,12 +1,12 @@
-import { AggregateDomainError } from '~/shared/domain/errors';
+import { AggregateDomainError, DomainError } from '~/shared/domain/errors';
 
 export class UuidCreationError extends AggregateDomainError {
   // TODO Replace message with constant
-  static readonly message = 'Не вдається створити ідентифікатор';
+  static readonly defaultMessage = 'Не вдається створити ідентифікатор';
 
   constructor(
-    errors: Error[] = [],
-    message: string = UuidCreationError.message,
+    errors: DomainError[] = [],
+    message: string = UuidCreationError.defaultMessage,
   ) {
     super(errors, message);
   }

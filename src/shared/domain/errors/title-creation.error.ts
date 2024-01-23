@@ -1,12 +1,12 @@
-import { AggregateDomainError } from '~/shared/domain/errors';
+import { AggregateDomainError, DomainError } from '~/shared/domain/errors';
 
 export class TitleCreationError extends AggregateDomainError {
   // TODO Replace message with constant
-  static readonly message = 'Не вдається створити назву';
+  static readonly defaultMessage = 'Не вдається створити назву';
 
   constructor(
-    errors: Error[] = [],
-    message: string = TitleCreationError.message,
+    errors: DomainError[] = [],
+    message: string = TitleCreationError.defaultMessage,
   ) {
     super(errors, message);
   }

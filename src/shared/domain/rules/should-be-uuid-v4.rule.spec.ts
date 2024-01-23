@@ -1,4 +1,4 @@
-import { ShouldBeUuidV4Rule } from './should-be-uuid.rule';
+import { ShouldBeUuidV4Rule } from './should-be-uuid-v4.rule';
 
 describe('ShouldBeUuidV4Rule', () => {
   it.each([

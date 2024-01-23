@@ -8,7 +8,7 @@ describe('CashBook', () => {
   });
 
   it('should create cash book with defined title', () => {
-    const received = CashBook.create({ title: 'test' });
+    const received = CashBook.create({ title: 'test', isTitleUnique: true });
     const newCashBook = received.value as CashBook;
 
     expect(received.value).toBeInstanceOf(CashBook);

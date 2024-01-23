@@ -21,11 +21,15 @@ export class CreateCashBookHandler
   async execute(
     command: CreateCashBookCommand,
   ): Promise<Result<CashBookCreationError, void>> {
-    const { params } = command;
+    const { title } = command.params;
 
-    // TODO Verify that the title does not already exist
+    const isTitleUnique =
+      await this.cashBooksWriteRepository.isTitleUnique(title);
 
-    const cashBook = CashBook.create({ title: params.title });
+    const cashBook = CashBook.create({
+      title: title,
+      isTitleUnique: isTitleUnique,
+    });
 
     if (cashBook.isFailure()) {
       return failure(cashBook.value);

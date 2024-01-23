@@ -5,6 +5,8 @@ export const CASH_BOOKS_WRITE_REPOSITORY_TOKEN = Symbol(
 );
 
 export interface CashBooksWriteRepository {
+  isTitleUnique(title: string): Promise<boolean>;
+
   save(cashBook: CashBook): Promise<void>;
 
   getById(id: string): Promise<CashBook | null>;

@@ -10,6 +10,14 @@ export class PrismaCashBooksWriteRepository
 {
   constructor(private readonly prismaService: PrismaService) {}
 
+  async isTitleUnique(title: string): Promise<boolean> {
+    const entries = await this.prismaService.cashBook.count({
+      where: { title: title },
+    });
+
+    return entries === 0 ? true : false;
+  }
+
   async save(cashBook: CashBook): Promise<void> {
     const mappedCashBook = CashBooksMapper.mapToPersistence(cashBook);
 

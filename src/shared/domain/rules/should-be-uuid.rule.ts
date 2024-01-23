@@ -2,9 +2,13 @@ import { ShouldBeUuidV4Error } from '../errors';
 import { Rule } from './rule';
 
 export class ShouldBeUuidV4Rule implements Rule {
-  constructor(private value: string) {}
+  constructor(
+    private value: string,
+    public isBreakable: boolean = false,
+    private customErrorMessage?: string,
+  ) {}
 
-  public error = new ShouldBeUuidV4Error();
+  public error = new ShouldBeUuidV4Error(this.customErrorMessage);
 
   public isBroken(): boolean {
     const regex =

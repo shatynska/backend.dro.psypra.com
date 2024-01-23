@@ -6,10 +6,14 @@ export class ShouldBeWithinLengthRangeRule implements Rule {
     private value: string,
     private minLength: number,
     private maxLength: number,
+    public isBreakable: boolean = false,
+    private customErrorMessage?: string,
   ) {}
 
   public error = new ShouldBeWithinLengthRangeError(
-    `Значення повинно бути довжиною від ${this.minLength} до ${this.maxLength} символів`,
+    this.customErrorMessage
+      ? this.customErrorMessage
+      : `Значення повинно бути довжиною від ${this.minLength} до ${this.maxLength} символів`,
   );
 
   public isBroken(): boolean {

@@ -12,6 +12,9 @@ export abstract class ValueObject<T> {
     for (const rule of rules) {
       if (rule.isBroken()) {
         errors.push(rule.error);
+        if (rule.isBreakable) {
+          break;
+        }
       }
     }
 

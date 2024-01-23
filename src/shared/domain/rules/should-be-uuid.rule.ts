@@ -1,11 +1,10 @@
-import { DomainError } from '../errors';
+import { ShouldBeUuidV4Error } from '../errors';
 import { Rule } from './rule';
 
 export class ShouldBeUuidV4Rule implements Rule {
   constructor(private value: string) {}
 
-  // TODO Replace message with constant
-  public error = new DomainError('Значення повинно бути в форматі UUID v4');
+  public error = new ShouldBeUuidV4Error();
 
   public isBroken(): boolean {
     const regex =

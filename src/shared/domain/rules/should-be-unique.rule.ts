@@ -1,11 +1,14 @@
-import { DomainError } from '../errors';
+import { ShouldBeUniqueError } from '../errors';
 import { Rule } from './rule';
 
 export class ShouldBeUniqueRule implements Rule {
-  constructor(private value: boolean) {}
+  constructor(
+    private value: boolean,
+    public isBreakable: boolean = false,
+    private customErrorMessage?: string,
+  ) {}
 
-  // TODO Replace message with constant
-  public error = new DomainError('Значення повинно бути унікальним');
+  public error = new ShouldBeUniqueError(this.customErrorMessage);
 
   public isBroken(): boolean {
     return this.value === false;

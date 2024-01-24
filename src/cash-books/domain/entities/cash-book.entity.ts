@@ -3,11 +3,16 @@ import { AggregateRoot } from '~/shared/domain/aggregate-root';
 import { TitleCreationError } from '~/shared/domain/errors';
 import { AmountOfMoney, Title, Uuid } from '~/shared/domain/value-objects';
 import { CashBookCreationError } from '../errors';
+import {
+  ReportingPeriod,
+  ReportingPeriodPrimitives,
+} from './reporting-period.entity';
 
 export type CashBookPrimitives = {
   id: string;
   title: string;
   cashBalance: number;
+  reportingPeriods: ReportingPeriodPrimitives[];
 };
 
 export type CreateCashBookParameters = Pick<CashBookPrimitives, 'title'> & {
@@ -19,6 +24,7 @@ export class CashBook extends AggregateRoot {
     private readonly id: Uuid,
     private title: Title,
     private cashBalance: AmountOfMoney,
+    private reportingPeriods: ReportingPeriod[] = [],
   ) {
     super();
   }
@@ -26,7 +32,7 @@ export class CashBook extends AggregateRoot {
   static create(
     params: CreateCashBookParameters,
   ): Result<CashBookCreationError, CashBook> {
-    const { isTitleUnique, title: titleValue } = params;
+    const { title: titleValue, isTitleUnique } = params;
 
     const creatingError = new CashBookCreationError();
 
@@ -78,6 +84,9 @@ export class CashBook extends AggregateRoot {
       id: this.id.getValue(),
       title: this.title.getValue(),
       cashBalance: this.cashBalance.getValue(),
+      reportingPeriods: this.reportingPeriods.map((period: ReportingPeriod) =>
+        period.mapToPrimitives(),
+      ),
     };
 
     return mappedCashBook;

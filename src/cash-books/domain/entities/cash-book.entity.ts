@@ -58,7 +58,7 @@ export class CashBook extends AggregateRoot {
   static reconstitute(params: CashBookPrimitives): CashBook {
     const { id, title, cashBalance } = params;
 
-    const reconstitutedId = Uuid.reconstitute(id);
+    const reconstitutedId = Uuid.reconstitute({ value: id });
     const reconstitutedTitle = Title.reconstitute({ value: title });
     const reconstitutedCashBalance = AmountOfMoney.reconstitute(cashBalance);
 

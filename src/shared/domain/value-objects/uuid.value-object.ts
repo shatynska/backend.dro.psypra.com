@@ -4,6 +4,10 @@ import { UuidCreationError } from '../errors';
 import { ShouldBeUuidV4Rule } from '../rules';
 import { ValueObject } from './value-object';
 
+type UuidPrimitives = {
+  value: string;
+};
+
 export class Uuid extends ValueObject<string> {
   static create(): Result<UuidCreationError, Uuid> {
     const value = uuid();
@@ -17,7 +21,9 @@ export class Uuid extends ValueObject<string> {
     return success(new Uuid(value));
   }
 
-  static reconstitute(value: string): Uuid {
+  static reconstitute(params: UuidPrimitives): Uuid {
+    const { value } = params;
+
     return new Uuid(value);
   }
 }

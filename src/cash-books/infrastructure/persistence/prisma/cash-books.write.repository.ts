@@ -19,7 +19,7 @@ export class PrismaCashBooksWriteRepository
   }
 
   async save(cashBook: CashBook): Promise<void> {
-    const mappedCashBook = CashBooksMapper.mapToPersistence(cashBook);
+    const mappedCashBook = cashBook.mapToPrimitives();
 
     await this.prismaService.cashBook.create({
       data: mappedCashBook,

@@ -3,16 +3,6 @@ import { CashBookDto } from '~/cash-books/application/dto/cash-book.dto';
 import { CashBook } from '~/cash-books/domain/entities/cash-book.entity';
 
 export class CashBooksMapper {
-  static mapToPersistence(cashBook: CashBook): PrismaCashBook {
-    const mappedCashBook = {
-      id: cashBook.getId(),
-      title: cashBook.getTitle(),
-      cashBalance: cashBook.getCashBalance(),
-    };
-
-    return mappedCashBook;
-  }
-
   static mapToDomain(params: PrismaCashBook): CashBook {
     const mappedCashBook = CashBook.reconstitute({
       title: params.title,

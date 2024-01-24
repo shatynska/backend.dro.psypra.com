@@ -4,13 +4,13 @@ import { TitleCreationError } from '~/shared/domain/errors';
 import { AmountOfMoney, Title, Uuid } from '~/shared/domain/value-objects';
 import { CashBookCreationError } from '../errors';
 
-export type CashBookParameters = {
+export type CashBookPrimitives = {
   id: string;
   title: string;
   cashBalance: number;
 };
 
-export type CreateCashBookParameters = Pick<CashBookParameters, 'title'> & {
+export type CreateCashBookParameters = Pick<CashBookPrimitives, 'title'> & {
   isTitleUnique: boolean;
 };
 
@@ -21,18 +21,6 @@ export class CashBook extends AggregateRoot {
     private cashBalance: AmountOfMoney,
   ) {
     super();
-  }
-
-  getId() {
-    return this.id.getValue();
-  }
-
-  getTitle() {
-    return this.title.getValue();
-  }
-
-  getCashBalance() {
-    return this.cashBalance.getValue();
   }
 
   static create(
@@ -65,7 +53,7 @@ export class CashBook extends AggregateRoot {
     return success(cashBook);
   }
 
-  static reconstitute(params: CashBookParameters): CashBook {
+  static reconstitute(params: CashBookPrimitives): CashBook {
     const id = Uuid.reconstitute(params.id);
     const title = Title.reconstitute(params.title);
     const cashBalance = AmountOfMoney.reconstitute(params.cashBalance);
@@ -73,5 +61,15 @@ export class CashBook extends AggregateRoot {
     const cashBook = new CashBook(id, title, cashBalance);
 
     return cashBook;
+  }
+
+  mapToPrimitives(): CashBookPrimitives {
+    const mappedCashBook = {
+      id: this.id.getValue(),
+      title: this.title.getValue(),
+      cashBalance: this.cashBalance.getValue(),
+    };
+
+    return mappedCashBook;
   }
 }

@@ -40,7 +40,7 @@ export class CashBook extends AggregateRoot {
     }
 
     const id = Uuid.create();
-    const cashBalance = AmountOfMoney.create(0);
+    const cashBalance = AmountOfMoney.create({ value: 0 });
 
     if (creatingError.errors.length > 0) {
       return failure(creatingError);
@@ -60,7 +60,9 @@ export class CashBook extends AggregateRoot {
 
     const reconstitutedId = Uuid.reconstitute({ value: id });
     const reconstitutedTitle = Title.reconstitute({ value: title });
-    const reconstitutedCashBalance = AmountOfMoney.reconstitute(cashBalance);
+    const reconstitutedCashBalance = AmountOfMoney.reconstitute({
+      value: cashBalance,
+    });
 
     const cashBook = new CashBook(
       reconstitutedId,

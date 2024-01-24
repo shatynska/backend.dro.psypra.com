@@ -13,7 +13,7 @@ describe('CashBook', () => {
 
     expect(received.value).toBeInstanceOf(CashBook);
 
-    expect(newCashBook.getTitle()).toEqual('test');
+    expect(newCashBook).toMatchObject({ title: { value: 'test' } });
   });
 });
 

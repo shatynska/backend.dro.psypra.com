@@ -26,12 +26,14 @@ export class CashBook extends AggregateRoot {
   static create(
     params: CreateCashBookParameters,
   ): Result<CashBookCreationError, CashBook> {
+    const { isTitleUnique, title: titleValue } = params;
+
     const creatingError = new CashBookCreationError();
 
-    const title: Result<TitleCreationError, Title> = Title.create(
-      params.title,
-      params.isTitleUnique,
-    );
+    const title: Result<TitleCreationError, Title> = Title.create({
+      value: titleValue,
+      isUnique: isTitleUnique,
+    });
 
     if (title.isFailure()) {
       creatingError.errors.push(title.value);
@@ -54,11 +56,17 @@ export class CashBook extends AggregateRoot {
   }
 
   static reconstitute(params: CashBookPrimitives): CashBook {
-    const id = Uuid.reconstitute(params.id);
-    const title = Title.reconstitute(params.title);
-    const cashBalance = AmountOfMoney.reconstitute(params.cashBalance);
+    const { id, title, cashBalance } = params;
 
-    const cashBook = new CashBook(id, title, cashBalance);
+    const reconstitutedId = Uuid.reconstitute(id);
+    const reconstitutedTitle = Title.reconstitute({ value: title });
+    const reconstitutedCashBalance = AmountOfMoney.reconstitute(cashBalance);
+
+    const cashBook = new CashBook(
+      reconstitutedId,
+      reconstitutedTitle,
+      reconstitutedCashBalance,
+    );
 
     return cashBook;
   }

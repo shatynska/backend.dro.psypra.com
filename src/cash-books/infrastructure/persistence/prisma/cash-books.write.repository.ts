@@ -12,24 +12,43 @@ export class PrismaCashBooksWriteRepository
 
   async isTitleUnique(title: string): Promise<boolean> {
     const entries = await this.prismaService.cashBook.count({
-      where: { title: title },
+      where: { title },
     });
 
     return entries === 0 ? true : false;
   }
 
   async save(cashBook: CashBook): Promise<void> {
-    const mappedCashBook = cashBook.mapToPrimitives();
+    const cashBookPrimitives = cashBook.mapToPrimitives();
 
-    await this.prismaService.cashBook.create({
-      data: mappedCashBook,
+    const { id, title, cashBalance, reportingPeriods } = cashBookPrimitives;
+
+    await this.prismaService.cashBook.upsert({
+      where: {
+        id,
+      },
+      update: {
+        id,
+        title,
+        cashBalance,
+        reportingPeriods: { createMany: { data: reportingPeriods } },
+      },
+      create: {
+        id,
+        title,
+        cashBalance,
+        reportingPeriods: { createMany: { data: reportingPeriods } },
+      },
     });
   }
 
   async getById(id: string): Promise<CashBook | null> {
     const cashBook = await this.prismaService.cashBook.findUnique({
       where: {
-        id: id,
+        id,
+      },
+      include: {
+        reportingPeriods: true,
       },
     });
     if (!cashBook) {

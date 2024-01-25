@@ -11,7 +11,7 @@ describe('Uuid', () => {
   });
 
   it('should return an UUID', () => {
-    const received = Uuid.reconstitute(mockUuid);
+    const received = Uuid.reconstitute({ value: mockUuid });
 
     expect(received.getValue()).toBe(mockUuid);
   });

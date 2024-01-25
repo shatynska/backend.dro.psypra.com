@@ -7,17 +7,25 @@ import { ReportingPeriodCreationError } from '../errors';
 export type ReportingPeriodPrimitives = {
   id: string;
   title: string;
+  startDate: string;
+  endDate: string;
 };
 
-export type CreateReportingPeriodParameters = Pick<
+export type AddReportingPeriodParameters = Omit<
   ReportingPeriodPrimitives,
-  'title'
-> & { isTitleUnique: boolean };
+  'id'
+>;
+
+export type CreateReportingPeriodParameters = AddReportingPeriodParameters & {
+  isTitleUnique: boolean;
+};
 
 export class ReportingPeriod extends Entity {
   private constructor(
     private id: Uuid,
     private title: Title,
+    private startDate: Date,
+    private endDate: Date,
   ) {
     super();
   }
@@ -25,7 +33,12 @@ export class ReportingPeriod extends Entity {
   static create(
     params: CreateReportingPeriodParameters,
   ): Result<ReportingPeriodCreationError, ReportingPeriod> {
-    const { title: titleValue, isTitleUnique } = params;
+    const {
+      title: titleValue,
+      isTitleUnique,
+      startDate: startDateValue,
+      endDate: endDateValue,
+    } = params;
 
     const creatingError = new ReportingPeriodCreationError();
 
@@ -39,6 +52,8 @@ export class ReportingPeriod extends Entity {
     }
 
     const id = Uuid.create();
+    const startDate = new Date(startDateValue);
+    const endDate = new Date(endDateValue);
 
     if (creatingError.errors.length > 0) {
       return failure(creatingError);
@@ -47,6 +62,8 @@ export class ReportingPeriod extends Entity {
     const reportingPeriod = new ReportingPeriod(
       id.value as Uuid,
       title.value as Title,
+      startDate,
+      endDate,
     );
 
     return success(reportingPeriod);
@@ -56,8 +73,14 @@ export class ReportingPeriod extends Entity {
     const mappedReportingPeriod = {
       id: this.id.getValue(),
       title: this.title.getValue(),
+      startDate: this.startDate.toISOString(),
+      endDate: this.endDate.toISOString(),
     };
 
     return mappedReportingPeriod;
+  }
+
+  getTitle() {
+    return this.title.getValue();
   }
 }

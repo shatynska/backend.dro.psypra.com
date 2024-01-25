@@ -25,7 +25,7 @@ export class GetCashBalanceController {
     type: CashBalanceResponseDto,
   })
   @ApiErrorDecorator(HttpStatus.NOT_FOUND, CashBookNotFoundError.defaultMessage)
-  @Get('cash-balance/:id')
+  @Get(':id/cash-balance')
   async getCashBalance(
     @Param('id') id: string,
   ): Promise<CashBalanceResponseDto> {

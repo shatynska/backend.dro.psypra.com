@@ -1,9 +1,9 @@
 import { Result, failure, success } from '~/shared/core/result';
 import { AggregateRoot } from '~/shared/domain/aggregate-root';
-import { TitleCreationError } from '~/shared/domain/errors';
 import { AmountOfMoney, Title, Uuid } from '~/shared/domain/value-objects';
-import { CashBookCreationError } from '../errors';
+import { CashBookCreationError, ReportingPeriodCreationError } from '../errors';
 import {
+  AddReportingPeriodParameters,
   ReportingPeriod,
   ReportingPeriodPrimitives,
 } from './reporting-period.entity';
@@ -36,7 +36,7 @@ export class CashBook extends AggregateRoot {
 
     const creatingError = new CashBookCreationError();
 
-    const title: Result<TitleCreationError, Title> = Title.create({
+    const title = Title.create({
       value: titleValue,
       isUnique: isTitleUnique,
     });
@@ -90,5 +90,36 @@ export class CashBook extends AggregateRoot {
     };
 
     return mappedCashBook;
+  }
+
+  addReportingPeriod(
+    params: AddReportingPeriodParameters,
+  ): Result<ReportingPeriodCreationError, this> {
+    const { title, startDate, endDate } = params;
+
+    const isTitleUnique = this.isReportingPeriodTitleUnique(title);
+
+    const newReportingPeriod = ReportingPeriod.create({
+      title,
+      isTitleUnique,
+      startDate,
+      endDate,
+    });
+
+    if (newReportingPeriod.isFailure()) {
+      return failure(newReportingPeriod.value);
+    }
+
+    this.reportingPeriods.push(newReportingPeriod.value);
+
+    return success(this);
+  }
+
+  private isReportingPeriodTitleUnique(title: string): boolean {
+    const entries = this.reportingPeriods.filter((period) => {
+      period.getTitle() === title;
+    });
+
+    return entries.length === 0 ? true : false;
   }
 }

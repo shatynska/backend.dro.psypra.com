@@ -1,19 +1,13 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
-import { CreateCashBookHandler } from '~/cash-books/application/commands/create-cash-book/create-cash-book.handle';
-import { GetCashBalanceHandler } from '~/cash-books/application/queries/get-cash-balance/get-cash-balance.handle';
+import { COMMANDS } from '~/cash-books/application/commands';
+import { QUERIES } from '~/cash-books/application/queries';
 import { PersistenceModule } from '../persistence/persistence.module';
-import { CashBooksController } from './controllers/cash-books.controller';
-import { CreateCashBookController } from './controllers/create-cash-book/create-cash-book.controller';
-import { GetCashBalanceController } from './controllers/get-cash-balance/get-cash-balance.controller';
+import { CONTROLLERS } from './controllers';
 
 @Module({
   imports: [CqrsModule, PersistenceModule],
-  controllers: [
-    GetCashBalanceController,
-    CreateCashBookController,
-    CashBooksController,
-  ],
-  providers: [GetCashBalanceHandler, CreateCashBookHandler],
+  controllers: [...CONTROLLERS],
+  providers: [...COMMANDS, ...QUERIES],
 })
 export class HttpModule {}

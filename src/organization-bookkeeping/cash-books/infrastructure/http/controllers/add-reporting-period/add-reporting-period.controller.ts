@@ -25,10 +25,6 @@ export class AddReportingPeriodController {
     HttpStatus.BAD_REQUEST,
     ReportingPeriodCreationError.defaultMessage,
   )
-  @ApiErrorDecorator(
-    HttpStatus.BAD_REQUEST,
-    CashBookNotFoundError.defaultMessage,
-  )
   @Post(':id/reporting-periods')
   async execute(@Body() dto: AddReportingPeriodRequestDto): Promise<void> {
     const result: Result<

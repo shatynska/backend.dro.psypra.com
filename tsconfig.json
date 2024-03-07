@@ -24,8 +24,8 @@
       "@user/*": ["src/user/*"],
       "@auth": ["src/auth"],
       "@auth/*": ["src/auth/*"],
-      "~/cash-books": ["src/cash-books"],
-      "~/cash-books/*": ["src/cash-books/*"],
+      "~/cash-books": ["src/organization-bookkeeping/cash-books"],
+      "~/cash-books/*": ["src/organization-bookkeeping/cash-books/*"],
       "~/shared": ["src/shared"],
       "~/shared/*": ["src/shared/*"]
     }

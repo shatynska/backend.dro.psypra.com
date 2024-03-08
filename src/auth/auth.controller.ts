@@ -56,7 +56,7 @@ export class AuthController {
   @ApiErrorDecorator(HttpStatus.BAD_REQUEST, 'Bad Request')
   @ApiErrorDecorator(
     HttpStatus.CONFLICT,
-    'User with this email is already registered',
+    'User with this username is already registered',
   )
   async register(@Body() dto: RegisterDto) {
     const user = await this.authService.register(dto);
@@ -171,8 +171,8 @@ export class AuthController {
         `https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=${token}`,
       )
       .pipe(
-        mergeMap(({ data: { email } }) =>
-          this.authService.providerAuth(email, agent, Provider.GOOGLE),
+        mergeMap(({ data: { userName } }) =>
+          this.authService.providerAuth(userName, agent, Provider.GOOGLE),
         ),
         map((data) => this.setRefreshTokenToCookies(data, res)),
         handleTimeoutAndErrors(),

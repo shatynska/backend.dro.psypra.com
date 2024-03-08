@@ -44,13 +44,15 @@ export class AuthService {
 
   async register(dto: RegisterDto) {
     const user: User = await this.usersService
-      .findOne(dto.email)
+      .findOne(dto.userName)
       .catch((err) => {
         this.logger.error(err);
         return null;
       });
     if (user) {
-      throw new ConflictException('User with this email is already registered');
+      throw new ConflictException(
+        'User with this username is already registered',
+      );
     }
     return this.usersService.save(dto).catch((err) => {
       this.logger.error(err);
@@ -60,7 +62,7 @@ export class AuthService {
 
   async login(dto: LoginDto, agent: string): Promise<Tokens> {
     const user: User = await this.usersService
-      .findOne(dto.email, true)
+      .findOne(dto.identifier, true)
       .catch((err) => {
         this.logger.error(err);
         return null;
@@ -76,7 +78,9 @@ export class AuthService {
       'Bearer ' +
       this.jwtService.sign({
         id: user.id,
+        userName: user.userName,
         email: user.email,
+        phone: user.phone,
         roles: user.roles,
       });
 

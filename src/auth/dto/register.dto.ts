@@ -4,9 +4,10 @@ import { MinLength, Validate } from 'class-validator';
 
 export class RegisterDto {
   @ApiProperty({
-    example: 'test@gmail.com',
+    example: 'myUserName',
   })
-  email: string;
+  @MinLength(4)
+  userName: string;
 
   @ApiProperty({ example: 'secret_password' })
   @MinLength(6)

@@ -58,7 +58,7 @@
     "@types/cookie-parser": "^1.4.3",
     "@types/express": "^4.17.17",
     "@types/jest": "^29.5.2",
-    "@types/node": "^20.3.1",
+    "@types/node": "^20.11.25",
     "@types/passport-jwt": "^3.0.9",
     "@types/supertest": "^2.0.12",
     "@types/uuid": "^9.0.2",
@@ -75,9 +75,12 @@
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.0",
     "ts-loader": "^9.4.3",
-    "ts-node": "^10.9.1",
+    "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.1.3"
+    "typescript": "^5.4.2"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -103,7 +106,8 @@
       "^@common(|/.*)$": "<rootDir>/libs/common/src/$1",
       "^@user(|/.*)$": "<rootDir>/src/user/$1",
       "^@auth(|/.*)$": "<rootDir>/src/auth/$1",
-      "^~/cash-books(|/.*)$": "<rootDir>/src/cash-books/$1",
+      "^~/cash-books(|/.*)$": "<rootDir>/src/organization-bookkeeping/cash-books/$1",
+      "^~/page-sections(|/.*)$": "<rootDir>/src/website-content/page-sections/$1",
       "^~/shared(|/.*)$": "<rootDir>/src/shared/$1"
     }
   }

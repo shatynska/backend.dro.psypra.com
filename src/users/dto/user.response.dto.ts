@@ -8,9 +8,19 @@ export class UserResponseDto {
   id: string;
 
   @ApiProperty({
+    example: 'myUserName',
+  })
+  userName: string;
+
+  @ApiProperty({
     example: 'test@gmail.com',
   })
-  email: string;
+  email?: string;
+
+  @ApiProperty({
+    example: '+380971234567',
+  })
+  phone?: string;
 
   @ApiProperty({
     example: [Role.USER],

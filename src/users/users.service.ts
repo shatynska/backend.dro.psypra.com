@@ -22,41 +22,52 @@ export class UsersService {
       : null;
     const savedUser = await this.prismaService.user.upsert({
       where: {
-        email: user.email,
+        userName: user.userName,
       },
       update: {
+        email: user?.email ?? undefined,
+        phone: user?.phone ?? undefined,
         password: hashedPassword ?? undefined,
         provider: user?.provider ?? undefined,
         roles: user?.roles ?? undefined,
       },
       create: {
-        email: user.email,
+        userName: user.userName,
+        email: undefined,
+        phone: undefined,
         password: hashedPassword,
         provider: user?.provider,
         roles: ['USER'],
       },
     });
     await this.cacheManager.set(savedUser.id, savedUser);
+    await this.cacheManager.set(savedUser.userName, savedUser);
     await this.cacheManager.set(savedUser.email, savedUser);
+    await this.cacheManager.set(savedUser.phone, savedUser);
     return savedUser;
   }
 
-  async findOne(idOrEmail: string, isReset = false): Promise<User> {
+  async findOne(identifier: string, isReset = false): Promise<User> {
     if (isReset) {
-      await this.cacheManager.del(idOrEmail);
+      await this.cacheManager.del(identifier);
     }
-    const user = await this.cacheManager.get<User>(idOrEmail);
+    const user = await this.cacheManager.get<User>(identifier);
     if (!user) {
       const user = await this.prismaService.user.findFirst({
         where: {
-          OR: [{ id: idOrEmail }, { email: idOrEmail }],
+          OR: [
+            { id: identifier },
+            { userName: identifier },
+            { email: identifier },
+            { phone: identifier },
+          ],
         },
       });
       if (!user) {
         return null;
       }
       await this.cacheManager.set(
-        idOrEmail,
+        identifier,
         user,
         convertToSecondsUtil(this.configService.get('JWT_EXP')),
       );
@@ -71,7 +82,9 @@ export class UsersService {
     }
     await Promise.all([
       this.cacheManager.del(id),
+      this.cacheManager.del(user.userName),
       this.cacheManager.del(user.email),
+      this.cacheManager.del(user.phone),
     ]);
     return this.prismaService.user.delete({
       where: { id },

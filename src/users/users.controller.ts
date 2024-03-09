@@ -21,11 +21,11 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Get(':idOrEmail')
+  @Get(':identifier')
   @UseInterceptors(ClassSerializerInterceptor)
   @ApiBearerAuth()
-  async findOne(@Param('idOrEmail') idOrEmail: string) {
-    const user = await this.usersService.findOne(idOrEmail);
+  async findOne(@Param('identifier') identifier: string) {
+    const user = await this.usersService.findOne(identifier);
     return new UserResponseDto(user);
   }
 

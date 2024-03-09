@@ -23,7 +23,7 @@ model CashBook {
 model Expense {
   id            String   @id @default(uuid())
   cashBook      CashBook @relation(fields: [cashBookId], references: [id])
-  cashBookId    String
+  cashBookId    String   @map("cash_book_id")
   amount        Int
   reportingDate DateTime @map("reporting_date") @db.Date
   details       String?
@@ -62,11 +62,24 @@ model ReportingPeriod {
   title          String
   cashBook       CashBook        @relation(fields: [cashBookId], references: [id], onDelete: Cascade)
   cashBookId     String          @map("cash_book_id")
-  startDate      DateTime        @db.Date
-  endDate        DateTime        @db.Date
+  startDate      DateTime        @map("start_date") @db.Date
+  endDate        DateTime        @map("end_date") @db.Date
   membershipFees MembershipFee[]
 
   @@map("reporting_periods")
+}
+
+model PageSection {
+  id               String  @id @default(uuid())
+  page             String
+  section          String
+  primaryHeading   String? @map("primary_heading")
+  secondaryHeading String? @map("secondary_heading")
+  href             String?
+  parentId         String? @map("parent_id")
+
+  @@unique(name: "alias", [page, section])
+  @@map("page-sections")
 }
 
 model Token {

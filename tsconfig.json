@@ -27,7 +27,9 @@
       "~/cash-books": ["src/organization-bookkeeping/cash-books"],
       "~/cash-books/*": ["src/organization-bookkeeping/cash-books/*"],
       "~/shared": ["src/shared"],
-      "~/shared/*": ["src/shared/*"]
+      "~/shared/*": ["src/shared/*"],
+      "~/page-sections": ["src/website-content/page-sections"],
+      "~/page-sections/*": ["src/website-content/page-sections/*"]
     }
   }
 }

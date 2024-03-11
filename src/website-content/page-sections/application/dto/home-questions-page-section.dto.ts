@@ -1,7 +1,6 @@
-import { Headings, PageSectionDto } from './page-section.dto';
+import { PageSectionDto } from './page-section.dto';
 
-export class HomeQuestionsPageSectionDto implements PageSectionDto {
-  headings: Headings;
+export class HomeQuestionsPageSectionDto extends PageSectionDto {
   data: {
     items: {
       title: string;

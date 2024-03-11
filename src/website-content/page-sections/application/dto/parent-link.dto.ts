@@ -1,7 +1,6 @@
 import { HeadingsDto } from './headings.dto';
 
-export class PageSectionDto {
+export class ParentLinkDto {
   headings: HeadingsDto;
-  href?: string;
-  parentId?: string;
+  href: string;
 }

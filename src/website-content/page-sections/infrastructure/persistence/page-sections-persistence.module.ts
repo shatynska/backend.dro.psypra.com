@@ -11,4 +11,4 @@ import { PrismaPageSectionsReadRepository } from './prisma/page-sections.read.re
   ],
   exports: [PAGE_SECTIONS_READ_REPOSITORY_TOKEN],
 })
-export class PersistenceModule {}
+export class PageSectionsPersistenceModule {}

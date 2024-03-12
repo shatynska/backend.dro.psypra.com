@@ -70,13 +70,15 @@ model ReportingPeriod {
 }
 
 model PageSection {
-  id               String  @id @default(uuid())
+  id               String        @id @default(uuid())
   page             String
   section          String
-  primaryHeading   String? @map("primary_heading")
-  secondaryHeading String? @map("secondary_heading")
+  primaryHeading   String?       @map("primary_heading")
+  secondaryHeading String?       @map("secondary_heading")
   href             String?
-  parentId         String? @map("parent_id")
+  parentId         String?       @map("parent_id")
+  parent           PageSection?  @relation("ParentChildren", fields: [parentId], references: [id])
+  children         PageSection[] @relation("ParentChildren")
 
   @@unique(name: "alias", [page, section])
   @@map("page-sections")

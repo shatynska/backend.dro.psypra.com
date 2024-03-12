@@ -1,10 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { PageSectionDto } from 'src/website-content/page-sections/application/dto/page-section.dto';
+import { PageSectionsReadRepository } from '~/page-sections/application/page-sections.read.repository';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
 import { PageSectionMapper } from './mappers/page-section.mapper';
 
 @Injectable()
-export class PrismaPageSectionsReadRepository {
+export class PrismaPageSectionsReadRepository
+  implements PageSectionsReadRepository
+{
   constructor(private readonly prismaService: PrismaService) {}
 
   async getPageSectionByAlias({

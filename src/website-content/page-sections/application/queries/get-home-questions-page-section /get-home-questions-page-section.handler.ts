@@ -33,13 +33,12 @@ export class GetHomeQuestionsPageSectionHandler
       return failure(new PageSectionNotFoundError());
     }
 
-    const contentData = {
-      items: [],
-    };
+    const contentItems =
+      await this.pageSectionsReadRepository.getHomeQuestionsPageSectionContentItems();
 
     return success({
       pageSectionHeader: headerData,
-      pageSectionContent: contentData,
+      pageSectionContent: { items: contentItems },
     });
   }
 }

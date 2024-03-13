@@ -1,15 +1,13 @@
-import { PageSectionDto } from './dto/page-section.dto';
+import { GetPageSectionByAliasParametersDto } from './dto/get-page-section-by-alias-parameters.dto';
+import { PageSectionHeaderDto } from './dto/page-section-header.dto';
 
 export const PAGE_SECTIONS_READ_REPOSITORY_TOKEN = Symbol(
   'SectionsReadRepositoryToken',
 );
 
 export interface PageSectionsReadRepository {
-  getPageSectionByAlias({
+  getPageSectionHeaderByAlias({
     page,
     section,
-  }: {
-    page: string;
-    section: string;
-  }): Promise<PageSectionDto | null>;
+  }: GetPageSectionByAliasParametersDto): Promise<PageSectionHeaderDto | null>;
 }

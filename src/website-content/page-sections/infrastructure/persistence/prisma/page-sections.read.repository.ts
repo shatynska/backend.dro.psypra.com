@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { PageSectionDto } from 'src/website-content/page-sections/application/dto/page-section.dto';
+import { PageSectionHeaderDto } from 'src/website-content/page-sections/application/dto/page-section-header.dto';
+import { GetPageSectionByAliasParametersDto } from '~/page-sections/application/dto/get-page-section-by-alias-parameters.dto';
 import { PageSectionsReadRepository } from '~/page-sections/application/page-sections.read.repository';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
-import { PageSectionMapper } from './mappers/page-section.mapper';
+import { PageSectionHeaderMapper } from './mappers/page-section-header.mapper';
 
 @Injectable()
 export class PrismaPageSectionsReadRepository
@@ -10,14 +11,11 @@ export class PrismaPageSectionsReadRepository
 {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async getPageSectionByAlias({
+  async getPageSectionHeaderByAlias({
     page,
     section,
-  }: {
-    page: string;
-    section: string;
-  }): Promise<PageSectionDto | null> {
-    const pageSection = await this.prismaService.pageSection.findUnique({
+  }: GetPageSectionByAliasParametersDto): Promise<PageSectionHeaderDto | null> {
+    const header = await this.prismaService.pageSection.findUnique({
       where: {
         alias: {
           page: page,
@@ -28,14 +26,13 @@ export class PrismaPageSectionsReadRepository
         primaryHeading: true,
         secondaryHeading: true,
         href: true,
-        parentId: true,
       },
     });
 
-    if (!pageSection) {
+    if (!header) {
       return null;
     }
 
-    return PageSectionMapper.mapToDto(pageSection);
+    return PageSectionHeaderMapper.mapToDto(header);
   }
 }

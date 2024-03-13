@@ -4,6 +4,8 @@ import { PageSectionHeaderDto } from 'src/website-content/page-sections/applicat
 import { GetPageSectionParametersDto } from '~/page-sections/application/dto/get-page-section-parameters.dto';
 import { PageSectionsReadRepository } from '~/page-sections/application/page-sections.read.repository';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
+import { HomeQuestionsPageSectionContentItemResponseDto } from '../../http/dto/responses/home-question-page-section/home-questions-page-section-content-item.response.dto';
+import { HomeQuestionsPageSectionContentItemsMapper } from './mappers/home-questions-page-section-content-items.mapper';
 import { PageSectionHeaderWithParentLinkMapper } from './mappers/page-section-header-with-parent-link.mapper.';
 import { PageSectionHeaderMapper } from './mappers/page-section-header.mapper';
 
@@ -12,6 +14,20 @@ export class PrismaPageSectionsReadRepository
   implements PageSectionsReadRepository
 {
   constructor(private readonly prismaService: PrismaService) {}
+
+  async getHomeQuestionsPageSectionContentItems(): Promise<
+    HomeQuestionsPageSectionContentItemResponseDto[]
+  > {
+    const sections = await this.prismaService.pageSection.findMany({
+      where: { page: 'home', NOT: { section: 'questions' } },
+      select: {
+        secondaryHeading: true,
+        href: true,
+      },
+    });
+
+    return HomeQuestionsPageSectionContentItemsMapper.mapToDto(sections);
+  }
 
   async getPageSectionHeader({
     page,

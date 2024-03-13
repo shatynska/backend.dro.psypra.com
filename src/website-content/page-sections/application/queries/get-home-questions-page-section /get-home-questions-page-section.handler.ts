@@ -24,7 +24,7 @@ export class GetHomeQuestionsPageSectionHandler
     Result<PageSectionNotFoundError, HomeQuestionsPageSectionDto>
   > {
     const headerData: PageSectionHeaderDto | null =
-      await this.pageSectionsReadRepository.getPageSectionHeaderByAlias({
+      await this.pageSectionsReadRepository.getPageSectionHeader({
         page: 'home',
         section: 'questions',
       });

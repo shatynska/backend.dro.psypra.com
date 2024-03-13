@@ -1,4 +1,4 @@
-import { GetPageSectionByAliasParametersDto } from './dto/get-page-section-by-alias-parameters.dto';
+import { GetPageSectionParametersDto } from './dto/get-page-section-parameters.dto';
 import { PageSectionHeaderDto } from './dto/page-section-header.dto';
 
 export const PAGE_SECTIONS_READ_REPOSITORY_TOKEN = Symbol(
@@ -6,13 +6,13 @@ export const PAGE_SECTIONS_READ_REPOSITORY_TOKEN = Symbol(
 );
 
 export interface PageSectionsReadRepository {
-  getPageSectionHeaderByAlias({
+  getPageSectionHeader({
     page,
     section,
-  }: GetPageSectionByAliasParametersDto): Promise<PageSectionHeaderDto | null>;
+  }: GetPageSectionParametersDto): Promise<PageSectionHeaderDto | null>;
 
-  getPageSectionHeaderWithParentLinkByAlias({
+  getPageSectionHeaderWithParentLink({
     page,
     section,
-  }: GetPageSectionByAliasParametersDto): Promise<PageSectionHeaderDto | null>;
+  }: GetPageSectionParametersDto): Promise<PageSectionHeaderDto | null>;
 }

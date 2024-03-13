@@ -1,7 +1,7 @@
 import { PageSectionDto } from './page-section.dto';
 
 export class HomeQuestionsPageSectionDto extends PageSectionDto {
-  data: {
+  pageSectionContent: {
     items: {
       title: string;
       href: string;

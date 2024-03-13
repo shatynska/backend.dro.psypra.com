@@ -1,7 +1,5 @@
-import { HeadingsDto } from './headings.dto';
+import { PageSectionHeaderDto } from './page-section-header.dto';
 
 export class PageSectionDto {
-  headings: HeadingsDto;
-  href?: string;
-  parentId?: string;
+  pageSectionHeader: PageSectionHeaderDto;
 }

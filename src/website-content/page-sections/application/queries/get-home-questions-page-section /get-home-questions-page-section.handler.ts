@@ -2,7 +2,7 @@ import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { Result, failure, success } from '~/shared/core/result';
 import { HomeQuestionsPageSectionDto } from '../../dto/home-questions-page-section.dto';
-import { PageSectionDto } from '../../dto/page-section.dto';
+import { PageSectionHeaderDto } from '../../dto/page-section-header.dto';
 import { PageSectionNotFoundError } from '../../errors/page-section-not-found.error';
 
 import {
@@ -23,23 +23,23 @@ export class GetHomeQuestionsPageSectionHandler
   async execute(): Promise<
     Result<PageSectionNotFoundError, HomeQuestionsPageSectionDto>
   > {
-    const section: PageSectionDto | null =
-      await this.pageSectionsReadRepository.getPageSectionByAlias({
+    const headerData: PageSectionHeaderDto | null =
+      await this.pageSectionsReadRepository.getPageSectionHeaderByAlias({
         page: 'home',
         section: 'questions',
       });
 
-    if (section === null) {
+    if (headerData === null) {
       return failure(new PageSectionNotFoundError());
     }
 
-    const result: HomeQuestionsPageSectionDto = {
-      headings: section.headings,
-      data: {
-        items: [],
-      },
+    const contentData = {
+      items: [],
     };
 
-    return success(result);
+    return success({
+      pageSectionHeader: headerData,
+      pageSectionContent: contentData,
+    });
   }
 }

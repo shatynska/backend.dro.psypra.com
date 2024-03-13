@@ -10,4 +10,9 @@ export interface PageSectionsReadRepository {
     page,
     section,
   }: GetPageSectionByAliasParametersDto): Promise<PageSectionHeaderDto | null>;
+
+  getPageSectionHeaderWithParentLinkByAlias({
+    page,
+    section,
+  }: GetPageSectionByAliasParametersDto): Promise<PageSectionHeaderDto | null>;
 }

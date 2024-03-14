@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PageSectionHeaderDto } from 'src/website-content/page-sections/application/dto/page-section-header.dto';
 import { GetPageSectionParametersDto } from '~/page-sections/application/dto/get-page-section-parameters.dto';
+import { HomeQuestionsPageSectionContentItemDto } from '~/page-sections/application/dto/home-questions-page-section-content-item.dto';
 import { PageSectionsReadRepository } from '~/page-sections/application/page-sections.read.repository';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
-import { HomeQuestionsPageSectionContentItemResponseDto } from '../../http/dto/responses/home-question-page-section/home-questions-page-section-content-item.response.dto';
 import { HomeQuestionsPageSectionContentItemsMapper } from './mappers/home-questions-page-section-content-items.mapper';
 import { PageSectionHeaderWithParentLinkMapper } from './mappers/page-section-header-with-parent-link.mapper.';
 import { PageSectionHeaderMapper } from './mappers/page-section-header.mapper';
@@ -16,7 +16,7 @@ export class PrismaPageSectionsReadRepository
   constructor(private readonly prismaService: PrismaService) {}
 
   async getHomeQuestionsPageSectionContentItems(): Promise<
-    HomeQuestionsPageSectionContentItemResponseDto[]
+    HomeQuestionsPageSectionContentItemDto[]
   > {
     const sections = await this.prismaService.pageSection.findMany({
       where: { page: 'home', NOT: { section: 'questions' } },

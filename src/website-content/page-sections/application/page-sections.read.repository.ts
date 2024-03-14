@@ -1,5 +1,5 @@
-import { HomeQuestionsPageSectionContentItemResponseDto } from '../infrastructure/http/dto/responses/home-question-page-section/home-questions-page-section-content-item.response.dto';
 import { GetPageSectionParametersDto } from './dto/get-page-section-parameters.dto';
+import { HomeQuestionsPageSectionContentItemDto } from './dto/home-questions-page-section-content-item.dto';
 import { PageSectionHeaderDto } from './dto/page-section-header.dto';
 
 export const PAGE_SECTIONS_READ_REPOSITORY_TOKEN = Symbol(
@@ -8,7 +8,7 @@ export const PAGE_SECTIONS_READ_REPOSITORY_TOKEN = Symbol(
 
 export interface PageSectionsReadRepository {
   getHomeQuestionsPageSectionContentItems(): Promise<
-    HomeQuestionsPageSectionContentItemResponseDto[]
+    HomeQuestionsPageSectionContentItemDto[]
   >;
 
   getPageSectionHeader({

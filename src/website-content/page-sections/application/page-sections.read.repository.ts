@@ -3,7 +3,7 @@ import { HomeQuestionsPageSectionContentItemDto } from './dto/home-questions-pag
 import { PageSectionHeaderDto } from './dto/page-section-header.dto';
 
 export const PAGE_SECTIONS_READ_REPOSITORY_TOKEN = Symbol(
-  'SectionsReadRepositoryToken',
+  'PageSectionsReadRepositoryToken',
 );
 
 export interface PageSectionsReadRepository {

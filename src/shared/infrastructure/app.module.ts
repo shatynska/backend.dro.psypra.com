@@ -4,7 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { CashBooksModule } from '~/cash-books/infrastructure/cash-books.module';
-import { PageSectionsModule } from '~/page-sections/infrastructure/page-sections.module';
+import { PageSectionsModule } from '~/page-sections/page-sections.module';
 import { PrismaModule } from '~/shared/infrastructure/prisma/prisma.module';
 import { AuthModule } from '../../auth/auth.module';
 import { UsersModule } from '../../users/users.module';

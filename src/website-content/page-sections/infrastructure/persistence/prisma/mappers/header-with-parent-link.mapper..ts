@@ -1,13 +1,13 @@
 import { Prisma } from '@prisma/client';
-import { PageSectionHeaderDto } from '~/page-sections/application/dto/page-section-header.dto';
-import { PrismaPageSectionsReadRepository } from '../page-sections.read.repository';
+import { HeaderDto } from '~/page-sections/application/dto/header.dto';
+import { PrismaReadRepository } from '../read.repository';
 
 type Props = Prisma.PageSectionGetPayload<
-  typeof PrismaPageSectionsReadRepository.pageSectionWithParent
+  typeof PrismaReadRepository.headerWithParentLink
 >;
 
-export class PageSectionHeaderWithParentLinkMapper {
-  static mapToDto(data: Props): PageSectionHeaderDto {
+export class HeaderWithParentLinkMapper {
+  static mapToDto(data: Props): HeaderDto {
     const mappedData = {
       primaryHeading: data.primaryHeading,
       secondaryHeading: data.secondaryHeading,

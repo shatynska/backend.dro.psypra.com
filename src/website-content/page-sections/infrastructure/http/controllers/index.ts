@@ -1,5 +1,3 @@
-import { GetHomeQuestionsPageSectionController } from './get-home-questions-page-section/get-home-questions-page-section.controller';
+import { GetHomeQuestionsController } from './get-home-questions/get-home-questions.controller';
 
-export const PAGE_SECTIONS_CONTROLLERS = [
-  GetHomeQuestionsPageSectionController,
-];
+export const CONTROLLERS = [GetHomeQuestionsController];

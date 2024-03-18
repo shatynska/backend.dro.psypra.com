@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { PageSectionsHttpModule } from './infrastructure/http/page-sections-http.module';
+import { HttpModule } from './infrastructure/http/http.module';
 
 @Module({
-  imports: [PageSectionsHttpModule],
+  imports: [HttpModule],
 })
 export class PageSectionsModule {}

@@ -7,7 +7,7 @@ import helmet from 'helmet';
 import { AuthModule } from 'src/auth/auth.module';
 import { UsersModule } from 'src/users/users.module';
 import { HttpModule } from '~/cash-books/infrastructure/http/http.module';
-import { PageSectionsHttpModule } from '~/page-sections/infrastructure/http/page-sections-http.module';
+import { HttpModule as PageSectionsHttpModule } from '~/page-sections/infrastructure/http/http.module';
 import { AppModule } from './app.module';
 
 async function bootstrap() {

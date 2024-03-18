@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class HomeQuestionsPageSectionContentItemResponseDto {
+export class HomeQuestionsContentItemResponseDto {
   @ApiProperty({ example: 'До кого звернутися?' })
   title: string;
 
@@ -8,7 +8,7 @@ export class HomeQuestionsPageSectionContentItemResponseDto {
   href: string;
 }
 
-export const homeQuestionsPageSectionContentItemResponseDtoStubs: HomeQuestionsPageSectionContentItemResponseDto[] =
+export const homeQuestionsContentItemResponseDtoStubs: HomeQuestionsContentItemResponseDto[] =
   [
     { title: 'До кого звернутися?', href: '/specialists' },
     { title: 'З ким працюють?', href: '/ages' },

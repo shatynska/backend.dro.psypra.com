@@ -1,3 +1,3 @@
-import { GetHomeQuestionsPageSectionHandler } from './get-home-questions-page-section/get-home-questions-page-section.handler';
+import { GetHomeQuestionsHandler } from './get-home-questions/get-home-questions.handler';
 
-export const PAGE_SECTIONS_QUERIES = [GetHomeQuestionsPageSectionHandler];
+export const QUERIES = [GetHomeQuestionsHandler];

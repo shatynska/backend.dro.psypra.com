@@ -20,6 +20,40 @@ model CashBook {
   @@map("cash_books")
 }
 
+model Dimension {
+  id                         String                       @id @default(uuid())
+  alias                      String                       @unique
+  title                      String                       @unique
+  dimensionItems             DimensionItem[]
+  specialists DimensionItemsToSpecialist[]
+
+  @@map("dimensions")
+}
+
+model DimensionItem {
+  id             String                       @id @default(uuid())
+  alias          String                       @unique
+  title          String                       @unique
+  dimension      Dimension                    @relation(fields: [dimensionAlias], references: [alias])
+  dimensionAlias String                       @map("dimension_alias")
+  specialists    DimensionItemsToSpecialist[]
+  description String
+
+  @@map("dimension_items")
+}
+
+model DimensionItemsToSpecialist {
+  dimension          Dimension     @relation(fields: [dimensionAlias], references: [alias])
+  dimensionAlias     String        @map("dimension_alias")
+  dimensionItem      DimensionItem @relation(fields: [dimensionItemAlias], references: [alias])
+  dimensionItemAlias String        @map("dimension_item_alias")
+  specialist         Specialist    @relation(fields: [specialistAlias], references: [alias])
+  specialistAlias    String        @map("specialist_alias")
+
+  @@id([dimensionItemAlias, specialistAlias])
+  @@map("dimension_items_to_specialists")
+}
+
 model Expense {
   id            String   @id @default(uuid())
   cashBook      CashBook @relation(fields: [cashBookId], references: [id])
@@ -83,6 +117,39 @@ model PageSection {
   @@unique(name: "alias", [page, section])
   @@map("page-sections")
 }
+
+model Specialist {
+  id             String                       @id @default(uuid())
+  alias          String                       @unique
+  firstName      String                       @map("first_name")
+  lastName       String                       @map("last_name")
+  phones         String[]
+  emails         String[]
+  websites       String[]
+  dimensionItems DimensionItemsToSpecialist[]
+
+  @@map("specialists")
+}
+
+// model Specialty {
+//   id          String                     @id @default(uuid())
+//   alias       String                     @unique
+//   title       String                     @unique
+//   description String
+//   specialists SpecialistsToSpecialties[]
+
+//   @@map("specialties")
+// }
+
+// model SpecialistsToSpecialties {
+//   specialist   Specialist @relation(fields: [specialistId], references: [id])
+//   specialistId String     @map("specialist_id")
+//   specialty    Specialty  @relation(fields: [specialtyId], references: [id])
+//   specialtyId  String     @map("specialty_id")
+
+//   @@id([specialistId, specialtyId])
+//   @@map("specialists_to_specialties")
+// }
 
 model Token {
   token     String   @unique

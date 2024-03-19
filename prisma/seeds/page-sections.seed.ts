@@ -189,6 +189,7 @@ export async function seedPageSections(prisma) {
       primaryHeading: 'Фахівці',
       secondaryHeading: 'До кого звернутися?',
       parentId: '3b9108e8-ae80-4cbe-9947-5e0789b6fe21',
+      href: '/specialists',
     },
   });
 

@@ -1,5 +1,5 @@
 import { PageSection } from '@prisma/client';
-import { HeaderDto } from '~/page-sections/application/dto/header.dto';
+import { HeaderDto } from '~/page-sections/application/dto/section/header.dto';
 
 type Props = Pick<PageSection, 'primaryHeading' | 'secondaryHeading' | 'href'>;
 

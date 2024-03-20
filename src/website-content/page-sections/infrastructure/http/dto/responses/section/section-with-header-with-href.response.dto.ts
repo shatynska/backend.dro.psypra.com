@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { HeaderDto } from '~/page-sections/application/dto/header.dto';
+import { HeaderDto } from '~/page-sections/application/dto/section/header.dto';
 import {
   HeaderWithHrefResponseDto,
   headerWithHrefResponseDtoStubs,

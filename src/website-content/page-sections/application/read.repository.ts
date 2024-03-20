@@ -1,6 +1,6 @@
 import { GetSectionParametersDto } from './dto/get-section-parameters.dto';
-import { HeaderDto } from './dto/header.dto';
-import { HomeQuestionsContentItemDto } from './dto/home-questions-content-item.dto';
+import { HomeQuestionsContentItemDto } from './dto/home-questions/home-questions-content-item.dto';
+import { HeaderDto } from './dto/section/header.dto';
 
 export const READ_REPOSITORY_TOKEN = Symbol('PageSectionsReadRepositoryToken');
 

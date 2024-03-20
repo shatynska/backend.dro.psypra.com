@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client';
-import { HeaderDto } from '~/page-sections/application/dto/header.dto';
+import { HeaderDto } from '~/page-sections/application/dto/section/header.dto';
 import { PrismaReadRepository } from '../read.repository';
 
 type Props = Prisma.PageSectionGetPayload<

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { HeaderDto } from 'src/website-content/page-sections/application/dto/header.dto';
+import { HeaderDto } from 'src/website-content/page-sections/application/dto/section/header.dto';
 import { GetSectionParametersDto } from '~/page-sections/application/dto/get-section-parameters.dto';
-import { HomeQuestionsContentItemDto } from '~/page-sections/application/dto/home-questions-content-item.dto';
+import { HomeQuestionsContentItemDto } from '~/page-sections/application/dto/home-questions/home-questions-content-item.dto';
 import { ReadRepository } from '~/page-sections/application/read.repository';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
 import { HeaderWithParentLinkMapper } from './mappers/header-with-parent-link.mapper.';

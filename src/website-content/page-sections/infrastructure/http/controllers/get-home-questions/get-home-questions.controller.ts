@@ -2,11 +2,11 @@ import { ApiErrorDecorator, Public } from '@common/decorators';
 import { Controller, Get, HttpStatus, NotFoundException } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { HomeQuestionsDto } from '~/page-sections/application/dto/home-questions.dto';
+import { HomeQuestionsDto } from '~/page-sections/application/dto/home-questions/home-questions.dto';
 import { SectionNotFoundError } from '~/page-sections/application/errors/section-not-found.error';
 import { GetHomeQuestionsQuery } from '~/page-sections/application/queries/get-home-questions/get-home-questions.query';
 import { Result } from '~/shared/core/result';
-import { HomeQuestionsResponseDto } from '../../dto/responses/home-question/home-questions-response.dto';
+import { HomeQuestionsResponseDto } from '../../dto/responses/home-question/home-questions.response.dto';
 
 @Controller('pages')
 @Public()

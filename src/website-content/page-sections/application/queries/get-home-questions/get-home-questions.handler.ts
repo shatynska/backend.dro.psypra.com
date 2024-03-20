@@ -1,8 +1,8 @@
 import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { Result, failure, success } from '~/shared/core/result';
-import { HeaderDto } from '../../dto/header.dto';
-import { HomeQuestionsDto } from '../../dto/home-questions.dto';
+import { HomeQuestionsDto } from '../../dto/home-questions/home-questions.dto';
+import { HeaderDto } from '../../dto/section/header.dto';
 import { SectionNotFoundError } from '../../errors/section-not-found.error';
 
 import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';

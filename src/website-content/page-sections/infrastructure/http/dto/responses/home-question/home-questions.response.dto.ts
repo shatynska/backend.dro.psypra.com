@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { HomeQuestionsDto } from '~/page-sections/application/dto/home-questions.dto';
+import { HomeQuestionsDto } from '~/page-sections/application/dto/home-questions/home-questions.dto';
 import { SectionWithHeaderWithHrefResponseDto } from '../section/section-with-header-with-href.response.dto';
 import {
   HomeQuestionsContentResponseDto,

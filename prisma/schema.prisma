@@ -21,11 +21,11 @@ model CashBook {
 }
 
 model Dimension {
-  id                         String                       @id @default(uuid())
-  alias                      String                       @unique
-  title                      String                       @unique
-  dimensionItems             DimensionItem[]
-  specialists DimensionItemsToSpecialist[]
+  id             String                       @id @default(uuid())
+  alias          String                       @unique
+  title          String                       @unique
+  dimensionItems DimensionItem[]
+  specialists    DimensionItemsToSpecialist[]
 
   @@map("dimensions")
 }
@@ -37,7 +37,7 @@ model DimensionItem {
   dimension      Dimension                    @relation(fields: [dimensionAlias], references: [alias])
   dimensionAlias String                       @map("dimension_alias")
   specialists    DimensionItemsToSpecialist[]
-  description String
+  description    String?
 
   @@map("dimension_items")
 }

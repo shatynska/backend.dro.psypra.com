@@ -1,8 +1,8 @@
-import { GetMainParametersDto } from './dto/get-main-parameters.dto';
+import { GetSpecialistParametersDto } from './dto/get-specialist-parameters.dto';
 import { MainDto } from './dto/main.dto';
 
 export const READ_REPOSITORY_TOKEN = Symbol('SpecialistsReadRepositoryToken');
 
 export interface ReadRepository {
-  getMain(parameters: GetMainParametersDto): Promise<MainDto | null>;
+  getMain(parameters: GetSpecialistParametersDto): Promise<MainDto | null>;
 }

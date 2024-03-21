@@ -1,10 +1,6 @@
 import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { Result, failure, success } from '~/shared/core/result';
-// import {
-//   SECTIONS_READ_REPOSITORY_TOKEN,
-//   SectionsReadRepository,
-// } from '~/specialists/application/sections.read.repository';
 import { MainDto } from '../../dto/main.dto';
 import { SpecialistNotFoundError } from '../../errors/specialist-not-found.error';
 import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';

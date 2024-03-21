@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { HeaderWithParentLinkDto } from '~/page-sections/application/dto/section/header-with-parent-link.dto';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
 import { HomeQuestionsContentItemDto } from '../../../application/dto/home-questions/home-questions-content-item.dto';
 import { GetSectionParametersDto } from '../../../application/dto/section/get-section-parameters.dto';
@@ -8,7 +9,6 @@ import { ReadRepository } from '../../../application/read.repository';
 import { HeaderWithParentLinkMapper } from './mappers/header-with-parent-link.mapper.';
 import { HeaderMapper } from './mappers/header.mapper';
 import { HomeQuestionsContentItemsMapper } from './mappers/home-questions-content-items.mapper';
-import { HeaderWithParentLinkDto } from '~/page-sections/application/dto/section/header-with-parent-link.dto';
 
 @Injectable()
 export class PrismaReadRepository implements ReadRepository {
@@ -27,14 +27,14 @@ export class PrismaReadRepository implements ReadRepository {
   }
 
   async getHeader({
-    page,
-    section,
+    pageAlias,
+    sectionAlias,
   }: GetSectionParametersDto): Promise<HeaderDto | null> {
     const header = await this.prismaService.pageSection.findUnique({
       where: {
         alias: {
-          page: page,
-          section: section,
+          page: pageAlias,
+          section: sectionAlias,
         },
       },
       select: {
@@ -52,14 +52,14 @@ export class PrismaReadRepository implements ReadRepository {
   }
 
   async getHeaderWithParentLink({
-    page,
-    section,
+    pageAlias,
+    sectionAlias,
   }: GetSectionParametersDto): Promise<HeaderWithParentLinkDto | null> {
     const header = await this.prismaService.pageSection.findUnique({
       where: {
         alias: {
-          page: page,
-          section: section,
+          page: pageAlias,
+          section: sectionAlias,
         },
       },
       select: PrismaReadRepository.headerWithParentLinkSelect,

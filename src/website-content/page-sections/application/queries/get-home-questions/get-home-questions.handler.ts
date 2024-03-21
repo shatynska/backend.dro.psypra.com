@@ -4,7 +4,6 @@ import { Result, failure, success } from '~/shared/core/result';
 import { HomeQuestionsDto } from '../../dto/home-questions/home-questions.dto';
 import { HeaderDto } from '../../dto/section/header.dto';
 import { SectionNotFoundError } from '../../errors/section-not-found.error';
-
 import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';
 import { GetHomeQuestionsQuery } from './get-home-questions.query';
 
@@ -19,8 +18,8 @@ export class GetHomeQuestionsHandler
 
   async execute(): Promise<Result<SectionNotFoundError, HomeQuestionsDto>> {
     const headerData: HeaderDto | null = await this.readRepository.getHeader({
-      page: 'home',
-      section: 'questions',
+      pageAlias: 'home',
+      sectionAlias: 'questions',
     });
 
     if (headerData === null) {

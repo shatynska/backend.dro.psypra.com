@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { HeaderDto } from 'src/website-content/page-sections/application/dto/section/header.dto';
-import { GetSectionParametersDto } from '~/page-sections/application/dto/get-section-parameters.dto';
-import { HomeQuestionsContentItemDto } from '~/page-sections/application/dto/home-questions/home-questions-content-item.dto';
-import { ReadRepository } from '~/page-sections/application/read.repository';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
+import { HomeQuestionsContentItemDto } from '../../../application/dto/home-questions/home-questions-content-item.dto';
+import { GetSectionParametersDto } from '../../../application/dto/section/get-section-parameters.dto';
+import { HeaderDto } from '../../../application/dto/section/header.dto';
+import { ReadRepository } from '../../../application/read.repository';
 import { HeaderWithParentLinkMapper } from './mappers/header-with-parent-link.mapper.';
 import { HeaderMapper } from './mappers/header.mapper';
 import { HomeQuestionsContentItemsMapper } from './mappers/home-questions-content-items.mapper';
+import { HeaderWithParentLinkDto } from '~/page-sections/application/dto/section/header-with-parent-link.dto';
 
 @Injectable()
 export class PrismaReadRepository implements ReadRepository {
@@ -53,7 +54,7 @@ export class PrismaReadRepository implements ReadRepository {
   async getHeaderWithParentLink({
     page,
     section,
-  }: GetSectionParametersDto): Promise<HeaderDto | null> {
+  }: GetSectionParametersDto): Promise<HeaderWithParentLinkDto | null> {
     const header = await this.prismaService.pageSection.findUnique({
       where: {
         alias: {

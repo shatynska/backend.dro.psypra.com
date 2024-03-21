@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client';
-import { HeaderDto } from '~/page-sections/application/dto/section/header.dto';
+import { HeaderWithParentLinkDto } from '../../../../application/dto/section/header-with-parent-link.dto';
 import { PrismaReadRepository } from '../read.repository';
 
 type Props = Prisma.PageSectionGetPayload<
@@ -7,7 +7,7 @@ type Props = Prisma.PageSectionGetPayload<
 >;
 
 export class HeaderWithParentLinkMapper {
-  static mapToDto(data: Props): HeaderDto {
+  static mapToDto(data: Props): HeaderWithParentLinkDto {
     const mappedData = {
       primaryHeading: data.primaryHeading,
       secondaryHeading: data.secondaryHeading,

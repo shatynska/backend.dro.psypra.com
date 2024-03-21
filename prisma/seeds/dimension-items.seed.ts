@@ -50,9 +50,521 @@ export async function seedDimensionItems(prisma) {
     },
   });
 
+  const individual = await prisma.dimensionItem.upsert({
+    where: { alias: 'individual' },
+    update: {},
+    create: {
+      alias: 'individual',
+      title: 'індивідуальна',
+      dimension: {
+        connect: { alias: 'forms' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const сouples = await prisma.dimensionItem.upsert({
+    where: { alias: 'сouples' },
+    update: {},
+    create: {
+      alias: 'сouples',
+      title: 'парна',
+      dimension: {
+        connect: { alias: 'forms' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const family = await prisma.dimensionItem.upsert({
+    where: { alias: 'family' },
+    update: {},
+    create: {
+      alias: 'family',
+      title: 'сімейна',
+      dimension: {
+        connect: { alias: 'forms' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const group = await prisma.dimensionItem.upsert({
+    where: { alias: 'group' },
+    update: {},
+    create: {
+      alias: 'group',
+      title: 'групова',
+      dimension: {
+        connect: { alias: 'forms' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const preschool = await prisma.dimensionItem.upsert({
+    where: { alias: 'preschool' },
+    update: {},
+    create: {
+      alias: 'preschool',
+      title: '3+',
+      dimension: {
+        connect: { alias: 'ages' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const school = await prisma.dimensionItem.upsert({
+    where: { alias: 'school' },
+    update: {},
+    create: {
+      alias: 'school',
+      title: '6+',
+      dimension: {
+        connect: { alias: 'ages' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const adolescent = await prisma.dimensionItem.upsert({
+    where: { alias: 'adolescent' },
+    update: {},
+    create: {
+      alias: 'adolescent',
+      title: '12+',
+      dimension: {
+        connect: { alias: 'ages' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const young = await prisma.dimensionItem.upsert({
+    where: { alias: 'young' },
+    update: {},
+    create: {
+      alias: 'young',
+      title: '18+',
+      dimension: {
+        connect: { alias: 'ages' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const middle = await prisma.dimensionItem.upsert({
+    where: { alias: 'middle' },
+    update: {},
+    create: {
+      alias: 'middle',
+      title: '40+',
+      dimension: {
+        connect: { alias: 'ages' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const older = await prisma.dimensionItem.upsert({
+    where: { alias: 'older' },
+    update: {},
+    create: {
+      alias: 'older',
+      title: '60+',
+      dimension: {
+        connect: { alias: 'ages' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const oneTime = await prisma.dimensionItem.upsert({
+    where: { alias: 'oneTime' },
+    update: {},
+    create: {
+      alias: 'oneTime',
+      title: 'разові консультації',
+      dimension: {
+        connect: { alias: 'terms' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const short = await prisma.dimensionItem.upsert({
+    where: { alias: 'short' },
+    update: {},
+    create: {
+      alias: 'short',
+      title: 'короткотривала психотерапія',
+      dimension: {
+        connect: { alias: 'terms' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const long = await prisma.dimensionItem.upsert({
+    where: { alias: 'long' },
+    update: {},
+    create: {
+      alias: 'long',
+      title: 'довготривала психотерапія',
+      dimension: {
+        connect: { alias: 'terms' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const gestalt = await prisma.dimensionItem.upsert({
+    where: { alias: 'gestalt' },
+    update: {},
+    create: {
+      alias: 'gestalt',
+      title: 'гештальт',
+      dimension: {
+        connect: { alias: 'approaches' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const psychoanalytic = await prisma.dimensionItem.upsert({
+    where: { alias: 'psychoanalytic' },
+    update: {},
+    create: {
+      alias: 'psychoanalytic',
+      title: 'психоанітична',
+      dimension: {
+        connect: { alias: 'approaches' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const EMDR = await prisma.dimensionItem.upsert({
+    where: { alias: 'EMDR' },
+    update: {},
+    create: {
+      alias: 'EMDR',
+      title: 'ЕМДР',
+      dimension: {
+        connect: { alias: 'approaches' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const сlientСentered = await prisma.dimensionItem.upsert({
+    where: { alias: 'сlientСentered' },
+    update: {},
+    create: {
+      alias: 'сlientСentered',
+      title: 'клієнт-центрована',
+      dimension: {
+        connect: { alias: 'approaches' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const positive = await prisma.dimensionItem.upsert({
+    where: { alias: 'positive' },
+    update: {},
+    create: {
+      alias: 'positive',
+      title: 'позитивна',
+      dimension: {
+        connect: { alias: 'approaches' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const systemicFamily = await prisma.dimensionItem.upsert({
+    where: { alias: 'systemicFamily' },
+    update: {},
+    create: {
+      alias: 'systemicFamily',
+      title: 'системна сімейна',
+      dimension: {
+        connect: { alias: 'approaches' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const zero = await prisma.dimensionItem.upsert({
+    where: { alias: 'zero' },
+    update: {},
+    create: {
+      alias: 'zero',
+      title: '0',
+      dimension: {
+        connect: { alias: 'rates' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const one = await prisma.dimensionItem.upsert({
+    where: { alias: 'one' },
+    update: {},
+    create: {
+      alias: 'one',
+      title: '100',
+      dimension: {
+        connect: { alias: 'rates' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const two = await prisma.dimensionItem.upsert({
+    where: { alias: 'two' },
+    update: {},
+    create: {
+      alias: 'two',
+      title: '200',
+      dimension: {
+        connect: { alias: 'rates' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const three = await prisma.dimensionItem.upsert({
+    where: { alias: 'three' },
+    update: {},
+    create: {
+      alias: 'three',
+      title: '300',
+      dimension: {
+        connect: { alias: 'rates' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const four = await prisma.dimensionItem.upsert({
+    where: { alias: 'four' },
+    update: {},
+    create: {
+      alias: 'four',
+      title: '400',
+      dimension: {
+        connect: { alias: 'rates' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const five = await prisma.dimensionItem.upsert({
+    where: { alias: 'five' },
+    update: {},
+    create: {
+      alias: 'five',
+      title: '500',
+      dimension: {
+        connect: { alias: 'rates' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const six = await prisma.dimensionItem.upsert({
+    where: { alias: 'six' },
+    update: {},
+    create: {
+      alias: 'six',
+      title: '600',
+      dimension: {
+        connect: { alias: 'rates' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const seven = await prisma.dimensionItem.upsert({
+    where: { alias: 'seven' },
+    update: {},
+    create: {
+      alias: 'seven',
+      title: '700',
+      dimension: {
+        connect: { alias: 'rates' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const eight = await prisma.dimensionItem.upsert({
+    where: { alias: 'eight' },
+    update: {},
+    create: {
+      alias: 'eight',
+      title: '800',
+      dimension: {
+        connect: { alias: 'rates' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const nine = await prisma.dimensionItem.upsert({
+    where: { alias: 'nine' },
+    update: {},
+    create: {
+      alias: 'nine',
+      title: '900',
+      dimension: {
+        connect: { alias: 'rates' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const ten = await prisma.dimensionItem.upsert({
+    where: { alias: 'ten' },
+    update: {},
+    create: {
+      alias: 'ten',
+      title: '1000',
+      dimension: {
+        connect: { alias: 'rates' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const eleven = await prisma.dimensionItem.upsert({
+    where: { alias: 'eleven ' },
+    update: {},
+    create: {
+      alias: 'eleven ',
+      title: '1100',
+      dimension: {
+        connect: { alias: 'rates' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
+  const twelve = await prisma.dimensionItem.upsert({
+    where: { alias: 'twelve' },
+    update: {},
+    create: {
+      alias: 'twelve',
+      title: '1200',
+      dimension: {
+        connect: { alias: 'rates' },
+      },
+    },
+    include: {
+      dimension: true,
+    },
+  });
+
   console.log({
     psychologist,
     psychotherapist,
     psychiatrist,
+    individual,
+    сouples,
+    family,
+    group,
+    preschool,
+    school,
+    adolescent,
+    young,
+    middle,
+    older,
+    oneTime,
+    short,
+    long,
+    gestalt,
+    psychoanalytic,
+    EMDR,
+    сlientСentered,
+    positive,
+    systemicFamily,
+    zero,
+    one,
+    two,
+    three,
+    four,
+    five,
+    six,
+    seven,
+    eight,
+    nine,
+    ten,
+    eleven,
+    twelve,
   });
 }

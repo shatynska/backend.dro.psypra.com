@@ -1,5 +1,3 @@
-import { HeaderDto } from './header.dto';
-
-export class SectionDto {
-  header: HeaderDto;
+export class SectionDto<Header> {
+  header: Header;
 }

@@ -1,5 +1,5 @@
 import { HomeQuestionsContentItemDto } from './dto/home-questions/home-questions-content-item.dto';
-import { GetSectionParametersDto } from './dto/section/get-section-parameters.dto';
+import { GetSectionParametersDto } from './dto/section/get-section.parameters.dto';
 import { HeaderWithHrefDto } from './dto/section/header-with-href.dto';
 import { HeaderWithParentLinkDto } from './dto/section/header-with-parent-link.dto';
 

@@ -29,7 +29,11 @@
       "~/shared": ["src/shared"],
       "~/shared/*": ["src/shared/*"],
       "~/page-sections": ["src/website-content/page-sections"],
-      "~/page-sections/*": ["src/website-content/page-sections/*"]
+      "~/page-sections/*": ["src/website-content/page-sections/*"],
+      "~/dimensions": ["src/website-content/dimensions"],
+      "~/dimensions/*": ["src/website-content/dimensions/*"],
+      "~/specialists": ["src/website-content/specialists"],
+      "~/specialists/*": ["src/website-content/specialists/*"]
     }
   }
 }

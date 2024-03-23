@@ -1,6 +1,5 @@
-import { DimensionItemWithAliasAndHrefDto } from './dimension-item-with-alias-and-link.dto';
-
 export class DimensionDto {
+  alias: string;
   title: string;
-  items: DimensionItemWithAliasAndHrefDto[];
+  href: string;
 }

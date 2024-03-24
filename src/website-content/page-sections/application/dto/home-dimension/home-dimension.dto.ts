@@ -1,4 +1,4 @@
-import { DimensionItemWithAliasAndHrefDto } from '~/dimensions/application/dto/get-dimension/dimension-item-with-alias-and-link.dto';
+import { DimensionItemWithAliasAndHrefDto } from '~/dimensions/application/dto/dimension-with-items/dimension-item-with-alias-and-href.dto';
 import { HeaderWithHrefDto } from '../section/header-with-href.dto';
 import { SectionDto } from '../section/section.dto';
 

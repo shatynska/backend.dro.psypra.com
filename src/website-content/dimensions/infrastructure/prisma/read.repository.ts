@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { DimensionItemDto } from '~/dimensions/application/dto/dimension-item/dimension-item.dto';
+import { GetDimensionItemParametersDto } from '~/dimensions/application/dto/dimension-item/get-dimension-item.parameters.dto';
+import { DimensionWithItemsDto } from '~/dimensions/application/dto/dimension-with-items/dimension-with-items.dto';
+import { GetDimensionWithItemsParametersDto } from '~/dimensions/application/dto/dimension-with-items/get-dimension-with-items.parameters.dto';
+import { ReadRepository } from '~/dimensions/application/read.repository';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
-import { DimensionItemDto } from '../../application/dto/get-dimension-item/dimension-item.dto';
-import { GetDimensionItemParametersDto } from '../../application/dto/get-dimension-item/get-dimension-item-parameters.dto';
-import { DimensionDto } from '../../application/dto/get-dimension/dimension.dto';
-import { GetDimensionParametersDto } from '../../application/dto/get-dimension/get-dimension-parameters.dto';
-import { ReadRepository } from '../../application/read.repository';
 import { DimensionMapper } from './mappers/dimension.mapper';
 
 @Injectable()
@@ -32,7 +32,7 @@ export class PrismaReadRepository implements ReadRepository {
 
   async getDimension({
     alias,
-  }: GetDimensionParametersDto): Promise<DimensionDto | null> {
+  }: GetDimensionWithItemsParametersDto): Promise<DimensionWithItemsDto | null> {
     const dimension = await this.prismaService.dimension.findUnique({
       where: { alias: alias },
       select: PrismaReadRepository.dimensionWithItemsSelect,

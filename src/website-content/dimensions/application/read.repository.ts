@@ -1,14 +1,16 @@
-import { DimensionItemDto } from './dto/get-dimension-item/dimension-item.dto';
-import { GetDimensionItemParametersDto } from './dto/get-dimension-item/get-dimension-item-parameters.dto';
-import { DimensionDto } from './dto/get-dimension/dimension.dto';
-import { GetDimensionParametersDto } from './dto/get-dimension/get-dimension-parameters.dto';
+import { DimensionItemDto } from './dto/dimension-item/dimension-item.dto';
+import { GetDimensionItemParametersDto } from './dto/dimension-item/get-dimension-item.parameters.dto';
+import { DimensionWithItemsDto } from './dto/dimension-with-items/dimension-with-items.dto';
+import { GetDimensionWithItemsParametersDto } from './dto/dimension-with-items/get-dimension-with-items.parameters.dto';
 
 export const READ_REPOSITORY_TOKEN = Symbol(
   'DimensionItemsReadRepositoryToken',
 );
 
 export interface ReadRepository {
-  getDimension(parameters: GetDimensionParametersDto): Promise<DimensionDto>;
+  getDimension(
+    parameters: GetDimensionWithItemsParametersDto,
+  ): Promise<DimensionWithItemsDto>;
 
   getDimensionItem(
     parameters: GetDimensionItemParametersDto,

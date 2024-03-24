@@ -1,4 +1,4 @@
 import { GetDimensionItemHandler } from './get-dimension-item/get-dimension-item.handler';
-import { GetDimensionHandler } from './get-dimension/get-dimension.handler';
+import { GetDimensionWithItemsHandler } from './get-dimension-with-items/get-dimension-with-items.handler';
 
-export const QUERIES = [GetDimensionHandler, GetDimensionItemHandler];
+export const QUERIES = [GetDimensionWithItemsHandler, GetDimensionItemHandler];

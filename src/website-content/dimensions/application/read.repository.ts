@@ -8,11 +8,11 @@ export const READ_REPOSITORY_TOKEN = Symbol(
 );
 
 export interface ReadRepository {
-  getDimension(
-    parameters: GetDimensionWithItemsParametersDto,
-  ): Promise<DimensionWithItemsDto>;
-
   getDimensionItem(
     parameters: GetDimensionItemParametersDto,
   ): Promise<DimensionItemDto>;
+
+  getDimensionWithItems(
+    parameters: GetDimensionWithItemsParametersDto,
+  ): Promise<DimensionWithItemsDto>;
 }

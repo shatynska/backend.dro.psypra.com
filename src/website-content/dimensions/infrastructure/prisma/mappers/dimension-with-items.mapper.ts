@@ -1,13 +1,13 @@
 import { Prisma } from '@prisma/client';
-import { DimensionDto } from '../../../application/dto/get-dimension/dimension.dto';
+import { DimensionWithItemsDto } from '~/dimensions/application/dto/dimension-with-items/dimension-with-items.dto';
 import { PrismaReadRepository } from '../read.repository';
 
 type Props = Prisma.DimensionGetPayload<
   typeof PrismaReadRepository.dimensionWithItems
 >;
 
-export class DimensionMapper {
-  static mapToDto(data: Props): DimensionDto {
+export class DimensionWithItemsMapper {
+  static mapToDto(data: Props): DimensionWithItemsDto {
     const mappedData = {
       title: data.title,
       items: data.dimensionItems.map((item) => ({

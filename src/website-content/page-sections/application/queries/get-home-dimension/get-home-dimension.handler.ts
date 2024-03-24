@@ -1,7 +1,7 @@
 import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryBus, QueryHandler } from '@nestjs/cqrs';
-import { DimensionDto } from '~/dimensions/application/dto/get-dimension/dimension.dto';
-import { GetDimensionQuery } from '~/dimensions/application/queries/get-dimension/get-dimension.query';
+import { DimensionWithItemsDto } from '~/dimensions/application/dto/dimension-with-items/dimension-with-items.dto';
+import { GetDimensionWithItemsQuery } from '~/dimensions/application/queries/get-dimension-with-items/get-dimension-with-items.query';
 import { NotFoundError } from '~/shared/application/errors/not-found.error';
 import { Result, failure, success } from '~/shared/core/result';
 import { HomeDimensionDto } from '../../dto/home-dimension/home-dimension.dto';
@@ -33,9 +33,9 @@ export class GetHomeDimensionHandler
       return failure(new SectionNotFoundError());
     }
 
-    const dimension: Result<NotFoundError, DimensionDto> =
+    const dimension: Result<NotFoundError, DimensionWithItemsDto> =
       await this.queryBus.execute(
-        new GetDimensionQuery({ alias: dimensionAlias }),
+        new GetDimensionWithItemsQuery({ alias: dimensionAlias }),
       );
 
     if (dimension.isFailure()) {

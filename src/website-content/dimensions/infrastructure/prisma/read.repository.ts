@@ -6,7 +6,7 @@ import { DimensionWithItemsDto } from '~/dimensions/application/dto/dimension-wi
 import { GetDimensionWithItemsParametersDto } from '~/dimensions/application/dto/dimension-with-items/get-dimension-with-items.parameters.dto';
 import { ReadRepository } from '~/dimensions/application/read.repository';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
-import { DimensionMapper } from './mappers/dimension.mapper';
+import { DimensionWithItemsMapper } from './mappers/dimension-with-items.mapper';
 
 @Injectable()
 export class PrismaReadRepository implements ReadRepository {
@@ -30,7 +30,7 @@ export class PrismaReadRepository implements ReadRepository {
     return item;
   }
 
-  async getDimension({
+  async getDimensionWithItems({
     alias,
   }: GetDimensionWithItemsParametersDto): Promise<DimensionWithItemsDto | null> {
     const dimension = await this.prismaService.dimension.findUnique({
@@ -42,7 +42,7 @@ export class PrismaReadRepository implements ReadRepository {
       return null;
     }
 
-    return DimensionMapper.mapToDto(dimension);
+    return DimensionWithItemsMapper.mapToDto(dimension);
   }
 
   static dimensionWithItemsSelect = Prisma.validator<Prisma.DimensionSelect>()({

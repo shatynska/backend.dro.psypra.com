@@ -1,6 +1,6 @@
 import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryBus, QueryHandler } from '@nestjs/cqrs';
-import { DimensionWithHrefDto } from '~/dimensions/application/dto/dimension-with-href/dimension-with-href.dto';
+import { DimensionWithHrefDto } from '~/dimensions/application/dto/dimension-with-href.dto';
 import { GetDimensionWithHrefQuery } from '~/dimensions/application/queries/get-dimension-with-href/get-dimension-with-href.query';
 import { NotFoundError } from '~/shared/application/errors/not-found.error';
 import { Result, failure, success } from '~/shared/core/result';

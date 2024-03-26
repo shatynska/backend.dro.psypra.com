@@ -1,5 +1,5 @@
 import { Dimension } from '@prisma/client';
-import { DimensionWithHrefDto } from '~/dimensions/application/dto/dimension-with-href/dimension-with-href.dto';
+import { DimensionWithHrefDto } from '~/dimensions/application/dto/dimension-with-href.dto';
 
 type Props = Pick<Dimension, 'alias' | 'title'>;
 

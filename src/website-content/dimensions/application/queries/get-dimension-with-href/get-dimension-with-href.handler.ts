@@ -2,7 +2,7 @@ import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { NotFoundError } from '~/shared/application/errors/not-found.error';
 import { Result, failure, success } from '~/shared/core/result';
-import { DimensionWithHrefDto } from '../../dto/dimension-with-href/dimension-with-href.dto';
+import { DimensionWithHrefDto } from '../../dto/dimension-with-href.dto';
 import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';
 import { GetDimensionWithHrefQuery } from './get-dimension-with-href.query';
 

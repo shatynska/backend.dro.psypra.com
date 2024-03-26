@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { DimensionItemDto } from '~/dimensions/application/dto/dimension-item/dimension-item.dto';
-import { DimensionWithHrefDto } from '~/dimensions/application/dto/dimension-with-href/dimension-with-href.dto';
-import { DimensionWithItemsDto } from '~/dimensions/application/dto/dimension-with-items/dimension-with-items.dto';
+import { DimensionItemDto } from '~/dimensions/application/dto/dimension-item.dto';
+import { DimensionWithHrefDto } from '~/dimensions/application/dto/dimension-with-href.dto';
+import { DimensionWithItemsDto } from '~/dimensions/application/dto/dimension-with-items.dto';
 import { ReadRepository } from '~/dimensions/application/read.repository';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
 import { DimensionWithHrefMapper } from './mappers/dimension-with-href.mapper';

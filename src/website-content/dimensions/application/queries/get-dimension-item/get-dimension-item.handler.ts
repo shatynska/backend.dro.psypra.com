@@ -2,7 +2,7 @@ import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { NotFoundError } from '~/shared/application/errors/not-found.error';
 import { Result, failure, success } from '~/shared/core/result';
-import { DimensionItemDto } from '../../dto/dimension-item/dimension-item.dto';
+import { DimensionItemDto } from '../../dto/dimension-item.dto';
 import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';
 import { GetDimensionItemQuery } from './get-dimension-item.query';
 

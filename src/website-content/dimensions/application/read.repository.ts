@@ -1,6 +1,6 @@
-import { DimensionItemDto } from './dto/dimension-item/dimension-item.dto';
-import { DimensionWithHrefDto } from './dto/dimension-with-href/dimension-with-href.dto';
-import { DimensionWithItemsDto } from './dto/dimension-with-items/dimension-with-items.dto';
+import { DimensionItemDto } from './dto/dimension-item.dto';
+import { DimensionWithHrefDto } from './dto/dimension-with-href.dto';
+import { DimensionWithItemsDto } from './dto/dimension-with-items.dto';
 
 export const READ_REPOSITORY_TOKEN = Symbol(
   'DimensionItemsReadRepositoryToken',

@@ -1,5 +1,3 @@
-import { GetDimensionWithItemsParametersDto } from '../../dto/dimension-with-items/get-dimension-with-items.parameters.dto';
-
 export class GetDimensionWithItemsQuery {
-  constructor(public readonly parameters: GetDimensionWithItemsParametersDto) {}
+  constructor(public readonly alias: string) {}
 }

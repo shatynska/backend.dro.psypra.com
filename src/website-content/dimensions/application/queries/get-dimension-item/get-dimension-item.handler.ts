@@ -16,11 +16,10 @@ export class GetDimensionItemHandler
   ) {}
 
   async execute({
-    parameters: { alias },
+    alias,
   }: GetDimensionItemQuery): Promise<Result<NotFoundError, DimensionItemDto>> {
-    const item: DimensionItemDto = await this.readRepository.getDimensionItem({
-      alias: alias,
-    });
+    const item: DimensionItemDto =
+      await this.readRepository.getDimensionItem(alias);
 
     if (item === null) {
       return failure(new NotFoundError('Елемент не знайдено'));

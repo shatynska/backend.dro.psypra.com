@@ -35,7 +35,7 @@ export class GetHomeDimensionHandler
 
     const dimension: Result<NotFoundError, DimensionWithItemsDto> =
       await this.queryBus.execute(
-        new GetDimensionWithItemsQuery({ alias: dimensionAlias }),
+        new GetDimensionWithItemsQuery(dimensionAlias),
       );
 
     if (dimension.isFailure()) {

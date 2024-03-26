@@ -37,7 +37,7 @@ export class GetDimensionMainHandler
 
     const contentData: Result<NotFoundError, DimensionWithItemsDto> =
       await this.queryBus.execute(
-        new GetDimensionWithItemsQuery({ alias: dimensionAlias }),
+        new GetDimensionWithItemsQuery(dimensionAlias),
       );
 
     if (contentData.isFailure()) {

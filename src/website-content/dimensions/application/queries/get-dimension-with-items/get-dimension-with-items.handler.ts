@@ -16,14 +16,12 @@ export class GetDimensionWithItemsHandler
   ) {}
 
   async execute({
-    parameters: { alias },
+    alias,
   }: GetDimensionWithItemsQuery): Promise<
     Result<NotFoundError, DimensionWithItemsDto>
   > {
     const dimension: DimensionWithItemsDto =
-      await this.readRepository.getDimensionWithItems({
-        alias: alias,
-      });
+      await this.readRepository.getDimensionWithItems(alias);
 
     if (dimension === null) {
       return failure(new NotFoundError('Вимір не знайдено'));

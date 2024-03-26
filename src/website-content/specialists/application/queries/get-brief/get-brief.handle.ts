@@ -35,9 +35,7 @@ export class GetBriefHandler implements IQueryHandler<GetBriefQuery> {
     for (const dimensionAlias of dimensionAliases) {
       const dimension: Result<NotFoundError, DimensionWithHrefDto> =
         await this.queryBus.execute(
-          new GetDimensionWithHrefQuery({
-            alias: dimensionAlias,
-          }),
+          new GetDimensionWithHrefQuery(dimensionAlias),
         );
 
       if (dimension.isFailure()) {

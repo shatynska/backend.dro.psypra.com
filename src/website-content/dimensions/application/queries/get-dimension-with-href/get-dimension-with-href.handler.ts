@@ -16,14 +16,12 @@ export class GetDimensionWithHrefHandler
   ) {}
 
   async execute({
-    parameters: { alias },
+    alias,
   }: GetDimensionWithHrefQuery): Promise<
     Result<NotFoundError, DimensionWithHrefDto>
   > {
     const dimension: DimensionWithHrefDto =
-      await this.readRepository.getDimensionWithHref({
-        alias: alias,
-      });
+      await this.readRepository.getDimensionWithHref(alias);
 
     if (dimension === null) {
       return failure(new NotFoundError('Вимір не знайдено'));

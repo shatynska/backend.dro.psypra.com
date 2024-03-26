@@ -21,14 +21,14 @@ export class GetSpecialistBriefHandler
   ) {}
 
   async execute({
-    parameters: { specialistAlias },
+    specialistAlias,
   }: GetSpecialistBriefQuery): Promise<
     Result<NotFoundError, SpecialistBriefDto>
   > {
-    const headerData: HeaderDto | null = await this.readRepository.getHeader({
-      pageAlias: 'specialist',
-      sectionAlias: 'brief',
-    });
+    const headerData: HeaderDto | null = await this.readRepository.getHeader(
+      'specialist',
+      'brief',
+    );
 
     if (headerData === null) {
       return failure(new SectionNotFoundError());

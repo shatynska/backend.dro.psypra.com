@@ -21,15 +21,12 @@ export class GetDimensionMainHandler
   ) {}
 
   async execute({
-    parameters: { dimensionAlias },
+    dimensionAlias,
   }: GetDimensionMainQuery): Promise<
     Result<SectionNotFoundError, DimensionMainDto>
   > {
     const headerData: HeaderWithParentLinkDto | null =
-      await this.readRepository.getHeaderWithParentLink({
-        pageAlias: 'dimension',
-        sectionAlias: 'main',
-      });
+      await this.readRepository.getHeaderWithParentLink('dimension', 'main');
 
     if (headerData === null) {
       return failure(new SectionNotFoundError());

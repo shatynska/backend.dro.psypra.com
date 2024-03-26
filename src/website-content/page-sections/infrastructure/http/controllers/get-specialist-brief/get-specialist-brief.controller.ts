@@ -30,9 +30,7 @@ export class GetSpecialistBriefController {
     @Param('specialist') specialist: string,
   ): Promise<SpecialistBriefResponseDto> {
     const section: Result<SectionNotFoundError, SpecialistBriefDto> =
-      await this.queryBus.execute(
-        new GetSpecialistBriefQuery({ specialistAlias: specialist }),
-      );
+      await this.queryBus.execute(new GetSpecialistBriefQuery(specialist));
 
     if (section.isFailure()) {
       throw new NotFoundException(section.value.message);

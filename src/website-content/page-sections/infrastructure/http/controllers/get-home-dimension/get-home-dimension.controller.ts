@@ -30,9 +30,7 @@ export class GetHomeDimensionController {
     @Param('dimension') dimension: string,
   ): Promise<HomeDimensionResponseDto> {
     const section: Result<SectionNotFoundError, HomeDimensionDto> =
-      await this.queryBus.execute(
-        new GetHomeDimensionQuery({ dimensionAlias: dimension }),
-      );
+      await this.queryBus.execute(new GetHomeDimensionQuery(dimension));
 
     if (section.isFailure()) {
       throw new NotFoundException(section.value.message);

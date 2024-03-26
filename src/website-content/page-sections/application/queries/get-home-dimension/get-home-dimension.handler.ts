@@ -21,13 +21,10 @@ export class GetHomeDimensionHandler
   ) {}
 
   async execute({
-    parameters: { dimensionAlias },
+    dimensionAlias,
   }: GetHomeDimensionQuery): Promise<Result<NotFoundError, HomeDimensionDto>> {
     const header: HeaderWithHrefDto | null =
-      await this.readRepository.getHeader({
-        pageAlias: 'home',
-        sectionAlias: dimensionAlias,
-      });
+      await this.readRepository.getHeader('home', dimensionAlias);
 
     if (header === null) {
       return failure(new SectionNotFoundError());

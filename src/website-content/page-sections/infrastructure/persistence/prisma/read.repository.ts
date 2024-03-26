@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { HomeQuestionsContentItemDto } from '~/page-sections/application/dto/home-questions/home-questions-content-item.dto';
-import { GetSectionParametersDto } from '~/page-sections/application/dto/section/get-section.parameters.dto';
 import { HeaderWithHrefDto } from '~/page-sections/application/dto/section/header-with-href.dto';
 import { HeaderWithParentLinkDto } from '~/page-sections/application/dto/section/header-with-parent-link.dto';
 import { ReadRepository } from '~/page-sections/application/read.repository';
@@ -14,10 +13,10 @@ import { HomeQuestionsContentItemsMapper } from './mappers/home-questions-conten
 export class PrismaReadRepository implements ReadRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async getHeader({
-    pageAlias,
-    sectionAlias,
-  }: GetSectionParametersDto): Promise<HeaderWithHrefDto | null> {
+  async getHeader(
+    pageAlias: string,
+    sectionAlias: string,
+  ): Promise<HeaderWithHrefDto | null> {
     const header = await this.prismaService.pageSection.findUnique({
       where: {
         alias: {
@@ -39,10 +38,10 @@ export class PrismaReadRepository implements ReadRepository {
     return HeaderMapper.mapToDto(header);
   }
 
-  async getHeaderWithParentLink({
-    pageAlias,
-    sectionAlias,
-  }: GetSectionParametersDto): Promise<HeaderWithParentLinkDto | null> {
+  async getHeaderWithParentLink(
+    pageAlias: string,
+    sectionAlias: string,
+  ): Promise<HeaderWithParentLinkDto | null> {
     const header = await this.prismaService.pageSection.findUnique({
       where: {
         alias: {

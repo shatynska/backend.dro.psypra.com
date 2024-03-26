@@ -17,10 +17,10 @@ export class GetHomeQuestionsHandler
   ) {}
 
   async execute(): Promise<Result<SectionNotFoundError, HomeQuestionsDto>> {
-    const headerData: HeaderDto | null = await this.readRepository.getHeader({
-      pageAlias: 'home',
-      sectionAlias: 'questions',
-    });
+    const headerData: HeaderDto | null = await this.readRepository.getHeader(
+      'home',
+      'questions',
+    );
 
     if (headerData === null) {
       return failure(new SectionNotFoundError());

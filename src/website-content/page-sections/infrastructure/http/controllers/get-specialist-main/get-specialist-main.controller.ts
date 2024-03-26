@@ -30,9 +30,7 @@ export class GetSpecialistMainController {
     @Param('specialist') specialist: string,
   ): Promise<SpecialistMainResponseDto> {
     const section: Result<SectionNotFoundError, SpecialistMainDto> =
-      await this.queryBus.execute(
-        new GetSpecialistMainQuery({ specialistAlias: specialist }),
-      );
+      await this.queryBus.execute(new GetSpecialistMainQuery(specialist));
 
     if (section.isFailure()) {
       throw new NotFoundException(section.value.message);

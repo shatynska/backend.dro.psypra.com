@@ -21,15 +21,12 @@ export class GetSpecialistMainHandler
   ) {}
 
   async execute({
-    parameters: { specialistAlias },
+    specialistAlias,
   }: GetSpecialistMainQuery): Promise<
     Result<NotFoundError, SpecialistMainDto>
   > {
     const headerData: HeaderWithParentLinkDto | null =
-      await this.readRepository.getHeaderWithParentLink({
-        pageAlias: 'specialist',
-        sectionAlias: 'main',
-      });
+      await this.readRepository.getHeaderWithParentLink('specialist', 'main');
 
     if (headerData === null) {
       return failure(new SectionNotFoundError());

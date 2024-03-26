@@ -19,7 +19,7 @@ export class GetBriefHandler implements IQueryHandler<GetBriefQuery> {
   ) {}
 
   async execute({
-    parameters: { alias },
+    alias,
   }: GetBriefQuery): Promise<Result<SpecialistNotFoundError, BriefDto>> {
     const dimensionAliases = [
       'specialties',
@@ -45,10 +45,7 @@ export class GetBriefHandler implements IQueryHandler<GetBriefQuery> {
       }
 
       const items: BriefDimensionItemsDto | null =
-        await this.readRepository.getBriefDimensionItems({
-          specialistAlias: alias,
-          dimensionAlias: dimensionAlias,
-        });
+        await this.readRepository.getBriefDimensionItems(alias, dimensionAlias);
 
       dimensionsWithItems[dimensionAlias] = Object.assign(
         {},

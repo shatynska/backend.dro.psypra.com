@@ -14,9 +14,9 @@ export class GetMainHandler implements IQueryHandler<GetMainQuery> {
   ) {}
 
   async execute({
-    parameters: { alias },
+    alias,
   }: GetMainQuery): Promise<Result<SpecialistNotFoundError, MainDto>> {
-    const data: MainDto | null = await this.readRepository.getMain({ alias });
+    const data: MainDto | null = await this.readRepository.getMain(alias);
 
     if (data === null) {
       return failure(new SpecialistNotFoundError());

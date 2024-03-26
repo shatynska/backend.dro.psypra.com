@@ -2,8 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
 import { BriefDimensionItemsDto } from '~/specialists/application/dto/brief/brief-dimension-items.dto';
-import { GetBriefDimensionItemsParametersDto } from '~/specialists/application/dto/brief/get-brief-dimension-items.parameters.dto';
-import { GetSpecialistParametersDto } from '~/specialists/application/dto/get-specialist-parameters.dto';
 import { MainDto } from '../../../application/dto/main.dto';
 import { ReadRepository } from '../../../application/read.repository';
 import { BriefMapper } from './mappers/brief.mapper';
@@ -13,9 +11,7 @@ import { MainMapper } from './mappers/main.mapper';
 export class PrismaReadRepository implements ReadRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async getMain({
-    alias,
-  }: GetSpecialistParametersDto): Promise<MainDto | null> {
+  async getMain(alias: string): Promise<MainDto | null> {
     const specialist = await this.prismaService.specialist.findUnique({
       where: {
         alias: alias,
@@ -30,10 +26,10 @@ export class PrismaReadRepository implements ReadRepository {
     return MainMapper.mapToDto(specialist);
   }
 
-  async getBriefDimensionItems({
-    specialistAlias,
-    dimensionAlias,
-  }: GetBriefDimensionItemsParametersDto): Promise<BriefDimensionItemsDto | null> {
+  async getBriefDimensionItems(
+    specialistAlias: string,
+    dimensionAlias: string,
+  ): Promise<BriefDimensionItemsDto | null> {
     const specialist = await this.prismaService.specialist.findUnique({
       where: {
         alias: specialistAlias,

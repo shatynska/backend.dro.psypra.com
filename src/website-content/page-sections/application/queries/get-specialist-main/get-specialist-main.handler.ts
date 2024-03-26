@@ -36,7 +36,7 @@ export class GetSpecialistMainHandler
     }
 
     const contentData: Result<NotFoundError, MainDto> =
-      await this.queryBus.execute(new GetMainQuery({ alias: specialistAlias }));
+      await this.queryBus.execute(new GetMainQuery(specialistAlias));
 
     if (contentData.isFailure()) {
       return failure(contentData.value);

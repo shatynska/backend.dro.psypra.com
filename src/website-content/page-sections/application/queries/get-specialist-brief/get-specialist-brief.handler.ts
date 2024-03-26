@@ -35,9 +35,7 @@ export class GetSpecialistBriefHandler
     }
 
     const contentData: Result<NotFoundError, BriefDto> =
-      await this.queryBus.execute(
-        new GetBriefQuery({ alias: specialistAlias }),
-      );
+      await this.queryBus.execute(new GetBriefQuery(specialistAlias));
 
     if (contentData.isFailure()) {
       return failure(contentData.value);

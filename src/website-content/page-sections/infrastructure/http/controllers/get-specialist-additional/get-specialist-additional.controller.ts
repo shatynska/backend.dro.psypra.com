@@ -9,6 +9,7 @@ import {
 import { QueryBus } from '@nestjs/cqrs';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { SectionNotFoundError } from '~/page-sections/application/errors/section-not-found.error';
+import { GetSpecialistAdditionalHandler } from '~/page-sections/application/queries/get-specialist-additional/get-specialist-additional.handler';
 import { GetSpecialistAdditionalQuery } from '~/page-sections/application/queries/get-specialist-additional/get-specialist-additional.query';
 import { SpecialistAdditionalResponseDto } from '../../dto/specialist-additional/specialist-additional.response.dto';
 
@@ -27,10 +28,11 @@ export class GetSpecialistAdditionalController {
   async execute(
     @Param('specialist') specialist: string,
     @Param('section') section: string,
-  ): Promise<SpecialistAdditionalResponseDto> {
-    const data = await this.queryBus.execute(
-      new GetSpecialistAdditionalQuery(specialist, section),
-    );
+  ) {
+    const data = await this.queryBus.execute<
+      GetSpecialistAdditionalQuery,
+      Awaited<ReturnType<GetSpecialistAdditionalHandler['execute']>>
+    >(new GetSpecialistAdditionalQuery(specialist, section));
 
     if (data.isFailure()) {
       throw new NotFoundException(data.value.message);

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { SpecialistMainDto } from '~/page-sections/application/dto/specialist-main/specialist-main.dto';
+import { SpecialistMainDto } from '~/page-sections/application/dto/specialist-main.dto';
 import { headerWithParentLinkResponseDtoStubs } from '../section/header-with-parent-link.response.dto';
 import { SectionWithHeaderWithParentLinkResponseDto } from '../section/section-with-header-with-parent-link.response.dto';
 import {

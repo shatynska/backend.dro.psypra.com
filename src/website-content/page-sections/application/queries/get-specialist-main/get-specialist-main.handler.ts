@@ -5,7 +5,7 @@ import { Result, failure, success } from '~/shared/core/result';
 import { MainDto } from '~/specialists/application/dto/main.dto';
 import { GetMainQuery } from '~/specialists/application/queries/get-main/get-main.query';
 import { HeaderWithParentLinkDto } from '../../dto/section/header-with-parent-link.dto';
-import { SpecialistMainDto } from '../../dto/specialist-main/specialist-main.dto';
+import { SpecialistMainDto } from '../../dto/specialist-main.dto';
 import { SectionNotFoundError } from '../../errors/section-not-found.error';
 import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';
 import { GetSpecialistMainQuery } from './get-specialist-main.query';

@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { SpecialistMainDto } from '~/page-sections/application/dto/specialist-main/specialist-main.dto';
+import { SpecialistMainDto } from '~/page-sections/application/dto/specialist-main.dto';
 import { SectionNotFoundError } from '~/page-sections/application/errors/section-not-found.error';
 import { GetSpecialistMainQuery } from '~/page-sections/application/queries/get-specialist-main/get-specialist-main.query';
 import { Result } from '~/shared/core/result';

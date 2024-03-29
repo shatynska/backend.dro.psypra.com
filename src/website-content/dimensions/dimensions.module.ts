@@ -1,10 +1,16 @@
 import { Module } from '@nestjs/common';
 import { QUERIES } from './application/queries';
-import { PersistenceModule } from './infrastructure/persistence.module';
+import { READ_REPOSITORY_TOKEN } from './application/read.repository';
+import { PrismaReadRepository } from './infrastructure/persistence/prisma/read.repository';
 
 @Module({
-  imports: [PersistenceModule],
-  providers: [...QUERIES],
+  providers: [
+    {
+      provide: READ_REPOSITORY_TOKEN,
+      useClass: PrismaReadRepository,
+    },
+    ...QUERIES,
+  ],
 
   exports: [...QUERIES],
 })

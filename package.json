@@ -108,6 +108,7 @@
       "^@auth(|/.*)$": "<rootDir>/src/auth/$1",
       "^~/cash-books(|/.*)$": "<rootDir>/src/organization-bookkeeping/cash-books/$1",
       "^~/page-sections(|/.*)$": "<rootDir>/src/website-content/page-sections/$1",
+      "^~/section-headers(|/.*)$": "<rootDir>/src/website-content/section-headers/$1",
       "^~/dimensions(|/.*)$": "<rootDir>/src/website-content/dimensions/$1",
       "^~/specialists(|/.*)$": "<rootDir>/src/website-content/specialists/$1",
       "^~/shared(|/.*)$": "<rootDir>/src/shared/$1"

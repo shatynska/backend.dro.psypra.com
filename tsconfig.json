@@ -30,6 +30,8 @@
       "~/shared/*": ["src/shared/*"],
       "~/page-sections": ["src/website-content/page-sections"],
       "~/page-sections/*": ["src/website-content/page-sections/*"],
+      "~/section-headers": ["src/website-content/section-headers"],
+      "~/section-headers/*": ["src/website-content/section-headers/*"],
       "~/dimensions": ["src/website-content/dimensions"],
       "~/dimensions/*": ["src/website-content/dimensions/*"],
       "~/specialists": ["src/website-content/specialists"],

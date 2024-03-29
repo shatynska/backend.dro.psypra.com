@@ -6,8 +6,8 @@ import * as cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { AuthModule } from 'src/auth/auth.module';
 import { UsersModule } from 'src/users/users.module';
+import { WebsiteContentModule } from 'src/website-content/website-content.module';
 import { HttpModule } from '~/cash-books/infrastructure/http/http.module';
-import { HttpModule as PageSectionsHttpModule } from '~/page-sections/infrastructure/http/http.module';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -42,7 +42,7 @@ async function bootstrap() {
     app,
     websiteContentOptions,
     {
-      include: [PageSectionsHttpModule],
+      include: [WebsiteContentModule],
     },
   );
   SwaggerModule.setup('api', app, websiteContentDocument);

@@ -8,9 +8,11 @@ import {
 } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { SpecialistAdditionalDto } from '~/page-sections/application/dto/specialist-additional.dto';
 import { SectionNotFoundError } from '~/page-sections/application/errors/section-not-found.error';
-import { GetSpecialistAdditionalHandler } from '~/page-sections/application/queries/get-specialist-additional/get-specialist-additional.handler';
 import { GetSpecialistAdditionalQuery } from '~/page-sections/application/queries/get-specialist-additional/get-specialist-additional.query';
+import { NotFoundError } from '~/shared/application/errors/not-found.error';
+import { Result } from '~/shared/core/result';
 import { SpecialistAdditionalResponseDto } from '../../dto/specialist-additional/specialist-additional.response.dto';
 
 @Controller('pages')
@@ -25,14 +27,16 @@ export class GetSpecialistAdditionalController {
   })
   @ApiErrorDecorator(HttpStatus.NOT_FOUND, SectionNotFoundError.defaultMessage)
   @Get('specialists/:specialist/:section')
-  async execute(
+  async handle(
     @Param('specialist') specialist: string,
     @Param('section') section: string,
   ) {
+    const query = new GetSpecialistAdditionalQuery(specialist, section);
+
     const data = await this.queryBus.execute<
       GetSpecialistAdditionalQuery,
-      Awaited<ReturnType<GetSpecialistAdditionalHandler['execute']>>
-    >(new GetSpecialistAdditionalQuery(specialist, section));
+      Result<NotFoundError, SpecialistAdditionalDto>
+    >(query);
 
     if (data.isFailure()) {
       throw new NotFoundException(data.value.message);

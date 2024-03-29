@@ -1,5 +1,5 @@
+import { HeaderWithParentLinkDto } from '~/section-headers/application/dto/header-with-parent-link.dto';
 import { MainDto } from '~/specialists/application/dto/main.dto';
-import { HeaderWithParentLinkDto } from './section/header-with-parent-link.dto';
 import { SectionDto } from './section/section.dto';
 
 export class SpecialistMainDto extends SectionDto<HeaderWithParentLinkDto> {

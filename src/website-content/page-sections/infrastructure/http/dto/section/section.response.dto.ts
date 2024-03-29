@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { HeaderDto } from '~/page-sections/application/dto/section/header.dto';
+import { HeaderDto } from '~/section-headers/application/dto/header.dto';
 import {
   HeaderResponseDto,
   headerResponseDtoStubs,
@@ -10,12 +10,7 @@ export class SectionResponseDto {
   header: HeaderResponseDto;
 
   constructor(header: HeaderDto) {
-    this.header = {
-      headings: {
-        primary: header.primaryHeading,
-        secondary: header.secondaryHeading,
-      },
-    };
+    this.header = header;
   }
 }
 

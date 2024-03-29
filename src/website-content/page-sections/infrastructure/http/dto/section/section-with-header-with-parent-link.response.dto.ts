@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { HeaderWithParentLinkDto } from '~/page-sections/application/dto/section/header-with-parent-link.dto';
+import { HeaderWithParentLinkDto } from '~/section-headers/application/dto/header-with-parent-link.dto';
 import {
   HeaderWithParentLinkResponseDto,
   headerWithParentLinkResponseDtoStubs,
@@ -15,13 +15,7 @@ export class SectionWithHeaderWithParentLinkResponseDto extends SectionResponseD
 
   constructor(header: HeaderWithParentLinkDto) {
     super(header);
-    this.header.parentLink = {
-      headings: {
-        primary: header.parentLink.primaryHeading,
-        secondary: header.parentLink.secondaryHeading,
-      },
-      href: header.parentLink.href,
-    };
+    this.header.parentLink = header.parentLink;
   }
 }
 

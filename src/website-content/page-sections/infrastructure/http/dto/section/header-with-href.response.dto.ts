@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { HeaderDto } from '~/page-sections/application/dto/section/header.dto';
+import { HeaderDto } from '~/section-headers/application/dto/header.dto';
 import {
   HeaderHeadingsResponseDto,
   headerHeadingsResponseDtoStubs,
@@ -15,11 +15,7 @@ export class HeaderWithHrefResponseDto {
   href: string;
 
   constructor(header: HeaderDto) {
-    this.headings = {
-      primary: header.primaryHeading,
-      secondary: header.secondaryHeading,
-    };
-    this.href = header.secondaryHeading;
+    Object.assign(this, header);
   }
 }
 

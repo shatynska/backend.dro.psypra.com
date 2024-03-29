@@ -1,33 +1,31 @@
-import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryBus, QueryHandler } from '@nestjs/cqrs';
 import { DimensionWithItemsDto } from '~/dimensions/application/dto/dimension-with-items.dto';
 import { GetDimensionWithItemsQuery } from '~/dimensions/application/queries/get-dimension-with-items/get-dimension-with-items.query';
+import { HeaderDto } from '~/section-headers/application/dto/header.dto';
+import { GetHeaderQuery } from '~/section-headers/application/queries/get-header/get-header.query';
 import { NotFoundError } from '~/shared/application/errors/not-found.error';
 import { Result, failure, success } from '~/shared/core/result';
 import { HomeDimensionDto } from '../../dto/home-dimension/home-dimension.dto';
-import { HeaderWithHrefDto } from '../../dto/section/header-with-href.dto';
-import { SectionNotFoundError } from '../../errors/section-not-found.error';
-import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';
 import { GetHomeDimensionQuery } from './get-home-dimension.query';
 
 @QueryHandler(GetHomeDimensionQuery)
 export class GetHomeDimensionHandler
   implements IQueryHandler<GetHomeDimensionQuery>
 {
-  constructor(
-    @Inject(READ_REPOSITORY_TOKEN)
-    private readRepository: ReadRepository,
-    private readonly queryBus: QueryBus,
-  ) {}
+  constructor(private readonly queryBus: QueryBus) {}
 
   async execute({
     dimensionAlias,
   }: GetHomeDimensionQuery): Promise<Result<NotFoundError, HomeDimensionDto>> {
-    const header: HeaderWithHrefDto | null =
-      await this.readRepository.getHeader('home', dimensionAlias);
+    const headerQuery = new GetHeaderQuery('home', dimensionAlias);
 
-    if (header === null) {
-      return failure(new SectionNotFoundError());
+    const header = await this.queryBus.execute<
+      GetHeaderQuery,
+      Result<NotFoundError, HeaderDto>
+    >(headerQuery);
+
+    if (header.isFailure()) {
+      return failure(header.value);
     }
 
     const dimension: Result<NotFoundError, DimensionWithItemsDto> =
@@ -40,7 +38,7 @@ export class GetHomeDimensionHandler
     }
 
     return success({
-      header: header,
+      header: header.value,
       content: { items: dimension.value.items },
     });
   }

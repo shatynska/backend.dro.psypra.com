@@ -1,22 +1,17 @@
-import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryBus, QueryHandler } from '@nestjs/cqrs';
+import { HeaderDto } from '~/section-headers/application/dto/header.dto';
+import { GetHeaderQuery } from '~/section-headers/application/queries/get-header/get-header.query';
 import { NotFoundError } from '~/shared/application/errors/not-found.error';
 import { Result, failure, success } from '~/shared/core/result';
 import { GetBriefQuery } from '~/specialists/application/queries/get-brief/get-brief.query';
 import { SpecialistAdditionalDto } from '../../dto/specialist-additional.dto';
-import { SectionNotFoundError } from '../../errors/section-not-found.error';
-import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';
 import { GetSpecialistAdditionalQuery } from './get-specialist-additional.query';
 
 @QueryHandler(GetSpecialistAdditionalQuery)
 export class GetSpecialistAdditionalHandler
   implements IQueryHandler<GetSpecialistAdditionalQuery>
 {
-  constructor(
-    @Inject(READ_REPOSITORY_TOKEN)
-    private readRepository: ReadRepository,
-    private readonly queryBus: QueryBus,
-  ) {}
+  constructor(private readonly queryBus: QueryBus) {}
 
   async execute({
     specialistAlias,
@@ -24,28 +19,32 @@ export class GetSpecialistAdditionalHandler
   }: GetSpecialistAdditionalQuery): Promise<
     Result<NotFoundError, SpecialistAdditionalDto>
   > {
-    const headerData = await this.readRepository.getHeader(
-      'specialist',
-      sectionAlias,
-    );
+    const headerQuery = new GetHeaderQuery('specialist', sectionAlias);
 
-    if (headerData === null) {
-      return failure(new SectionNotFoundError());
+    const header = await this.queryBus.execute<
+      GetHeaderQuery,
+      Result<NotFoundError, HeaderDto>
+    >(headerQuery);
+
+    if (header.isFailure()) {
+      return failure(header.value);
     }
 
     const queryMap = new Map([['brief', GetBriefQuery]]);
 
-    const query = queryMap.get(sectionAlias);
+    const contentQuery = queryMap.get(sectionAlias);
 
-    const contentData = await this.queryBus.execute(new query(specialistAlias));
+    const content = await this.queryBus.execute(
+      new contentQuery(specialistAlias),
+    );
 
-    if (contentData.isFailure()) {
-      return failure(contentData.value);
+    if (content.isFailure()) {
+      return failure(content.value);
     }
 
     return success({
-      header: headerData,
-      content: contentData.value,
+      header: header.value,
+      content: content.value,
     });
   }
 }

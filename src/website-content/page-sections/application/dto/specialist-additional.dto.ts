@@ -1,4 +1,4 @@
-import { HeaderDto } from './section/header.dto';
+import { HeaderDto } from '~/section-headers/application/dto/header.dto';
 import { SectionDto } from './section/section.dto';
 
 // TODO Define content type

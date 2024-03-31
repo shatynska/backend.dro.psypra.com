@@ -20,7 +20,11 @@ export class GetDimensionMainHandler
   }: GetDimensionMainQuery): Promise<
     Result<SectionNotFoundError, DimensionMainDto>
   > {
-    const headerQuery = new GetHeaderWithParentLinkQuery('dimension', 'main');
+    // TODO Refactor section database schema for more precise query
+    const headerQuery = new GetHeaderWithParentLinkQuery(
+      'home',
+      dimensionAlias,
+    );
 
     const header = await this.queryBus.execute<
       GetHeaderWithParentLinkQuery,
@@ -39,8 +43,6 @@ export class GetDimensionMainHandler
     if (content.isFailure()) {
       return failure(content.value);
     }
-
-    header.value.headings.primary = content.value.title;
 
     return success({
       header: header.value,

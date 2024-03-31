@@ -1,25 +1,28 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { DimensionMainDto } from '~/page-sections/application/dto/dimension-main/dimension-main.dto';
-import { headerWithParentLinkResponseDtoStubs } from '../section/header-with-parent-link.response.dto';
-import { SectionWithHeaderWithParentLinkResponseDto } from '../section/section-with-header-with-parent-link.response.dto';
 import {
-  DimensionMainContentResponseDto,
-  dimensionMainContentResponseDtoStubs,
-} from './dimension-main-content.response.dto';
+  DimensionItemsDto,
+  dimensionItemsDtoStubs,
+} from '~/dimensions/application/dto/dimension-items.dto';
+import { DimensionMainDto } from '~/page-sections/application/dto/dimension-main/dimension-main.dto';
+import {
+  HeaderWithParentLinkDto,
+  headerWithParentLinkDtoStubs,
+} from '~/section-headers/application/dto/header-with-parent-link.dto';
 
-export class DimensionMainResponseDto extends SectionWithHeaderWithParentLinkResponseDto {
-  @ApiProperty({ example: dimensionMainContentResponseDtoStubs[0] })
-  content: DimensionMainContentResponseDto;
+export class DimensionMainResponseDto implements DimensionMainDto {
+  @ApiProperty({
+    type: () => HeaderWithParentLinkDto,
+    example: headerWithParentLinkDtoStubs[0],
+  })
+  header: HeaderWithParentLinkDto;
+
+  @ApiProperty({
+    type: () => DimensionItemsDto,
+    example: dimensionItemsDtoStubs[0],
+  })
+  content: DimensionItemsDto;
 
   constructor(section: DimensionMainDto) {
-    super(section.header);
-    this.content = section.content;
+    Object.assign(this, section);
   }
 }
-
-export const dimensionMainResponseDtoStubs: DimensionMainResponseDto[] = [
-  {
-    header: headerWithParentLinkResponseDtoStubs[0],
-    content: dimensionMainContentResponseDtoStubs[0],
-  },
-];

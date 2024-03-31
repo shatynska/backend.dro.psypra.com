@@ -1,4 +1,4 @@
-import { SpecialistBriefDimensionItemsDto } from './dto/specialist-brief/specialist-brief-dimension-items.dto';
+import { SpecialistBriefDimensionItemsDto } from './dto/specialist-brief.dto';
 import { SpecialistMainDto } from './dto/specialist-main.dto';
 
 export const READ_REPOSITORY_TOKEN = Symbol('SpecialistsReadRepositoryToken');

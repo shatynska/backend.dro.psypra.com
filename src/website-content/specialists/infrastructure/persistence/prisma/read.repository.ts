@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
-import { SpecialistBriefDimensionItemsDto } from '~/specialists/application/dto/specialist-brief/specialist-brief-dimension-items.dto';
+import { SpecialistBriefDimensionItemsDto } from '~/specialists/application/dto/specialist-brief.dto';
 import { SpecialistMainDto } from '../../../application/dto/specialist-main.dto';
 import { ReadRepository } from '../../../application/read.repository';
 import { SpecialistBriefMapper } from './mappers/specialist-brief.mapper';

@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client';
-import { SpecialistBriefDimensionItemsDto } from '~/specialists/application/dto/specialist-brief/specialist-brief-dimension-items.dto';
+import { SpecialistBriefDimensionItemsDto } from '~/specialists/application/dto/specialist-brief.dto';
 import { PrismaReadRepository } from '../read.repository';
 
 type Props = Prisma.SpecialistGetPayload<

@@ -6,8 +6,10 @@ import { HeaderDto } from '~/section-headers/application/dto/header.dto';
 import { GetHeaderQuery } from '~/section-headers/application/queries/get-header/get-header.query';
 import { NotFoundError } from '~/shared/application/errors/not-found.error';
 import { Result, failure, success } from '~/shared/core/result';
-import { SpecialistBriefDimensionItemsDto } from '../../dto/specialist-brief/specialist-brief-dimension-items.dto';
-import { SpecialistBriefDto } from '../../dto/specialist-brief/specialist-brief.dto';
+import {
+  SpecialistBriefDimensionItemsDto,
+  SpecialistBriefDto,
+} from '../../dto/specialist-brief.dto';
 import { SpecialistNotFoundError } from '../../errors/specialist-not-found.error';
 import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';
 import { GetSpecialistBriefSectionQuery } from './get-specialist-brief-section.query';

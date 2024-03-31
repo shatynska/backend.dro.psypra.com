@@ -1,5 +1,3 @@
-import { SpecialistBriefDimensionDto } from './specialist-brief-dimension.dto';
-
 export class SpecialistBriefDto {
   specialties: SpecialistBriefDimensionDto;
   forms: SpecialistBriefDimensionDto;
@@ -7,4 +5,13 @@ export class SpecialistBriefDto {
   terms: SpecialistBriefDimensionDto;
   approaches: SpecialistBriefDimensionDto;
   rates: SpecialistBriefDimensionDto;
+}
+
+export class SpecialistBriefDimensionItemsDto {
+  items: string[];
+}
+
+export class SpecialistBriefDimensionDto extends SpecialistBriefDimensionItemsDto {
+  title: string;
+  href: string;
 }

@@ -13,7 +13,11 @@ export const headingsDtoStubs: HeadingsDto[] = [
     secondary: 'Хто є хто?',
   },
   {
-    primary: 'Спеціалісти',
+    primary: 'Психотерапевти',
+    secondary: 'Що це таке?',
+  },
+  {
+    primary: 'Фахівці',
     secondary: 'До кого звернутися?',
   },
   {
@@ -21,7 +25,15 @@ export const headingsDtoStubs: HeadingsDto[] = [
     secondary: 'Психотерапевт',
   },
   {
-    primary: 'Психотерапевти',
-    secondary: 'Що це таке?',
+    primary: 'Короткий огляд',
+    secondary: 'Досьє',
+  },
+  {
+    primary: 'Професійний шлях',
+    secondary: 'Який досвід?',
+  },
+  {
+    primary: 'Основні запити',
+    secondary: 'З якими темами?',
   },
 ];

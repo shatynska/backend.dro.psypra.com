@@ -1,3 +1,3 @@
-export class GetBriefQuery {
+export class GetSpecialistBriefSectionQuery {
   constructor(public readonly alias: string) {}
 }

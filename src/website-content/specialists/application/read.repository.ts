@@ -1,13 +1,13 @@
-import { BriefDimensionItemsDto } from './dto/brief/brief-dimension-items.dto';
-import { MainDto } from './dto/main.dto';
+import { SpecialistBriefDimensionItemsDto } from './dto/specialist-brief/specialist-brief-dimension-items.dto';
+import { SpecialistMainDto } from './dto/specialist-main.dto';
 
 export const READ_REPOSITORY_TOKEN = Symbol('SpecialistsReadRepositoryToken');
 
 export interface ReadRepository {
-  getMain(alias: string): Promise<MainDto | null>;
+  getSpecialistMain(alias: string): Promise<SpecialistMainDto | null>;
 
-  getBriefDimensionItems(
+  getSpecialistBriefDimensionItems(
     specialistAlias: string,
     dimensionAlias: string,
-  ): Promise<BriefDimensionItemsDto | null>;
+  ): Promise<SpecialistBriefDimensionItemsDto | null>;
 }

@@ -1,4 +1,7 @@
-import { GetBriefHandler } from './get-brief/get-brief.handle';
-import { GetMainHandler } from './get-main/get-main.handle';
+import { GetSpecialistBriefSectionHandler } from './get-specialist-brief-section/get-specialist-brief-section.handle';
+import { GetSpecialistMainSectionHandler } from './get-specialist-main-section/get-specialist-main-section.handle';
 
-export const QUERIES = [GetMainHandler, GetBriefHandler];
+export const QUERIES = [
+  GetSpecialistBriefSectionHandler,
+  GetSpecialistMainSectionHandler,
+];

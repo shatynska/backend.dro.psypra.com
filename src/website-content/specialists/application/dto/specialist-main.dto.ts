@@ -1,4 +1,4 @@
-export class MainDto {
+export class SpecialistMainDto {
   firstName: string;
   lastName: string;
   specialties: string[];

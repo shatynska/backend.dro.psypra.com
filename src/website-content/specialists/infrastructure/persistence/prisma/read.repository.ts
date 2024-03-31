@@ -1,35 +1,35 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
-import { BriefDimensionItemsDto } from '~/specialists/application/dto/brief/brief-dimension-items.dto';
-import { MainDto } from '../../../application/dto/main.dto';
+import { SpecialistBriefDimensionItemsDto } from '~/specialists/application/dto/specialist-brief/specialist-brief-dimension-items.dto';
+import { SpecialistMainDto } from '../../../application/dto/specialist-main.dto';
 import { ReadRepository } from '../../../application/read.repository';
-import { BriefMapper } from './mappers/brief.mapper';
-import { MainMapper } from './mappers/main.mapper';
+import { SpecialistBriefMapper } from './mappers/specialist-brief.mapper';
+import { SpecialistMainMapper } from './mappers/specialist-main.mapper';
 
 @Injectable()
 export class PrismaReadRepository implements ReadRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async getMain(alias: string): Promise<MainDto | null> {
+  async getSpecialistMain(alias: string): Promise<SpecialistMainDto | null> {
     const specialist = await this.prismaService.specialist.findUnique({
       where: {
         alias: alias,
       },
-      select: PrismaReadRepository.mainSelect,
+      select: PrismaReadRepository.specialistMainSelect,
     });
 
     if (!specialist) {
       return null;
     }
 
-    return MainMapper.mapToDto(specialist);
+    return SpecialistMainMapper.mapToDto(specialist);
   }
 
-  async getBriefDimensionItems(
+  async getSpecialistBriefDimensionItems(
     specialistAlias: string,
     dimensionAlias: string,
-  ): Promise<BriefDimensionItemsDto | null> {
+  ): Promise<SpecialistBriefDimensionItemsDto | null> {
     const specialist = await this.prismaService.specialist.findUnique({
       where: {
         alias: specialistAlias,
@@ -56,10 +56,10 @@ export class PrismaReadRepository implements ReadRepository {
       return null;
     }
 
-    return BriefMapper.mapToDto(specialist);
+    return SpecialistBriefMapper.mapToDto(specialist);
   }
 
-  static mainSelect = Prisma.validator<Prisma.SpecialistSelect>()({
+  static specialistMainSelect = Prisma.validator<Prisma.SpecialistSelect>()({
     firstName: true,
     lastName: true,
     dimensionItems: {
@@ -81,11 +81,11 @@ export class PrismaReadRepository implements ReadRepository {
     websites: true,
   });
 
-  static main = Prisma.validator<Prisma.SpecialistDefaultArgs>()({
-    select: PrismaReadRepository.mainSelect,
+  static specialistMain = Prisma.validator<Prisma.SpecialistDefaultArgs>()({
+    select: PrismaReadRepository.specialistMainSelect,
   });
 
-  static getBriefSelect = (dimensionAlias: string) => {
+  static getSpecialistBriefSelect = (dimensionAlias: string) => {
     return Prisma.validator<Prisma.SpecialistSelect>()({
       dimensionItems: {
         where: {
@@ -104,7 +104,7 @@ export class PrismaReadRepository implements ReadRepository {
     });
   };
 
-  static brief = Prisma.validator<Prisma.SpecialistDefaultArgs>()({
-    select: PrismaReadRepository.getBriefSelect('specialist'),
+  static specialistBrief = Prisma.validator<Prisma.SpecialistDefaultArgs>()({
+    select: PrismaReadRepository.getSpecialistBriefSelect('specialist'),
   });
 }

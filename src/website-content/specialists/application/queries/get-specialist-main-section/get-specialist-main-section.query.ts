@@ -1,3 +1,3 @@
-export class GetMainQuery {
+export class GetSpecialistMainSectionQuery {
   constructor(public readonly alias: string) {}
 }

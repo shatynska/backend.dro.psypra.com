@@ -1,11 +1,13 @@
 import { Prisma } from '@prisma/client';
-import { MainDto } from '../../../../application/dto/main.dto';
+import { SpecialistMainDto } from '../../../../application/dto/specialist-main.dto';
 import { PrismaReadRepository } from '../read.repository';
 
-export class MainMapper {
+export class SpecialistMainMapper {
   static mapToDto(
-    params: Prisma.SpecialistGetPayload<typeof PrismaReadRepository.main>,
-  ): MainDto {
+    params: Prisma.SpecialistGetPayload<
+      typeof PrismaReadRepository.specialistMain
+    >,
+  ): SpecialistMainDto {
     const mappedData = {
       firstName: params.firstName,
       lastName: params.lastName,

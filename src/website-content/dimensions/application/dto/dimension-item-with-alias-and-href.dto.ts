@@ -9,7 +9,7 @@ export const dimensionItemWithAliasAndHrefDtoStubs: DimensionItemWithAliasAndHre
   [
     {
       alias: 'psychologist',
-      title: 'психолог',
+      title: 'Психолог',
       href: '/specialties/psychologist',
       description:
         'Це фахівець, який оцінює, діагно­стує і вивчає пове­дінку і розу­мові процеси. Деякі пси­хологи, такі як клі­нічні ...',

@@ -27,16 +27,18 @@ export class GetSpecialistMainSectionController {
   })
   @ApiErrorDecorator(HttpStatus.NOT_FOUND, SectionNotFoundError.defaultMessage)
   @Get('specialists/:specialist/main')
-  async execute(@Param('specialist') specialistAlias: string) {
-    const section = await this.queryBus.execute<
+  async handle(@Param('specialist') specialistAlias: string) {
+    const query = new GetSpecialistMainSectionQuery(specialistAlias);
+
+    const data = await this.queryBus.execute<
       GetSpecialistMainSectionQuery,
       Result<NotFoundError, GetSpecialistMainSectionResult>
-    >(new GetSpecialistMainSectionQuery(specialistAlias));
+    >(query);
 
-    if (section.isFailure()) {
-      throw new NotFoundException(section.value.message);
+    if (data.isFailure()) {
+      throw new NotFoundException(data.value.message);
     }
 
-    return new GetSpecialistMainSectionResponse(section.value);
+    return new GetSpecialistMainSectionResponse(data.value);
   }
 }

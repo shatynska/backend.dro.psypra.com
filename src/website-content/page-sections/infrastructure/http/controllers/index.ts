@@ -1,3 +1,3 @@
-import { GetHomeQuestionsController } from './get-home-questions/get-home-questions.controller';
+import { GetHomeQuestionsSectionController } from './get-home-questions-section/get-home-questions-section.controller';
 
-export const CONTROLLERS = [GetHomeQuestionsController];
+export const CONTROLLERS = [GetHomeQuestionsSectionController];

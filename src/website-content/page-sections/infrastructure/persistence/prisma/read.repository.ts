@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { HomeQuestionsContentItemDto } from '~/page-sections/application/dto/home-questions/home-questions-content-item.dto';
+import { HomeQuestionsDto } from '~/page-sections/application/dto/home-questions.dto';
 import { ReadRepository } from '~/page-sections/application/read.repository';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
-import { HomeQuestionsContentItemsMapper } from './mappers/home-questions-content-items.mapper';
+import { HomeQuestionsMapper } from './mappers/home-questions.mapper';
 
 @Injectable()
 export class PrismaReadRepository implements ReadRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async getHomeQuestionsContentItems(): Promise<HomeQuestionsContentItemDto[]> {
+  async getHomeQuestions(): Promise<HomeQuestionsDto> {
     const sections = await this.prismaService.pageSection.findMany({
       where: { page: 'home', NOT: { section: 'questions' } },
       select: {
@@ -17,6 +17,6 @@ export class PrismaReadRepository implements ReadRepository {
       },
     });
 
-    return HomeQuestionsContentItemsMapper.mapToDto(sections);
+    return HomeQuestionsMapper.mapToDto(sections);
   }
 }

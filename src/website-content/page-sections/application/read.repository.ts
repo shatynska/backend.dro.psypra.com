@@ -1,7 +1,7 @@
-import { HomeQuestionsContentItemDto } from './dto/home-questions/home-questions-content-item.dto';
+import { HomeQuestionsDto } from './dto/home-questions.dto';
 
 export const READ_REPOSITORY_TOKEN = Symbol('PageSectionsReadRepositoryToken');
 
 export interface ReadRepository {
-  getHomeQuestionsContentItems(): Promise<HomeQuestionsContentItemDto[]>;
+  getHomeQuestions(): Promise<HomeQuestionsDto>;
 }

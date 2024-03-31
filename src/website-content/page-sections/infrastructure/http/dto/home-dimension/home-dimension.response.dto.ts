@@ -3,14 +3,17 @@ import {
   DimensionItemsDto,
   dimensionItemsDtoStubs,
 } from '~/dimensions/application/dto/dimension-items.dto';
-import { HomeDimensionDto } from '~/page-sections/application/dto/home-dimension/home-dimension.dto';
+import { GetHomeDimensionSectionResult } from '~/page-sections/application/queries/get-home-dimension/get-home-dimension-section.result';
 import {
   HeaderDto,
   headerDtoStubs,
 } from '~/section-headers/application/dto/header.dto';
 
-export class HomeDimensionResponseDto implements HomeDimensionDto {
-  @ApiProperty({ type: () => HeaderDto, example: headerDtoStubs[1] })
+export class HomeDimensionResponseDto implements GetHomeDimensionSectionResult {
+  @ApiProperty({
+    type: () => HeaderDto,
+    example: headerDtoStubs[1],
+  })
   header: HeaderDto;
 
   @ApiProperty({
@@ -19,7 +22,7 @@ export class HomeDimensionResponseDto implements HomeDimensionDto {
   })
   content: DimensionItemsDto;
 
-  constructor(section: HomeDimensionDto) {
+  constructor(section: GetHomeDimensionSectionResult) {
     Object.assign(this, section);
   }
 }

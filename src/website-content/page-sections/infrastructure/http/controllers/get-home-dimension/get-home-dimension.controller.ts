@@ -8,8 +8,8 @@ import {
 } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { HomeDimensionDto } from '~/page-sections/application/dto/home-dimension/home-dimension.dto';
 import { SectionNotFoundError } from '~/page-sections/application/errors/section-not-found.error';
+import { GetHomeDimensionSectionResult } from '~/page-sections/application/queries/get-home-dimension/get-home-dimension-section.result';
 import { GetHomeDimensionQuery } from '~/page-sections/application/queries/get-home-dimension/get-home-dimension.query';
 import { Result } from '~/shared/core/result';
 import { HomeDimensionResponseDto } from '../../dto/home-dimension/home-dimension.response.dto';
@@ -29,8 +29,12 @@ export class GetHomeDimensionController {
   async execute(
     @Param('dimension') dimension: string,
   ): Promise<HomeDimensionResponseDto> {
-    const section: Result<SectionNotFoundError, HomeDimensionDto> =
-      await this.queryBus.execute(new GetHomeDimensionQuery(dimension));
+    const query = new GetHomeDimensionQuery(dimension);
+
+    const section = await this.queryBus.execute<
+      GetHomeDimensionQuery,
+      Result<SectionNotFoundError, GetHomeDimensionSectionResult>
+    >(query);
 
     if (section.isFailure()) {
       throw new NotFoundException(section.value.message);

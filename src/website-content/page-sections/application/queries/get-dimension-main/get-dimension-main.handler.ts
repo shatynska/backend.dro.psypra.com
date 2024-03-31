@@ -5,9 +5,9 @@ import { HeaderWithParentLinkDto } from '~/section-headers/application/dto/heade
 import { GetHeaderWithParentLinkQuery } from '~/section-headers/application/queries/get-header-with-parent-link/get-header-with-parent-link.query';
 import { NotFoundError } from '~/shared/application/errors/not-found.error';
 import { Result, failure, success } from '~/shared/core/result';
-import { DimensionMainDto } from '../../dto/dimension-main/dimension-main.dto';
 import { SectionNotFoundError } from '../../errors/section-not-found.error';
 import { GetDimensionMainQuery } from './get-dimension-main.query';
+import { GetDimensionMainSectionResult } from './get-dimension-main-section.result';
 
 @QueryHandler(GetDimensionMainQuery)
 export class GetDimensionMainHandler
@@ -18,7 +18,7 @@ export class GetDimensionMainHandler
   async execute({
     dimensionAlias,
   }: GetDimensionMainQuery): Promise<
-    Result<SectionNotFoundError, DimensionMainDto>
+    Result<SectionNotFoundError, GetDimensionMainSectionResult>
   > {
     // TODO Refactor section database schema for more precise query
     const headerQuery = new GetHeaderWithParentLinkQuery(

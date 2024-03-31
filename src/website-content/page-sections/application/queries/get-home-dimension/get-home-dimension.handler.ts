@@ -5,8 +5,8 @@ import { HeaderDto } from '~/section-headers/application/dto/header.dto';
 import { GetHeaderQuery } from '~/section-headers/application/queries/get-header/get-header.query';
 import { NotFoundError } from '~/shared/application/errors/not-found.error';
 import { Result, failure, success } from '~/shared/core/result';
-import { HomeDimensionDto } from '../../dto/home-dimension/home-dimension.dto';
 import { GetHomeDimensionQuery } from './get-home-dimension.query';
+import { GetHomeDimensionSectionResult } from './get-home-dimension-section.result';
 
 @QueryHandler(GetHomeDimensionQuery)
 export class GetHomeDimensionHandler
@@ -16,7 +16,9 @@ export class GetHomeDimensionHandler
 
   async execute({
     dimensionAlias,
-  }: GetHomeDimensionQuery): Promise<Result<NotFoundError, HomeDimensionDto>> {
+  }: GetHomeDimensionQuery): Promise<
+    Result<NotFoundError, GetHomeDimensionSectionResult>
+  > {
     const headerQuery = new GetHeaderQuery('home', dimensionAlias);
 
     const header = await this.queryBus.execute<

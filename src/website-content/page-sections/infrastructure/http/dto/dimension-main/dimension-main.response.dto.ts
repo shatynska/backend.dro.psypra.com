@@ -3,13 +3,13 @@ import {
   DimensionItemsDto,
   dimensionItemsDtoStubs,
 } from '~/dimensions/application/dto/dimension-items.dto';
-import { DimensionMainDto } from '~/page-sections/application/dto/dimension-main/dimension-main.dto';
+import { GetDimensionMainSectionResult } from '~/page-sections/application/queries/get-dimension-main/get-dimension-main-section.result';
 import {
   HeaderWithParentLinkDto,
   headerWithParentLinkDtoStubs,
 } from '~/section-headers/application/dto/header-with-parent-link.dto';
 
-export class DimensionMainResponseDto implements DimensionMainDto {
+export class DimensionMainResponseDto implements GetDimensionMainSectionResult {
   @ApiProperty({
     type: () => HeaderWithParentLinkDto,
     example: headerWithParentLinkDtoStubs[0],
@@ -22,7 +22,7 @@ export class DimensionMainResponseDto implements DimensionMainDto {
   })
   content: DimensionItemsDto;
 
-  constructor(section: DimensionMainDto) {
+  constructor(section: GetDimensionMainSectionResult) {
     Object.assign(this, section);
   }
 }

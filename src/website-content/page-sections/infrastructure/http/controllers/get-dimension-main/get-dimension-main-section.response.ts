@@ -9,7 +9,9 @@ import {
   headerWithParentLinkDtoStubs,
 } from '~/section-headers/application/dto/header-with-parent-link.dto';
 
-export class DimensionMainResponseDto implements GetDimensionMainSectionResult {
+export class GetDimensionMainSectionResponse
+  implements GetDimensionMainSectionResult
+{
   @ApiProperty({
     type: () => HeaderWithParentLinkDto,
     example: headerWithParentLinkDtoStubs[0],

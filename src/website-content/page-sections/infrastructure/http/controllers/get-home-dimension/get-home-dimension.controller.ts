@@ -12,7 +12,7 @@ import { SectionNotFoundError } from '~/page-sections/application/errors/section
 import { GetHomeDimensionSectionResult } from '~/page-sections/application/queries/get-home-dimension/get-home-dimension-section.result';
 import { GetHomeDimensionQuery } from '~/page-sections/application/queries/get-home-dimension/get-home-dimension.query';
 import { Result } from '~/shared/core/result';
-import { HomeDimensionResponseDto } from '../../dto/home-dimension/home-dimension.response.dto';
+import { GetHomeDimensionSectionResponse } from './get-home-dimension-section.response';
 
 @Controller('pages')
 @Public()
@@ -22,24 +22,22 @@ export class GetHomeDimensionController {
 
   @ApiResponse({
     status: 200,
-    type: HomeDimensionResponseDto,
+    type: GetHomeDimensionSectionResponse,
   })
   @ApiErrorDecorator(HttpStatus.NOT_FOUND, SectionNotFoundError.defaultMessage)
   @Get('home/:dimension')
-  async execute(
-    @Param('dimension') dimension: string,
-  ): Promise<HomeDimensionResponseDto> {
+  async handle(@Param('dimension') dimension: string) {
     const query = new GetHomeDimensionQuery(dimension);
 
-    const section = await this.queryBus.execute<
+    const data = await this.queryBus.execute<
       GetHomeDimensionQuery,
       Result<SectionNotFoundError, GetHomeDimensionSectionResult>
     >(query);
 
-    if (section.isFailure()) {
-      throw new NotFoundException(section.value.message);
+    if (data.isFailure()) {
+      throw new NotFoundException(data.value.message);
     }
 
-    return new HomeDimensionResponseDto(section.value);
+    return new GetHomeDimensionSectionResponse(data.value);
   }
 }

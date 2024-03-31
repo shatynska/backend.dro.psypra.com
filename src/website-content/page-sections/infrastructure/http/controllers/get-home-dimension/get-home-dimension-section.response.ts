@@ -9,7 +9,9 @@ import {
   headerDtoStubs,
 } from '~/section-headers/application/dto/header.dto';
 
-export class HomeDimensionResponseDto implements GetHomeDimensionSectionResult {
+export class GetHomeDimensionSectionResponse
+  implements GetHomeDimensionSectionResult
+{
   @ApiProperty({
     type: () => HeaderDto,
     example: headerDtoStubs[1],

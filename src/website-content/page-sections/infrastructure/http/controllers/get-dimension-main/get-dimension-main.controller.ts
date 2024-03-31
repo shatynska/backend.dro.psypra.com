@@ -12,7 +12,7 @@ import { SectionNotFoundError } from '~/page-sections/application/errors/section
 import { GetDimensionMainSectionResult } from '~/page-sections/application/queries/get-dimension-main/get-dimension-main-section.result';
 import { GetDimensionMainQuery } from '~/page-sections/application/queries/get-dimension-main/get-dimension-main.query';
 import { Result } from '~/shared/core/result';
-import { DimensionMainResponseDto } from '../../dto/dimension-main/dimension-main.response.dto';
+import { GetDimensionMainSectionResponse } from './get-dimension-main-section.response';
 
 @Controller('pages')
 @Public()
@@ -22,24 +22,22 @@ export class GetDimensionMainController {
 
   @ApiResponse({
     status: 200,
-    type: DimensionMainResponseDto,
+    type: GetDimensionMainSectionResponse,
   })
   @ApiErrorDecorator(HttpStatus.NOT_FOUND, SectionNotFoundError.defaultMessage)
   @Get('dimensions/:dimension/main')
-  async execute(
-    @Param('dimension') dimension: string,
-  ): Promise<DimensionMainResponseDto> {
+  async handle(@Param('dimension') dimension: string) {
     const query = new GetDimensionMainQuery(dimension);
 
-    const section = await this.queryBus.execute<
+    const data = await this.queryBus.execute<
       GetDimensionMainQuery,
       Result<SectionNotFoundError, GetDimensionMainSectionResult>
     >(query);
 
-    if (section.isFailure()) {
-      throw new NotFoundException(section.value.message);
+    if (data.isFailure()) {
+      throw new NotFoundException(data.value.message);
     }
 
-    return new DimensionMainResponseDto(section.value);
+    return new GetDimensionMainSectionResponse(data.value);
   }
 }

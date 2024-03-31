@@ -8,36 +8,36 @@ import {
 } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { GetHomeDimensionSectionQuery } from '~/dimensions/application/queries/get-home-dimension-section/get-home-dimension-section.query';
+import { GetHomeDimensionSectionResult } from '~/dimensions/application/queries/get-home-dimension-section/get-home-dimension-section.result';
 import { SectionNotFoundError } from '~/page-sections/application/errors/section-not-found.error';
-import { GetDimensionMainSectionResult } from '~/page-sections/application/queries/get-dimension-main/get-dimension-main-section.result';
-import { GetDimensionMainQuery } from '~/page-sections/application/queries/get-dimension-main/get-dimension-main.query';
 import { Result } from '~/shared/core/result';
-import { GetDimensionMainSectionResponse } from './get-dimension-main-section.response';
+import { GetHomeDimensionSectionResponse } from './get-home-dimension-section.response';
 
 @Controller('pages')
 @Public()
 @ApiTags('pages')
-export class GetDimensionMainController {
+export class GetHomeDimensionSectionController {
   constructor(private readonly queryBus: QueryBus) {}
 
   @ApiResponse({
     status: 200,
-    type: GetDimensionMainSectionResponse,
+    type: GetHomeDimensionSectionResponse,
   })
   @ApiErrorDecorator(HttpStatus.NOT_FOUND, SectionNotFoundError.defaultMessage)
-  @Get('dimensions/:dimension/main')
+  @Get('home/:dimension')
   async handle(@Param('dimension') dimension: string) {
-    const query = new GetDimensionMainQuery(dimension);
+    const query = new GetHomeDimensionSectionQuery(dimension);
 
     const data = await this.queryBus.execute<
-      GetDimensionMainQuery,
-      Result<SectionNotFoundError, GetDimensionMainSectionResult>
+      GetHomeDimensionSectionQuery,
+      Result<SectionNotFoundError, GetHomeDimensionSectionResult>
     >(query);
 
     if (data.isFailure()) {
       throw new NotFoundException(data.value.message);
     }
 
-    return new GetDimensionMainSectionResponse(data.value);
+    return new GetHomeDimensionSectionResponse(data.value);
   }
 }

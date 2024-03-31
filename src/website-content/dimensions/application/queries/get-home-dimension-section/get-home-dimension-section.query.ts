@@ -1,3 +1,3 @@
-export class GetDimensionMainQuery {
+export class GetHomeDimensionSectionQuery {
   constructor(public readonly dimensionAlias: string) {}
 }

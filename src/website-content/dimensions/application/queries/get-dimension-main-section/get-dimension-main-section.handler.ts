@@ -1,24 +1,28 @@
+import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryBus, QueryHandler } from '@nestjs/cqrs';
-import { DimensionWithItemsDto } from '~/dimensions/application/dto/dimension-with-items.dto';
-import { GetDimensionWithItemsQuery } from '~/dimensions/application/queries/get-dimension-with-items/get-dimension-with-items.query';
 import { HeaderWithParentLinkDto } from '~/section-headers/application/dto/header-with-parent-link.dto';
 import { GetHeaderWithParentLinkQuery } from '~/section-headers/application/queries/get-header-with-parent-link/get-header-with-parent-link.query';
 import { NotFoundError } from '~/shared/application/errors/not-found.error';
 import { Result, failure, success } from '~/shared/core/result';
-import { SectionNotFoundError } from '../../errors/section-not-found.error';
-import { GetDimensionMainQuery } from './get-dimension-main.query';
+import { DimensionItemsDto } from '../../dto/dimension-items.dto';
+import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';
+import { GetDimensionMainSectionQuery } from './get-dimension-main-section.query';
 import { GetDimensionMainSectionResult } from './get-dimension-main-section.result';
 
-@QueryHandler(GetDimensionMainQuery)
-export class GetDimensionMainHandler
-  implements IQueryHandler<GetDimensionMainQuery>
+@QueryHandler(GetDimensionMainSectionQuery)
+export class GetDimensionMainSectionHandler
+  implements IQueryHandler<GetDimensionMainSectionQuery>
 {
-  constructor(private readonly queryBus: QueryBus) {}
+  constructor(
+    @Inject(READ_REPOSITORY_TOKEN)
+    private readRepository: ReadRepository,
+    private readonly queryBus: QueryBus,
+  ) {}
 
   async execute({
     dimensionAlias,
-  }: GetDimensionMainQuery): Promise<
-    Result<SectionNotFoundError, GetDimensionMainSectionResult>
+  }: GetDimensionMainSectionQuery): Promise<
+    Result<NotFoundError, GetDimensionMainSectionResult>
   > {
     // TODO Refactor section database schema for more precise query
     const headerQuery = new GetHeaderWithParentLinkQuery(
@@ -35,18 +39,16 @@ export class GetDimensionMainHandler
       return failure(header.value);
     }
 
-    const content: Result<NotFoundError, DimensionWithItemsDto> =
-      await this.queryBus.execute(
-        new GetDimensionWithItemsQuery(dimensionAlias),
-      );
+    const content: DimensionItemsDto =
+      await this.readRepository.getDimensionWithItems(dimensionAlias);
 
-    if (content.isFailure()) {
-      return failure(content.value);
+    if (content === null) {
+      return failure(new NotFoundError('Вимір не знайдено'));
     }
 
     return success({
       header: header.value,
-      content: { items: content.value.items },
+      content: content,
     });
   }
 }

@@ -1,22 +1,27 @@
+import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryBus, QueryHandler } from '@nestjs/cqrs';
-import { DimensionWithItemsDto } from '~/dimensions/application/dto/dimension-with-items.dto';
-import { GetDimensionWithItemsQuery } from '~/dimensions/application/queries/get-dimension-with-items/get-dimension-with-items.query';
 import { HeaderDto } from '~/section-headers/application/dto/header.dto';
 import { GetHeaderQuery } from '~/section-headers/application/queries/get-header/get-header.query';
 import { NotFoundError } from '~/shared/application/errors/not-found.error';
 import { Result, failure, success } from '~/shared/core/result';
-import { GetHomeDimensionQuery } from './get-home-dimension.query';
+import { DimensionItemsDto } from '../../dto/dimension-items.dto';
+import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';
+import { GetHomeDimensionSectionQuery } from './get-home-dimension-section.query';
 import { GetHomeDimensionSectionResult } from './get-home-dimension-section.result';
 
-@QueryHandler(GetHomeDimensionQuery)
-export class GetHomeDimensionHandler
-  implements IQueryHandler<GetHomeDimensionQuery>
+@QueryHandler(GetHomeDimensionSectionQuery)
+export class GetHomeDimensionSectionHandler
+  implements IQueryHandler<GetHomeDimensionSectionQuery>
 {
-  constructor(private readonly queryBus: QueryBus) {}
+  constructor(
+    @Inject(READ_REPOSITORY_TOKEN)
+    private readRepository: ReadRepository,
+    private readonly queryBus: QueryBus,
+  ) {}
 
   async execute({
     dimensionAlias,
-  }: GetHomeDimensionQuery): Promise<
+  }: GetHomeDimensionSectionQuery): Promise<
     Result<NotFoundError, GetHomeDimensionSectionResult>
   > {
     const headerQuery = new GetHeaderQuery('home', dimensionAlias);
@@ -30,18 +35,16 @@ export class GetHomeDimensionHandler
       return failure(header.value);
     }
 
-    const dimension: Result<NotFoundError, DimensionWithItemsDto> =
-      await this.queryBus.execute(
-        new GetDimensionWithItemsQuery(dimensionAlias),
-      );
+    const content: DimensionItemsDto =
+      await this.readRepository.getDimensionWithItems(dimensionAlias);
 
-    if (dimension.isFailure()) {
-      return failure(dimension.value);
+    if (content === null) {
+      return failure(new NotFoundError('Вимір не знайдено'));
     }
 
     return success({
       header: header.value,
-      content: { items: dimension.value.items },
+      content: content,
     });
   }
 }

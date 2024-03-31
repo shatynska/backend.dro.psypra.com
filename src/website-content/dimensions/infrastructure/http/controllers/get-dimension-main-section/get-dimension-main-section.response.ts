@@ -3,7 +3,7 @@ import {
   DimensionItemsDto,
   dimensionItemsDtoStubs,
 } from '~/dimensions/application/dto/dimension-items.dto';
-import { GetDimensionMainSectionResult } from '~/page-sections/application/queries/get-dimension-main/get-dimension-main-section.result';
+import { GetDimensionMainSectionResult } from '~/dimensions/application/queries/get-dimension-main-section/get-dimension-main-section.result';
 import {
   HeaderWithParentLinkDto,
   headerWithParentLinkDtoStubs,

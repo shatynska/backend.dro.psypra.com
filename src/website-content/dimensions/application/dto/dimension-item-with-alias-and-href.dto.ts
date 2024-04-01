@@ -1,4 +1,4 @@
-import { DimensionItemDto } from './dimension-item.dto';
+import { DimensionItemDto, dimensionItemDtoStubs } from './dimension-item.dto';
 
 export class DimensionItemWithAliasAndHrefDto extends DimensionItemDto {
   alias: string;
@@ -9,16 +9,12 @@ export const dimensionItemWithAliasAndHrefDtoStubs: DimensionItemWithAliasAndHre
   [
     {
       alias: 'psychologist',
-      title: 'Психолог',
       href: '/specialties/psychologist',
-      description:
-        'Це фахівець, який оцінює, діагно­стує і вивчає пове­дінку і розу­мові процеси. Деякі пси­хологи, такі як клі­нічні ...',
+      ...dimensionItemDtoStubs[0],
     },
     {
       alias: 'psychotherapist',
-      title: 'Психотерапевт',
       href: '/specialties/psychotherapist',
-      description:
-        'Фахівець, який має повну вищу ос­віту за нап­рямом під­готовки ...',
+      ...dimensionItemDtoStubs[1],
     },
   ];

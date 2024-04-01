@@ -5,7 +5,7 @@ export class DimensionItemDto {
 
 export const dimensionItemDtoStubs: DimensionItemDto[] = [
   {
-    title: 'психолог',
+    title: 'Психолог',
     description:
       'Це фахівець, який оцінює, діагно­стує і вивчає пове­дінку і розу­мові процеси. Деякі пси­хологи, такі як клі­нічні ...',
   },

@@ -7,7 +7,7 @@ export class DimensionItemMapper {
   static mapToDto(data: Props): DimensionItemDto {
     const mappedData = {
       title: data.title.charAt(0).toUpperCase() + data.title.slice(1),
-      description: `/${data.description}`,
+      description: data.description,
     };
 
     return mappedData;

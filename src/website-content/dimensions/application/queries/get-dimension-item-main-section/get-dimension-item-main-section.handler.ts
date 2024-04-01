@@ -8,12 +8,12 @@ import { GetSectionHeaderResult } from '~/page-sections/application/queries/get-
 import { NotFoundError } from '~/shared/application/errors/not-found.error';
 import { Result, failure, success } from '~/shared/core/result';
 import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';
-import { GetDimensionItemQuery } from './get-dimension-item.query';
-import { GetDimensionItemResult } from './get-dimension-item.result';
+import { GetDimensionItemMainSectionQuery } from './get-dimension-item-main-section.query';
+import { GetDimensionItemMainSectionResult } from './get-dimension-item-main-section.result';
 
-@QueryHandler(GetDimensionItemQuery)
-export class GetDimensionItemHandler
-  implements IQueryHandler<GetDimensionItemQuery>
+@QueryHandler(GetDimensionItemMainSectionQuery)
+export class GetDimensionItemMainSectionHandler
+  implements IQueryHandler<GetDimensionItemMainSectionQuery>
 {
   constructor(
     @Inject(READ_REPOSITORY_TOKEN)
@@ -24,8 +24,8 @@ export class GetDimensionItemHandler
   async execute({
     dimensionAlias,
     alias,
-  }: GetDimensionItemQuery): Promise<
-    Result<NotFoundError, GetDimensionItemResult>
+  }: GetDimensionItemMainSectionQuery): Promise<
+    Result<NotFoundError, GetDimensionItemMainSectionResult>
   > {
     const parentLinkQuery = new GetSectionHeaderWithHrefQuery(dimensionAlias);
 

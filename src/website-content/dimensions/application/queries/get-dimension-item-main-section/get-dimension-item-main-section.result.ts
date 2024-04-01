@@ -2,7 +2,7 @@ import { SectionHeaderWithParentLinkDto } from '~/page-sections/application/dto/
 import { SectionDto } from '~/page-sections/application/dto/section.dto';
 import { DimensionItemDto } from '../../dto/dimension-item.dto';
 
-export class GetDimensionItemResult extends SectionDto<
+export class GetDimensionItemMainSectionResult extends SectionDto<
   SectionHeaderWithParentLinkDto,
   DimensionItemDto
 > {}

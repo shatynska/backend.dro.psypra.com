@@ -1,8 +1,8 @@
 import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryBus, QueryHandler } from '@nestjs/cqrs';
 import { HeaderWithParentLinkDto } from '~/section-headers/application/dto/header-with-parent-link.dto';
-import { GetHeaderWithParentLinkQuery } from '~/section-headers/application/queries/get-header-with-parent-link/get-header-with-parent-link.query';
-import { NotFoundError } from '~/shared/application/errors/not-found.error';
+import { GetHeaderWithHrefQuery } from '~/section-headers/application/queries/get-header-with-href/get-header-with-href.query';
+import { GetHeaderWithHrefResult } from '~/section-headers/application/queries/get-header-with-href/get-header-with-href.result';
 import { Result, failure, success } from '~/shared/core/result';
 import { SpecialistNotFoundError } from '../../errors/specialist-not-found.error';
 import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';
@@ -22,30 +22,35 @@ export class GetSpecialistMainSectionHandler
   async execute({
     alias,
   }: GetSpecialistMainSectionQuery): Promise<
-    Result<SpecialistNotFoundError, GetSpecialistMainSectionResult>
+    Result<Error, GetSpecialistMainSectionResult>
   > {
+    const parentLinkQuery = new GetHeaderWithHrefQuery('specialists');
+
+    const parentLink = await this.queryBus.execute<
+      GetHeaderWithHrefQuery,
+      Result<Error, GetHeaderWithHrefResult>
+    >(parentLinkQuery);
+
+    if (parentLink.isFailure()) {
+      return failure(parentLink.value);
+    }
+
     const content = await this.readRepository.getSpecialistMain(alias);
 
     if (content === null) {
       return failure(new SpecialistNotFoundError());
     }
 
-    const headerQuery = new GetHeaderWithParentLinkQuery('specialist', 'main');
-
-    const header = await this.queryBus.execute<
-      GetHeaderWithParentLinkQuery,
-      Result<NotFoundError, HeaderWithParentLinkDto>
-    >(headerQuery);
-
-    if (header.isFailure()) {
-      return failure(header.value);
-    }
-
-    header.value.headings.primary = `${content.firstName} ${content.lastName}`;
-    header.value.headings.secondary = content.specialties.join(', ');
+    const header: HeaderWithParentLinkDto = {
+      headings: {
+        primary: `${content.firstName} ${content.lastName}`,
+        secondary: content.specialties.join(', '),
+      },
+      parentLink: parentLink.value,
+    };
 
     return success({
-      header: header.value,
+      header: header,
       content: content,
     });
   }

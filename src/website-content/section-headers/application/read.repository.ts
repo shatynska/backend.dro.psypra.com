@@ -1,4 +1,4 @@
-import { HeaderWithParentLinkDto } from './dto/header-with-parent-link.dto';
+import { HeaderWithHrefDto } from './dto/header-with-href.dto';
 import { HeaderDto } from './dto/header.dto';
 
 export const READ_REPOSITORY_TOKEN = Symbol(
@@ -6,10 +6,7 @@ export const READ_REPOSITORY_TOKEN = Symbol(
 );
 
 export interface ReadRepository {
-  getHeader(pageAlias: string, sectionAlias: string): Promise<HeaderDto | null>;
+  getHeader(sectionAlias: string): Promise<HeaderDto | null>;
 
-  getHeaderWithParentLink(
-    pageAlias: string,
-    sectionAlias: string,
-  ): Promise<HeaderWithParentLinkDto | null>;
+  getHeaderWithHref(sectionAlias: string): Promise<HeaderWithHrefDto | null>;
 }

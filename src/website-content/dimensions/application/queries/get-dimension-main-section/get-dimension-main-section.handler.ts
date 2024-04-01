@@ -1,10 +1,12 @@
 import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryBus, QueryHandler } from '@nestjs/cqrs';
 import { HeaderWithParentLinkDto } from '~/section-headers/application/dto/header-with-parent-link.dto';
-import { GetHeaderWithParentLinkQuery } from '~/section-headers/application/queries/get-header-with-parent-link/get-header-with-parent-link.query';
+import { GetHeaderWithHrefQuery } from '~/section-headers/application/queries/get-header-with-href/get-header-with-href.query';
+import { GetHeaderWithHrefResult } from '~/section-headers/application/queries/get-header-with-href/get-header-with-href.result';
+import { GetHeaderQuery } from '~/section-headers/application/queries/get-header/get-header.query';
+import { GetHeaderResult } from '~/section-headers/application/queries/get-header/get-header.result';
 import { NotFoundError } from '~/shared/application/errors/not-found.error';
 import { Result, failure, success } from '~/shared/core/result';
-import { DimensionItemsDto } from '../../dto/dimension-items.dto';
 import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';
 import { GetDimensionMainSectionQuery } from './get-dimension-main-section.query';
 import { GetDimensionMainSectionResult } from './get-dimension-main-section.result';
@@ -22,24 +24,36 @@ export class GetDimensionMainSectionHandler
   async execute({
     dimensionAlias,
   }: GetDimensionMainSectionQuery): Promise<
-    Result<NotFoundError, GetDimensionMainSectionResult>
+    Result<Error, GetDimensionMainSectionResult>
   > {
-    // TODO Refactor section database schema for more precise query
-    const headerQuery = new GetHeaderWithParentLinkQuery(
-      'home',
-      dimensionAlias,
-    );
+    const headerQuery = new GetHeaderQuery(dimensionAlias);
 
     const header = await this.queryBus.execute<
-      GetHeaderWithParentLinkQuery,
-      Result<NotFoundError, HeaderWithParentLinkDto>
+      GetHeaderQuery,
+      Result<Error, GetHeaderResult>
     >(headerQuery);
 
     if (header.isFailure()) {
       return failure(header.value);
     }
 
-    const content: DimensionItemsDto =
+    const parentLinkQuery = new GetHeaderWithHrefQuery('questions');
+
+    const parentLink = await this.queryBus.execute<
+      GetHeaderWithHrefQuery,
+      Result<Error, GetHeaderWithHrefResult>
+    >(parentLinkQuery);
+
+    if (parentLink.isFailure()) {
+      return failure(parentLink.value);
+    }
+
+    const headerWithParentLink: HeaderWithParentLinkDto = {
+      ...header.value,
+      parentLink: parentLink.value,
+    };
+
+    const content =
       await this.readRepository.getDimensionWithItems(dimensionAlias);
 
     if (content === null) {
@@ -47,7 +61,7 @@ export class GetDimensionMainSectionHandler
     }
 
     return success({
-      header: header.value,
+      header: headerWithParentLink,
       content: content,
     });
   }

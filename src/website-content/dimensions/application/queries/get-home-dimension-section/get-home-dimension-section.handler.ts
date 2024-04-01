@@ -1,10 +1,9 @@
 import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryBus, QueryHandler } from '@nestjs/cqrs';
-import { HeaderDto } from '~/section-headers/application/dto/header.dto';
-import { GetHeaderQuery } from '~/section-headers/application/queries/get-header/get-header.query';
+import { GetHeaderWithHrefQuery } from '~/section-headers/application/queries/get-header-with-href/get-header-with-href.query';
+import { GetHeaderWithHrefResult } from '~/section-headers/application/queries/get-header-with-href/get-header-with-href.result';
 import { NotFoundError } from '~/shared/application/errors/not-found.error';
 import { Result, failure, success } from '~/shared/core/result';
-import { DimensionItemsDto } from '../../dto/dimension-items.dto';
 import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';
 import { GetHomeDimensionSectionQuery } from './get-home-dimension-section.query';
 import { GetHomeDimensionSectionResult } from './get-home-dimension-section.result';
@@ -22,20 +21,20 @@ export class GetHomeDimensionSectionHandler
   async execute({
     dimensionAlias,
   }: GetHomeDimensionSectionQuery): Promise<
-    Result<NotFoundError, GetHomeDimensionSectionResult>
+    Result<Error, GetHomeDimensionSectionResult>
   > {
-    const headerQuery = new GetHeaderQuery('home', dimensionAlias);
+    const headerQuery = new GetHeaderWithHrefQuery(dimensionAlias);
 
     const header = await this.queryBus.execute<
-      GetHeaderQuery,
-      Result<NotFoundError, HeaderDto>
+      GetHeaderWithHrefQuery,
+      Result<Error, GetHeaderWithHrefResult>
     >(headerQuery);
 
     if (header.isFailure()) {
       return failure(header.value);
     }
 
-    const content: DimensionItemsDto =
+    const content =
       await this.readRepository.getDimensionWithItems(dimensionAlias);
 
     if (content === null) {

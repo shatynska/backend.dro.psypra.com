@@ -2,9 +2,8 @@ import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryBus, QueryHandler } from '@nestjs/cqrs';
 import { DimensionWithHrefDto } from '~/dimensions/application/dto/dimension-with-href.dto';
 import { GetDimensionWithHrefQuery } from '~/dimensions/application/queries/get-dimension-with-href/get-dimension-with-href.query';
-import { HeaderDto } from '~/section-headers/application/dto/header.dto';
 import { GetHeaderQuery } from '~/section-headers/application/queries/get-header/get-header.query';
-import { NotFoundError } from '~/shared/application/errors/not-found.error';
+import { GetHeaderResult } from '~/section-headers/application/queries/get-header/get-header.result';
 import { Result, failure, success } from '~/shared/core/result';
 import {
   SpecialistBriefDimensionItemsDto,
@@ -14,6 +13,7 @@ import { SpecialistNotFoundError } from '../../errors/specialist-not-found.error
 import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';
 import { GetSpecialistBriefSectionQuery } from './get-specialist-brief-section.query';
 import { GetSpecialistBriefSectionResult } from './get-specialist-brief-section.result';
+import { NotFoundError } from 'rxjs';
 
 @QueryHandler(GetSpecialistBriefSectionQuery)
 export class GetSpecialistBriefSectionHandler
@@ -28,13 +28,13 @@ export class GetSpecialistBriefSectionHandler
   async execute({
     alias,
   }: GetSpecialistBriefSectionQuery): Promise<
-    Result<SpecialistNotFoundError, GetSpecialistBriefSectionResult>
+    Result<Error, GetSpecialistBriefSectionResult>
   > {
-    const headerQuery = new GetHeaderQuery('specialist', 'brief');
+    const headerQuery = new GetHeaderQuery('brief');
 
     const header = await this.queryBus.execute<
       GetHeaderQuery,
-      Result<NotFoundError, HeaderDto>
+      Result<Error, GetHeaderResult>
     >(headerQuery);
 
     if (header.isFailure()) {

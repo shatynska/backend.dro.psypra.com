@@ -3,11 +3,13 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { NotFoundError } from '~/shared/application/errors/not-found.error';
 import { Result, failure, success } from '~/shared/core/result';
 import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';
-import { GetHeaderQuery } from './get-header.query';
-import { GetHeaderResult } from './get-header.result';
+import { GetHeaderWithHrefQuery } from './get-header-with-href.query';
+import { GetHeaderWithHrefResult } from './get-header-with-href.result';
 
-@QueryHandler(GetHeaderQuery)
-export class GetHeaderHandler implements IQueryHandler<GetHeaderQuery> {
+@QueryHandler(GetHeaderWithHrefQuery)
+export class GetHeaderWithHrefHandler
+  implements IQueryHandler<GetHeaderWithHrefQuery>
+{
   constructor(
     @Inject(READ_REPOSITORY_TOKEN)
     private readRepository: ReadRepository,
@@ -15,13 +17,15 @@ export class GetHeaderHandler implements IQueryHandler<GetHeaderQuery> {
 
   async execute({
     sectionAlias,
-  }: GetHeaderQuery): Promise<Result<NotFoundError, GetHeaderResult>> {
-    const headerData = await this.readRepository.getHeader(sectionAlias);
+  }: GetHeaderWithHrefQuery): Promise<
+    Result<NotFoundError, GetHeaderWithHrefResult>
+  > {
+    const data = await this.readRepository.getHeaderWithHref(sectionAlias);
 
-    if (headerData === null) {
+    if (data === null) {
       return failure(new NotFoundError('Заголовок не знайдено'));
     }
 
-    return success(headerData);
+    return success(data);
   }
 }

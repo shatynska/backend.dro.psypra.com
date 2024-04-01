@@ -1,7 +1,7 @@
 import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryBus, QueryHandler } from '@nestjs/cqrs';
-import { GetHeaderWithHrefQuery } from '~/section-headers/application/queries/get-header-with-href/get-header-with-href.query';
-import { GetHeaderWithHrefResult } from '~/section-headers/application/queries/get-header-with-href/get-header-with-href.result';
+import { GetSectionHeaderWithHrefQuery } from '~/page-sections/application/queries/get-section-header-with-href/get-section-header-with-href.query';
+import { GetSectionHeaderWithHrefResult } from '~/page-sections/application/queries/get-section-header-with-href/get-section-header-with-href.result';
 import { NotFoundError } from '~/shared/application/errors/not-found.error';
 import { Result, failure, success } from '~/shared/core/result';
 import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';
@@ -23,11 +23,11 @@ export class GetHomeDimensionSectionHandler
   }: GetHomeDimensionSectionQuery): Promise<
     Result<Error, GetHomeDimensionSectionResult>
   > {
-    const headerQuery = new GetHeaderWithHrefQuery(dimensionAlias);
+    const headerQuery = new GetSectionHeaderWithHrefQuery(dimensionAlias);
 
     const header = await this.queryBus.execute<
-      GetHeaderWithHrefQuery,
-      Result<Error, GetHeaderWithHrefResult>
+      GetSectionHeaderWithHrefQuery,
+      Result<Error, GetSectionHeaderWithHrefResult>
     >(headerQuery);
 
     if (header.isFailure()) {

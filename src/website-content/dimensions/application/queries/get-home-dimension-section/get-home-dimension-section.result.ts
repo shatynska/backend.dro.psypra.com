@@ -1,8 +1,8 @@
 import { DimensionItemsDto } from '~/dimensions/application/dto/dimension-items.dto';
+import { SectionHeaderWithHrefDto } from '~/page-sections/application/dto/section-header-with-href.dto';
 import { SectionDto } from '~/page-sections/application/dto/section.dto';
-import { HeaderWithHrefDto } from '~/section-headers/application/dto/header-with-href.dto';
 
 export class GetHomeDimensionSectionResult extends SectionDto<
-  HeaderWithHrefDto,
+  SectionHeaderWithHrefDto,
   DimensionItemsDto
 > {}

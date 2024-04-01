@@ -5,18 +5,18 @@ import {
 } from '~/dimensions/application/dto/dimension-items.dto';
 import { GetHomeDimensionSectionResult } from '~/dimensions/application/queries/get-home-dimension-section/get-home-dimension-section.result';
 import {
-  HeaderWithHrefDto,
-  headerWithHrefDtoStubs,
-} from '~/section-headers/application/dto/header-with-href.dto';
+  SectionHeaderWithHrefDto,
+  sectionHeaderWithHrefDtoStubs,
+} from '~/page-sections/application/dto/section-header-with-href.dto';
 
 export class GetHomeDimensionSectionResponse
   implements GetHomeDimensionSectionResult
 {
   @ApiProperty({
-    type: () => HeaderWithHrefDto,
-    example: headerWithHrefDtoStubs[1],
+    type: () => SectionHeaderWithHrefDto,
+    example: sectionHeaderWithHrefDtoStubs[1],
   })
-  header: HeaderWithHrefDto;
+  header: SectionHeaderWithHrefDto;
 
   @ApiProperty({
     type: () => DimensionItemsDto,

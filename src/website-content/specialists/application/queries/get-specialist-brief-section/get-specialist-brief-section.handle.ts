@@ -1,8 +1,8 @@
 import { IQueryHandler, QueryBus, QueryHandler } from '@nestjs/cqrs';
 import { GetDimensionsWithItemsForSpecialistQuery } from '~/dimensions/application/queries/get-dimensions-with-items-for-specialist/get-dimensions-with-items-for-specialist.query copy';
 import { GetDimensionsWithItemsForSpecialistResult } from '~/dimensions/application/queries/get-dimensions-with-items-for-specialist/get-dimensions-with-items-for-specialist.result';
-import { GetHeaderQuery } from '~/section-headers/application/queries/get-header/get-header.query';
-import { GetHeaderResult } from '~/section-headers/application/queries/get-header/get-header.result';
+import { GetSectionHeaderQuery } from '~/page-sections/application/queries/get-section-header/get-section-header.query';
+import { GetSectionHeaderResult } from '~/page-sections/application/queries/get-section-header/get-section-header.result';
 import { Result, failure, success } from '~/shared/core/result';
 import { GetSpecialistBriefSectionQuery } from './get-specialist-brief-section.query';
 import { GetSpecialistBriefSectionResult } from './get-specialist-brief-section.result';
@@ -18,11 +18,11 @@ export class GetSpecialistBriefSectionHandler
   }: GetSpecialistBriefSectionQuery): Promise<
     Result<Error, GetSpecialistBriefSectionResult>
   > {
-    const headerQuery = new GetHeaderQuery('brief');
+    const headerQuery = new GetSectionHeaderQuery('brief');
 
     const header = await this.queryBus.execute<
-      GetHeaderQuery,
-      Result<Error, GetHeaderResult>
+      GetSectionHeaderQuery,
+      Result<Error, GetSectionHeaderResult>
     >(headerQuery);
 
     if (header.isFailure()) {

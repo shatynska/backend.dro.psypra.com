@@ -1,8 +1,8 @@
 import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryBus, QueryHandler } from '@nestjs/cqrs';
-import { HeaderWithParentLinkDto } from '~/section-headers/application/dto/header-with-parent-link.dto';
-import { GetHeaderWithHrefQuery } from '~/section-headers/application/queries/get-header-with-href/get-header-with-href.query';
-import { GetHeaderWithHrefResult } from '~/section-headers/application/queries/get-header-with-href/get-header-with-href.result';
+import { SectionHeaderWithParentLinkDto } from '~/page-sections/application/dto/section-header-with-parent-link.dto';
+import { GetSectionHeaderWithHrefQuery } from '~/page-sections/application/queries/get-section-header-with-href/get-section-header-with-href.query';
+import { GetSectionHeaderWithHrefResult } from '~/page-sections/application/queries/get-section-header-with-href/get-section-header-with-href.result';
 import { Result, failure, success } from '~/shared/core/result';
 import { SpecialistNotFoundError } from '../../errors/specialist-not-found.error';
 import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';
@@ -24,11 +24,11 @@ export class GetSpecialistMainSectionHandler
   }: GetSpecialistMainSectionQuery): Promise<
     Result<Error, GetSpecialistMainSectionResult>
   > {
-    const parentLinkQuery = new GetHeaderWithHrefQuery('specialists');
+    const parentLinkQuery = new GetSectionHeaderWithHrefQuery('specialists');
 
     const parentLink = await this.queryBus.execute<
-      GetHeaderWithHrefQuery,
-      Result<Error, GetHeaderWithHrefResult>
+      GetSectionHeaderWithHrefQuery,
+      Result<Error, GetSectionHeaderWithHrefResult>
     >(parentLinkQuery);
 
     if (parentLink.isFailure()) {
@@ -41,7 +41,7 @@ export class GetSpecialistMainSectionHandler
       return failure(new SpecialistNotFoundError());
     }
 
-    const header: HeaderWithParentLinkDto = {
+    const header: SectionHeaderWithParentLinkDto = {
       headings: {
         primary: `${content.firstName} ${content.lastName}`,
         secondary: content.specialties.join(', '),

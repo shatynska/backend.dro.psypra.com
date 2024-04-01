@@ -4,19 +4,20 @@ import {
   dimensionsWithItemsForSpecialistDtoStubs,
 } from '~/dimensions/application/dto/dimensions-with-items-for-specialist.dto';
 import {
-  HeaderDto,
-  headerDtoStubs,
-} from '~/section-headers/application/dto/header.dto';
+  SectionHeaderDto,
+  sectionHeaderDtoStubs,
+} from '~/page-sections/application/dto/section-header.dto';
+
 import { GetSpecialistBriefSectionResult } from '~/specialists/application/queries/get-specialist-brief-section/get-specialist-brief-section.result';
 
 export class GetSpecialistBriefSectionResponse
   implements GetSpecialistBriefSectionResult
 {
   @ApiProperty({
-    type: () => HeaderDto,
-    example: headerDtoStubs[2],
+    type: () => SectionHeaderDto,
+    example: sectionHeaderDtoStubs[2],
   })
-  header: HeaderDto;
+  header: SectionHeaderDto;
 
   @ApiProperty({
     type: () => DimensionsWithItemsForSpecialistDto,

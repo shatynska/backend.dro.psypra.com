@@ -3,20 +3,20 @@ import {
   HomeQuestionsDto,
   homeQuestionsDtoStub,
 } from '~/page-sections/application/dto/home-questions.dto';
-import { GetHomeQuestionsSectionResult } from '~/page-sections/application/queries/get-home-questions/get-home-questions-section.result';
 import {
-  HeaderDto,
-  headerDtoStubs,
-} from '~/section-headers/application/dto/header.dto';
+  SectionHeaderDto,
+  sectionHeaderDtoStubs,
+} from '~/page-sections/application/dto/section-header.dto';
+import { GetHomeQuestionsSectionResult } from '~/page-sections/application/queries/get-home-questions/get-home-questions-section.result';
 
 export class GetHomeQuestionsSectionResponse
   implements GetHomeQuestionsSectionResult
 {
   @ApiProperty({
-    type: () => HeaderDto,
-    example: headerDtoStubs[0],
+    type: () => SectionHeaderDto,
+    example: sectionHeaderDtoStubs[0],
   })
-  header: HeaderDto;
+  header: SectionHeaderDto;
 
   @ApiProperty({
     type: () => HomeQuestionsDto,

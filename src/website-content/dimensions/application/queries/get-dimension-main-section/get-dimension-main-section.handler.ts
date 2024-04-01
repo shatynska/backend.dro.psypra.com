@@ -1,10 +1,10 @@
 import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryBus, QueryHandler } from '@nestjs/cqrs';
-import { HeaderWithParentLinkDto } from '~/section-headers/application/dto/header-with-parent-link.dto';
-import { GetHeaderWithHrefQuery } from '~/section-headers/application/queries/get-header-with-href/get-header-with-href.query';
-import { GetHeaderWithHrefResult } from '~/section-headers/application/queries/get-header-with-href/get-header-with-href.result';
-import { GetHeaderQuery } from '~/section-headers/application/queries/get-header/get-header.query';
-import { GetHeaderResult } from '~/section-headers/application/queries/get-header/get-header.result';
+import { SectionHeaderWithParentLinkDto } from '~/page-sections/application/dto/section-header-with-parent-link.dto';
+import { GetSectionHeaderWithHrefQuery } from '~/page-sections/application/queries/get-section-header-with-href/get-section-header-with-href.query';
+import { GetSectionHeaderWithHrefResult } from '~/page-sections/application/queries/get-section-header-with-href/get-section-header-with-href.result';
+import { GetSectionHeaderQuery } from '~/page-sections/application/queries/get-section-header/get-section-header.query';
+import { GetSectionHeaderResult } from '~/page-sections/application/queries/get-section-header/get-section-header.result';
 import { NotFoundError } from '~/shared/application/errors/not-found.error';
 import { Result, failure, success } from '~/shared/core/result';
 import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';
@@ -26,29 +26,29 @@ export class GetDimensionMainSectionHandler
   }: GetDimensionMainSectionQuery): Promise<
     Result<Error, GetDimensionMainSectionResult>
   > {
-    const headerQuery = new GetHeaderQuery(dimensionAlias);
+    const headerQuery = new GetSectionHeaderQuery(dimensionAlias);
 
     const header = await this.queryBus.execute<
-      GetHeaderQuery,
-      Result<Error, GetHeaderResult>
+      GetSectionHeaderQuery,
+      Result<Error, GetSectionHeaderResult>
     >(headerQuery);
 
     if (header.isFailure()) {
       return failure(header.value);
     }
 
-    const parentLinkQuery = new GetHeaderWithHrefQuery('questions');
+    const parentLinkQuery = new GetSectionHeaderWithHrefQuery('questions');
 
     const parentLink = await this.queryBus.execute<
-      GetHeaderWithHrefQuery,
-      Result<Error, GetHeaderWithHrefResult>
+      GetSectionHeaderWithHrefQuery,
+      Result<Error, GetSectionHeaderWithHrefResult>
     >(parentLinkQuery);
 
     if (parentLink.isFailure()) {
       return failure(parentLink.value);
     }
 
-    const headerWithParentLink: HeaderWithParentLinkDto = {
+    const headerWithParentLink: SectionHeaderWithParentLinkDto = {
       ...header.value,
       parentLink: parentLink.value,
     };

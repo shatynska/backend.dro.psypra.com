@@ -1,7 +1,7 @@
 import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryBus, QueryHandler } from '@nestjs/cqrs';
-import { GetHeaderQuery } from '~/section-headers/application/queries/get-header/get-header.query';
-import { GetHeaderResult } from '~/section-headers/application/queries/get-header/get-header.result';
+import { GetSectionHeaderQuery } from '~/page-sections/application/queries/get-section-header/get-section-header.query';
+import { GetSectionHeaderResult } from '~/page-sections/application/queries/get-section-header/get-section-header.result';
 import { Result, failure, success } from '~/shared/core/result';
 import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';
 import { GetHomeQuestionsSectionQuery } from './get-home-questions-section.query';
@@ -18,11 +18,11 @@ export class GetHomeQuestionsSectionHandler
   ) {}
 
   async execute(): Promise<Result<Error, GetHomeQuestionsSectionResult>> {
-    const headerQuery = new GetHeaderQuery('questions');
+    const headerQuery = new GetSectionHeaderQuery('questions');
 
     const header = await this.queryBus.execute<
-      GetHeaderQuery,
-      Result<Error, GetHeaderResult>
+      GetSectionHeaderQuery,
+      Result<Error, GetSectionHeaderResult>
     >(headerQuery);
 
     if (header.isFailure()) {

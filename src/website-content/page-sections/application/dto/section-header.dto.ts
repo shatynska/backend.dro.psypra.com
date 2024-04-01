@@ -1,9 +1,13 @@
-export class HeadingsDto {
+export class SectionHeaderDto {
+  headings: SectionHeadingsDto;
+}
+
+export class SectionHeadingsDto {
   primary: string;
   secondary: string;
 }
 
-export const headingsDtoStubs: HeadingsDto[] = [
+export const sectionHeadingsDtoStubs: SectionHeadingsDto[] = [
   {
     primary: 'Критерії пошуку',
     secondary: 'Багато питань?',
@@ -35,5 +39,17 @@ export const headingsDtoStubs: HeadingsDto[] = [
   {
     primary: 'Основні запити',
     secondary: 'З якими темами?',
+  },
+];
+
+export const sectionHeaderDtoStubs: SectionHeaderDto[] = [
+  {
+    headings: sectionHeadingsDtoStubs[0],
+  },
+  {
+    headings: sectionHeadingsDtoStubs[4],
+  },
+  {
+    headings: sectionHeadingsDtoStubs[5],
   },
 ];

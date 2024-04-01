@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { DimensionItemDto } from '~/dimensions/application/dto/dimension-item.dto';
-import { DimensionWithHrefDto } from '~/dimensions/application/dto/dimension-with-href.dto';
 import { DimensionWithItemsDto } from '~/dimensions/application/dto/dimension-with-items.dto';
+import { DimensionsWithItemsForSpecialistDto } from '~/dimensions/application/dto/dimensions-with-items-for-specialist.dto';
 import { ReadRepository } from '~/dimensions/application/read.repository';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
-import { DimensionWithHrefMapper } from './mappers/dimension-with-href.mapper';
-import { DimensionWithItemsMapper } from './mappers/dimension-with-items.mapper';
 import { DimensionItemMapper } from './mappers/dimension-item.mapper';
+import { DimensionWithItemsMapper } from './mappers/dimension-with-items.mapper';
+import { DimensionsWithItemsForSpecialistMapper } from './mappers/dimensions-with-items-for-specialist.mapper';
 
 @Injectable()
 export class PrismaReadRepository implements ReadRepository {
@@ -29,20 +29,6 @@ export class PrismaReadRepository implements ReadRepository {
     return DimensionItemMapper.mapToDto(item);
   }
 
-  async getDimensionWithHref(alias: string): Promise<DimensionWithHrefDto> {
-    const dimension = await this.prismaService.dimension.findUnique({
-      where: {
-        alias: alias,
-      },
-      select: {
-        alias: true,
-        title: true,
-      },
-    });
-
-    return DimensionWithHrefMapper.mapToDto(dimension);
-  }
-
   async getDimensionWithItems(
     alias: string,
   ): Promise<DimensionWithItemsDto | null> {
@@ -56,6 +42,29 @@ export class PrismaReadRepository implements ReadRepository {
     }
 
     return DimensionWithItemsMapper.mapToDto(dimension);
+  }
+
+  async getDimensionsWithItemsForSpecialist(
+    dimensionsAliases: string[],
+    specialistAlias: string,
+  ): Promise<DimensionsWithItemsForSpecialistDto> {
+    const dimensions = await this.prismaService.dimension.findMany({
+      where: {
+        alias: {
+          in: dimensionsAliases,
+        },
+      },
+      select:
+        PrismaReadRepository.getDimensionsWithItemsForSpecialistSelect(
+          specialistAlias,
+        ),
+    });
+
+    if (!dimensions) {
+      return null;
+    }
+
+    return DimensionsWithItemsForSpecialistMapper.mapToDto(dimensions);
   }
 
   static dimensionWithItemsSelect = Prisma.validator<Prisma.DimensionSelect>()({
@@ -73,4 +82,29 @@ export class PrismaReadRepository implements ReadRepository {
   static dimensionWithItems = Prisma.validator<Prisma.DimensionDefaultArgs>()({
     select: PrismaReadRepository.dimensionWithItemsSelect,
   });
+
+  static getDimensionsWithItemsForSpecialistSelect = (
+    specialistAlias: string,
+  ) => {
+    return Prisma.validator<Prisma.DimensionSelect>()({
+      alias: true,
+      title: true,
+      dimensionItems: {
+        where: {
+          specialists: { some: { specialistAlias: specialistAlias } },
+        },
+        select: {
+          title: true,
+        },
+      },
+    });
+  };
+
+  static dimensionsWithItemsForSpecialist =
+    Prisma.validator<Prisma.DimensionDefaultArgs>()({
+      select:
+        PrismaReadRepository.getDimensionsWithItemsForSpecialistSelect(
+          'specialist',
+        ),
+    });
 }

@@ -1,6 +1,6 @@
 import { DimensionItemDto } from './dto/dimension-item.dto';
-import { DimensionWithHrefDto } from './dto/dimension-with-href.dto';
 import { DimensionWithItemsDto } from './dto/dimension-with-items.dto';
+import { DimensionsWithItemsForSpecialistDto } from './dto/dimensions-with-items-for-specialist.dto';
 
 export const READ_REPOSITORY_TOKEN = Symbol(
   'DimensionItemsReadRepositoryToken',
@@ -9,7 +9,10 @@ export const READ_REPOSITORY_TOKEN = Symbol(
 export interface ReadRepository {
   getDimensionItem(alias: string): Promise<DimensionItemDto>;
 
-  getDimensionWithHref(alias: string): Promise<DimensionWithHrefDto>;
-
   getDimensionWithItems(alias: string): Promise<DimensionWithItemsDto>;
+
+  getDimensionsWithItemsForSpecialist(
+    dimensionsAliases: string[],
+    specialistAlias: string,
+  ): Promise<DimensionsWithItemsForSpecialistDto>;
 }

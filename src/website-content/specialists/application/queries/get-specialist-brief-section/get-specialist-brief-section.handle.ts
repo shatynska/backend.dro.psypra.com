@@ -1,29 +1,17 @@
-import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryBus, QueryHandler } from '@nestjs/cqrs';
-import { DimensionWithHrefDto } from '~/dimensions/application/dto/dimension-with-href.dto';
-import { GetDimensionWithHrefQuery } from '~/dimensions/application/queries/get-dimension-with-href/get-dimension-with-href.query';
+import { GetDimensionsWithItemsForSpecialistQuery } from '~/dimensions/application/queries/get-dimensions-with-items-for-specialist/get-dimensions-with-items-for-specialist.query copy';
+import { GetDimensionsWithItemsForSpecialistResult } from '~/dimensions/application/queries/get-dimensions-with-items-for-specialist/get-dimensions-with-items-for-specialist.result';
 import { GetHeaderQuery } from '~/section-headers/application/queries/get-header/get-header.query';
 import { GetHeaderResult } from '~/section-headers/application/queries/get-header/get-header.result';
 import { Result, failure, success } from '~/shared/core/result';
-import {
-  SpecialistBriefDimensionItemsDto,
-  SpecialistBriefDto,
-} from '../../dto/specialist-brief.dto';
-import { SpecialistNotFoundError } from '../../errors/specialist-not-found.error';
-import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';
 import { GetSpecialistBriefSectionQuery } from './get-specialist-brief-section.query';
 import { GetSpecialistBriefSectionResult } from './get-specialist-brief-section.result';
-import { NotFoundError } from 'rxjs';
 
 @QueryHandler(GetSpecialistBriefSectionQuery)
 export class GetSpecialistBriefSectionHandler
   implements IQueryHandler<GetSpecialistBriefSectionQuery>
 {
-  constructor(
-    @Inject(READ_REPOSITORY_TOKEN)
-    private readRepository: ReadRepository,
-    private readonly queryBus: QueryBus,
-  ) {}
+  constructor(private readonly queryBus: QueryBus) {}
 
   async execute({
     alias,
@@ -41,43 +29,20 @@ export class GetSpecialistBriefSectionHandler
       return failure(header.value);
     }
 
-    const dimensionAliases = [
-      'specialties',
-      'forms',
-      'ages',
-      'terms',
-      'approaches',
-      'rates',
-    ];
+    const contentQuery = new GetDimensionsWithItemsForSpecialistQuery(alias);
 
-    const dimensionsWithItems: SpecialistBriefDto = new SpecialistBriefDto();
+    const content = await this.queryBus.execute<
+      GetDimensionsWithItemsForSpecialistQuery,
+      Result<Error, GetDimensionsWithItemsForSpecialistResult>
+    >(contentQuery);
 
-    for (const dimensionAlias of dimensionAliases) {
-      const dimension: Result<NotFoundError, DimensionWithHrefDto> =
-        await this.queryBus.execute(
-          new GetDimensionWithHrefQuery(dimensionAlias),
-        );
-
-      if (dimension.isFailure()) {
-        return failure(dimension.value);
-      }
-
-      const items: SpecialistBriefDimensionItemsDto | null =
-        await this.readRepository.getSpecialistBriefDimensionItems(
-          alias,
-          dimensionAlias,
-        );
-
-      dimensionsWithItems[dimensionAlias] = Object.assign(
-        {},
-        dimension.value,
-        items,
-      );
+    if (content.isFailure()) {
+      return failure(content.value);
     }
 
     return success({
       header: header.value,
-      content: dimensionsWithItems,
+      content: content.value,
     });
   }
 }

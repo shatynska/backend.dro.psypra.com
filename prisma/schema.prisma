@@ -104,17 +104,11 @@ model ReportingPeriod {
 }
 
 model PageSection {
-  id               String        @id @default(uuid())
-  page             String
-  section          String
-  primaryHeading   String?       @map("primary_heading")
-  secondaryHeading String?       @map("secondary_heading")
+  alias            String  @id
+  primaryHeading   String @map("primary_heading")
+  secondaryHeading String? @map("secondary_heading")
   href             String?
-  parentId         String?       @map("parent_id")
-  parent           PageSection?  @relation("ParentChildren", fields: [parentId], references: [id])
-  children         PageSection[] @relation("ParentChildren")
 
-  @@unique(name: "alias", [page, section])
   @@map("page-sections")
 }
 
@@ -130,26 +124,6 @@ model Specialist {
 
   @@map("specialists")
 }
-
-// model Specialty {
-//   id          String                     @id @default(uuid())
-//   alias       String                     @unique
-//   title       String                     @unique
-//   description String
-//   specialists SpecialistsToSpecialties[]
-
-//   @@map("specialties")
-// }
-
-// model SpecialistsToSpecialties {
-//   specialist   Specialist @relation(fields: [specialistId], references: [id])
-//   specialistId String     @map("specialist_id")
-//   specialty    Specialty  @relation(fields: [specialtyId], references: [id])
-//   specialtyId  String     @map("specialty_id")
-
-//   @@id([specialistId, specialtyId])
-//   @@map("specialists_to_specialties")
-// }
 
 model Token {
   token     String   @unique

@@ -10,7 +10,23 @@ export class PrismaReadRepository implements ReadRepository {
 
   async getHomeQuestions(): Promise<HomeQuestionsDto> {
     const sections = await this.prismaService.pageSection.findMany({
-      where: { page: 'home', NOT: { section: 'questions' } },
+      where: {
+        alias: {
+          in: [
+            'specialties',
+            'specialists',
+            'forms',
+            'ages',
+            'themes',
+            'terms',
+            'approaches',
+            'rates',
+            'locations',
+            'schedules',
+            'contacts',
+          ],
+        },
+      },
       select: {
         secondaryHeading: true,
         href: true,

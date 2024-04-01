@@ -54,7 +54,9 @@ export class GetDimensionMainSectionHandler
     };
 
     const content =
-      await this.readRepository.getDimensionWithItems(dimensionAlias);
+      await this.readRepository.getDimensionItemsByDimensionAlias(
+        dimensionAlias,
+      );
 
     if (content === null) {
       return failure(new NotFoundError('Вимір не знайдено'));

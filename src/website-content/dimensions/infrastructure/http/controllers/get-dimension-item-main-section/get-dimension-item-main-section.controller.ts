@@ -25,7 +25,7 @@ export class GetDimensionItemMainSectionController {
     type: GetDimensionItemMainSectionResponse,
   })
   @ApiErrorDecorator(HttpStatus.NOT_FOUND, SectionNotFoundError.defaultMessage)
-  @Get('dimensions/:dimension/:dimensionItem')
+  @Get('dimensions/:dimension/:dimensionItem/main')
   async handle(
     @Param('dimension') dimension: string,
     @Param('dimensionItem') dimensionItem: string,

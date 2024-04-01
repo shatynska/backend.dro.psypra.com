@@ -7,6 +7,7 @@ import { ReadRepository } from '~/dimensions/application/read.repository';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
 import { DimensionWithHrefMapper } from './mappers/dimension-with-href.mapper';
 import { DimensionWithItemsMapper } from './mappers/dimension-with-items.mapper';
+import { DimensionItemMapper } from './mappers/dimension-item.mapper';
 
 @Injectable()
 export class PrismaReadRepository implements ReadRepository {
@@ -25,7 +26,7 @@ export class PrismaReadRepository implements ReadRepository {
       return null;
     }
 
-    return item;
+    return DimensionItemMapper.mapToDto(item);
   }
 
   async getDimensionWithHref(alias: string): Promise<DimensionWithHrefDto> {

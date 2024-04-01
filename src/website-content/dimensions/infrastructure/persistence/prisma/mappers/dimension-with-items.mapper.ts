@@ -13,7 +13,7 @@ export class DimensionWithItemsMapper {
       items: data.dimensionItems.map((item) => ({
         alias: item.alias,
         href: `/${data.alias}/${item.alias}`,
-        title: item.title,
+        title: item.title.charAt(0).toUpperCase() + item.title.slice(1),
         description: item.description,
       })),
     };

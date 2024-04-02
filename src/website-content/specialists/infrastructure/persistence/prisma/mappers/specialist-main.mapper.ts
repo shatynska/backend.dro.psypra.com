@@ -2,23 +2,27 @@ import { Prisma } from '@prisma/client';
 import { SpecialistMainDto } from '../../../../application/dto/specialist-main.dto';
 import { PrismaReadRepository } from '../read.repository';
 
-export class SpecialistMainMapper {
-  static mapToDto(
-    params: Prisma.SpecialistGetPayload<
-      typeof PrismaReadRepository.specialistMain
-    >,
-  ): SpecialistMainDto {
-    const mappedData = {
-      firstName: params.firstName,
-      lastName: params.lastName,
-      specialties: params.dimensionItems.map(
-        (specialty) => specialty.dimensionItem.title,
-      ),
-      phones: params.phones,
-      emails: params.emails,
-      websites: params.websites,
-    };
+type Props = Prisma.SpecialistGetPayload<
+  typeof PrismaReadRepository.specialistMain
+>;
 
-    return mappedData;
+export class SpecialistMainMapper {
+  static mapToDto({
+    firstName,
+    lastName,
+    dimensionItems,
+    phones,
+    websites,
+    emails,
+  }: Props): SpecialistMainDto {
+    return {
+      fullName: `${lastName} ${firstName}`,
+      specialties: dimensionItems
+        .map((specialty) => specialty.dimensionItem.title)
+        .join(', '),
+      phones: phones,
+      emails: emails,
+      websites: websites,
+    };
   }
 }

@@ -43,8 +43,8 @@ export class GetSpecialistMainSectionHandler
 
     const header: SectionHeaderWithParentLinkDto = {
       headings: {
-        primary: `${content.firstName} ${content.lastName}`,
-        secondary: content.specialties.join(', '),
+        primary: content.fullName,
+        secondary: content.specialties,
       },
       parentLink: parentLink.value,
     };

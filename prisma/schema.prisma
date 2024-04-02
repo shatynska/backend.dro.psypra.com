@@ -10,19 +10,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model CashBook {
-  id               String            @id @default(uuid())
-  title            String            @unique
-  cashBalance      Int
-  reportingPeriods ReportingPeriod[]
-  expenses         Expense[]
-
-  @@map("cash_books")
-}
+// Website content
 
 model Dimension {
-  id             String                       @id @default(uuid())
-  alias          String                       @unique
+  alias          String                       @id
   title          String                       @unique
   dimensionItems DimensionItem[]
   specialists    DimensionItemsToSpecialist[]
@@ -52,6 +43,40 @@ model DimensionItemsToSpecialist {
 
   @@id([dimensionItemAlias, specialistAlias])
   @@map("dimension_items_to_specialists")
+}
+
+model PageSection {
+  alias            String  @id
+  primaryHeading   String  @map("primary_heading")
+  secondaryHeading String? @map("secondary_heading")
+  href             String?
+
+  @@map("page-sections")
+}
+
+model Specialist {
+  alias          String                       @unique
+  user           User                         @relation(fields: [alias], references: [userName])
+  firstName      String                       @map("first_name")
+  lastName       String                       @map("last_name")
+  phones         String[]
+  emails         String[]
+  websites       String[]
+  dimensionItems DimensionItemsToSpecialist[]
+
+  @@map("specialists")
+}
+
+// Bookkeeping models
+
+model CashBook {
+  id               String            @id @default(uuid())
+  title            String            @unique
+  cashBalance      Int
+  reportingPeriods ReportingPeriod[]
+  expenses         Expense[]
+
+  @@map("cash_books")
 }
 
 model Expense {
@@ -103,27 +128,7 @@ model ReportingPeriod {
   @@map("reporting_periods")
 }
 
-model PageSection {
-  alias            String  @id
-  primaryHeading   String @map("primary_heading")
-  secondaryHeading String? @map("secondary_heading")
-  href             String?
-
-  @@map("page-sections")
-}
-
-model Specialist {
-  id             String                       @id @default(uuid())
-  alias          String                       @unique
-  firstName      String                       @map("first_name")
-  lastName       String                       @map("last_name")
-  phones         String[]
-  emails         String[]
-  websites       String[]
-  dimensionItems DimensionItemsToSpecialist[]
-
-  @@map("specialists")
-}
+//Users models
 
 model Token {
   token     String   @unique
@@ -136,16 +141,17 @@ model Token {
 }
 
 model User {
-  id        String    @id @default(uuid())
-  userName  String    @unique @map("user_name")
-  email     String?   @unique
-  phone     String?   @unique
-  password  String?
-  provider  Provider?
-  roles     Role[]
-  tokens    Token[]
-  createdAt DateTime  @default(now()) @map("created_at")
-  updatedAt DateTime  @updatedAt @map("updated_at")
+  id         String      @id @default(uuid())
+  userName   String      @unique @map("user_name")
+  specialist Specialist?
+  email      String?     @unique
+  phone      String?     @unique
+  password   String?
+  provider   Provider?
+  roles      Role[]
+  tokens     Token[]
+  createdAt  DateTime    @default(now()) @map("created_at")
+  updatedAt  DateTime    @updatedAt @map("updated_at")
 
   @@map("users")
 }

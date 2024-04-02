@@ -4,8 +4,8 @@ export async function seedSpecialists(prisma) {
     update: {},
     create: {
       alias: 'shatynska',
-      firstName: 'Олена',
       lastName: 'Шатинська',
+      firstName: 'Олена',
       phones: ['+380980074869'],
       emails: ['shatynskaa@gmail.com'],
       websites: ['https://shatynska.in.ua'],
@@ -32,8 +32,8 @@ export async function seedSpecialists(prisma) {
     update: {},
     create: {
       alias: 'sozanska',
-      firstName: 'Созанська',
-      lastName: 'Ірина',
+      lastName: 'Созанська',
+      firstName: 'Ірина',
       dimensionItems: {
         create: [
           {
@@ -53,8 +53,8 @@ export async function seedSpecialists(prisma) {
     update: {},
     create: {
       alias: 'berchuk',
-      firstName: 'Берчук',
-      lastName: 'Володимир',
+      lastName: 'Берчук',
+      firstName: 'Володимир',
       dimensionItems: {
         create: [
           {
@@ -78,8 +78,8 @@ export async function seedSpecialists(prisma) {
     update: {},
     create: {
       alias: 'bilas',
-      firstName: 'Білас',
-      lastName: 'Юлія',
+      lastName: 'Білас',
+      firstName: 'Юлія',
       dimensionItems: {
         create: [
           {
@@ -99,8 +99,8 @@ export async function seedSpecialists(prisma) {
     update: {},
     create: {
       alias: 'hambarova',
-      firstName: 'Гамбарова',
-      lastName: 'Еляна',
+      lastName: 'Гамбарова',
+      firstName: 'Еляна',
       dimensionItems: {
         create: [
           {
@@ -120,8 +120,8 @@ export async function seedSpecialists(prisma) {
     update: {},
     create: {
       alias: 'drobchak',
-      firstName: 'Дробчак',
-      lastName: 'Ольга',
+      lastName: 'Дробчак',
+      firstName: 'Ольга',
       dimensionItems: {
         create: [
           {
@@ -145,8 +145,8 @@ export async function seedSpecialists(prisma) {
     update: {},
     create: {
       alias: 'kotsiuba',
-      firstName: 'Коцюба',
-      lastName: 'Галина',
+      lastName: 'Коцюба',
+      firstName: 'Галина',
       dimensionItems: {
         create: [
           {
@@ -166,8 +166,8 @@ export async function seedSpecialists(prisma) {
     update: {},
     create: {
       alias: 'lekh',
-      firstName: 'Лех',
-      lastName: 'Наталя',
+      lastName: 'Лех',
+      firstName: 'Наталя',
       dimensionItems: {
         create: [
           {
@@ -191,8 +191,8 @@ export async function seedSpecialists(prisma) {
     update: {},
     create: {
       alias: 'nekrasova',
-      firstName: 'Некрасова',
-      lastName: 'Валентина',
+      lastName: 'Некрасова',
+      firstName: 'Валентина',
       dimensionItems: {
         create: [
           {
@@ -216,8 +216,8 @@ export async function seedSpecialists(prisma) {
     update: {},
     create: {
       alias: 'parashchak',
-      firstName: 'Паращак',
-      lastName: 'Надія',
+      lastName: 'Паращак',
+      firstName: 'Надія',
       dimensionItems: {
         create: [
           {
@@ -237,8 +237,8 @@ export async function seedSpecialists(prisma) {
     update: {},
     create: {
       alias: 'petryshyn',
-      firstName: 'Петришин',
-      lastName: 'Ольга',
+      lastName: 'Петришин',
+      firstName: 'Ольга',
       dimensionItems: {
         create: [
           {
@@ -258,8 +258,8 @@ export async function seedSpecialists(prisma) {
     update: {},
     create: {
       alias: 'tatarevych',
-      firstName: 'Татаревич',
-      lastName: 'Галина',
+      lastName: 'Татаревич',
+      firstName: 'Галина',
       dimensionItems: {
         create: [
           {
@@ -279,8 +279,8 @@ export async function seedSpecialists(prisma) {
     update: {},
     create: {
       alias: 'franchuk',
-      firstName: 'Франчук',
-      lastName: 'Тетяна',
+      lastName: 'Франчук',
+      firstName: 'Тетяна',
       dimensionItems: {
         create: [
           {
@@ -300,8 +300,8 @@ export async function seedSpecialists(prisma) {
     update: {},
     create: {
       alias: 'chaplia',
-      firstName: 'Чапля',
-      lastName: 'Уляна',
+      lastName: 'Чапля',
+      firstName: 'Уляна',
       dimensionItems: {
         create: [
           {

@@ -1,18 +1,23 @@
 import { PageSection } from '@prisma/client';
 import { SectionHeaderWithHrefDto } from '~/page-sections/application/dto/section-header-with-href.dto';
 
-type Props = Pick<PageSection, 'primaryHeading' | 'secondaryHeading' | 'href'>;
+type Parameters = Pick<
+  PageSection,
+  'primaryHeading' | 'secondaryHeading' | 'href'
+>;
 
 export class SectionHeaderWithHrefMapper {
-  static mapToDto(data: Props): SectionHeaderWithHrefDto {
-    const mappedData = {
+  static mapToDto({
+    href,
+    primaryHeading,
+    secondaryHeading,
+  }: Parameters): SectionHeaderWithHrefDto {
+    return {
       headings: {
-        primary: data.primaryHeading,
-        secondary: data.secondaryHeading,
+        primary: primaryHeading,
+        secondary: secondaryHeading,
       },
-      href: data.href,
+      href,
     };
-
-    return mappedData;
   }
 }

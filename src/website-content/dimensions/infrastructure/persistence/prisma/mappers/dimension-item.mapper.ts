@@ -1,15 +1,13 @@
 import { DimensionItem } from '@prisma/client';
 import { DimensionItemDto } from '~/dimensions/application/dto/dimension-item.dto';
 
-type Props = Pick<DimensionItem, 'title' | 'description'>;
+type Parameters = Pick<DimensionItem, 'title' | 'description'>;
 
 export class DimensionItemMapper {
-  static mapToDto(data: Props): DimensionItemDto {
-    const mappedData = {
-      title: data.title.charAt(0).toUpperCase() + data.title.slice(1),
-      description: data.description,
+  static mapToDto({ title, description }: Parameters): DimensionItemDto {
+    return {
+      title: title.charAt(0).toUpperCase() + title.slice(1),
+      description,
     };
-
-    return mappedData;
   }
 }

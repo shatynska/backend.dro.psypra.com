@@ -7,7 +7,6 @@ import { GetSpecialistsResult } from '~/specialists/application/queries/get-spec
 
 export class GetSpecialistsResponse extends GetSpecialistsResult {
   @ApiProperty({
-    isArray: true,
     example: specialistEssentialWithAliasAndHrefDtoStubs,
   })
   specialists: SpecialistEssentialWithAliasAndHrefDto[];

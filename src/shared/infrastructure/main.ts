@@ -47,6 +47,20 @@ async function bootstrap() {
   );
   SwaggerModule.setup('api', app, websiteContentDocument);
 
+  const specialistsProfilesOptions = new DocumentBuilder()
+    .setTitle('DroPsyPra specialists profiles')
+    .setDescription('The DroPsyPra specialists profiles API description')
+    .setVersion('0.0.1')
+    .addTag('profiles')
+    .addBearerAuth()
+    .build();
+  const specialistsProfilesDocument = SwaggerModule.createDocument(
+    app,
+    specialistsProfilesOptions,
+    { include: [UsersModule, AuthModule] },
+  );
+  SwaggerModule.setup('api/profiles', app, specialistsProfilesDocument);
+
   const config = await app.get(ConfigService);
   const port = config.get<number>('API_PORT');
   await app.listen(port || 3000);

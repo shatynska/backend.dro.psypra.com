@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client';
 import { SpecialistMainDto } from '../../../../application/dto/specialist-main.dto';
-import { PrismaReadRepository } from '../read.repository';
+import { PrismaReadRepository } from '../prisma.read.repository';
 
 type Parameters = Prisma.SpecialistGetPayload<
   typeof PrismaReadRepository.specialistMain

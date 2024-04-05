@@ -3,7 +3,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { QUERIES } from './application/queries';
 import { READ_REPOSITORY_TOKEN } from './application/read.repository';
 import { CONTROLLERS } from './infrastructure/http/controllers';
-import { PrismaReadRepository } from './infrastructure/persistence/prisma/read.repository';
+import { PrismaReadRepository } from './infrastructure/persistence/prisma/prisma.read.repository';
 
 @Module({
   imports: [CqrsModule],

@@ -20,10 +20,10 @@ async function bootstrap() {
   app.use(cookieParser());
 
   const organizationBookkeepingOptions = new DocumentBuilder()
-    .setTitle('DroPsyPra book-keeping')
-    .setDescription('The DroPsyPra book-keeping API description')
+    .setTitle('DroPsyPra bookkeeping')
+    .setDescription('The DroPsyPra bookkeeping API description')
     .setVersion('0.0.1')
-    .addTag('book-keeping')
+    .addTag('bookkeeping')
     .addBearerAuth()
     .build();
   const organizationBookkeepingDocument = SwaggerModule.createDocument(
@@ -31,7 +31,7 @@ async function bootstrap() {
     organizationBookkeepingOptions,
     { include: [HttpModule, UsersModule, AuthModule] },
   );
-  SwaggerModule.setup('api/book-keeping', app, organizationBookkeepingDocument);
+  SwaggerModule.setup('api/bookkeeping', app, organizationBookkeepingDocument);
 
   const websiteContentOptions = new DocumentBuilder()
     .setTitle('DroPsyPra website content')

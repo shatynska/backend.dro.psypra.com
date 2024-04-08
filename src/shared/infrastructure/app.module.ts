@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { ProfilesModule } from 'src/specialists-profiles/profiles/profiles.module';
 import { WebsiteContentModule } from 'src/website-content/website-content.module';
 import { CashBooksModule } from '~/cash-books/infrastructure/cash-books.module';
 import { PrismaModule } from '~/shared/infrastructure/prisma/prisma.module';
@@ -17,6 +18,7 @@ import { UsersModule } from '../../users/users.module';
     WebsiteContentModule,
     PrismaModule,
     AuthModule,
+    ProfilesModule,
     ThrottlerModule.forRoot([
       {
         ttl: 6000,

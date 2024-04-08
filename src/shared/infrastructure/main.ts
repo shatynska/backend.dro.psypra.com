@@ -5,6 +5,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { AuthModule } from 'src/auth/auth.module';
+import { ProfilesModule } from 'src/specialists-profiles/profiles/profiles.module';
 import { UsersModule } from 'src/users/users.module';
 import { WebsiteContentModule } from 'src/website-content/website-content.module';
 import { HttpModule } from '~/cash-books/infrastructure/http/http.module';
@@ -57,7 +58,7 @@ async function bootstrap() {
   const specialistsProfilesDocument = SwaggerModule.createDocument(
     app,
     specialistsProfilesOptions,
-    { include: [UsersModule, AuthModule] },
+    { include: [UsersModule, AuthModule, ProfilesModule] },
   );
   SwaggerModule.setup('api/profiles', app, specialistsProfilesDocument);
 

@@ -48,7 +48,7 @@ model DimensionItemsToSpecialist {
 model PageSection {
   alias            String  @id
   primaryHeading   String  @map("primary_heading")
-  secondaryHeading String? @map("secondary_heading")
+  secondaryHeading String  @map("secondary_heading")
   href             String?
 
   @@map("page-sections")

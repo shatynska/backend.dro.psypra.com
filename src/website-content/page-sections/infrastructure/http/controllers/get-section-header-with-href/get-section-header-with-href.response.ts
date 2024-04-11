@@ -7,10 +7,10 @@ import { GetSectionHeaderWithHrefResult } from '~/page-sections/application/quer
 
 export class GetSectionHeaderWithHrefResponse extends GetSectionHeaderWithHrefResult {
   @ApiProperty({ example: sectionHeadingsDtoStubs[3] })
-  headings: SectionHeadingsDto;
+  headings!: SectionHeadingsDto;
 
   @ApiProperty({ example: '/specialists' })
-  href: string;
+  href!: string;
   constructor(header: GetSectionHeaderWithHrefResult) {
     super();
     Object.assign(this, header);

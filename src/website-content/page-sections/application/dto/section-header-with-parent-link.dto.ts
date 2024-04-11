@@ -8,7 +8,7 @@ import {
 } from './section-header.dto';
 
 export class SectionHeaderWithParentLinkDto extends SectionHeaderDto {
-  parentLink: SectionHeaderWithHrefDto;
+  parentLink!: SectionHeaderWithHrefDto;
 }
 
 export const sectionHeaderWithParentLinkDtoStubs: SectionHeaderWithParentLinkDto[] =

@@ -17,7 +17,7 @@ export class SectionHeaderWithHrefMapper {
         primary: primaryHeading,
         secondary: secondaryHeading,
       },
-      href,
+      href: href ?? '/',
     };
   }
 }

@@ -1,10 +1,10 @@
 export class SectionHeaderDto {
-  headings: SectionHeadingsDto;
+  headings!: SectionHeadingsDto;
 }
 
 export class SectionHeadingsDto {
-  primary: string;
-  secondary: string;
+  primary!: string;
+  secondary!: string;
 }
 
 export const sectionHeadingsDtoStubs: SectionHeadingsDto[] = [

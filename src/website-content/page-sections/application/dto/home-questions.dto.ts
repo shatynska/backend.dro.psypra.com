@@ -1,10 +1,10 @@
 export class HomeQuestionsDto {
-  items: HomeQuestionsItemDto[];
+  items!: HomeQuestionsItemDto[];
 }
 
 export class HomeQuestionsItemDto {
-  title: string;
-  href: string;
+  title!: string;
+  href!: string;
 }
 
 export const homeQuestionsItemDtoStubs: HomeQuestionsItemDto[] = [

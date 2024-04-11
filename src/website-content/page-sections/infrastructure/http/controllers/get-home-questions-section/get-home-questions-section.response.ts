@@ -16,13 +16,13 @@ export class GetHomeQuestionsSectionResponse
     type: () => SectionHeaderDto,
     example: sectionHeaderDtoStubs[0],
   })
-  header: SectionHeaderDto;
+  header!: SectionHeaderDto;
 
   @ApiProperty({
     type: () => HomeQuestionsDto,
     example: homeQuestionsDtoStub[0],
   })
-  content: HomeQuestionsDto;
+  content!: HomeQuestionsDto;
 
   constructor(section: GetHomeQuestionsSectionResult) {
     Object.assign(this, section);

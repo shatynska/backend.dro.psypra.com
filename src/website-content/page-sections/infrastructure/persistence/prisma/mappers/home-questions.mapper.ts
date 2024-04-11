@@ -8,7 +8,7 @@ export class HomeQuestionsMapper {
     return {
       items: questions.map((item) => ({
         title: item.secondaryHeading,
-        href: item.href,
+        href: item.href ?? '/',
       })),
     };
   }

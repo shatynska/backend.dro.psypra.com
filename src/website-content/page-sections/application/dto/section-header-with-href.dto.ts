@@ -4,7 +4,7 @@ import {
 } from './section-header.dto';
 
 export class SectionHeaderWithHrefDto extends SectionHeaderDto {
-  href: string;
+  href: string | undefined;
 }
 
 export const sectionHeaderWithHrefDtoStubs: SectionHeaderWithHrefDto[] = [

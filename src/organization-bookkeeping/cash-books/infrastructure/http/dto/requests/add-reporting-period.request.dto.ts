@@ -4,17 +4,17 @@ import { AddReportingPeriodDto } from '~/cash-books/application/dto/add-reportin
 export class AddReportingPeriodRequestDto implements AddReportingPeriodDto {
   @IsNotEmpty()
   @IsString()
-  cashBookId: string;
+  cashBookId!: string;
 
   @IsNotEmpty()
   @IsString()
-  title: string;
+  title!: string;
 
   @IsNotEmpty()
   @IsString()
-  startDate: string;
+  startDate!: string;
 
   @IsNotEmpty()
   @IsString()
-  endDate: string;
+  endDate!: string;
 }

@@ -5,7 +5,7 @@ import {
   CashBooksWriteRepository,
 } from '~/cash-books/domain/cash-books.write.repository';
 import { ReportingPeriodCreationError } from '~/cash-books/domain/errors';
-import { Result, failure } from '~/shared/core/result';
+import { Result, failure, success } from '~/shared/core/result';
 import { CashBookNotFoundError } from '../../errors/cash-book-not-found.error';
 import { AddReportingPeriodCommand } from './add-reporting-period.command';
 
@@ -21,7 +21,7 @@ export class AddReportingPeriodHandler
   async execute(
     command: AddReportingPeriodCommand,
   ): Promise<
-    Result<CashBookNotFoundError | ReportingPeriodCreationError, void>
+    Result<CashBookNotFoundError | ReportingPeriodCreationError, undefined>
   > {
     const { cashBookId, title, startDate, endDate } = command.params;
 
@@ -47,5 +47,7 @@ export class AddReportingPeriodHandler
     }
 
     await this.cashBooksWriteRepository.save(updatedCashBook.value);
+
+    return success(undefined);
   }
 }

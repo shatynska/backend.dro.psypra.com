@@ -4,5 +4,5 @@ import { CreateCashBookDto } from '~/cash-books/application/dto/create-cash-book
 export class CreateCashBookRequestDto implements CreateCashBookDto {
   @IsNotEmpty()
   @IsString()
-  title: string;
+  title!: string;
 }

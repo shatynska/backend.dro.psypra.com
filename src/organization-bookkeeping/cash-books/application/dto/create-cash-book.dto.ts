@@ -1,3 +1,3 @@
 export class CreateCashBookDto {
-  title: string;
+  title!: string;
 }

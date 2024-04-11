@@ -1,3 +1,3 @@
 export class CashBalanceDto {
-  value: number;
+  value!: number;
 }

@@ -6,7 +6,7 @@ import {
 } from '~/cash-books/domain/cash-books.write.repository';
 import { CashBook } from '~/cash-books/domain/entities/cash-book.entity';
 import { CashBookCreationError } from '~/cash-books/domain/errors';
-import { Result, failure } from '~/shared/core/result';
+import { Result, failure, success } from '~/shared/core/result';
 import { CreateCashBookCommand } from './create-cash-book.command';
 
 @CommandHandler(CreateCashBookCommand)
@@ -20,7 +20,7 @@ export class CreateCashBookHandler
 
   async execute(
     command: CreateCashBookCommand,
-  ): Promise<Result<CashBookCreationError, void>> {
+  ): Promise<Result<CashBookCreationError, undefined>> {
     const { title } = command.params;
 
     const isTitleUnique =
@@ -36,5 +36,7 @@ export class CreateCashBookHandler
     }
 
     await this.cashBooksWriteRepository.save(cashBook.value);
+
+    return success(undefined);
   }
 }

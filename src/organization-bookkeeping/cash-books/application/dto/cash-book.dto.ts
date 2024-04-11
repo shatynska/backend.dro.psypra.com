@@ -1,5 +1,5 @@
 export class CashBookDto {
-  id: string;
-  title: string;
-  cashBalance: number;
+  id!: string;
+  title!: string;
+  cashBalance!: number;
 }

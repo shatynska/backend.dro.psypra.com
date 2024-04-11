@@ -5,7 +5,7 @@ export class CashBalanceResponseDto implements CashBalanceDto {
   @ApiProperty({
     example: 8420,
   })
-  value: number;
+  value!: number;
 
   constructor(cashBalance: CashBalanceResponseDto) {
     Object.assign(this, cashBalance);

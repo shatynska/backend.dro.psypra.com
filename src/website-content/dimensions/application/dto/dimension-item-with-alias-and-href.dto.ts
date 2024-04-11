@@ -1,8 +1,8 @@
 import { DimensionItemDto, dimensionItemDtoStubs } from './dimension-item.dto';
 
 export class DimensionItemWithAliasAndHrefDto extends DimensionItemDto {
-  alias: string;
-  href: string;
+  alias!: string;
+  href!: string;
 }
 
 export const dimensionItemWithAliasAndHrefDtoStubs: DimensionItemWithAliasAndHrefDto[] =

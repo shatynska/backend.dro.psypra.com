@@ -4,7 +4,7 @@ import {
 } from './dimension-item-with-alias-and-href.dto';
 
 export class DimensionItemsDto {
-  items: DimensionItemWithAliasAndHrefDto[];
+  items!: DimensionItemWithAliasAndHrefDto[];
 }
 
 export const dimensionItemsDtoStubs: DimensionItemsDto[] = [

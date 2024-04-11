@@ -52,7 +52,7 @@ export class PrismaReadRepository implements ReadRepository {
   async getDimensionsWithItemsForSpecialist(
     dimensionsAliases: string[],
     specialistAlias: string,
-  ): Promise<DimensionsWithItemsForSpecialistDto> {
+  ): Promise<DimensionsWithItemsForSpecialistDto | null> {
     const dimensions = await this.prismaService.dimension.findMany({
       where: {
         alias: {

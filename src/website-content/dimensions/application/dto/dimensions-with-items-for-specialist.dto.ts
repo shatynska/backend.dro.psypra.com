@@ -1,11 +1,11 @@
 export class DimensionsWithItemsForSpecialistDto {
-  dimensions: DimensionWithItemsForSpecialistDto[];
+  dimensions!: DimensionWithItemsForSpecialistDto[];
 }
 
 export class DimensionWithItemsForSpecialistDto {
-  alias: string;
-  title: string;
-  items: string[];
+  alias!: string;
+  title!: string;
+  items!: string[];
 }
 
 export const dimensionWithItemsForSpecialistDtoStubs: DimensionWithItemsForSpecialistDto[] =

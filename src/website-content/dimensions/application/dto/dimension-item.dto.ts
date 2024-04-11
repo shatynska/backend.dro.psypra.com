@@ -1,5 +1,5 @@
 export class DimensionItemDto {
-  title: string;
+  title!: string;
   description?: string;
 }
 

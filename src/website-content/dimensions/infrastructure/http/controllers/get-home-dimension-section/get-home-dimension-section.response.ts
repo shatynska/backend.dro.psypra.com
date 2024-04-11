@@ -16,13 +16,13 @@ export class GetHomeDimensionSectionResponse
     type: () => SectionHeaderWithHrefDto,
     example: sectionHeaderWithHrefDtoStubs[1],
   })
-  header: SectionHeaderWithHrefDto;
+  header!: SectionHeaderWithHrefDto;
 
   @ApiProperty({
     type: () => DimensionItemsDto,
     example: dimensionItemsDtoStubs[0],
   })
-  content: DimensionItemsDto;
+  content!: DimensionItemsDto;
 
   constructor(section: GetHomeDimensionSectionResult) {
     Object.assign(this, section);

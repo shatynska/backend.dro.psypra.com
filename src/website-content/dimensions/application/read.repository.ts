@@ -7,7 +7,7 @@ export const READ_REPOSITORY_TOKEN = Symbol(
 );
 
 export interface ReadRepository {
-  getDimensionItem(alias: string): Promise<DimensionItemDto>;
+  getDimensionItem(alias: string): Promise<DimensionItemDto | null>;
 
   getDimensionItemsByDimensionAlias(
     dimensionAlias: string,
@@ -16,5 +16,5 @@ export interface ReadRepository {
   getDimensionsWithItemsForSpecialist(
     dimensionsAliases: string[],
     specialistAlias: string,
-  ): Promise<DimensionsWithItemsForSpecialistDto>;
+  ): Promise<DimensionsWithItemsForSpecialistDto | null>;
 }

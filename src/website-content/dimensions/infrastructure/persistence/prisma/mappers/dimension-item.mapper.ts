@@ -7,7 +7,7 @@ export class DimensionItemMapper {
   static mapToDto({ title, description }: Parameters): DimensionItemDto {
     return {
       title: title.charAt(0).toUpperCase() + title.slice(1),
-      description,
+      description: description ?? undefined,
     };
   }
 }

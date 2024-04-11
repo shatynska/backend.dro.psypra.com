@@ -13,7 +13,7 @@ export class DimensionItemsByDimensionAliasMapper {
         alias: item.alias,
         href: `/${item.dimensionAlias}/${item.alias}`,
         title: item.title.charAt(0).toUpperCase() + item.title.slice(1),
-        description: item.description,
+        description: item.description ?? undefined,
       })),
     };
   }

@@ -16,13 +16,13 @@ export class GetSpecialistMainSectionResponse
     type: () => SectionHeaderWithParentLinkDto,
     example: sectionHeaderWithParentLinkDtoStubs[3],
   })
-  header: SectionHeaderWithParentLinkDto;
+  header!: SectionHeaderWithParentLinkDto;
 
   @ApiProperty({
     type: () => SpecialistMainDto,
     example: specialistMainDtoStubs[0],
   })
-  content: SpecialistMainDto;
+  content!: SpecialistMainDto;
 
   constructor(section: GetSpecialistMainSectionResult) {
     Object.assign(this, section);

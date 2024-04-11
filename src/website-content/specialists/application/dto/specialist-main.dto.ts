@@ -4,9 +4,9 @@ import {
 } from './specialist-essential.dto';
 
 export class SpecialistMainDto extends SpecialistEssentialDto {
-  phones: string[];
-  emails: string[];
-  websites: string[];
+  phones!: string[];
+  emails!: string[];
+  websites!: string[];
 }
 
 export const specialistMainDtoStubs: SpecialistMainDto[] = [

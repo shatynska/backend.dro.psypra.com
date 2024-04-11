@@ -4,7 +4,7 @@ import {
 } from './specialist-essential.dto';
 
 export class SpecialistsDto {
-  specialists: SpecialistEssentialWithAliasAndHrefDto[];
+  specialists!: SpecialistEssentialWithAliasAndHrefDto[];
 }
 
 export const specialistsDtoStubs: SpecialistsDto[] = [

@@ -9,7 +9,7 @@ export class GetSpecialistsResponse extends GetSpecialistsResult {
   @ApiProperty({
     example: specialistEssentialWithAliasAndHrefDtoStubs,
   })
-  specialists: SpecialistEssentialWithAliasAndHrefDto[];
+  specialists!: SpecialistEssentialWithAliasAndHrefDto[];
 
   constructor(specialists: GetSpecialistsResult) {
     super();

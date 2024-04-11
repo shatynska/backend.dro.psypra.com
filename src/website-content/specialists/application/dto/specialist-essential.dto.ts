@@ -1,11 +1,11 @@
 export class SpecialistEssentialDto {
-  fullName: string;
-  specialties: string;
+  fullName!: string;
+  specialties!: string;
 }
 
 export class SpecialistEssentialWithAliasAndHrefDto extends SpecialistEssentialDto {
-  alias: string;
-  href: string;
+  alias!: string;
+  href!: string;
 }
 
 export const specialistEssentialDtoStubs: SpecialistEssentialDto[] = [

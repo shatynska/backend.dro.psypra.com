@@ -17,13 +17,13 @@ export class GetSpecialistBriefSectionResponse
     type: () => SectionHeaderDto,
     example: sectionHeaderDtoStubs[2],
   })
-  header: SectionHeaderDto;
+  header!: SectionHeaderDto;
 
   @ApiProperty({
     type: () => DimensionsWithItemsForSpecialistDto,
     example: dimensionsWithItemsForSpecialistDtoStubs,
   })
-  content: DimensionsWithItemsForSpecialistDto;
+  content!: DimensionsWithItemsForSpecialistDto;
 
   constructor(section: GetSpecialistBriefSectionResult) {
     Object.assign(this, section);

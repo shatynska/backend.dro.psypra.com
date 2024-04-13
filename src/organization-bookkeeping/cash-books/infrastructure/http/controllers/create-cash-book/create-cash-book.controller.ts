@@ -26,8 +26,10 @@ export class CreateCashBookController {
   )
   @Post()
   async execute(@Body() dto: CreateCashBookRequestDto): Promise<void> {
-    const result: Result<CashBookCreationError, void> =
-      await this.commandBus.execute(new CreateCashBookCommand(dto));
+    const result = await this.commandBus.execute<
+      CreateCashBookCommand,
+      Result<CashBookCreationError, null>
+    >(new CreateCashBookCommand(dto));
 
     // TODO Figure out why result may return undefined
     if (result && result.isFailure()) {

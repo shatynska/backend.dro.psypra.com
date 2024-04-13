@@ -20,7 +20,7 @@ export class CreateCashBookHandler
 
   async execute(
     command: CreateCashBookCommand,
-  ): Promise<Result<CashBookCreationError, undefined>> {
+  ): Promise<Result<CashBookCreationError, null>> {
     const { title } = command.params;
 
     const isTitleUnique =
@@ -37,6 +37,6 @@ export class CreateCashBookHandler
 
     await this.cashBooksWriteRepository.save(cashBook.value);
 
-    return success(undefined);
+    return success(null);
   }
 }

@@ -21,7 +21,7 @@ export class AddReportingPeriodHandler
   async execute(
     command: AddReportingPeriodCommand,
   ): Promise<
-    Result<CashBookNotFoundError | ReportingPeriodCreationError, undefined>
+    Result<CashBookNotFoundError | ReportingPeriodCreationError, null>
   > {
     const { cashBookId, title, startDate, endDate } = command.params;
 
@@ -48,6 +48,6 @@ export class AddReportingPeriodHandler
 
     await this.cashBooksWriteRepository.save(updatedCashBook.value);
 
-    return success(undefined);
+    return success(null);
   }
 }

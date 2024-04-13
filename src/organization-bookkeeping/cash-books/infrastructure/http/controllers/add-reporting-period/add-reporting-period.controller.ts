@@ -27,10 +27,10 @@ export class AddReportingPeriodController {
   )
   @Post(':id/reporting-periods')
   async execute(@Body() dto: AddReportingPeriodRequestDto): Promise<void> {
-    const result: Result<
-      CashBookNotFoundError | ReportingPeriodCreationError,
-      void
-    > = await this.commandBus.execute(new AddReportingPeriodCommand(dto));
+    const result = await this.commandBus.execute<
+      AddReportingPeriodCommand,
+      Result<CashBookNotFoundError | ReportingPeriodCreationError, null>
+    >(new AddReportingPeriodCommand(dto));
 
     if (result && result.isFailure()) {
       const error = result.value;

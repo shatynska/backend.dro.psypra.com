@@ -1,14 +1,15 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { MinLength } from 'class-validator';
+import { createZodDto } from 'nestjs-zod';
+import { z } from 'zod';
 
-export class LoginDto {
-  @ApiProperty({
-    example: 'myUserName',
+export const LoginDtoSchema = z
+  .object({
+    identifier: z.string().min(2).max(40),
+    password: z.string().min(8).max(40),
+    passportRepeat: z.string().min(8).max(40),
   })
-  @MinLength(4)
-  identifier!: string;
+  .refine((data) => data.password === data.passportRepeat, {
+    path: ['passportRepeat'],
+    message: 'Паролі не співпадають',
+  });
 
-  @ApiProperty({ example: 'secret_password' })
-  @MinLength(6)
-  password!: string;
-}
+export class LoginDto extends createZodDto(LoginDtoSchema) {}

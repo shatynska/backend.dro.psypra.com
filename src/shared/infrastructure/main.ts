@@ -1,9 +1,9 @@
-import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
 import helmet from 'helmet';
+import { patchNestJsSwagger } from 'nestjs-zod';
 import { AuthModule } from 'src/auth/auth.module';
 import { ProfilesModule } from 'src/specialists-profiles/profiles/profiles.module';
 import { UsersModule } from 'src/users/users.module';
@@ -16,8 +16,9 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   app.enableCors();
   app.use(helmet());
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.use(cookieParser());
+
+  patchNestJsSwagger();
 
   const organizationBookkeepingOptions = new DocumentBuilder()
     .setTitle('DroPsyPra bookkeeping')

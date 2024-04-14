@@ -1,8 +1,9 @@
 import { JwtAuthGuard } from '@auth/guards/jwt-auth.guard';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD, APP_PIPE } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { ZodValidationPipe } from 'nestjs-zod';
 import { ProfilesModule } from 'src/specialists-profiles/profiles/profiles.module';
 import { WebsiteContentModule } from 'src/website-content/website-content.module';
 import { CashBooksModule } from '~/cash-books/infrastructure/cash-books.module';
@@ -34,6 +35,10 @@ import { UsersModule } from '../../users/users.module';
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
+    },
+    {
+      provide: APP_PIPE,
+      useClass: ZodValidationPipe,
     },
   ],
 })

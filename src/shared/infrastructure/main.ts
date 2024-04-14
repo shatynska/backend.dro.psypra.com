@@ -1,3 +1,4 @@
+import { ErrorDto } from '@common/dto';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -59,7 +60,10 @@ async function bootstrap() {
   const specialistsProfilesDocument = SwaggerModule.createDocument(
     app,
     specialistsProfilesOptions,
-    { include: [UsersModule, AuthModule, ProfilesModule] },
+    {
+      include: [UsersModule, AuthModule, ProfilesModule],
+      extraModels: [ErrorDto],
+    },
   );
   SwaggerModule.setup('api/profiles', app, specialistsProfilesDocument);
 

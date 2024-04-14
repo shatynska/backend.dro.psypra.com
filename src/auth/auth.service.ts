@@ -1,10 +1,12 @@
 import { Provider, Token, User } from '.prisma/client';
 import {
+  BadRequestException,
   ConflictException,
   HttpException,
   HttpStatus,
   Injectable,
   Logger,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -39,11 +41,12 @@ export class AuthService {
       throw new UnauthorizedException();
     }
     const user = await this.usersService.findOne(token.userId);
+    if (!user) throw new NotFoundException();
     return this.generateTokens(user, agent);
   }
 
   async register(dto: RegisterDto) {
-    const user: User = await this.usersService
+    const user: User | null = await this.usersService
       .findOne(dto.userName)
       .catch((err) => {
         this.logger.error(err);
@@ -61,13 +64,13 @@ export class AuthService {
   }
 
   async login(dto: LoginDto, agent: string): Promise<Tokens> {
-    const user: User = await this.usersService
+    const user: User | null = await this.usersService
       .findOne(dto.identifier, true)
       .catch((err) => {
         this.logger.error(err);
         return null;
       });
-    if (!user || !compareSync(dto.password, user.password)) {
+    if (!user || (user.password && !compareSync(dto.password, user.password))) {
       throw new UnauthorizedException('Wrong login or password');
     }
     return this.generateTokens(user, agent);
@@ -124,6 +127,7 @@ export class AuthService {
           this.logger.error(err);
           return null;
         });
+      if (!user) throw new BadRequestException();
       return this.generateTokens(user, agent);
     }
     const user = await this.usersService

@@ -154,10 +154,16 @@ export class AuthController {
   @UseGuards(GoogleGuard)
   @Get('google/callback')
   googleAuthCallback(@Req() req: Request, @Res() res: Response) {
-    const token = req.user['accessToken'];
-    res.redirect(
-      `${this.configService.get('API_URL')}/auth/success-google?token=${token}`,
-    );
+    if (req.user) {
+      const token = req.user['accessToken'];
+      res.redirect(
+        `${this.configService.get(
+          'API_URL',
+        )}/auth/success-google?token=${token}`,
+      );
+    } else {
+      throw new BadRequestException();
+    }
   }
 
   @Get('success-google')

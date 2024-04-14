@@ -1,4 +1,3 @@
-import { JwtPayload } from '@auth/interfaces';
 import { CurrentUser } from '@common/decorators';
 import {
   Body,
@@ -6,6 +5,7 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   ParseUUIDPipe,
   Put,
@@ -13,6 +13,7 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { User } from '@prisma/client';
+import { JwtPayloadDto } from '~/shared/application/dto/jwt-payload.dto';
 import { UserResponseDto } from './dto';
 import { UsersService } from './users.service';
 
@@ -26,6 +27,9 @@ export class UsersController {
   @ApiBearerAuth()
   async findOne(@Param('identifier') identifier: string) {
     const user = await this.usersService.findOne(identifier);
+    if (!user) {
+      throw new NotFoundException();
+    }
     return new UserResponseDto(user);
   }
 
@@ -34,14 +38,14 @@ export class UsersController {
   @ApiBearerAuth()
   async remove(
     @Param('id', ParseUUIDPipe) id: string,
-    @CurrentUser() user: JwtPayload,
+    @CurrentUser() user: JwtPayloadDto,
   ) {
     return this.usersService.remove(id, user);
   }
 
   @Get()
   @ApiBearerAuth()
-  me(@CurrentUser() user: JwtPayload) {
+  me(@CurrentUser() user: JwtPayloadDto) {
     return user;
   }
 

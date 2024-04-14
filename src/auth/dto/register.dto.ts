@@ -7,14 +7,14 @@ export class RegisterDto {
     example: 'myUserName',
   })
   @MinLength(4)
-  userName: string;
+  userName!: string;
 
   @ApiProperty({ example: 'secret_password' })
   @MinLength(6)
-  password: string;
+  password!: string;
 
   @ApiProperty({ example: 'secret_password' })
   @MinLength(6)
   @Validate(IsPasswordsMatchingConstraint)
-  passportRepeat: string;
+  passportRepeat!: string;
 }

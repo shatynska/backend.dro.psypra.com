@@ -6,9 +6,9 @@ export class LoginDto {
     example: 'myUserName',
   })
   @MinLength(4)
-  identifier: string;
+  identifier!: string;
 
   @ApiProperty({ example: 'secret_password' })
   @MinLength(6)
-  password: string;
+  password!: string;
 }

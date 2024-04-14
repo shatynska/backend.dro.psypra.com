@@ -5,28 +5,28 @@ export class UserResponseDto {
   @ApiProperty({
     example: 'c0377617-9f36-489e-ba72-d462777987e9',
   })
-  id: string;
+  id!: string;
 
   @ApiProperty({
     example: 'myUserName',
   })
-  userName: string;
+  userName!: string;
 
   @ApiProperty({
     example: 'test@gmail.com',
   })
-  email?: string;
+  email?: string | null;
 
   @ApiProperty({
     example: '+380971234567',
   })
-  phone?: string;
+  phone?: string | null;
 
   @ApiProperty({
     example: [Role.USER],
     enum: Role,
   })
-  roles: Role[];
+  roles!: Role[];
 
   constructor(user: UserResponseDto) {
     Object.assign(this, user);

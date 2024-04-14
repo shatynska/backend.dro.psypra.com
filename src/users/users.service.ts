@@ -1,4 +1,3 @@
-import { JwtPayload } from '@auth/interfaces';
 import { convertToSecondsUtil } from '@common/utils';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { ForbiddenException, Inject, Injectable } from '@nestjs/common';
@@ -6,6 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { Role, User } from '@prisma/client';
 import { genSaltSync, hashSync } from 'bcrypt';
 import { Cache } from 'cache-manager';
+import { JwtPayloadDto } from '~/shared/application/dto/jwt-payload.dto';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
 
 @Injectable()
@@ -32,7 +32,7 @@ export class UsersService {
         roles: user?.roles ?? undefined,
       },
       create: {
-        userName: user.userName,
+        userName: user.userName ?? '',
         email: undefined,
         phone: undefined,
         password: hashedPassword,
@@ -42,12 +42,16 @@ export class UsersService {
     });
     await this.cacheManager.set(savedUser.id, savedUser);
     await this.cacheManager.set(savedUser.userName, savedUser);
-    await this.cacheManager.set(savedUser.email, savedUser);
-    await this.cacheManager.set(savedUser.phone, savedUser);
+    if (savedUser.email) {
+      await this.cacheManager.set(savedUser.email, savedUser);
+    }
+    if (savedUser.phone) {
+      await this.cacheManager.set(savedUser.phone, savedUser);
+    }
     return savedUser;
   }
 
-  async findOne(identifier: string, isReset = false): Promise<User> {
+  async findOne(identifier: string, isReset = false): Promise<User | null> {
     if (isReset) {
       await this.cacheManager.del(identifier);
     }
@@ -69,14 +73,14 @@ export class UsersService {
       await this.cacheManager.set(
         identifier,
         user,
-        convertToSecondsUtil(this.configService.get('JWT_EXP')),
+        convertToSecondsUtil(this.configService.get('JWT_EXP') ?? '10m'),
       );
       return user;
     }
     return user;
   }
 
-  async remove(id: string, user: JwtPayload) {
+  async remove(id: string, user: JwtPayloadDto) {
     if (user.id != id && !user.roles.includes(Role.ADMIN)) {
       throw new ForbiddenException();
     }

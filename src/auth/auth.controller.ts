@@ -1,9 +1,4 @@
-import {
-  ApiErrorDecorator,
-  Cookie,
-  Public,
-  UserAgent,
-} from '@common/decorators';
+import { Cookie, Public, UserAgent } from '@common/decorators';
 import { handleTimeoutAndErrors } from '@common/helpers';
 import { HttpService } from '@nestjs/axios';
 import {
@@ -22,7 +17,13 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBadRequestResponse,
+  ApiConflictResponse,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Provider } from '@prisma/client';
 import { Request, Response } from 'express';
 import { map, mergeMap } from 'rxjs';
@@ -53,11 +54,8 @@ export class AuthController {
     status: 201,
     type: UserResponseDto,
   })
-  @ApiErrorDecorator(HttpStatus.BAD_REQUEST, 'Bad Request')
-  @ApiErrorDecorator(
-    HttpStatus.CONFLICT,
-    'User with this username is already registered',
-  )
+  @ApiConflictResponse()
+  @ApiBadRequestResponse()
   async register(@Body() dto: RegisterDto) {
     const user = await this.authService.register(dto);
     if (!user) {
@@ -76,8 +74,7 @@ export class AuthController {
     status: 201,
     type: LoginResponseDto,
   })
-  @ApiErrorDecorator(HttpStatus.BAD_REQUEST, 'Unable to login')
-  @ApiErrorDecorator(HttpStatus.UNAUTHORIZED, 'Wrong login or password')
+  @ApiBadRequestResponse()
   async login(
     @Body() dto: LoginDto,
     @Res() res: Response,

@@ -57,6 +57,7 @@ model PageSection {
 model Specialist {
   alias          String                       @unique
   user           User                         @relation(fields: [alias], references: [userName])
+  isPublic       Boolean                      @default(false)
   firstName      String                       @map("first_name")
   lastName       String                       @map("last_name")
   phones         String[]

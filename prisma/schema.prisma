@@ -12,6 +12,17 @@ datasource db {
 
 // Website content
 
+model Contact {
+  id              String      @id @default(uuid())
+  specialist      Specialist  @relation(fields: [specialistAlias], references: [alias])
+  specialistAlias String      @map("specialist_alias")
+  type            ContactType
+  value           String
+  order           Int         @default(0)
+
+  @@map("contacts")
+}
+
 model Dimension {
   alias          String                       @id
   title          String                       @unique
@@ -64,6 +75,7 @@ model Specialist {
   emails         String[]
   websites       String[]
   dimensionItems DimensionItemsToSpecialist[]
+  Contact        Contact[]
 
   @@map("specialists")
 }
@@ -155,6 +167,12 @@ model User {
   updatedAt  DateTime    @updatedAt @map("updated_at")
 
   @@map("users")
+}
+
+enum ContactType {
+  PHONE
+  EMAIL
+  WEBSITE
 }
 
 enum MemberStatus {

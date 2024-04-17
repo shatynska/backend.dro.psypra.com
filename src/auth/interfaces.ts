@@ -1,4 +1,4 @@
-import { Token } from '.prisma/client';
+import { Token, User } from '.prisma/client';
 
 export interface Tokens {
   accessToken: string;
@@ -12,3 +12,5 @@ export interface JwtPayload {
   phone: string;
   roles: string[];
 }
+
+export type UserBrief = Pick<User, 'userName'>;

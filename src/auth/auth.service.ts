@@ -16,7 +16,7 @@ import { UsersService } from 'src/users/users.service';
 import { v4 } from 'uuid';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
 import { LoginDto, RegisterDto } from './dto';
-import { Tokens } from './interfaces';
+import { Tokens, UserBrief } from './interfaces';
 
 @Injectable()
 export class AuthService {
@@ -27,7 +27,10 @@ export class AuthService {
     private readonly prismaService: PrismaService,
   ) {}
 
-  async refreshTokens(refreshToken: string, agent: string): Promise<Tokens> {
+  async refreshTokens(
+    refreshToken: string,
+    agent: string,
+  ): Promise<{ tokens: Tokens; user: UserBrief }> {
     const token = await this.prismaService.token.findUnique({
       where: { token: refreshToken },
     });
@@ -42,7 +45,9 @@ export class AuthService {
     }
     const user = await this.usersService.findOne(token.userId);
     if (!user) throw new NotFoundException();
-    return this.generateTokens(user, agent);
+    const tokens = await this.generateTokens(user, agent);
+    const userBrief = { userName: user.userName, roles: user.roles };
+    return { tokens, user: userBrief };
   }
 
   async register(dto: RegisterDto) {
@@ -63,7 +68,10 @@ export class AuthService {
     });
   }
 
-  async login(dto: LoginDto, agent: string): Promise<Tokens> {
+  async login(
+    dto: LoginDto,
+    agent: string,
+  ): Promise<{ tokens: Tokens; user: UserBrief }> {
     const user: User | null = await this.usersService
       .findOne(dto.identifier, true)
       .catch((err) => {
@@ -73,7 +81,9 @@ export class AuthService {
     if (!user || (user.password && !compareSync(dto.password, user.password))) {
       throw new UnauthorizedException('Wrong login or password');
     }
-    return this.generateTokens(user, agent);
+    const tokens = await this.generateTokens(user, agent);
+    const userBrief = { userName: user.userName, roles: user.roles };
+    return { tokens, user: userBrief };
   }
 
   private async generateTokens(user: User, agent: string): Promise<Tokens> {

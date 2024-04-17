@@ -80,13 +80,16 @@ export class AuthController {
     @Res() res: Response,
     @UserAgent() agent: string,
   ) {
-    const tokens = await this.authService.login(dto, agent);
+    const { tokens, user } = await this.authService.login(dto, agent);
     if (!tokens) {
       throw new BadRequestException(
         `Unable to login with data ${JSON.stringify(dto)}`,
       );
     }
     this.setRefreshTokenToCookies(tokens, res);
+    res
+      .status(HttpStatus.CREATED)
+      .json({ user, accessToken: tokens.accessToken });
   }
 
   @ApiOperation({
@@ -122,11 +125,17 @@ export class AuthController {
     if (!refreshToken) {
       throw new UnauthorizedException();
     }
-    const tokens = await this.authService.refreshTokens(refreshToken, agent);
+    const { tokens, user } = await this.authService.refreshTokens(
+      refreshToken,
+      agent,
+    );
     if (!tokens) {
       throw new UnauthorizedException();
     }
     this.setRefreshTokenToCookies(tokens, res);
+    res
+      .status(HttpStatus.CREATED)
+      .json({ user, accessToken: tokens.accessToken });
   }
 
   private setRefreshTokenToCookies(tokens: Tokens, res: Response) {
@@ -141,7 +150,6 @@ export class AuthController {
         this.configService.get('NODE_ENV', 'development') === 'production',
       path: '/',
     });
-    res.status(HttpStatus.CREATED).json({ accessToken: tokens.accessToken });
   }
 
   @UseGuards(GoogleGuard)

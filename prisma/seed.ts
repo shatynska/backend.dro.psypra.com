@@ -8,12 +8,12 @@ import { seedUsers } from './seeds/users.seed';
 const prisma = new PrismaClient();
 
 async function main(prisma) {
-  seedUsers(prisma);
-  seedCashBooks(prisma);
-  seedDimensions(prisma);
-  seedDimensionItems(prisma);
-  seedSpecialists(prisma);
-  seedPageSections(prisma);
+  await seedUsers(prisma);
+  await seedCashBooks(prisma);
+  await seedDimensions(prisma);
+  await seedDimensionItems(prisma);
+  await seedSpecialists(prisma);
+  await seedPageSections(prisma);
 }
 
 main(prisma)

@@ -11,12 +11,12 @@ import { JwtPayloadDto } from '~/shared/application/dto/jwt-payload.dto';
 import { UpdateLastNameCommand } from '../../../../application/commands/update-last-name/update-last-name.command';
 import { UpdateLastNameRequestBody } from './update-last-name.request-body';
 
-@Controller('profiles')
-@ApiTags('profiles')
+@Controller('profile')
+@ApiTags('profile')
 export class UpdateLastNameController {
   constructor(private readonly commandBus: CommandBus) {}
 
-  @Patch('last-name')
+  @Patch('core/last-name')
   @ApiOperation({
     summary: 'Update last name',
   })

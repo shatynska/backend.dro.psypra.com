@@ -11,12 +11,12 @@ import { JwtPayloadDto } from '~/shared/application/dto/jwt-payload.dto';
 import { UpdateIsPublicCommand } from '../../../../application/commands/update-is-public/update-is-public.command';
 import { UpdateIsPublicRequestBody } from './update-is-public.request-body';
 
-@Controller('profiles')
-@ApiTags('profiles')
+@Controller('profile')
+@ApiTags('profile')
 export class UpdateIsPublicController {
   constructor(private readonly commandBus: CommandBus) {}
 
-  @Patch('is-public')
+  @Patch('core/is-public')
   @ApiOperation({
     summary: 'Update isPublic field',
   })

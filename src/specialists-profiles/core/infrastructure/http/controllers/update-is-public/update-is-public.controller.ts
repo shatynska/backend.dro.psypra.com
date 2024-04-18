@@ -2,9 +2,9 @@ import { ApiErrorDecorator, CurrentUser } from '@common/decorators';
 import { Body, Controller, HttpStatus, Patch } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { IsPublicDto } from 'src/specialists-profiles/core/application/dto/is-public.dto';
 import { JwtPayloadDto } from '~/shared/application/dto/jwt-payload.dto';
 import { UpdateIsPublicCommand } from '../../../../application/commands/update-is-public/update-is-public.command';
+import { UpdateIsPublicRequestBody } from './update-is-public.request-body';
 
 @Controller('profiles')
 @ApiTags('profiles')
@@ -19,7 +19,7 @@ export class UpdateIsPublicController {
   @ApiBearerAuth()
   async handle(
     @CurrentUser() user: JwtPayloadDto,
-    @Body() requestBody: IsPublicDto,
+    @Body() requestBody: UpdateIsPublicRequestBody,
   ) {
     const command = new UpdateIsPublicCommand(
       Object.assign({}, requestBody, { alias: user.userName }),

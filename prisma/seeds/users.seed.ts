@@ -4,7 +4,8 @@ export async function seedUsers(prisma) {
     update: {},
     create: {
       userName: 'shatynska',
-      password: '$2b$10$MaX1qOHgkACgJraaMlxcnu/0UiBT0bsoBVh/hF9VHrk7kojeMREU6',
+      email: 'shatynska@gmail.com',
+      password: '$2b$10$.Hxj5gYRn5L4DSIp/Uu.Yu.lzJEzj8MkNBBeSkR91rgTozgirFkym',
       roles: ['ADMIN', 'USER'],
     },
   });
@@ -13,7 +14,8 @@ export async function seedUsers(prisma) {
     update: {},
     create: {
       userName: 'sozanska',
-      password: '$2b$10$MaX1qOHgkACgJraaMlxcnu/0UiBT0bsoBVh/hF9VHrk7kojeMREU6',
+      email: 'ira.sozanska@gmail.com',
+      password: '$2b$10$.Hxj5gYRn5L4DSIp/Uu.Yu.lzJEzj8MkNBBeSkR91rgTozgirFkym',
       roles: ['ADMIN', 'USER'],
     },
   });
@@ -22,7 +24,8 @@ export async function seedUsers(prisma) {
     update: {},
     create: {
       userName: 'berchuk',
-      password: '$2b$10$MaX1qOHgkACgJraaMlxcnu/0UiBT0bsoBVh/hF9VHrk7kojeMREU6',
+      email: 'volodymyr.berchuk@gmail.com',
+      password: '$2b$10$.Hxj5gYRn5L4DSIp/Uu.Yu.lzJEzj8MkNBBeSkR91rgTozgirFkym',
       roles: ['USER'],
     },
   });
@@ -31,7 +34,8 @@ export async function seedUsers(prisma) {
     update: {},
     create: {
       userName: 'bilas',
-      password: '$2b$10$MaX1qOHgkACgJraaMlxcnu/0UiBT0bsoBVh/hF9VHrk7kojeMREU6',
+      email: 'petrechko13@gmail.com',
+      password: '$2b$10$.Hxj5gYRn5L4DSIp/Uu.Yu.lzJEzj8MkNBBeSkR91rgTozgirFkym',
       roles: ['USER'],
     },
   });
@@ -40,7 +44,7 @@ export async function seedUsers(prisma) {
     update: {},
     create: {
       userName: 'hambarova',
-      password: '$2b$10$MaX1qOHgkACgJraaMlxcnu/0UiBT0bsoBVh/hF9VHrk7kojeMREU6',
+      password: '$2b$10$.Hxj5gYRn5L4DSIp/Uu.Yu.lzJEzj8MkNBBeSkR91rgTozgirFkym',
       roles: ['USER'],
     },
   });
@@ -49,7 +53,8 @@ export async function seedUsers(prisma) {
     update: {},
     create: {
       userName: 'drobchak',
-      password: '$2b$10$MaX1qOHgkACgJraaMlxcnu/0UiBT0bsoBVh/hF9VHrk7kojeMREU6',
+      email: 'olgadrrobchak@gmail.com',
+      password: '$2b$10$.Hxj5gYRn5L4DSIp/Uu.Yu.lzJEzj8MkNBBeSkR91rgTozgirFkym',
       roles: ['USER'],
     },
   });
@@ -58,7 +63,8 @@ export async function seedUsers(prisma) {
     update: {},
     create: {
       userName: 'kotsiuba',
-      password: '$2b$10$MaX1qOHgkACgJraaMlxcnu/0UiBT0bsoBVh/hF9VHrk7kojeMREU6',
+      email: 'galinakotsyuba839@gmail.com',
+      password: '$2b$10$.Hxj5gYRn5L4DSIp/Uu.Yu.lzJEzj8MkNBBeSkR91rgTozgirFkym',
       roles: ['USER'],
     },
   });
@@ -67,7 +73,8 @@ export async function seedUsers(prisma) {
     update: {},
     create: {
       userName: 'lekh',
-      password: '$2b$10$MaX1qOHgkACgJraaMlxcnu/0UiBT0bsoBVh/hF9VHrk7kojeMREU6',
+      email: 'Nlech1903@ukr.net',
+      password: '$2b$10$.Hxj5gYRn5L4DSIp/Uu.Yu.lzJEzj8MkNBBeSkR91rgTozgirFkym',
       roles: ['USER'],
     },
   });
@@ -76,7 +83,8 @@ export async function seedUsers(prisma) {
     update: {},
     create: {
       userName: 'nekrasova',
-      password: '$2b$10$MaX1qOHgkACgJraaMlxcnu/0UiBT0bsoBVh/hF9VHrk7kojeMREU6',
+      email: 'vali4ka.nekrasova@gmail.com',
+      password: '$2b$10$.Hxj5gYRn5L4DSIp/Uu.Yu.lzJEzj8MkNBBeSkR91rgTozgirFkym',
       roles: ['USER'],
     },
   });
@@ -85,7 +93,7 @@ export async function seedUsers(prisma) {
     update: {},
     create: {
       userName: 'parashchak',
-      password: '$2b$10$MaX1qOHgkACgJraaMlxcnu/0UiBT0bsoBVh/hF9VHrk7kojeMREU6',
+      password: '$2b$10$.Hxj5gYRn5L4DSIp/Uu.Yu.lzJEzj8MkNBBeSkR91rgTozgirFkym',
       roles: ['USER'],
     },
   });
@@ -94,7 +102,8 @@ export async function seedUsers(prisma) {
     update: {},
     create: {
       userName: 'petryshyn',
-      password: '$2b$10$MaX1qOHgkACgJraaMlxcnu/0UiBT0bsoBVh/hF9VHrk7kojeMREU6',
+      email: 'Petryshyn.olinka17@gmail.com',
+      password: '$2b$10$.Hxj5gYRn5L4DSIp/Uu.Yu.lzJEzj8MkNBBeSkR91rgTozgirFkym',
       roles: ['USER'],
     },
   });
@@ -103,7 +112,7 @@ export async function seedUsers(prisma) {
     update: {},
     create: {
       userName: 'tatarevych',
-      password: '$2b$10$MaX1qOHgkACgJraaMlxcnu/0UiBT0bsoBVh/hF9VHrk7kojeMREU6',
+      password: '$2b$10$.Hxj5gYRn5L4DSIp/Uu.Yu.lzJEzj8MkNBBeSkR91rgTozgirFkym',
       roles: ['USER'],
     },
   });
@@ -112,7 +121,8 @@ export async function seedUsers(prisma) {
     update: {},
     create: {
       userName: 'franchuk',
-      password: '$2b$10$MaX1qOHgkACgJraaMlxcnu/0UiBT0bsoBVh/hF9VHrk7kojeMREU6',
+      email: 'franchuk.dok@gmail.com',
+      password: '$2b$10$.Hxj5gYRn5L4DSIp/Uu.Yu.lzJEzj8MkNBBeSkR91rgTozgirFkym',
       roles: ['USER'],
     },
   });
@@ -121,7 +131,7 @@ export async function seedUsers(prisma) {
     update: {},
     create: {
       userName: 'chaplia',
-      password: '$2b$10$MaX1qOHgkACgJraaMlxcnu/0UiBT0bsoBVh/hF9VHrk7kojeMREU6',
+      password: '$2b$10$.Hxj5gYRn5L4DSIp/Uu.Yu.lzJEzj8MkNBBeSkR91rgTozgirFkym',
       roles: ['USER'],
     },
   });

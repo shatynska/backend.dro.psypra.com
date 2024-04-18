@@ -6,9 +6,6 @@ export async function seedSpecialists(prisma) {
       alias: 'shatynska',
       lastName: 'Шатинська',
       firstName: 'Олена',
-      phones: ['+380980074869'],
-      emails: ['shatynskaa@gmail.com'],
-      websites: ['https://shatynska.in.ua'],
       dimensionItems: {
         create: [
           {

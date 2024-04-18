@@ -1,4 +1,3 @@
-import { ErrorDto } from '@common/dto';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -6,7 +5,7 @@ import * as cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { patchNestJsSwagger } from 'nestjs-zod';
 import { AuthModule } from 'src/auth/auth.module';
-import { ProfilesModule } from 'src/specialists-profiles/profiles/profiles.module';
+import { SpecialistsProfilesModule } from 'src/specialists-profiles/specialists-profiles.module';
 import { UsersModule } from 'src/users/users.module';
 import { WebsiteContentModule } from 'src/website-content/website-content.module';
 import { HttpModule } from '~/cash-books/infrastructure/http/http.module';
@@ -44,9 +43,7 @@ async function bootstrap() {
   const websiteContentDocument = SwaggerModule.createDocument(
     app,
     websiteContentOptions,
-    {
-      include: [WebsiteContentModule],
-    },
+    { include: [WebsiteContentModule] },
   );
   SwaggerModule.setup('api', app, websiteContentDocument);
 
@@ -61,8 +58,7 @@ async function bootstrap() {
     app,
     specialistsProfilesOptions,
     {
-      include: [UsersModule, AuthModule, ProfilesModule],
-      extraModels: [ErrorDto],
+      include: [UsersModule, AuthModule, SpecialistsProfilesModule],
     },
   );
   SwaggerModule.setup('api/profiles', app, specialistsProfilesDocument);

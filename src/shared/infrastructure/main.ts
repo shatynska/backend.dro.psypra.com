@@ -1,3 +1,4 @@
+import { ErrorDto } from '@common/dto';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -30,7 +31,7 @@ async function bootstrap() {
   const organizationBookkeepingDocument = SwaggerModule.createDocument(
     app,
     organizationBookkeepingOptions,
-    { include: [HttpModule, UsersModule, AuthModule] },
+    { include: [HttpModule, UsersModule, AuthModule], extraModels: [ErrorDto] },
   );
   SwaggerModule.setup('api/bookkeeping', app, organizationBookkeepingDocument);
 
@@ -43,7 +44,7 @@ async function bootstrap() {
   const websiteContentDocument = SwaggerModule.createDocument(
     app,
     websiteContentOptions,
-    { include: [WebsiteContentModule] },
+    { include: [WebsiteContentModule], extraModels: [ErrorDto] },
   );
   SwaggerModule.setup('api', app, websiteContentDocument);
 
@@ -59,6 +60,7 @@ async function bootstrap() {
     specialistsProfilesOptions,
     {
       include: [UsersModule, AuthModule, SpecialistsProfilesModule],
+      extraModels: [ErrorDto],
     },
   );
   SwaggerModule.setup('api/profiles', app, specialistsProfilesDocument);

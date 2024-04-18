@@ -62,22 +62,30 @@ model PageSection {
   secondaryHeading String  @map("secondary_heading")
   href             String?
 
-  @@map("page-sections")
+  @@map("page_sections")
 }
 
 model Specialist {
-  alias          String                       @unique
-  user           User                         @relation(fields: [alias], references: [userName])
-  isPublic       Boolean                      @default(false)
-  firstName      String                       @map("first_name")
-  lastName       String                       @map("last_name")
-  phones         String[]
-  emails         String[]
-  websites       String[]
-  dimensionItems DimensionItemsToSpecialist[]
-  Contact        Contact[]
+  alias                 String                       @unique
+  user                  User                         @relation(fields: [alias], references: [userName])
+  isPublic              Boolean                      @default(false)
+  firstName             String                       @map("first_name")
+  lastName              String                       @map("last_name")
+  dimensionItems        DimensionItemsToSpecialist[]
+  contacts              Contact[]
+  specialistDescriptions SpecialistDescription[]
 
   @@map("specialists")
+}
+
+model SpecialistDescription {
+  id              String                    @id @default(uuid())
+  specialist      Specialist                @relation(fields: [specialistAlias], references: [alias])
+  specialistAlias String                    @map("specialist_alias")
+  type            SpecialistDescriptionType
+  description     String
+
+  @@map("specialist_descriptions")
 }
 
 // Bookkeeping models
@@ -187,4 +195,10 @@ enum Provider {
 enum Role {
   ADMIN
   USER
+}
+
+enum SpecialistDescriptionType {
+  EXPERIENCE
+  APPROACH
+  PERSONALITY
 }

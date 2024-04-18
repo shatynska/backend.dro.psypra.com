@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { CONTROLLERS as SPECIALIST_CONTROLLERS } from './specialist/infrastructure/http/controllers';
-import { SpecialistModule } from './specialist/specialist.module';
+import { CoreModule } from './core/core.module';
+import { CONTROLLERS as CORE_CONTROLLERS } from './core/infrastructure/http/controllers';
 
 @Module({
-  imports: [SpecialistModule],
-  controllers: [...SPECIALIST_CONTROLLERS],
+  imports: [CoreModule],
+  controllers: [...CORE_CONTROLLERS],
 })
 export class SpecialistsProfilesModule {}

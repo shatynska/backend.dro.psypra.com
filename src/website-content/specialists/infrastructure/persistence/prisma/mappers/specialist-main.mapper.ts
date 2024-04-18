@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client';
+import { Contact, ContactType, Prisma } from '@prisma/client';
 import { SpecialistMainDto } from '../../../../application/dto/specialist-main.dto';
 import { PrismaReadRepository } from '../prisma.read.repository';
 
@@ -11,18 +11,25 @@ export class SpecialistMainMapper {
     firstName,
     lastName,
     dimensionItems,
-    phones,
-    websites,
-    emails,
+    contacts,
   }: Parameters): SpecialistMainDto {
     return {
       fullName: `${lastName} ${firstName}`,
       specialties: dimensionItems
         .map((specialty) => specialty.dimensionItem.title)
         .join(', '),
-      phones,
-      emails,
-      websites,
+      phones: this.getContactsByType(contacts, ContactType.PHONE),
+      emails: this.getContactsByType(contacts, ContactType.PHONE),
+      websites: this.getContactsByType(contacts, ContactType.PHONE),
     };
+  }
+
+  static getContactsByType(
+    contacts: Pick<Contact, 'value' | 'type'>[],
+    type: ContactType,
+  ) {
+    return contacts
+      .filter((contact) => contact.type === type)
+      .map((contact) => contact.value);
   }
 }

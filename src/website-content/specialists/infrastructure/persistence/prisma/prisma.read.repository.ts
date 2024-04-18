@@ -81,9 +81,15 @@ export class PrismaReadRepository implements ReadRepository {
         },
       },
     },
-    phones: true,
-    emails: true,
-    websites: true,
+    contacts: {
+      select: {
+        value: true,
+        type: true,
+      },
+      orderBy: {
+        order: 'desc',
+      },
+    },
   });
 
   static specialistMain = Prisma.validator<Prisma.SpecialistDefaultArgs>()({

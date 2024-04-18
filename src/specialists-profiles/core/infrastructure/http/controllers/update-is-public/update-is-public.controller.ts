@@ -1,7 +1,12 @@
-import { ApiErrorDecorator, CurrentUser } from '@common/decorators';
-import { Body, Controller, HttpStatus, Patch } from '@nestjs/common';
+import { CurrentUser } from '@common/decorators';
+import { Body, Controller, Patch } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
-import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiTags,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
 import { JwtPayloadDto } from '~/shared/application/dto/jwt-payload.dto';
 import { UpdateIsPublicCommand } from '../../../../application/commands/update-is-public/update-is-public.command';
 import { UpdateIsPublicRequestBody } from './update-is-public.request-body';
@@ -15,7 +20,7 @@ export class UpdateIsPublicController {
   @ApiOperation({
     summary: 'Update isPublic field',
   })
-  @ApiErrorDecorator(HttpStatus.UNAUTHORIZED)
+  @ApiUnauthorizedResponse()
   @ApiBearerAuth()
   async handle(
     @CurrentUser() user: JwtPayloadDto,

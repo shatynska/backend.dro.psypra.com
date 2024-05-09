@@ -19,8 +19,8 @@ export class SpecialistMainMapper {
         .map((specialty) => specialty.dimensionItem.title)
         .join(', '),
       phones: this.getContactsByType(contacts, ContactType.PHONE),
-      emails: this.getContactsByType(contacts, ContactType.PHONE),
-      websites: this.getContactsByType(contacts, ContactType.PHONE),
+      emails: this.getContactsByType(contacts, ContactType.EMAIL),
+      websites: this.getContactsByType(contacts, ContactType.WEBSITE),
     };
   }
 

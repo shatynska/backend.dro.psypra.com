@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { CashBookDto } from '~/cash-books/application/dto/cash-book.dto';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
+import { CashBookDto } from '../../../application/dto/cash-book.dto';
+import { ReadRepository } from '../../../application/repositories/read.repository';
 import { CashBooksMapper } from './cash-books.mapper';
 
 @Injectable()
-export class PrismaCashBooksReadRepository {
+export class PrismaReadRepository implements ReadRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
   async getById(id: string): Promise<CashBookDto | null> {

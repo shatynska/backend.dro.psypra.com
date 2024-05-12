@@ -1,13 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { CashBooksWriteRepository } from '~/cash-books/domain/cash-books.write.repository';
-import { CashBook } from '~/cash-books/domain/entities/cash-book.entity';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
+import { WriteRepository } from '../../../application/repositories/write.repository';
+import { CashBook } from '../../../domain/entities/cash-book.entity';
 import { CashBooksMapper } from './cash-books.mapper';
 
 @Injectable()
-export class PrismaCashBooksWriteRepository
-  implements CashBooksWriteRepository
-{
+export class PrismaWriteRepository implements WriteRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
   async isTitleUnique(title: string): Promise<boolean> {

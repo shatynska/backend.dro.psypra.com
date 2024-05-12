@@ -1,12 +1,12 @@
 import { Inject } from '@nestjs/common';
 import { CommandHandler, IQueryHandler } from '@nestjs/cqrs';
-import {
-  CASH_BOOKS_WRITE_REPOSITORY_TOKEN,
-  CashBooksWriteRepository,
-} from '~/cash-books/domain/cash-books.write.repository';
-import { ReportingPeriodCreationError } from '~/cash-books/domain/errors';
 import { Result, failure, success } from '~/shared/core/result';
+import { ReportingPeriodCreationError } from '../../../domain/errors';
 import { CashBookNotFoundError } from '../../errors/cash-book-not-found.error';
+import {
+  WRITE_REPOSITORY_TOKEN,
+  WriteRepository,
+} from '../../repositories/write.repository';
 import { AddReportingPeriodCommand } from './add-reporting-period.command';
 
 @CommandHandler(AddReportingPeriodCommand)
@@ -14,8 +14,8 @@ export class AddReportingPeriodHandler
   implements IQueryHandler<AddReportingPeriodCommand>
 {
   constructor(
-    @Inject(CASH_BOOKS_WRITE_REPOSITORY_TOKEN)
-    private cashBooksWriteRepository: CashBooksWriteRepository,
+    @Inject(WRITE_REPOSITORY_TOKEN)
+    private writeRepository: WriteRepository,
   ) {}
 
   async execute(
@@ -25,7 +25,7 @@ export class AddReportingPeriodHandler
   > {
     const { cashBookId, title, startDate, endDate } = command.params;
 
-    const cashBook = await this.cashBooksWriteRepository.getById(cashBookId);
+    const cashBook = await this.writeRepository.getById(cashBookId);
 
     if (cashBook === null) {
       // TODO Replace message with constant
@@ -46,7 +46,7 @@ export class AddReportingPeriodHandler
       return failure(updatedCashBook.value);
     }
 
-    await this.cashBooksWriteRepository.save(updatedCashBook.value);
+    await this.writeRepository.save(updatedCashBook.value);
 
     return success(null);
   }

@@ -5,12 +5,12 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { patchNestJsSwagger } from 'nestjs-zod';
-import { AuthModule } from 'src/auth/auth.module';
-import { SpecialistsProfilesModule } from 'src/specialists-profiles/specialists-profiles.module';
-import { UsersModule } from 'src/users/users.module';
-import { WebsiteContentModule } from 'src/website-content/website-content.module';
-import { HttpModule } from '~/cash-books/infrastructure/http/http.module';
 import { AppModule } from './app.module';
+import { AuthModule } from './auth/auth.module';
+import { OrganizationBookkeepingModule } from './organization-bookkeeping/organization-bookkeeping.module';
+import { SpecialistsProfilesModule } from './specialists-profiles/specialists-profiles.module';
+import { UsersModule } from './users/users.module';
+import { WebsiteContentModule } from './website-content/website-content.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -31,7 +31,10 @@ async function bootstrap() {
   const organizationBookkeepingDocument = SwaggerModule.createDocument(
     app,
     organizationBookkeepingOptions,
-    { include: [HttpModule, UsersModule, AuthModule], extraModels: [ErrorDto] },
+    {
+      include: [OrganizationBookkeepingModule, UsersModule, AuthModule],
+      extraModels: [ErrorDto],
+    },
   );
   SwaggerModule.setup('api/bookkeeping', app, organizationBookkeepingDocument);
 

@@ -1,5 +1,5 @@
 import { PageSection } from '@prisma/client';
-import { HomeQuestionsDto } from '~/page-sections/application/dto/home-questions.dto';
+import { HomeQuestionsDto } from '../../../../application/dto/home-questions.dto';
 
 type Parameters = Pick<PageSection, 'secondaryHeading' | 'href'>[];
 

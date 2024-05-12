@@ -1,5 +1,5 @@
 import { PageSection } from '@prisma/client';
-import { SectionHeaderDto } from '~/page-sections/application/dto/section-header.dto';
+import { SectionHeaderDto } from '../../../../application/dto/section-header.dto';
 
 type Parameters = Pick<PageSection, 'primaryHeading' | 'secondaryHeading'>;
 

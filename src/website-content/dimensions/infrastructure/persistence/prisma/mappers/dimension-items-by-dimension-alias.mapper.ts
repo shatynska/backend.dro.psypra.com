@@ -1,5 +1,5 @@
 import { DimensionItem } from '@prisma/client';
-import { DimensionItemsDto } from '~/dimensions/application/dto/dimension-items.dto';
+import { DimensionItemsDto } from '../../../../application/dto/dimension-items.dto';
 
 type Parameters = Pick<
   DimensionItem,

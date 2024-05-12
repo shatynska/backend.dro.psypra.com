@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
-import { SpecialistsDto } from '~/specialists/application/dto/specialists.dto';
 import { SpecialistMainDto } from '../../../application/dto/specialist-main.dto';
+import { SpecialistsDto } from '../../../application/dto/specialists.dto';
 import { ReadRepository } from '../../../application/read.repository';
 import { SpecialistMainMapper } from './mappers/specialist-main.mapper';
 import { SpecialistsMapper } from './mappers/specialists.mapper';

@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString } from 'class-validator';
-import { AddReportingPeriodDto } from '~/cash-books/application/dto/add-reporting-period.dto';
+import { AddReportingPeriodDto } from '../../../../application/dto/add-reporting-period.dto';
 
 export class AddReportingPeriodRequestDto implements AddReportingPeriodDto {
   @IsNotEmpty()

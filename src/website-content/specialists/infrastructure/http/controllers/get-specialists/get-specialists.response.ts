@@ -2,8 +2,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   SpecialistEssentialWithAliasAndHrefDto,
   specialistEssentialWithAliasAndHrefDtoStubs,
-} from '~/specialists/application/dto/specialist-essential.dto';
-import { GetSpecialistsResult } from '~/specialists/application/queries/get-specialists/get-specialists.result';
+} from '../../../../application/dto/specialist-essential.dto';
+import { GetSpecialistsResult } from '../../../../application/queries/get-specialists/get-specialists.result';
 
 export class GetSpecialistsResponse extends GetSpecialistsResult {
   @ApiProperty({

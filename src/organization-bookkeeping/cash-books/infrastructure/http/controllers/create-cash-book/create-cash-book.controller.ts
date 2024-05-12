@@ -8,9 +8,9 @@ import {
 } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateCashBookCommand } from '~/cash-books/application/commands/create-cash-book/create-cash-book.command';
-import { CashBookCreationError } from '~/cash-books/domain/errors';
 import { Result } from '~/shared/core/result';
+import { CreateCashBookCommand } from '../../../../application/commands/create-cash-book/create-cash-book.command';
+import { CashBookCreationError } from '../../../../domain/errors';
 import { CreateCashBookRequestDto } from '../../dto/requests/create-cash-book.request.dto';
 
 @Controller('cash-books')

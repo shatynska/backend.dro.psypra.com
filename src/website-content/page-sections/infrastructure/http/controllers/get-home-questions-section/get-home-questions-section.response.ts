@@ -2,12 +2,12 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   HomeQuestionsDto,
   homeQuestionsDtoStub,
-} from '~/page-sections/application/dto/home-questions.dto';
+} from '../../../../application/dto/home-questions.dto';
 import {
   SectionHeaderDto,
   sectionHeaderDtoStubs,
-} from '~/page-sections/application/dto/section-header.dto';
-import { GetHomeQuestionsSectionResult } from '~/page-sections/application/queries/get-home-questions/get-home-questions-section.result';
+} from '../../../../application/dto/section-header.dto';
+import { GetHomeQuestionsSectionResult } from '../../../../application/queries/get-home-questions/get-home-questions-section.result';
 
 export class GetHomeQuestionsSectionResponse
   implements GetHomeQuestionsSectionResult

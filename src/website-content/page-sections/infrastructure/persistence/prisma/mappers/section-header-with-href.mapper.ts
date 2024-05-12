@@ -1,5 +1,5 @@
 import { PageSection } from '@prisma/client';
-import { SectionHeaderWithHrefDto } from '~/page-sections/application/dto/section-header-with-href.dto';
+import { SectionHeaderWithHrefDto } from '../../../../application/dto/section-header-with-href.dto';
 
 type Parameters = Pick<
   PageSection,

@@ -8,11 +8,11 @@ import {
 } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { SectionNotFoundError } from '~/page-sections/application/errors/section-not-found.error';
 import { NotFoundError } from '~/shared/application/errors/not-found.error';
 import { Result } from '~/shared/core/result';
-import { GetSpecialistMainSectionQuery } from '~/specialists/application/queries/get-specialist-main-section/get-specialist-main-section.query';
-import { GetSpecialistMainSectionResult } from '~/specialists/application/queries/get-specialist-main-section/get-specialist-main-section.result';
+import { SectionNotFoundError } from '../../../../../page-sections/application/errors/section-not-found.error';
+import { GetSpecialistMainSectionQuery } from '../../../../application/queries/get-specialist-main-section/get-specialist-main-section.query';
+import { GetSpecialistMainSectionResult } from '../../../../application/queries/get-specialist-main-section/get-specialist-main-section.result';
 import { GetSpecialistMainSectionResponse } from './get-specialist-main-section.response';
 
 @Controller('pages')

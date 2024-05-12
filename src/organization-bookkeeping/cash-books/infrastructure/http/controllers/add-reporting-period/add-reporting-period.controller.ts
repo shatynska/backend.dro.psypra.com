@@ -8,11 +8,11 @@ import {
 } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AddReportingPeriodCommand } from '~/cash-books/application/commands/add-reporting-period/add-reporting-period.command';
-import { CashBookNotFoundError } from '~/cash-books/application/errors/cash-book-not-found.error';
-import { ReportingPeriodCreationError } from '~/cash-books/domain/errors';
 import { Result } from '~/shared/core/result';
 import { AggregateDomainError } from '~/shared/domain/errors';
+import { AddReportingPeriodCommand } from '../../../../application/commands/add-reporting-period/add-reporting-period.command';
+import { CashBookNotFoundError } from '../../../../application/errors/cash-book-not-found.error';
+import { ReportingPeriodCreationError } from '../../../../domain/errors';
 import { AddReportingPeriodRequestDto } from '../../dto/requests/add-reporting-period.request.dto';
 
 @Controller('cash-books')

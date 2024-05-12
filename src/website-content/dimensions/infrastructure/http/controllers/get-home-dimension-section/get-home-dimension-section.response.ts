@@ -1,13 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
-  DimensionItemsDto,
-  dimensionItemsDtoStubs,
-} from '~/dimensions/application/dto/dimension-items.dto';
-import { GetHomeDimensionSectionResult } from '~/dimensions/application/queries/get-home-dimension-section/get-home-dimension-section.result';
-import {
   SectionHeaderWithHrefDto,
   sectionHeaderWithHrefDtoStubs,
-} from '~/page-sections/application/dto/section-header-with-href.dto';
+} from '../../../../../page-sections/application/dto/section-header-with-href.dto';
+import {
+  DimensionItemsDto,
+  dimensionItemsDtoStubs,
+} from '../../../../application/dto/dimension-items.dto';
+import { GetHomeDimensionSectionResult } from '../../../../application/queries/get-home-dimension-section/get-home-dimension-section.result';
 
 export class GetHomeDimensionSectionResponse
   implements GetHomeDimensionSectionResult

@@ -8,10 +8,10 @@ import {
 } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { GetHomeDimensionSectionQuery } from '~/dimensions/application/queries/get-home-dimension-section/get-home-dimension-section.query';
-import { GetHomeDimensionSectionResult } from '~/dimensions/application/queries/get-home-dimension-section/get-home-dimension-section.result';
-import { SectionNotFoundError } from '~/page-sections/application/errors/section-not-found.error';
 import { Result } from '~/shared/core/result';
+import { SectionNotFoundError } from '../../../../../page-sections/application/errors/section-not-found.error';
+import { GetHomeDimensionSectionQuery } from '../../../../application/queries/get-home-dimension-section/get-home-dimension-section.query';
+import { GetHomeDimensionSectionResult } from '../../../../application/queries/get-home-dimension-section/get-home-dimension-section.result';
 import { GetHomeDimensionSectionResponse } from './get-home-dimension-section.response';
 
 @Controller('pages')

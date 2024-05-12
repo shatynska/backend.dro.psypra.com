@@ -2,13 +2,13 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   DimensionsWithItemsForSpecialistDto,
   dimensionsWithItemsForSpecialistDtoStubs,
-} from '~/dimensions/application/dto/dimensions-with-items-for-specialist.dto';
+} from '../../../../../dimensions/application/dto/dimensions-with-items-for-specialist.dto';
 import {
   SectionHeaderDto,
   sectionHeaderDtoStubs,
-} from '~/page-sections/application/dto/section-header.dto';
+} from '../../../../../page-sections/application/dto/section-header.dto';
 
-import { GetSpecialistBriefSectionResult } from '~/specialists/application/queries/get-specialist-brief-section/get-specialist-brief-section.result';
+import { GetSpecialistBriefSectionResult } from '../../../../application/queries/get-specialist-brief-section/get-specialist-brief-section.result';
 
 export class GetSpecialistBriefSectionResponse
   implements GetSpecialistBriefSectionResult

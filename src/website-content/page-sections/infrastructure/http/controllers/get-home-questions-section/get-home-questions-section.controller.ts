@@ -2,10 +2,10 @@ import { ApiErrorDecorator, Public } from '@common/decorators';
 import { Controller, Get, HttpStatus, NotFoundException } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { SectionNotFoundError } from '~/page-sections/application/errors/section-not-found.error';
-import { GetHomeQuestionsSectionQuery } from '~/page-sections/application/queries/get-home-questions/get-home-questions-section.query';
-import { GetHomeQuestionsSectionResult } from '~/page-sections/application/queries/get-home-questions/get-home-questions-section.result';
 import { Result } from '~/shared/core/result';
+import { SectionNotFoundError } from '../../../../application/errors/section-not-found.error';
+import { GetHomeQuestionsSectionQuery } from '../../../../application/queries/get-home-questions/get-home-questions-section.query';
+import { GetHomeQuestionsSectionResult } from '../../../../application/queries/get-home-questions/get-home-questions-section.result';
 import { GetHomeQuestionsSectionResponse } from './get-home-questions-section.response';
 
 @Controller('pages')

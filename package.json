@@ -109,11 +109,7 @@
       "^@common(|/.*)$": "<rootDir>/libs/common/src/$1",
       "^@user(|/.*)$": "<rootDir>/src/user/$1",
       "^@auth(|/.*)$": "<rootDir>/src/auth/$1",
-      "^~/cash-books(|/.*)$": "<rootDir>/src/organization-bookkeeping/cash-books/$1",
-      "^~/page-sections(|/.*)$": "<rootDir>/src/website-content/page-sections/$1",
-      "^~/dimensions(|/.*)$": "<rootDir>/src/website-content/dimensions/$1",
-      "^~/specialists(|/.*)$": "<rootDir>/src/website-content/specialists/$1",
-      "^~/shared(|/.*)$": "<rootDir>/src/shared/$1"
+      "^~(|/.*)$": "<rootDir>/src/$1"
     }
   }
 }

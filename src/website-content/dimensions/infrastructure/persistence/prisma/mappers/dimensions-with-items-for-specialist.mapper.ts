@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client';
-import { DimensionsWithItemsForSpecialistDto } from '~/dimensions/application/dto/dimensions-with-items-for-specialist.dto';
+import { DimensionsWithItemsForSpecialistDto } from '../../../../application/dto/dimensions-with-items-for-specialist.dto';
 import { PrismaReadRepository } from '../prisma.read.repository';
 
 type Parameters = Prisma.DimensionGetPayload<

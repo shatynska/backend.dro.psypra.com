@@ -2,11 +2,11 @@ import { ApiErrorDecorator, Public } from '@common/decorators';
 import { Controller, Get, HttpStatus, NotFoundException } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { SectionNotFoundError } from '~/page-sections/application/errors/section-not-found.error';
 import { NotFoundError } from '~/shared/application/errors/not-found.error';
 import { Result } from '~/shared/core/result';
-import { GetSpecialistsQuery } from '~/specialists/application/queries/get-specialists/get-specialists.query';
-import { GetSpecialistsResult } from '~/specialists/application/queries/get-specialists/get-specialists.result';
+import { SectionNotFoundError } from '../../../../../page-sections/application/errors/section-not-found.error';
+import { GetSpecialistsQuery } from '../../../../application/queries/get-specialists/get-specialists.query';
+import { GetSpecialistsResult } from '../../../../application/queries/get-specialists/get-specialists.result';
 import { GetSpecialistsResponse } from './get-specialists.response';
 
 @Controller('pages')

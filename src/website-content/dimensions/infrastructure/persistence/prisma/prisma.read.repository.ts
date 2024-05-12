@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { DimensionItemDto } from '~/dimensions/application/dto/dimension-item.dto';
-import { DimensionItemsDto } from '~/dimensions/application/dto/dimension-items.dto';
-import { DimensionsWithItemsForSpecialistDto } from '~/dimensions/application/dto/dimensions-with-items-for-specialist.dto';
-import { ReadRepository } from '~/dimensions/application/read.repository';
 import { PrismaService } from '~/shared/infrastructure/prisma/prisma.service';
+import { DimensionItemDto } from '../../../application/dto/dimension-item.dto';
+import { DimensionItemsDto } from '../../../application/dto/dimension-items.dto';
+import { DimensionsWithItemsForSpecialistDto } from '../../../application/dto/dimensions-with-items-for-specialist.dto';
+import { ReadRepository } from '../../../application/read.repository';
 import { DimensionItemMapper } from './mappers/dimension-item.mapper';
 import { DimensionItemsByDimensionAliasMapper } from './mappers/dimension-items-by-dimension-alias.mapper';
 import { DimensionsWithItemsForSpecialistMapper } from './mappers/dimensions-with-items-for-specialist.mapper';

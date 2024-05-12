@@ -8,10 +8,10 @@ import {
 } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CashBalanceDto } from '~/cash-books/application/dto/cash-balance.dto';
-import { CashBookNotFoundError } from '~/cash-books/application/errors/cash-book-not-found.error';
-import { GetCashBalanceQuery } from '~/cash-books/application/queries/get-cash-balance/get-cash-balance.query';
 import { Result } from '~/shared/core/result';
+import { CashBalanceDto } from '../../../../application/dto/cash-balance.dto';
+import { CashBookNotFoundError } from '../../../../application/errors/cash-book-not-found.error';
+import { GetCashBalanceQuery } from '../../../../application/queries/get-cash-balance/get-cash-balance.query';
 import { CashBalanceResponseDto } from '../../dto/responses/cash-balance.response.dto';
 
 @Controller('cash-books')

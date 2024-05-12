@@ -1,9 +1,9 @@
 import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryBus, QueryHandler } from '@nestjs/cqrs';
-import { SectionHeaderWithParentLinkDto } from '~/page-sections/application/dto/section-header-with-parent-link.dto';
-import { GetSectionHeaderWithHrefQuery } from '~/page-sections/application/queries/get-section-header-with-href/get-section-header-with-href.query';
-import { GetSectionHeaderWithHrefResult } from '~/page-sections/application/queries/get-section-header-with-href/get-section-header-with-href.result';
 import { Result, failure, success } from '~/shared/core/result';
+import { SectionHeaderWithParentLinkDto } from '../../../../page-sections/application/dto/section-header-with-parent-link.dto';
+import { GetSectionHeaderWithHrefQuery } from '../../../../page-sections/application/queries/get-section-header-with-href/get-section-header-with-href.query';
+import { GetSectionHeaderWithHrefResult } from '../../../../page-sections/application/queries/get-section-header-with-href/get-section-header-with-href.result';
 import { SpecialistNotFoundError } from '../../errors/specialist-not-found.error';
 import { READ_REPOSITORY_TOKEN, ReadRepository } from '../../read.repository';
 import { GetSpecialistMainSectionQuery } from './get-specialist-main-section.query';

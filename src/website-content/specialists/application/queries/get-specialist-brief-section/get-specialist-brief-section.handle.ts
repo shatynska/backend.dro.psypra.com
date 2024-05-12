@@ -1,9 +1,9 @@
 import { IQueryHandler, QueryBus, QueryHandler } from '@nestjs/cqrs';
-import { GetDimensionsWithItemsForSpecialistQuery } from '~/dimensions/application/queries/get-dimensions-with-items-for-specialist/get-dimensions-with-items-for-specialist.query copy';
-import { GetDimensionsWithItemsForSpecialistResult } from '~/dimensions/application/queries/get-dimensions-with-items-for-specialist/get-dimensions-with-items-for-specialist.result';
-import { GetSectionHeaderQuery } from '~/page-sections/application/queries/get-section-header/get-section-header.query';
-import { GetSectionHeaderResult } from '~/page-sections/application/queries/get-section-header/get-section-header.result';
 import { Result, failure, success } from '~/shared/core/result';
+import { GetDimensionsWithItemsForSpecialistQuery } from '../../../../dimensions/application/queries/get-dimensions-with-items-for-specialist/get-dimensions-with-items-for-specialist.query copy';
+import { GetDimensionsWithItemsForSpecialistResult } from '../../../../dimensions/application/queries/get-dimensions-with-items-for-specialist/get-dimensions-with-items-for-specialist.result';
+import { GetSectionHeaderQuery } from '../../../../page-sections/application/queries/get-section-header/get-section-header.query';
+import { GetSectionHeaderResult } from '../../../../page-sections/application/queries/get-section-header/get-section-header.result';
 import { GetSpecialistBriefSectionQuery } from './get-specialist-brief-section.query';
 import { GetSpecialistBriefSectionResult } from './get-specialist-brief-section.result';
 

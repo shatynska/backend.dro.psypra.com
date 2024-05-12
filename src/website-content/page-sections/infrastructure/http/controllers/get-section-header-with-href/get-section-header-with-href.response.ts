@@ -2,8 +2,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   SectionHeadingsDto,
   sectionHeadingsDtoStubs,
-} from '~/page-sections/application/dto/section-header.dto';
-import { GetSectionHeaderWithHrefResult } from '~/page-sections/application/queries/get-section-header-with-href/get-section-header-with-href.result';
+} from '../../../../application/dto/section-header.dto';
+import { GetSectionHeaderWithHrefResult } from '../../../../application/queries/get-section-header-with-href/get-section-header-with-href.result';
 
 export class GetSectionHeaderWithHrefResponse extends GetSectionHeaderWithHrefResult {
   @ApiProperty({ example: sectionHeadingsDtoStubs[3] })

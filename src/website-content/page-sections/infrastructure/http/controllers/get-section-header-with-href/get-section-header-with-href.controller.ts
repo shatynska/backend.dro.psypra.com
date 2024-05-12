@@ -8,11 +8,11 @@ import {
 } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { SectionNotFoundError } from '~/page-sections/application/errors/section-not-found.error';
-import { GetSectionHeaderWithHrefQuery } from '~/page-sections/application/queries/get-section-header-with-href/get-section-header-with-href.query';
-import { GetSectionHeaderWithHrefResult } from '~/page-sections/application/queries/get-section-header-with-href/get-section-header-with-href.result';
 import { NotFoundError } from '~/shared/application/errors/not-found.error';
 import { Result } from '~/shared/core/result';
+import { SectionNotFoundError } from '../../../../application/errors/section-not-found.error';
+import { GetSectionHeaderWithHrefQuery } from '../../../../application/queries/get-section-header-with-href/get-section-header-with-href.query';
+import { GetSectionHeaderWithHrefResult } from '../../../../application/queries/get-section-header-with-href/get-section-header-with-href.result';
 import { GetSectionHeaderWithHrefResponse } from './get-section-header-with-href.response';
 
 @Controller('pages')

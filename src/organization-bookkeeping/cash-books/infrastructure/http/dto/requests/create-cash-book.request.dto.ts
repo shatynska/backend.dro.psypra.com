@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString } from 'class-validator';
-import { CreateCashBookDto } from '~/cash-books/application/dto/create-cash-book.dto';
+import { CreateCashBookDto } from '../../../../application/dto/create-cash-book.dto';
 
 export class CreateCashBookRequestDto implements CreateCashBookDto {
   @IsNotEmpty()

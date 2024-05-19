@@ -18,8 +18,9 @@ RUN npx prisma generate
 
 RUN npm run build
 
-RUN npm ci --only=production && npm cache clean --force
+RUN npm pkg delete scripts.prepare
 
+RUN npm ci --omit=dev && npm cache clean --force
 
 
 FROM base As production

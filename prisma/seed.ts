@@ -5,9 +5,10 @@ import { seedDimensions } from './seeds/dimensions.seed';
 import { seedPageSections } from './seeds/page-sections.seed';
 import { seedSpecialists } from './seeds/specialists.seed';
 import { seedUsers } from './seeds/users.seed';
+
 const prisma = new PrismaClient();
 
-async function main(prisma) {
+async function seed() {
   await seedUsers(prisma);
   await seedCashBooks(prisma);
   await seedDimensions(prisma);
@@ -16,7 +17,7 @@ async function main(prisma) {
   await seedPageSections(prisma);
 }
 
-main(prisma)
+seed()
   .then(async () => {
     await prisma.$disconnect();
   })

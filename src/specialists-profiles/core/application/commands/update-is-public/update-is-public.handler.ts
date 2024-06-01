@@ -1,7 +1,7 @@
 import { Inject } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import {
-  CORE_WRITE_REPOSITORY_TOKEN,
+  WRITE_REPOSITORY_TOKEN,
   WriteRepository,
 } from '../../repositories/write.repository';
 import { UpdateIsPublicCommand } from './update-is-public.command';
@@ -11,7 +11,7 @@ export class UpdateIsPublicHandler
   implements ICommandHandler<UpdateIsPublicCommand>
 {
   constructor(
-    @Inject(CORE_WRITE_REPOSITORY_TOKEN)
+    @Inject(WRITE_REPOSITORY_TOKEN)
     private repository: WriteRepository,
   ) {}
 

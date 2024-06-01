@@ -2,7 +2,7 @@ import { UpdateFirstNameDto } from '../dto/update-first-name.dto';
 import { UpdateIsPublicDto } from '../dto/update-is-public.dto';
 import { UpdateLastNameDto } from '../dto/update-last-name.dto';
 
-export const CORE_WRITE_REPOSITORY_TOKEN = Symbol('CoreWriteRepositoryToken');
+export const WRITE_REPOSITORY_TOKEN = Symbol('CoreWriteRepositoryToken');
 
 export interface WriteRepository {
   updateIsPublic(parameters: UpdateIsPublicDto): Promise<void>;

@@ -1,17 +1,14 @@
 import { Inject, InternalServerErrorException } from '@nestjs/common';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import {
-  READ_REPOSITORY_TOKEN,
-  ReadRepository,
-} from '../../repositories/read.repository';
+import { QUERIES_REPOSITORY_TOKEN, QueriesRepository } from '../shared';
 import { GetCoreQuery } from './get-core.query';
 import { GetCoreResult } from './get-core.result';
 
 @QueryHandler(GetCoreQuery)
 export class GetCoreHandler implements IQueryHandler<GetCoreQuery> {
   constructor(
-    @Inject(READ_REPOSITORY_TOKEN)
-    private repository: ReadRepository,
+    @Inject(QUERIES_REPOSITORY_TOKEN)
+    private repository: QueriesRepository,
   ) {}
 
   async execute({ parameters }: GetCoreQuery): Promise<GetCoreResult> {

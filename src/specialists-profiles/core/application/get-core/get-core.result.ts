@@ -1,3 +1,3 @@
-import { CoreDto } from '../../dto/core.dto';
+import { CoreDto } from '../shared';
 
 export class GetCoreResult extends CoreDto {}

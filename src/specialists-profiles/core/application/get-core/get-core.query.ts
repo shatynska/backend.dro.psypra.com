@@ -1,4 +1,4 @@
-import { SpecialistAliasDto } from '~/shared/application/dto/specialist-alias.dto';
+import { SpecialistAliasDto } from '~/shared';
 
 export class GetCoreQuery {
   constructor(public readonly parameters: SpecialistAliasDto) {}

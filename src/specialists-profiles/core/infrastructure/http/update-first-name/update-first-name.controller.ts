@@ -7,13 +7,13 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { AdminOrOwnerGuard } from 'src/specialists-profiles/shared/infrastructure/http/guards/admin-or-owner.guard';
-import { SpecialistAliasPathParameter } from '~/shared/infrastructure/http/controllers/specialist-alias.path-parameter';
-import { UpdateFirstNameCommand } from '../../../../application/commands/update-first-name/update-first-name.command';
+import { SpecialistAliasPathParameter } from '~/shared';
+import { AdminOrOwnerGuard } from '../../../../shared';
+import { UpdateFirstNameCommand } from '../../../application';
 import { UpdateFirstNameRequestBody } from './update-first-name.request-body';
 
-@Controller('profile')
-@ApiTags('profile')
+@Controller('profiles')
+@ApiTags('profiles')
 export class UpdateFirstNameController {
   constructor(private readonly commandBus: CommandBus) {}
 

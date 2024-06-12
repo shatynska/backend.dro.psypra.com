@@ -7,13 +7,13 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { AdminOrOwnerGuard } from 'src/specialists-profiles/shared/infrastructure/http/guards/admin-or-owner.guard';
-import { SpecialistAliasPathParameter } from '~/shared/infrastructure/http/controllers/specialist-alias.path-parameter';
-import { UpdateIsPublicCommand } from '../../../../application/commands/update-is-public/update-is-public.command';
+import { SpecialistAliasPathParameter } from '~/shared';
+import { AdminOrOwnerGuard } from '../../../../shared';
+import { UpdateIsPublicCommand } from '../../../application';
 import { UpdateIsPublicRequestBody } from './update-is-public.request-body';
 
-@Controller('profile')
-@ApiTags('profile')
+@Controller('profiles')
+@ApiTags('profiles')
 export class UpdateIsPublicController {
   constructor(private readonly commandBus: CommandBus) {}
 

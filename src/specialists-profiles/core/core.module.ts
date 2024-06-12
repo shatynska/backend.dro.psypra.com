@@ -1,26 +1,44 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
-import { COMMANDS } from './application/commands';
-import { QUERIES } from './application/queries';
-import { READ_REPOSITORY_TOKEN } from './application/repositories/read.repository';
-import { WRITE_REPOSITORY_TOKEN } from './application/repositories/write.repository';
-import { CONTROLLERS } from './infrastructure/http/controllers';
-import { PrismaReadRepository } from './infrastructure/persistence/prisma/prisma.read.repository';
-import { PrismaWriteRepository } from './infrastructure/persistence/prisma/prisma.write.repository';
+import {
+  COMMANDS_REPOSITORY_TOKEN,
+  GetCoreHandler,
+  QUERIES_REPOSITORY_TOKEN,
+  UpdateFirstNameHandler,
+  UpdateIsPublicHandler,
+  UpdateLastNameHandler,
+} from './application';
+import {
+  GetCoreController,
+  PrismaCommandsRepository,
+  PrismaQueriesRepository,
+  UpdateFirstNameController,
+  UpdateIsPublicController,
+  UpdateLastNameController,
+} from './infrastructure';
+
+export const CONTROLLERS = [
+  GetCoreController,
+  UpdateFirstNameController,
+  UpdateIsPublicController,
+  UpdateLastNameController,
+];
 
 @Module({
   imports: [CqrsModule],
   controllers: [...CONTROLLERS],
   providers: [
-    ...QUERIES,
-    ...COMMANDS,
+    GetCoreHandler,
+    UpdateFirstNameHandler,
+    UpdateIsPublicHandler,
+    UpdateLastNameHandler,
     {
-      provide: READ_REPOSITORY_TOKEN,
-      useClass: PrismaReadRepository,
+      provide: QUERIES_REPOSITORY_TOKEN,
+      useClass: PrismaQueriesRepository,
     },
     {
-      provide: WRITE_REPOSITORY_TOKEN,
-      useClass: PrismaWriteRepository,
+      provide: COMMANDS_REPOSITORY_TOKEN,
+      useClass: PrismaCommandsRepository,
     },
   ],
 })

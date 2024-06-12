@@ -1,2 +1,1 @@
-export { CoreModule } from './core.module';
-export { CONTROLLERS as CORE_CONTROLLERS } from './infrastructure/http/controllers';
+export { CONTROLLERS as CORE_CONTROLLERS, CoreModule } from './core.module';

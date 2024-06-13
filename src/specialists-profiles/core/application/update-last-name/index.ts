@@ -1,6 +1,6 @@
 export {
   UpdateLastNameCommand,
   UpdateLastNameParameters,
-  UpdateLastNameParametersSchema,
+  updateLastNameParametersSchema,
 } from './update-last-name.command';
 export { UpdateLastNameHandler } from './update-last-name.handler';

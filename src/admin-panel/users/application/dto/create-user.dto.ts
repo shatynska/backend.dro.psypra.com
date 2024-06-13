@@ -1,6 +1,6 @@
 import { createZodDto } from 'nestjs-zod';
-import { PasswordDtoSchema, UserNameDtoSchema } from './user.dto';
+import { passwordDtoSchema, userNameDtoSchema } from './user.dto';
 
-export const CreateUserDtoSchema = UserNameDtoSchema.and(PasswordDtoSchema);
+export const createUserDtoSchema = userNameDtoSchema.and(passwordDtoSchema);
 
-export class CreateUserDto extends createZodDto(CreateUserDtoSchema) {}
+export class CreateUserDto extends createZodDto(createUserDtoSchema) {}

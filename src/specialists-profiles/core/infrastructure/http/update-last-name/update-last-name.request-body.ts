@@ -1,10 +1,10 @@
 import { createZodDto } from 'nestjs-zod';
-import { UpdateLastNameParametersSchema } from '../../../application';
+import { updateLastNameParametersSchema } from '../../../application';
 
-const UpdateLastNameRequestBodySchema = UpdateLastNameParametersSchema.pick({
+const updateLastNameRequestBodySchema = updateLastNameParametersSchema.pick({
   lastName: true,
 });
 
 export class UpdateLastNameRequestBody extends createZodDto(
-  UpdateLastNameRequestBodySchema,
+  updateLastNameRequestBodySchema,
 ) {}

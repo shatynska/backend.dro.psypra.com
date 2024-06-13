@@ -1,6 +1,6 @@
 export {
   UpdateIsPublicCommand,
   UpdateIsPublicParameters,
-  UpdateIsPublicParametersSchema,
+  updateIsPublicParametersSchema,
 } from './update-is-public.command';
 export { UpdateIsPublicHandler } from './update-is-public.handler';

@@ -2,7 +2,7 @@ import { Provider, Role } from '@prisma/client';
 import { createZodDto } from 'nestjs-zod';
 import { z } from 'zod';
 
-export const UserDtoSchema = z.object({
+export const userDtoSchema = z.object({
   id: z.string().uuid(),
   userName: z.string().min(2).max(40),
   email: z.string().email().optional(),
@@ -11,14 +11,14 @@ export const UserDtoSchema = z.object({
   provider: z.nativeEnum(Provider).optional(),
 });
 
-export class UserDto extends createZodDto(UserDtoSchema) {}
+export class UserDto extends createZodDto(userDtoSchema) {}
 
-export const UserNameDtoSchema = UserDtoSchema.pick({ userName: true });
+export const userNameDtoSchema = userDtoSchema.pick({ userName: true });
 
-export class UserNameDto extends createZodDto(UserNameDtoSchema) {}
+export class UserNameDto extends createZodDto(userNameDtoSchema) {}
 
-export const PasswordDtoSchema = z.object({
+export const passwordDtoSchema = z.object({
   password: z.string().min(8).max(40),
 });
 
-export class PasswordDto extends createZodDto(PasswordDtoSchema) {}
+export class PasswordDto extends createZodDto(passwordDtoSchema) {}

@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { SpecialistAliasDtoSchema } from '~/shared/application/dto/specialist-alias.dto';
+import { specialistAliasDtoSchema } from '../../../application';
 
 export type SpecialistAliasPathParameter = z.infer<
-  typeof SpecialistAliasDtoSchema.shape.alias
+  typeof specialistAliasDtoSchema.shape.alias
 >;

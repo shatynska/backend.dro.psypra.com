@@ -1,13 +1,15 @@
 import { createZodDto } from 'nestjs-zod';
-import { SpecialistAliasDtoSchema } from '~/shared';
-import { CoreDtoSchema } from '../shared';
+import { specialistAliasDtoSchema } from '~/shared';
+import { coreDtoSchema } from '../shared';
 
-export const UpdateIsPublicParametersSchema = CoreDtoSchema.pick({
-  isPublic: true,
-}).merge(SpecialistAliasDtoSchema);
+export const updateIsPublicParametersSchema = coreDtoSchema
+  .pick({
+    isPublic: true,
+  })
+  .merge(specialistAliasDtoSchema);
 
 export class UpdateIsPublicParameters extends createZodDto(
-  UpdateIsPublicParametersSchema,
+  updateIsPublicParametersSchema,
 ) {}
 
 export class UpdateIsPublicCommand {

@@ -2,7 +2,7 @@ import { Role } from '@prisma/client';
 import { createZodDto } from 'nestjs-zod';
 import { z } from 'zod';
 
-export const LoginResponseDtoSchema = z.object({
+export const loginResponseDtoSchema = z.object({
   accessToken: z.string().startsWith('Bearer '),
   user: z
     .object({
@@ -12,4 +12,4 @@ export const LoginResponseDtoSchema = z.object({
     .nullable(),
 });
 
-export class LoginResponseDto extends createZodDto(LoginResponseDtoSchema) {}
+export class LoginResponseDto extends createZodDto(loginResponseDtoSchema) {}

@@ -1,6 +1,6 @@
 export {
   UpdateFirstNameCommand,
   UpdateFirstNameParameters,
-  UpdateFirstNameParametersSchema,
+  updateFirstNameParametersSchema,
 } from './update-first-name.command';
 export { UpdateFirstNameHandler } from './update-first-name.handler';

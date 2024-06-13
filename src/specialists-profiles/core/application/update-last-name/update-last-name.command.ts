@@ -1,13 +1,15 @@
 import { createZodDto } from 'nestjs-zod';
-import { SpecialistAliasDtoSchema } from '~/shared';
-import { CoreDtoSchema } from '../shared/core.dto';
+import { specialistAliasDtoSchema } from '~/shared';
+import { coreDtoSchema } from '../shared';
 
-export const UpdateLastNameParametersSchema = CoreDtoSchema.pick({
-  lastName: true,
-}).merge(SpecialistAliasDtoSchema);
+export const updateLastNameParametersSchema = coreDtoSchema
+  .pick({
+    lastName: true,
+  })
+  .merge(specialistAliasDtoSchema);
 
 export class UpdateLastNameParameters extends createZodDto(
-  UpdateLastNameParametersSchema,
+  updateLastNameParametersSchema,
 ) {}
 export class UpdateLastNameCommand {
   constructor(public readonly parameters: UpdateLastNameParameters) {}

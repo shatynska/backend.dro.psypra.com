@@ -25,4 +25,3 @@ export const contactsDtoSchema = z.object({
 });
 
 export class ContactsDto extends createZodDto(contactsDtoSchema) {}
-

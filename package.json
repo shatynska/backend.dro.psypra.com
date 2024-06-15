@@ -45,6 +45,7 @@
     "cookie-parser": "^1.4.6",
     "date-fns": "^2.30.0",
     "helmet": "^7.0.0",
+    "libphonenumber-js": "^1.11.3",
     "nestjs-zod": "^3.0.0",
     "passport": "^0.6.0",
     "passport-google-oauth20": "^2.0.0",

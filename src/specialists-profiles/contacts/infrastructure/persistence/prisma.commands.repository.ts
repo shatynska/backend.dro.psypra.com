@@ -1,7 +1,11 @@
 import { Injectable } from '@nestjs/common';
 
 import { PrismaService } from '~/shared';
-import { AddContactParameters, CommandsRepository } from '../../application';
+import {
+  AddContactParameters,
+  CommandsRepository,
+  RemoveContactParameters,
+} from '../../application';
 
 @Injectable()
 export class PrismaCommandsRepository implements CommandsRepository {
@@ -18,6 +22,12 @@ export class PrismaCommandsRepository implements CommandsRepository {
         type: type,
         specialist: { connect: { alias } },
       },
+    });
+  }
+
+  async removeContact({ id, alias }: RemoveContactParameters): Promise<void> {
+    await this.prismaService.contact.delete({
+      where: { id, specialistAlias: alias },
     });
   }
 }

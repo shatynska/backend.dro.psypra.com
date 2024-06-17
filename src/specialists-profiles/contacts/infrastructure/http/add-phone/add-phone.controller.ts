@@ -9,7 +9,7 @@ import {
 } from '@nestjs/swagger';
 import { SpecialistAliasPathParameter } from '~/shared';
 import { AdminOrOwnerGuard } from '../../../../shared';
-import { AddPhoneCommand } from '../../../application';
+import { AddContactCommand } from '../../../application';
 import { AddPhoneRequestBody } from './add-phone.request-body';
 
 @Controller('profiles')
@@ -29,7 +29,11 @@ export class AddPhoneController {
     @Param('specialist') specialist: SpecialistAliasPathParameter,
     @Body() requestBody: AddPhoneRequestBody,
   ) {
-    const command = new AddPhoneCommand({ ...requestBody, alias: specialist });
+    const command = new AddContactCommand({
+      ...requestBody,
+      type: 'PHONE',
+      alias: specialist,
+    });
 
     await this.commandBus.execute(command);
   }

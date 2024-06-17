@@ -1,8 +1,9 @@
 import { createZodDto } from 'nestjs-zod';
-import { addPhoneParametersSchema } from '../../../application';
+import { z } from 'zod';
+import { contactsDtoSchema } from '../../../application';
 
-const addPhoneRequestBodySchema = addPhoneParametersSchema.pick({
-  phone: true,
+const addPhoneRequestBodySchema = z.object({
+  contact: contactsDtoSchema.shape.phones.element,
 });
 
 export class AddPhoneRequestBody extends createZodDto(

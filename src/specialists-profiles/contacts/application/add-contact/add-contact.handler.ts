@@ -1,9 +1,6 @@
 import { Inject } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import {
-  COMMANDS_REPOSITORY_TOKEN,
-  CommandsRepository,
-} from '../shared/commands.repository';
+import { COMMANDS_REPOSITORY_TOKEN, CommandsRepository } from '../shared';
 import { AddContactCommand } from './add-contact.command';
 
 @CommandHandler(AddContactCommand)

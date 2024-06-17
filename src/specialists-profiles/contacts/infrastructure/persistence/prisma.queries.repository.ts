@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService, SpecialistAliasDto } from '~/shared';
 import { ContactsDto, QueriesRepository } from '../../application';
-import { GetAllMapper } from './get-all.mapper';
+import { GetContactsMapper } from './get-contacts.mapper';
 
 @Injectable()
 export class PrismaQueriesRepository implements QueriesRepository {
   constructor(private readonly prismaService: PrismaService) {}
-  async getAll({ alias }: SpecialistAliasDto): Promise<ContactsDto | null> {
+  async GetContacts({
+    alias,
+  }: SpecialistAliasDto): Promise<ContactsDto | null> {
     const data = await this.prismaService.contact.findMany({
       where: {
         specialist: { alias },
@@ -17,6 +19,6 @@ export class PrismaQueriesRepository implements QueriesRepository {
       },
     });
 
-    return GetAllMapper.mapToDto(data);
+    return GetContactsMapper.mapToDto(data);
   }
 }

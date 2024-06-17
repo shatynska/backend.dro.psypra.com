@@ -3,23 +3,23 @@ import { CqrsModule } from '@nestjs/cqrs';
 import {
   AddPhoneHandler,
   COMMANDS_REPOSITORY_TOKEN,
-  GetAllHandler,
+  GetContactsHandler,
   QUERIES_REPOSITORY_TOKEN,
 } from './application';
 import {
   AddPhoneController,
-  GetAllController,
+  GetContactsController,
   PrismaCommandsRepository,
   PrismaQueriesRepository,
 } from './infrastructure';
 
-export const CONTROLLERS = [AddPhoneController, GetAllController];
+export const CONTROLLERS = [AddPhoneController, GetContactsController];
 
 @Module({
   imports: [CqrsModule],
   controllers: [...CONTROLLERS],
   providers: [
-    GetAllHandler,
+    GetContactsHandler,
     AddPhoneHandler,
     {
       provide: QUERIES_REPOSITORY_TOKEN,

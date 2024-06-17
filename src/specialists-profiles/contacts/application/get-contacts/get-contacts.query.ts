@@ -1,5 +1,5 @@
 import { SpecialistAliasDto } from '~/shared';
 
-export class GetAllQuery {
+export class GetContactsQuery {
   constructor(public readonly parameters: SpecialistAliasDto) {}
 }

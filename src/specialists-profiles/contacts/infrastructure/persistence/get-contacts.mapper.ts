@@ -3,7 +3,7 @@ import { ContactsDto } from '../../application';
 
 type Parameters = Pick<Contact, 'type' | 'value'>[];
 
-export class GetAllMapper {
+export class GetContactsMapper {
   static mapToDto(parameters: Parameters): ContactsDto {
     return {
       phones: this.getContactsByType(parameters, ContactType.PHONE),

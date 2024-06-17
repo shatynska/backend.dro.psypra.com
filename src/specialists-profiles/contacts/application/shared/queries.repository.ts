@@ -6,5 +6,5 @@ export const QUERIES_REPOSITORY_TOKEN = Symbol(
 );
 
 export interface QueriesRepository {
-  getAll(parameters: SpecialistAliasDto): Promise<ContactsDto | null>;
+  GetContacts(parameters: SpecialistAliasDto): Promise<ContactsDto | null>;
 }

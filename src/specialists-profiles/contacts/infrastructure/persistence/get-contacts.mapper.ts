@@ -1,7 +1,7 @@
 import { Contact, ContactType } from '@prisma/client';
 import { ContactsDto } from '../../application';
 
-type Parameters = Pick<Contact, 'type' | 'value'>[];
+type Parameters = Pick<Contact, 'type' | 'id' | 'value'>[];
 
 export class GetContactsMapper {
   static mapToDto(parameters: Parameters): ContactsDto {
@@ -12,12 +12,9 @@ export class GetContactsMapper {
     };
   }
 
-  static getContactsByType(
-    contacts: Pick<Contact, 'value' | 'type'>[],
-    type: ContactType,
-  ) {
+  static getContactsByType(contacts: Parameters, type: ContactType) {
     return contacts
       .filter((contact) => contact.type === type)
-      .map((contact) => contact.value);
+      .map((contact) => ({ id: contact.id, value: contact.value }));
   }
 }

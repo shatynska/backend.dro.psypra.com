@@ -14,6 +14,7 @@ export class PrismaQueriesRepository implements QueriesRepository {
         specialist: { alias },
       },
       select: {
+        id: true,
         value: true,
         type: true,
       },

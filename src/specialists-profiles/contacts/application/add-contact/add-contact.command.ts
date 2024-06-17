@@ -6,11 +6,11 @@ import { contactsDtoSchema } from '../shared';
 export const addContactParametersSchema = z
   .object({
     contact: z.union([
-      contactsDtoSchema.shape.phones.element,
-      contactsDtoSchema.shape.emails.element,
-      contactsDtoSchema.shape.websites.element,
+      contactsDtoSchema.shape.phones.element.shape.value,
+      contactsDtoSchema.shape.emails.element.shape.value,
+      contactsDtoSchema.shape.websites.element.shape.value,
     ]),
-    type: z.enum(['PHONE', 'WEBSITE', 'EMAIL']),
+    type: z.enum(['PHONE', 'EMAIL', 'WEBSITE']),
   })
   .merge(specialistAliasDtoSchema);
 

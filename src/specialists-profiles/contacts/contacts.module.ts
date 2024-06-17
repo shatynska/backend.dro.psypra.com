@@ -1,26 +1,33 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import {
-  AddPhoneHandler,
+  AddContactHandler,
   COMMANDS_REPOSITORY_TOKEN,
   GetContactsHandler,
   QUERIES_REPOSITORY_TOKEN,
 } from './application';
 import {
+  AddEmailController,
   AddPhoneController,
+  AddWebsiteController,
   GetContactsController,
   PrismaCommandsRepository,
   PrismaQueriesRepository,
 } from './infrastructure';
 
-export const CONTROLLERS = [AddPhoneController, GetContactsController];
+export const CONTROLLERS = [
+  AddPhoneController,
+  AddEmailController,
+  AddWebsiteController,
+  GetContactsController,
+];
 
 @Module({
   imports: [CqrsModule],
   controllers: [...CONTROLLERS],
   providers: [
     GetContactsHandler,
-    AddPhoneHandler,
+    AddContactHandler,
     {
       provide: QUERIES_REPOSITORY_TOKEN,
       useClass: PrismaQueriesRepository,

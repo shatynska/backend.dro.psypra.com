@@ -5,6 +5,7 @@ import {
   COMMANDS_REPOSITORY_TOKEN,
   GetContactsHandler,
   QUERIES_REPOSITORY_TOKEN,
+  RemoveContactHandler,
 } from './application';
 import {
   AddEmailController,
@@ -13,9 +14,11 @@ import {
   GetContactsController,
   PrismaCommandsRepository,
   PrismaQueriesRepository,
+  RemoveContactController,
 } from './infrastructure';
 
 export const CONTROLLERS = [
+  RemoveContactController,
   AddPhoneController,
   AddEmailController,
   AddWebsiteController,
@@ -28,6 +31,7 @@ export const CONTROLLERS = [
   providers: [
     GetContactsHandler,
     AddContactHandler,
+    RemoveContactHandler,
     {
       provide: QUERIES_REPOSITORY_TOKEN,
       useClass: PrismaQueriesRepository,

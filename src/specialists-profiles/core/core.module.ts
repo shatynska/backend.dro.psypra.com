@@ -3,6 +3,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import {
   COMMANDS_REPOSITORY_TOKEN,
   GetCoreHandler,
+  GetFirstNameHandler,
   QUERIES_REPOSITORY_TOKEN,
   UpdateFirstNameHandler,
   UpdateIsPublicHandler,
@@ -10,6 +11,7 @@ import {
 } from './application';
 import {
   GetCoreController,
+  GetFirstNameController,
   PrismaCommandsRepository,
   PrismaQueriesRepository,
   UpdateFirstNameController,
@@ -19,6 +21,7 @@ import {
 
 export const CONTROLLERS = [
   GetCoreController,
+  GetFirstNameController,
   UpdateFirstNameController,
   UpdateIsPublicController,
   UpdateLastNameController,
@@ -29,6 +32,7 @@ export const CONTROLLERS = [
   controllers: [...CONTROLLERS],
   providers: [
     GetCoreHandler,
+    GetFirstNameHandler,
     UpdateFirstNameHandler,
     UpdateIsPublicHandler,
     UpdateLastNameHandler,

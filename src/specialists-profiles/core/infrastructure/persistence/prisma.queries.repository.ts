@@ -1,7 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService, SpecialistAliasDto } from '~/shared';
-import { CoreDto, QueriesRepository } from '../../application';
-import { GetFirstNameResult } from '../../application/get-first-name/get-first-name.result';
+import {
+  CoreDto,
+  GetFirstNameResult,
+  GetLastNameResult,
+  QueriesRepository,
+} from '../../application';
 
 @Injectable()
 export class PrismaQueriesRepository implements QueriesRepository {
@@ -30,6 +34,21 @@ export class PrismaQueriesRepository implements QueriesRepository {
       },
       select: {
         firstName: true,
+      },
+    });
+
+    return data;
+  }
+
+  async getLastName({
+    alias,
+  }: SpecialistAliasDto): Promise<GetLastNameResult | null> {
+    const data = await this.prismaService.specialist.findUnique({
+      where: {
+        alias: alias,
+      },
+      select: {
+        lastName: true,
       },
     });
 

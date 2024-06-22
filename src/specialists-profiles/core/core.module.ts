@@ -4,6 +4,7 @@ import {
   COMMANDS_REPOSITORY_TOKEN,
   GetCoreHandler,
   GetFirstNameHandler,
+  GetLastNameHandler,
   QUERIES_REPOSITORY_TOKEN,
   UpdateFirstNameHandler,
   UpdateIsPublicHandler,
@@ -12,6 +13,7 @@ import {
 import {
   GetCoreController,
   GetFirstNameController,
+  GetLastNameController,
   PrismaCommandsRepository,
   PrismaQueriesRepository,
   UpdateFirstNameController,
@@ -22,6 +24,7 @@ import {
 export const CONTROLLERS = [
   GetCoreController,
   GetFirstNameController,
+  GetLastNameController,
   UpdateFirstNameController,
   UpdateIsPublicController,
   UpdateLastNameController,
@@ -33,6 +36,7 @@ export const CONTROLLERS = [
   providers: [
     GetCoreHandler,
     GetFirstNameHandler,
+    GetLastNameHandler,
     UpdateFirstNameHandler,
     UpdateIsPublicHandler,
     UpdateLastNameHandler,

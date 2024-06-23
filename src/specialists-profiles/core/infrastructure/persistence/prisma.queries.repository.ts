@@ -6,6 +6,7 @@ import {
   GetLastNameResult,
   QueriesRepository,
 } from '../../application';
+import { GetIsPublicResult } from '../../application/get-is-public';
 
 @Injectable()
 export class PrismaQueriesRepository implements QueriesRepository {
@@ -49,6 +50,21 @@ export class PrismaQueriesRepository implements QueriesRepository {
       },
       select: {
         lastName: true,
+      },
+    });
+
+    return data;
+  }
+
+  async getIsPublic({
+    alias,
+  }: SpecialistAliasDto): Promise<GetIsPublicResult | null> {
+    const data = await this.prismaService.specialist.findUnique({
+      where: {
+        alias: alias,
+      },
+      select: {
+        isPublic: true,
       },
     });
 

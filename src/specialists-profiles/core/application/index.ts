@@ -1,4 +1,3 @@
-export * from './get-core';
 export * from './get-first-name';
 export * from './get-is-public';
 export * from './get-last-name';

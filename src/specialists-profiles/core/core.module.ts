@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import {
   COMMANDS_REPOSITORY_TOKEN,
-  GetCoreHandler,
   GetFirstNameHandler,
   GetIsPublicHandler,
   GetLastNameHandler,
@@ -12,7 +11,6 @@ import {
   UpdateLastNameHandler,
 } from './application';
 import {
-  GetCoreController,
   GetFirstNameController,
   GetIsPublicController,
   GetLastNameController,
@@ -24,7 +22,6 @@ import {
 } from './infrastructure';
 
 export const CONTROLLERS = [
-  GetCoreController,
   GetFirstNameController,
   GetLastNameController,
   GetIsPublicController,
@@ -37,7 +34,6 @@ export const CONTROLLERS = [
   imports: [CqrsModule],
   controllers: [...CONTROLLERS],
   providers: [
-    GetCoreHandler,
     GetFirstNameHandler,
     GetLastNameHandler,
     GetIsPublicHandler,

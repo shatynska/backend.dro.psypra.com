@@ -85,6 +85,7 @@ export const CurrentCashBookResponseDtoStub: CurrentCashBookResponseDto = {
       lastName: 'Некрасова',
       firstName: 'Валентина',
       membershipFees: [
+        { reportingMonth: 11, amount: 200 },
         { reportingMonth: 10, amount: 200 },
         { reportingMonth: 9, amount: 200 },
         { reportingMonth: 8, amount: 200 },
@@ -100,8 +101,10 @@ export const CurrentCashBookResponseDtoStub: CurrentCashBookResponseDto = {
       lastName: 'Паращак',
       firstName: 'Надія',
       membershipFees: [
+        { reportingMonth: 10, amount: 200 },
         { reportingMonth: 9, amount: 200 },
         { reportingMonth: 8, amount: 200 },
+        { reportingMonth: 7, amount: 200 },
         { reportingMonth: 6, amount: 200 },
         { reportingMonth: 5, amount: 200 },
       ],
@@ -139,9 +142,10 @@ export const CurrentCashBookResponseDtoStub: CurrentCashBookResponseDto = {
       lastName: 'Татаревич',
       firstName: 'Галина',
       membershipFees: [
+        { reportingMonth: 11, amount: 200 },
         { reportingMonth: 10, amount: 200 },
         { reportingMonth: 9, amount: 200 },
-        { reportingMonth: 8, amount: 0 },
+        { reportingMonth: 8, amount: 200 },
         { reportingMonth: 7, amount: 200 },
         { reportingMonth: 6, amount: 200 },
       ],
@@ -163,6 +167,7 @@ export const CurrentCashBookResponseDtoStub: CurrentCashBookResponseDto = {
       lastName: 'Чапля',
       firstName: 'Уляна',
       membershipFees: [
+        { reportingMonth: 12, amount: 200 },
         { reportingMonth: 11, amount: 200 },
         { reportingMonth: 10, amount: 200 },
         { reportingMonth: 9, amount: 200 },

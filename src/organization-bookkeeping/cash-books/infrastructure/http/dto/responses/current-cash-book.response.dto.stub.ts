@@ -22,8 +22,12 @@ export const CurrentCashBookResponseDtoStub: CurrentCashBookResponseDto = {
       firstName: 'Юлія',
       lastName: 'Білас',
       membershipFees: [
+        { reportingMonth: 10, amount: 200 },
+        { reportingMonth: 9, amount: 200 },
+        { reportingMonth: 8, amount: 200 },
         { reportingMonth: 7, amount: 200 },
         { reportingMonth: 6, amount: 200 },
+        { reportingMonth: 5, amount: 200 },
         { reportingMonth: 4, amount: 200 },
         { reportingMonth: 3, amount: 200 },
         { reportingMonth: 2, amount: 200 },

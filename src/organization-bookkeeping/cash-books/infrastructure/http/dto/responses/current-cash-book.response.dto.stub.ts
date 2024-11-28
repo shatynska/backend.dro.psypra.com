@@ -7,6 +7,7 @@ export const CurrentCashBookResponseDtoStub: CurrentCashBookResponseDto = {
       lastName: 'Берчук',
       firstName: 'Володимир',
       membershipFees: [
+        { reportingMonth: 11, amount: 200 },
         { reportingMonth: 10, amount: 200 },
         { reportingMonth: 9, amount: 200 },
         { reportingMonth: 8, amount: 200 },
@@ -48,7 +49,10 @@ export const CurrentCashBookResponseDtoStub: CurrentCashBookResponseDto = {
       lastName: 'Дробчак',
       firstName: 'Ольга',
       membershipFees: [
+        { reportingMonth: 11, amount: 200 },
+        { reportingMonth: 10, amount: 200 },
         { reportingMonth: 9, amount: 200 },
+        { reportingMonth: 8, amount: 200 },
         { reportingMonth: 7, amount: 200 },
         { reportingMonth: 6, amount: 200 },
         { reportingMonth: 5, amount: 200 },
@@ -75,8 +79,10 @@ export const CurrentCashBookResponseDtoStub: CurrentCashBookResponseDto = {
       lastName: 'Лех',
       firstName: 'Наталія',
       membershipFees: [
+        { reportingMonth: 11, amount: 200 },
         { reportingMonth: 10, amount: 200 },
         { reportingMonth: 9, amount: 200 },
+        { reportingMonth: 8, amount: 200 },
         { reportingMonth: 7, amount: 200 },
         { reportingMonth: 6, amount: 200 },
         { reportingMonth: 5, amount: 200 },
@@ -131,6 +137,7 @@ export const CurrentCashBookResponseDtoStub: CurrentCashBookResponseDto = {
       lastName: 'Созанська',
       firstName: 'Ірина',
       membershipFees: [
+        { reportingMonth: 11, amount: 200 },
         { reportingMonth: 10, amount: 200 },
         { reportingMonth: 9, amount: 200 },
         { reportingMonth: 8, amount: 200 },
@@ -188,6 +195,7 @@ export const CurrentCashBookResponseDtoStub: CurrentCashBookResponseDto = {
       lastName: 'Шатинська',
       firstName: 'Альона',
       membershipFees: [
+        { reportingMonth: 11, amount: 200 },
         { reportingMonth: 10, amount: 200 },
         { reportingMonth: 9, amount: 200 },
         { reportingMonth: 8, amount: 200 },
